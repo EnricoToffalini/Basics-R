@@ -1,0 +1,28 @@
+
+.reveal .small {
+  font-size: 26px;
+}
+
+.reveal .smaller {
+  font-size: 22px;
+}
+
+.reveal .smallest {
+  font-size: 18px;
+}
+
+
+.reveal pre {
+  font-size: 20px; /* Adjust this as needed */
+}
+
+.reveal .small-code pre {
+  font-size: 16px;
+}
+
+.reveal .large-code pre {
+  font-size: 26px;
+}
+
+
+

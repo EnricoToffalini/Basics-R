@@ -1,0 +1,86 @@
+---
+title: "Basics of R for Data Science"
+subtitle: "PhD Course in Psychological Sciences - University of Padova"
+author: "Enrico Toffalini"
+include-in-header: header.html
+format: 
+  html:
+    self-contained: true
+    toc: true      # Add table of contents
+    toc-depth: 1   # Depth of table of contents
+    code-fold: false # Allows code folding
+    code-summary: "Show the code"
+    message: false
+editor: visual
+---
+
+# xx
+
+xx
+
+Il libro di riferimento per il corso è il libro anch’esso disponibile online su Github [Introduction2R](https://psicostat.github.io/Introduction2R/).
+
+## Aule e Orari (2023-2024)
+
+| Data | Ora | Aula |
+|---|---|---|
+| 18/03/2024 | 09:00-13:00 | 4M |
+| 19/03/2024 | 09:00-13:00 | 4M |
+| 20/03/2024 | 09:00-13:00 | 4M |
+| 21/03/2024 | 13:00-17:00 | 4M |
+| 22/03/2024 | 09:00-13:00 | 4M |
+
+# Prepararsi al corso
+
+1. **Installare R ed R Studio**. Per il corso è necessario aver installato R ed R Studio. Per istruzioni su come installare si può vedere il [Capitolo 1](https://psicostat.github.io/Introduction2R/install.html) del libro Introduction2R.
+2. **Salvare il sito web della repository** [https://github.com/arca-dpss/course-R](https://arca-dpss.github.io/course-R/) come preferito nel browser (in modo da avere facilmente accesso a tutto il materiale)
+3. **Scaricare la repository** Github del corso a questo [link](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/arca-dpss/course-R). Estraete la cartella del corso in una posizione qualsiasi del PC
+4. Installare i seguenti pacchetti eseguendo il codice R (semplicemente copiate e incollate nella console):
+
+```r
+pkgs <- c("devtools", "filor", "rmarkdown", "bookdown", "knitr", "here", "dplyr", "readr", "stringr", "readxl", "haven", "emo", "faux", "tidyr", "cowplot", "tidyverse", "cli", "purrr", "renderthis", "xaringan", "icons", "kableExtra", "xaringanExtra", "ggplot2", "stats", "tibble", "broom", "flextable", "sjPlot")
+install.packages(pkgs)
+```
+
+# Suddivisione argomenti
+
+## Introduzione all’ambiente di lavoro in R.
+
+In questa giornata verrà introdotto il software R dall’installazione per i vari sistemi operativi alla spiegazione e organizzazione di come gestire una sessione di lavoro.
+
+## Strutture dati e manipolazione di oggetti
+
+In questa giornata verranno introdotte le principali strutture dati che compongono il linguaggio R e le modalità per interagire in modo avanzato con esse.
+
+## Introduzione alla programmazione in R
+
+In questa giornata verranno introdotti i principali costrutti della programmazione (operazioni condizionali, iterazioni e funzioni) e la loro implementazione in R.
+
+## Applicazioni avanzate del linguaggio
+
+In questa giornata verranno introdotti alcuni aspetti trasversali utili per un utilizzo moderno e avanzato del linguaggio R cercando di risolvere problemi concreti.
+
+# Link importanti
+
+- Documento condiviso per esercizi - [Link](https://etherpad.wikimedia.org/p/arca-corsoR)
+- Cartella Dati - [Download Link](https://minhaskamal.github.io/DownGit/#/home?url=https:%2F%2Fgithub.com%2Farca-dpss%2Fcourse-R%2Ftree%2Fmain%2Fexercises%2Fdata)
+
+# Materiale
+
+## Lezioni
+
+Questi sono i link al materiale principale del corso:
+
+- **Introduzione al corso** - [Slides](slides/1_intro_generale/1_intro_generale.html) - [PDF](slides/1_intro_generale/1_intro_generale.pdf)
+- **Introduzione a R** - [Slides](slides/2_intro_a_R/2_intro_a_R.html) - [PDF](slides/2_intro_a_R/2_intro_a_R.pdf)
+- **Strutture dati in R** - [Slides](slides/3_data_structures/3_data_structures.html) - [PDF](slides/3_data_structures/3_data_structures.pdf)
+- **Programmazione in R** - [Slides](slides/4_programmazione/4_programmazione.html) - [PDF](slides/4_programmazione/4_programmazione.pdf)
+- **Problem Solving in R** - [Link](extra/R_problem_solving.html)
+- **R and beyond** - [Slides](slides/5_R_and_beyond/5_R_and_beyond.html) - [PDF](slides/5_R_and_beyond/5_R_and_beyond.pdf)
+
+## Esercizi
+
+In questa sezione abbiamo il file principale con tutti gli esercizi e alcune soluzioni proposte:
+
+- Esercizi - [file](exercises/esercizi-no-solutions.html)
+
