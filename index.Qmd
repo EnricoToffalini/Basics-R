@@ -2,85 +2,74 @@
 title: "Basics of R for Data Science"
 subtitle: "PhD Course in Psychological Sciences - University of Padova"
 author: "Enrico Toffalini"
-include-in-header: header.html
+include-in-header: assets/header.html
 format: 
   html:
     self-contained: true
-    toc: true      # Add table of contents
-    toc-depth: 1   # Depth of table of contents
-    code-fold: false # Allows code folding
-    code-summary: "Show the code"
+    toc: true   
+    toc-depth: 2  
+    code-fold: false 
     message: false
+    css: "assets/custom.css"
 editor: visual
 ---
 
-# xx
+[**R**](https://www.r-project.org/){target="_blank"} is an open-source programming language with a huge library ecosystem that allows you to perform highly flexible and powerful data analysis. It is extensively used in academic research, but also increasingly adopted in business for data science. 
 
-xx
+## Dates and Rooms
 
-Il libro di riferimento per il corso è il libro anch’esso disponibile online su Github [Introduction2R](https://psicostat.github.io/Introduction2R/).
+| Day        | Time        | Room |
+|------------|-------------|------|
+| 18/11/2024 | 14:30-16:30 | 4T   |
+| 19/11/2024 | 14:30-16:30 | 4T   |
+| 25/03/2024 | 09:00-12:00 | 4M   |
+| 26/03/2024 | 14:00-17:00 | 4M   |
 
-## Aule e Orari (2023-2024)
+## About This Course
 
-| Data | Ora | Aula |
-|---|---|---|
-| 18/03/2024 | 09:00-13:00 | 4M |
-| 19/03/2024 | 09:00-13:00 | 4M |
-| 20/03/2024 | 09:00-13:00 | 4M |
-| 21/03/2024 | 13:00-17:00 | 4M |
-| 22/03/2024 | 09:00-13:00 | 4M |
+This introductory course will prepare you for most future methodological courses in the [*PhD program in Psychological Sciences*](https://dottorato.psy.unipd.it/en){target="_blank"}, where R is extensively used. We will navigate the development environment, work with basic data structures like vectors and dataframes, learn about essential concepts of programming like loops and functions, and see some fundamentals of data visualization. Advanced topics like statistical modelling and data simulation will be covered in future courses and are **not** presented here (though occasional simple examples may appear). 
 
-# Prepararsi al corso
+The primary resource for the course is the online book available on GitHub: [***Introduction2R** (English edition)*](https://psicostat.github.io/Introduction2R_EN/){target="_blank"}.
 
-1. **Installare R ed R Studio**. Per il corso è necessario aver installato R ed R Studio. Per istruzioni su come installare si può vedere il [Capitolo 1](https://psicostat.github.io/Introduction2R/install.html) del libro Introduction2R.
-2. **Salvare il sito web della repository** [https://github.com/arca-dpss/course-R](https://arca-dpss.github.io/course-R/) come preferito nel browser (in modo da avere facilmente accesso a tutto il materiale)
-3. **Scaricare la repository** Github del corso a questo [link](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/arca-dpss/course-R). Estraete la cartella del corso in una posizione qualsiasi del PC
-4. Installare i seguenti pacchetti eseguendo il codice R (semplicemente copiate e incollate nella console):
+### Preparing for the Course
 
-```r
-pkgs <- c("devtools", "filor", "rmarkdown", "bookdown", "knitr", "here", "dplyr", "readr", "stringr", "readxl", "haven", "emo", "faux", "tidyr", "cowplot", "tidyverse", "cli", "purrr", "renderthis", "xaringan", "icons", "kableExtra", "xaringanExtra", "ggplot2", "stats", "tibble", "broom", "flextable", "sjPlot")
+1.  **Bookmark this course homepage**: Save this link: [xxxxxxxxxxxxxxxxxxx](xxxxxxxxxxxxxxxxx) for easy access to course materials.
+2.  **Install R and RStudio**. Follow the installation instructions in [*Chapter 1*](https://psicostat.github.io/Introduction2R_EN/install.html){target="_blank"} of *Introduction2R* to ensure R and RStudio are installed. 
+3.  **Install the following R packages** by running this code in your R console:
+
+``` r
+pkgs = c("ggplot2", "psych", "readxl")
 install.packages(pkgs)
 ```
 
-# Suddivisione argomenti
+### Course Topics
 
-## Introduzione all’ambiente di lavoro in R.
+#### Introduction to the R Environment
 
-In questa giornata verrà introdotto il software R dall’installazione per i vari sistemi operativi alla spiegazione e organizzazione di come gestire una sessione di lavoro.
+We will cover the installation of R and introduce how to organize and manage a work session in R Studio, and how to import a dataset. 
 
-## Strutture dati e manipolazione di oggetti
+#### Data Structures and Object Manipulation
 
-In questa giornata verranno introdotte le principali strutture dati che compongono il linguaggio R e le modalità per interagire in modo avanzato con esse.
+We will introduce the main data structures in R and methods for interacting with them effectively. In particular, we will focus on vectors and dataframes.
 
-## Introduzione alla programmazione in R
+#### Basics of Programming in R
 
-In questa giornata verranno introdotti i principali costrutti della programmazione (operazioni condizionali, iterazioni e funzioni) e la loro implementazione in R.
+We will introduce essential programming concepts and their implementation in R, including conditional operations (such as `if...else`), loops (such as the `for` loops), and some common functions. 
 
-## Applicazioni avanzate del linguaggio
+#### Data Visualization
 
-In questa giornata verranno introdotti alcuni aspetti trasversali utili per un utilizzo moderno e avanzato del linguaggio R cercando di risolvere problemi concreti.
+Optional - only if enough time is left, we will introduce some basics of data visualization. If we do not have time, just have a look at the slides and don't despair: some data visualization will still be presented in future courses in this PhD program. 
 
-# Link importanti
+## Slides and Materials
 
-- Documento condiviso per esercizi - [Link](https://etherpad.wikimedia.org/p/arca-corsoR)
-- Cartella Dati - [Download Link](https://minhaskamal.github.io/DownGit/#/home?url=https:%2F%2Fgithub.com%2Farca-dpss%2Fcourse-R%2Ftree%2Fmain%2Fexercises%2Fdata)
+### Lectures
 
-# Materiale
+-   **topic 1** - [Slides](Slides/xxxxxxxxxxxxxxxxxx)
+-   **topic 2** - [Slides](Slides/xxxxxxxxxxxxxxxxxx)
+-   **topic 3** - [Slides](Slides/xxxxxxxxxxxxxxxxxx)
 
-## Lezioni
+### Exercises
 
-Questi sono i link al materiale principale del corso:
+-   **topic 1** - [Slides](Slides/xxxxxxxxxxxxxxxxxx)
 
-- **Introduzione al corso** - [Slides](slides/1_intro_generale/1_intro_generale.html) - [PDF](slides/1_intro_generale/1_intro_generale.pdf)
-- **Introduzione a R** - [Slides](slides/2_intro_a_R/2_intro_a_R.html) - [PDF](slides/2_intro_a_R/2_intro_a_R.pdf)
-- **Strutture dati in R** - [Slides](slides/3_data_structures/3_data_structures.html) - [PDF](slides/3_data_structures/3_data_structures.pdf)
-- **Programmazione in R** - [Slides](slides/4_programmazione/4_programmazione.html) - [PDF](slides/4_programmazione/4_programmazione.pdf)
-- **Problem Solving in R** - [Link](extra/R_problem_solving.html)
-- **R and beyond** - [Slides](slides/5_R_and_beyond/5_R_and_beyond.html) - [PDF](slides/5_R_and_beyond/5_R_and_beyond.pdf)
-
-## Esercizi
-
-In questa sezione abbiamo il file principale con tutti gli esercizi e alcune soluzioni proposte:
-
-- Esercizi - [file](exercises/esercizi-no-solutions.html)
 
