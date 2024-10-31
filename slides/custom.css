@@ -11,9 +11,8 @@
   font-size: 18px;
 }
 
-
 .reveal pre {
-  font-size: 20px; /* Adjust this as needed */
+  font-size: 20px;
 }
 
 .reveal .small-code pre {
@@ -24,5 +23,7 @@
   font-size: 26px;
 }
 
-
+summary {
+    font-size: 22px;
+}
 

@@ -6,9 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Enrico Toffalini">
 
-<title>Basics of R for Data Science</title>
+<title>Exercises - First Steps</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,40 +18,6 @@ ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
 width: 0.8em;
 margin: 0 0.8em 0.2em -1em;  vertical-align: middle;
-}
-
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-{ counter-reset: source-line 0; }
-pre.numberSource code > span
-{ position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-{ content: counter(source-line);
-position: relative; left: -1em; text-align: right; vertical-align: baseline;
-border: none; display: inline-block;
--webkit-touch-callout: none; -webkit-user-select: none;
--khtml-user-select: none; -moz-user-select: none;
--ms-user-select: none; user-select: none;
-padding: 0 4px; width: 4em;
-}
-pre.numberSource { margin-left: 3em; padding-left: 4px; }
-div.sourceCode
-{ }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -3079,13 +3044,9 @@ vertical-align: -.125em;
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#dates-and-rooms" id="toc-dates-and-rooms" class="nav-link active" data-scroll-target="#dates-and-rooms">Dates and Rooms</a></li>
-  <li><a href="#about-this-course" id="toc-about-this-course" class="nav-link" data-scroll-target="#about-this-course">About This Course</a>
-  <ul class="collapse">
-  <li><a href="#preparing-for-the-course" id="toc-preparing-for-the-course" class="nav-link" data-scroll-target="#preparing-for-the-course">Preparing for the Course</a></li>
-  <li><a href="#course-topics" id="toc-course-topics" class="nav-link" data-scroll-target="#course-topics">Course Topics</a></li>
-  </ul></li>
-  <li><a href="#slides-and-materials" id="toc-slides-and-materials" class="nav-link" data-scroll-target="#slides-and-materials">Slides and Materials</a></li>
+  <li><a href="#install-and-use-cran-packages" id="toc-install-and-use-cran-packages" class="nav-link active" data-scroll-target="#install-and-use-cran-packages">Install and Use CRAN Packages</a></li>
+  <li><a href="#mathematical-operations" id="toc-mathematical-operations" class="nav-link" data-scroll-target="#mathematical-operations">Mathematical operations</a></li>
+  <li><a href="#logical-operations" id="toc-logical-operations" class="nav-link" data-scroll-target="#logical-operations">Logical operations</a></li>
   </ul>
 </nav>
 </div>
@@ -3093,20 +3054,14 @@ vertical-align: -.125em;
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Basics of R for Data Science</h1>
-<p class="subtitle lead">PhD Course in Psychological Sciences - University of Padova</p>
+<h1 class="title">Exercises - First Steps</h1>
+<p class="subtitle lead"><em>Basics of R for Data Science</em></p>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Enrico Toffalini </p>
-          </div>
-  </div>
     
   
     
@@ -3117,95 +3072,14 @@ vertical-align: -.125em;
 </header>
 
 
-<p><a href="https://www.r-project.org/" target="_blank"><strong>R</strong></a> is an open-source programming language with a huge library ecosystem that allows you to perform highly flexible and powerful data analysis. It is extensively used in academic research, but also increasingly adopted in business for data science.</p>
-<section id="dates-and-rooms" class="level2">
-<h2 class="anchored" data-anchor-id="dates-and-rooms">Dates and Rooms</h2>
-<table class="table">
-<thead>
-<tr class="header">
-<th>Day</th>
-<th>Time</th>
-<th>Room</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>18/11/2024</td>
-<td>14:30-16:30</td>
-<td>4T</td>
-</tr>
-<tr class="even">
-<td>19/11/2024</td>
-<td>14:30-16:30</td>
-<td>4T</td>
-</tr>
-<tr class="odd">
-<td>25/03/2024</td>
-<td>09:00-12:00</td>
-<td>4M</td>
-</tr>
-<tr class="even">
-<td>26/03/2024</td>
-<td>14:00-17:00</td>
-<td>4M</td>
-</tr>
-</tbody>
-</table>
+<section id="install-and-use-cran-packages" class="level3">
+<h3 class="anchored" data-anchor-id="install-and-use-cran-packages">Install and Use CRAN Packages</h3>
 </section>
-<section id="about-this-course" class="level2">
-<h2 class="anchored" data-anchor-id="about-this-course">About This Course</h2>
-<p>This introductory course will prepare you for most future methodological courses in the <a href="https://dottorato.psy.unipd.it/en" target="_blank"><em>PhD program in Psychological Sciences</em></a> <em>(University of Padova)</em>, where R is extensively used. We will navigate the development environment, work with basic data structures like vectors and dataframes, learn about essential concepts of programming like loops and functions, and see some fundamentals of data visualization. Advanced topics like statistical modelling and data simulation will be covered in future courses and are <strong>not</strong> presented here (though occasional simple examples may appear).</p>
-<p>The primary resource for the course is the online book available on GitHub: <a href="https://psicostat.github.io/Introduction2R_EN/" target="_blank"><em><strong>Introduction2R</strong> (English edition)</em></a>.</p>
-<section id="preparing-for-the-course" class="level3">
-<h3 class="anchored" data-anchor-id="preparing-for-the-course">Preparing for the Course</h3>
-<ol type="1">
-<li><strong>Bookmark this course homepage</strong>: Save the present URL <a href="https://enricotoffalini.github.io/Basics-R/" target="_blank">https://enricotoffalini.github.io/Basics-R/</a> for easy access to course materials.</li>
-<li><strong>Install R and RStudio</strong>. Follow the installation instructions in <a href="https://psicostat.github.io/Introduction2R_EN/install.html" target="_blank"><em>Chapter 1</em></a> of <em>Introduction2R</em> to ensure R and RStudio are installed.</li>
-<li><strong>Install the following R packages</strong> by running this code in your R console:</li>
-</ol>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pkgs <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;ggplot2&quot;</span>, <span class="st">&quot;psych&quot;</span>, <span class="st">&quot;readxl&quot;</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(pkgs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="mathematical-operations" class="level3">
+<h3 class="anchored" data-anchor-id="mathematical-operations">Mathematical operations</h3>
 </section>
-<section id="course-topics" class="level3">
-<h3 class="anchored" data-anchor-id="course-topics">Course Topics</h3>
-<section id="introduction-to-the-r-environment" class="level4">
-<h4 class="anchored" data-anchor-id="introduction-to-the-r-environment">Introduction to the R Environment</h4>
-<p>We will cover the installation of R and introduce how to organize and manage a work session in R Studio, and how to import a dataset.</p>
-</section>
-<section id="data-structures-and-object-manipulation" class="level4">
-<h4 class="anchored" data-anchor-id="data-structures-and-object-manipulation">Data Structures and Object Manipulation</h4>
-<p>We will introduce the main data structures in R and methods for interacting with them effectively. In particular, we will focus on vectors and dataframes.</p>
-</section>
-<section id="basics-of-programming-in-r" class="level4">
-<h4 class="anchored" data-anchor-id="basics-of-programming-in-r">Basics of Programming in R</h4>
-<p>We will introduce essential programming concepts and their implementation in R, including conditional operations (such as <code>if...else</code>), loops (such as the <code>for</code> loops), and some common functions.</p>
-</section>
-<section id="data-visualization" class="level4">
-<h4 class="anchored" data-anchor-id="data-visualization">Data Visualization</h4>
-<p>Optional - only if enough time is left, we will introduce some basics of data visualization. If we do not have time, just have a look at the slides and don’t despair: some data visualization will still be presented in future courses in this PhD program.</p>
-</section>
-</section>
-</section>
-<section id="slides-and-materials" class="level2">
-<h2 class="anchored" data-anchor-id="slides-and-materials">Slides and Materials</h2>
-<section id="lectures" class="level4">
-<h4 class="anchored" data-anchor-id="lectures">Lectures</h4>
-<ul>
-<li><strong>topic 1</strong> - <a href="Slides/0.GettingStartedR.html" target="_blank">html</a> - <a href="Slides/0.GettingStartedR.pdf" target="_blank">pdf</a></li>
-<li><strong>topic 2</strong> - <a href="Slides/xxxxxxxxxxxxxxxxxx" target="_blank">html</a> - <a href="xxxxxxxxxxxxxxxxxx" target="_blank">pdf</a></li>
-<li><strong>topic 3</strong> - <a href="Slides/xxxxxxxxxxxxxxxxxx" target="_blank">html</a> - <a href="xxxxxxxxxxxxxxxxxx" target="_blank">pdf</a></li>
-</ul>
-</section>
-<section id="exercises" class="level4">
-<h4 class="anchored" data-anchor-id="exercises">Exercises</h4>
-<ul>
-<li><strong>topic 1</strong> - <a href="Exercises/0-Exercises-First-steps.html" target="_blank">html</a></li>
-</ul>
-<hr>
-<p style="font-size:12px;">
-</p><p>GitHub repository associated to the present course website: <a href="https://github.com/EnricoToffalini/Basics-R" target="_blank">https://github.com/EnricoToffalini/Basics-R</a></p>
-<p></p>
-</section>
+<section id="logical-operations" class="level3">
+<h3 class="anchored" data-anchor-id="logical-operations">Logical operations</h3>
 </section>
 
 </main>

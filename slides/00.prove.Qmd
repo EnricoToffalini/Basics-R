@@ -1,6 +1,7 @@
 ---
 title: "prove"
 author: "Enrico Toffalini"
+include-in-header: ../assets/slidesheader.html
 format:
   revealjs:
     css: custom.css
