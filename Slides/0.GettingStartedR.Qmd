@@ -1,0 +1,34 @@
+---
+title: "Getting Started with R"
+author: "Enrico Toffalini"
+include-in-header: ../assets/slidesheader.html
+format:
+  revealjs:
+    css: custom.css
+    theme: default
+    slide-number: c/t
+    self-contained: false
+    code-fold: false
+    code-summary: "Show code"
+    code-overflow: wrap
+    title-slide-attributes: 
+     data-background-image: "figures/psicostatLogo.png"
+     data-background-size: "contain"
+     data-background-opacity: "0.15"
+execute:
+  echo: true
+  output: true
+---
+## Slide 1
+
+### slide 1
+
+## Slide 2
+
+```{r}
+a = rnorm(10)
+```
+
+<!-- --------------------------------------------------------------------- -->
+
+
