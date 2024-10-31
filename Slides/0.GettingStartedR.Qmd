@@ -19,9 +19,21 @@ execute:
   echo: true
   output: true
 ---
-## Slide 1
+## Why becoming an R user?
 
-### slide 1
+<div style="font-size:30px;">
+- **Free & open-source**: wherever you go, R will be with you at no costs (unlike *SPSS*, *MPLUS*, *MATLAB*, etc.)
+
+- **A real programming language**: difficult at the beginning? but: 1) gives you lots of flexibility; 2) facilitates learning any other programming language (e.g., **Python**).
+
+- **Mainstream in academia** for data science, increasingly used in business. *Job market advantage!*
+
+- **Vast community support** thanks to a large and active community.
+
+- **Huge ecosystem**, >19,000 packages on CRAN, more from other sources (e.g., GitHub), to do amazing stuff including statistical data analysis, machine learning, data visualization, developing webapps [*shiny*], writing reports and even entire books [*bookdown*, *rmarkdown*, *quarto*]).
+
+- Facilitates **reproducible research** by sharing code and workflows.
+</div>
 
 ## Slide 2
 
