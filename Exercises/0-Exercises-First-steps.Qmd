@@ -14,8 +14,8 @@ format:
 editor: visual
 ---
 
-### Install and Use CRAN Packages
-
 ### Mathematical operations
 
 ### Logical operations
+
+### Installing and Using CRAN Packages
