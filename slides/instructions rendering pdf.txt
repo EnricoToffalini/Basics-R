@@ -1,7 +1,0 @@
-remotes::install_github("jhelvy/renderthis")
-
-renderthis::to_pdf("__NOME_DEL_FILE__.html")
-
-
-renderthis::to_pdf("0.GettingStartedR.html")
-

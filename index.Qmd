@@ -65,13 +65,13 @@ Optional - only if enough time is left, we will introduce some basics of data vi
 
 #### Lectures
 
--   **topic 1** - [html](slides/0.GettingStartedR.html){target="_blank"} - [pdf](Slides/0.GettingStartedR.pdf){target="_blank"}
--   **topic 2** - [html](slides/xxxxxxxxxxxxxxxxxx){target="_blank"} - [pdf](xxxxxxxxxxxxxxxxxx){target="_blank"}
--   **topic 3** - [html](slides/xxxxxxxxxxxxxxxxxx){target="_blank"} - [pdf](xxxxxxxxxxxxxxxxxx){target="_blank"}
+-   **topic 1** - [html](Slides/0.GettingStartedR.html){target="_blank"} - [pdf](Slides/0.GettingStartedR.pdf){target="_blank"}
+-   **topic 2** - [html](Slides/xxxxxxxxxxxxxxxxxx){target="_blank"} - [pdf](xxxxxxxxxxxxxxxxxx){target="_blank"}
+-   **topic 3** - [html](Slides/xxxxxxxxxxxxxxxxxx){target="_blank"} - [pdf](xxxxxxxxxxxxxxxxxx){target="_blank"}
 
 #### Exercises
 
--   **topic 1** - [html](exercises/0-Exercises-First-steps.html){target="_blank"}
+-   **topic 1** - [html](Exercises/0-Exercises-First-steps.html){target="_blank"}
 
 ------------------------------------------------------------------------
 
