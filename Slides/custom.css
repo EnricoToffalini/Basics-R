@@ -1,4 +1,8 @@
 
+.reveal {
+  font-size: 32px;
+}
+
 .reveal .small {
   font-size: 26px;
 }
@@ -12,7 +16,7 @@
 }
 
 .reveal pre {
-  font-size: 20px;
+  font-size: 22px;
 }
 
 .reveal .small-code pre {
@@ -27,3 +31,15 @@ summary {
     font-size: 22px;
 }
 
+pre code.sourceCode {
+    background-color: #EEEEFF !important; 
+    padding: 0.2em;
+    border-radius: 5px;
+}
+span.co {
+    color: #999999 !important;
+    font-style: italic !important;
+}
+span.fu {
+    color: darkblue !important;
+}

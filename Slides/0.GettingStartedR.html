@@ -408,19 +408,156 @@ Enrico Toffalini
 <h2>Why becoming an R user?</h2>
 <div style="font-size:30px;">
 <ul>
-<li><p><strong>Free &amp; open-source</strong>: wherever you go, R will be with you at no costs (unlike <em>SPSS</em>, <em>MPLUS</em>, <em>MATLAB</em>, etc.)</p></li>
-<li><p><strong>A real programming language</strong>: difficult at the beginning? but: 1) gives you lots of flexibility; 2) facilitates learning any other programming language (e.g., <strong>Python</strong>).</p></li>
 <li><p><strong>Mainstream in academia</strong> for data science, increasingly used in business. <em>Job market advantage!</em></p></li>
-<li><p><strong>Vast community support</strong> thanks to a large and active community.</p></li>
-<li><p><strong>Huge ecosystem</strong>, &gt;19,000 packages on CRAN, more from other sources (e.g., GitHub), to do amazing stuff including statistical data analysis, machine learning, data visualization, developing webapps [<em>shiny</em>], writing reports and even entire books [<em>bookdown</em>, <em>rmarkdown</em>, <em>quarto</em>]).</p></li>
+<li><p><strong>Free &amp; open-source</strong>: wherever you go, R will be with you at no costs (unlike <em>SPSS</em>, <em>MPLUS</em>, <em>MATLAB</em>, etc.)</p></li>
+<li><p><strong>Real programming language</strong>: difficult at the beginning? but: 1) gives you lots of flexibility; 2) facilitates learning any other programming language (e.g., <strong>Python</strong>).</p></li>
+<li><p><strong>Vast community support</strong> thanks to a large and active community (also, chatGPT knows it pretty well!).</p></li>
+<li><p><strong>Huge ecosystem</strong>, &gt;20,000 packages on CRAN, more from other sources (e.g., GitHub), to do amazing stuff with statistical data analysis, machine learning, data visualization, developing webapps [<em>shiny</em>], writing reports and even entire books [<em>bookdown</em>, <em>rmarkdown</em>]), can integrate with <em>quarto</em>, <em>github</em>.</p></li>
 <li><p>Facilitates <strong>reproducible research</strong> by sharing code and workflows.</p></li>
 </ul>
 </div>
 </section>
-<section id="slide-2" class="slide level2">
-<h2>Slide 2</h2>
+<section id="what-you-may-expect-to-learn-in-this-course" class="slide level2">
+<h2>What you may expect to learn in this course:</h2>
+<div style="font-size:40px;">
+<ul>
+<li><p>Executing fundamental operations and using basic functions in R;</p></li>
+<li><p>working with essential data types and structures;</p></li>
+<li><p>Gaining some proficiency in managing and manipulating data with vectors and dataframes;</p></li>
+<li><p>Understanding some fundamental concepts of programming.</p></li>
+</ul>
+</div>
+</section>
+<section id="section" class="slide level2">
+<h2></h2>
+<h3 id="over-the-next-couple-of-years-you-may-expect-to-learn-to-use-r-to-perform-at-least-some-fundamentals-about">Over the next couple of years, you may expect to learn to use R to perform at least some fundamentals about:</h3>
+<div style="font-size:36px;">
+<ul>
+<li><p>Core statistical inference methods;</p></li>
+<li><p>(Generalized) linear (mixed-effects) modeling;</p></li>
+<li><p>Data visualization using <em>ggplot2</em>;</p></li>
+<li><p>Power analysis via data simulation ;</p></li>
+<li><p>Structural Equation Modeling;</p></li>
+<li><p>Conducting meta-analysis.</p></li>
+</ul>
+</div>
+</section>
+<section id="you-may-even-create-greeting-cards" class="slide level2">
+<h2>you may even create greeting cards</h2>
+<div style="text-align: center;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a>a <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="0.GettingStartedR_files/figure-revealjs/unnamed-chunk-1-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="you-may-even-create-greeting-cards-1" class="slide level2">
+<h2>you may even create greeting cards</h2>
+<div style="text-align: center;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="0.GettingStartedR_files/figure-revealjs/unnamed-chunk-2-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="or-like-fancy-infographics" class="slide level2">
+<h2>or like fancy infographics</h2>
+<div style="text-align: center;">
+<p><img src="figures/worldInfographic.png"></p>
+</div>
+</section>
+<section id="or-like-fancy-infographics-1" class="slide level2">
+<h2>or like fancy infographics</h2>
+<div style="text-align: center;">
+<p><img src="figures/ItalyInfographic.png" width="650px" height="550px"></p>
+</div>
+</section>
+<section id="perform-classical-data-analysis" class="slide level2">
+<h2>perform classical data analysis</h2>
+<div style="text-align: center;">
+<p><img src="figures/colorfulPlot.png"></p>
+</div>
+</section>
+<section id="one-day-you-may-create-interactive-webapps-with-shiny" class="slide level2">
+<h2>one day you may create interactive webapps with Shiny</h2>
+<p><br>
+see <a href="https://shiny.posit.co/r/gallery/#feature-demos" target="_blank">Shiny gallery</a></p>
+<p><br>
+a couple of recent real examples from Psicostat members:</p>
+<ul>
+<li><p>this <a href="https://feracot.shinyapps.io/shiny/" target="_blank">game-like shiny app</a> developed for the science4all event in Padova; see <a href="https://psicostat.github.io/science4all/" target="_blank">here</a> some explanation in Italian</p></li>
+<li><p>practical <a href="https://enricotoffalini.shinyapps.io/TimeTasks/" target="_blank">ad-hoc shiny app</a> for scoring experimental data collected by students</p></li>
+</ul>
+</section>
+<section id="or-entire-websites-and-books" class="slide level2">
+<h2>or entire websites and books</h2>
+<ul>
+<li><p>this <a href="https://enricotoffalini.github.io/Basics-R/" target="_blank">entire course</a> is a website in its own right</p></li>
+<li><p>the <a href="https://psicostat.github.io/Introduction2R_EN/" target="_blank">course textbook</a> is a book/website</p></li>
+<li><p>also see <a href="https://lakens.github.io/statistical_inferences/" target="_blank">this wonderful book</a> by Daniël Lakens explaining Statistical Inference</p></li>
+</ul>
+<p>of course, these resources integrate other tools such as GitHub and Quarto, but they can be created within the R ecosystem</p>
+</section>
+<section id="install-r-and-rstudio" class="slide level2">
+<h2>install R and Rstudio</h2>
+<p><br>
+<br>
+first of all, for getting started, follow the instructions in <a href="https://psicostat.github.io/Introduction2R_EN/install.html" target="_blank"><em>Chapter 1</em></a> of <em>Introduction2R</em> to ensure that both R and RStudio are installed</p>
+</section>
+<section id="r-console-just-base-r" class="slide level2">
+<h2>R Console (just base R)</h2>
+<div style="text-align: center;">
+<p><img src="figures/RConsole.png"></p>
+</div>
+</section>
+<section id="r-studio-full-ide" class="slide level2">
+<h2>R Studio (full IDE)</h2>
+<div style="text-align: center;">
+<p><img src="figures/RStudioIDE.png"></p>
+</div>
+</section>
+<section id="lets-test-the-environment" class="slide level2">
+<h2>Let’s Test the Environment!</h2>
+<p>Let’s run a few commands in RStudio to familiarize with its console and see if the installation works properly</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="dv">10</span>) <span class="co"># draw 10 random values from a Standard Normal distribution</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]  1.3976825  0.2081247  0.5839531  3.0235967  1.0913360 -0.2286666
+ [7] -0.4663686  0.4197838 -0.4151076  1.1685571</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="" aria-hidden="true" tabindex="-1"></a>?rnorm <span class="co"># open the help tab for the "rnorm" function</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>( <span class="fu">rnorm</span>(<span class="dv">10</span>, <span class="at">mean=</span><span class="dv">100</span>, <span class="at">sd=</span><span class="dv">15</span>) ) <span class="co"># draw 10 values from IQ distribution, round them</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 112 106 105 107  99 105 103  74  86  94</code></pre>
+</div>
+</div>
+<p style="font-size:10px;">
+<br>
+</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"psych"</span>) <span class="co"># install a package</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(psych) <span class="co"># load the newly installed package</span></span>
+<span id="cb7-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">fisherz</span>(<span class="at">rho=</span><span class="fl">0.9</span>) <span class="co"># use it to transform a correlation into a Fisher's z</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.472219</code></pre>
+</div>
 </div>
 <!-- --------------------------------------------------------------------- -->
 <div class="quarto-auto-generated-content">

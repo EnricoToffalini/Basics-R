@@ -1,0 +1,107 @@
+---
+title: "First Steps in R (part 2)"
+author: "Enrico Toffalini"
+include-in-header: ../assets/slidesheader.html
+format:
+  revealjs:
+    code-line-numbers: false
+    css: custom.css
+    theme: default
+    slide-number: c/t
+    self-contained: false
+    code-fold: false
+    code-summary: "Show code"
+    code-overflow: wrap
+    title-slide-attributes: 
+     data-background-image: "figures/psicostatLogo.png"
+     data-background-size: "contain"
+     data-background-opacity: "0.15"
+execute:
+  echo: true
+  output: true
+---
+## Let's see how to
+
+<div style="font-size:40px;">
+*Part 1:*
+
+- Create, name objects;
+
+- Use basic operations (arithmetical, relational, logical); 
+
+- Basic types of data; 
+
+*Part 2:* 
+
+- Install, load from CRAN (and more), call functions, help;
+
+- Set up your Working Directory;
+
+- Import, export workspace and data
+</div>
+
+<!-- --------------------------------------------------------------------- -->
+
+## Install packages... and more
+
+Traditional installing of a package from CRAN:
+
+```{r, eval=FALSE}
+install.packages("effsize")
+```
+
+installing of multiple packages from CRAN at once:
+
+```{r, eval=FALSE}
+install.packages( c("effsize","psych","ggplot2") )
+```
+
+For development or personal use, you may occasionally install packages from outside CRAN, such as from GitHub: 
+
+```{r, eval=FALSE}
+# examples
+devtools::install_github("FilippoGambarota/filor")
+devtools::install_github("EnricoToffalini/toffee")
+```
+
+In any case, then you can load the installed packages using function `library`:
+```{r, eval=FALSE}
+library(effsize)
+library(ggplot2)
+```
+
+## Install packages... and more
+### call functions
+
+After loading a package, its functions are directly callable throughout the R session:
+
+```{r, eval=FALSE}
+library(psych)
+
+fisherz(rho=0.8) # use a function from the "psych" package
+```
+
+Also, you may directly call any function from any installed package, regardless of whether it was or was not previously loaded in the workspace, using "`::`"; this is especially useful when there is a risk of functions with conflicting names, or if you don't want to load an entire package for using just a function: 
+
+```{r, eval=FALSE}
+psych::fisherz(rho=0.8)
+```
+
+## Install packages... and more
+### *HELP!* see the "help" of a function
+
+We will explore how functions work, more in detail, later. For now, let’s look at how to access help if something is unclear. Let's take the basic function `mean`:
+
+```{r, eval=FALSE}
+?mean # this will work
+help(mean) # this does the same
+```
+
+<div style="text-align: center;">
+  <img src="figures/exampleHelp.png"/>
+</div>
+
+
+<!-- --------------------------------------------------------------------- -->
+
+
