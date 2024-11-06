@@ -64,7 +64,7 @@ devtools::install_github("FilippoGambarota/filor")
 devtools::install_github("EnricoToffalini/toffee")
 ```
 
-In any case, then you can load the installed packages using function `library`:
+After installing, you need to load the packages using function `library`:
 ```{r, eval=FALSE}
 library(effsize)
 library(ggplot2)
@@ -101,6 +101,179 @@ help(mean) # this does the same
   <img src="figures/exampleHelp.png"/>
 </div>
 
+<!-- --------------------------------------------------------------------- -->
+
+## Set up Working Directory
+
+<div style="font-size:40px;">
+The **Working Directory** (WD) is the location of the folder in your computer where R reads and saves files by default. 
+
+If you import/export anything (*data*, *figures*, *workspaces*, etc.) you need to know your WD!
+
+The `getwd()` function allows you to display the location of your current WD. Let's see my own:
+
+```{r}
+getwd()
+```
+</div>
+
+## Set up Working Directory
+
+As a general rule:
+
+- When you open the RStudio app the default WD may be the `documents` folder (in Windows) or the `home directory` (e.g., `/home/username`; in Linux or macOS);
+
+- This default may be reset at any time from inside RStudio on `Tools > Global Options... > General`;
+
+- When RStudio is newly open by opening a file (e.g., a `.R` script file), the WD may be set at that file location *(actually my favorite)*;
+
+- However, you can set a new WD at any time from within the R code, using the `setwd()` function, for example:
+```{r}
+setwd( "C:/Users/enric/" )
+```
+
+## Set up Working Directory
+
+<div style="font-size:46px;">
+**RStudio Projects** may eliminate the need of using `setwd()` within scripts.
+</div>
+
+<div style="font-size:40px;">
+- You can create a *new project* with `File > New Project...` choose a specific folder
+
+- Keep all materials of your project in the same folder as the newly created `.Rproj` file
+
+- As you open the `.Rproj`, it will automatically start a new *RStudio* session with the WD set into that folder.
+</div>
+
+## Set up Working Directory
+
+Finally, *not vital for now*, but know the difference between:
+
+- **Absolute path**: `"C:/Users/enric/"` indicates the full directory path from the root
+
+- **Relative paths**: for import/export purposes you may move around the current WD 
+  - for example `png(filename="figures/Fig1.png")` may save $Fig1.png$ into the $figures$ directory which is **inside** the current WD; 
+  - differently, `png(filename="../figures/Fig1.png")` may save $Fig1.png$ into the $figures$ directory which is **outside, one level up** the current WD
+
+<!-- --------------------------------------------------------------------- -->
+
+## Import/export
+### Workspace
+
+All your R code (script) is generally stored in text files with a `.R` extension. But what about your data?! 
+
+You can save the entire workspace (with all its objects) using the `save.image()` function:
+
+```{r, eval=F}
+# let's populate the workspace first
+myName = "Enrico"
+prof = TRUE
+coursesTaught = 4L
+age = 36
+
+# now let's save it
+save.image("myWS.RData") 
+```
+
+Specifying `"myWS.RData"` is not mandatory but recommended, otherwise your file will simply be named `.RData`. (By the way... *where* will it be saved?)
+
+## Import/export
+### Workspace
+
+Alternatively, you may even save just one or a few workspace objects, rather than all:
+
+```{r, eval=F}
+# let's populate the workspace first
+myName = "Enrico"
+prof = TRUE
+coursesTaught = 4L
+age = 36
+
+# now let's save only two objects
+save(myName, age, file="myWS.RData") 
+```
+
+This will save only variables `myName` and `age` into the newly created `myWS.RData` file
+
+This may be useful when you have an overcrowded workspace and prefer to save only a few objects that store the final results
+
+## Import/export
+### Workspace
+
+Once you open a new R session, you may load the previously stored workspace using the `load()` function, specifying `load("workspace_name.RData")`, like this:
+
+```{r, eval=F}
+# empty the workspace to make sure there's actually nothing!
+rm(list=ls())
+ls()
+
+# now load the previously saved workspace
+load("myWS.RData") 
+# make sure that the objects have been loaded
+ls()
+```
+
+## Import/export
+### Data
+
+<div style="font-size:38px;">
+Arguably a **fundamental skill** for anyone working in data science!
+
+Most people use *MS Excel* or similar software (e.g., *LibreOffice Calc*) for handling data, which produce their own file formats (e.g., `.xlsx`). That's perfectly fine. However, the **most versatile data format is `.csv` (comma-separated values)**, a simple text (no formatting, no licences required) file format for storing tabular data/dataframes. 
+
+- **Best practice**: Save data in `.csv` format from your software of choice before importing it in R.
+</div>
+
+## Import/export
+### Data
+
+Here's an example of using the `read.csv()` function for importing data:
+
+```{r}
+# IMPORT csv data from a "data" subfolder, and store it in an object named "df"
+df = read.csv("data/Performance.csv", header=TRUE, sep=",", dec=".")
+
+head(df) # have a look at the first few rows
+```
+
+<div style="font-size:22px;">
+Actually, specifying "`header=TRUE, sep=",", dec="."`" is unnecessary and could be omitted because it is the default... but it may be useful to get accustomed with functions arguments; also, in Italian Excel export settings, it is possible that *separator character* (`sep`) be "`;`", and *decimal point character* be "`,`" so... be aware of your settings!
+</div>
+
+## Import/export
+### Data
+
+If you absolutely want to import your data directly from a **MS Excel** document (`.xlsx`), you may use function `read_excel()` from the package `readxl`: 
+
+```{r}
+library(readxl)
+# function "data.frame" forces it to be a dataframe, otherwise it's a tibble
+df = data.frame( read_excel("data/Performance.xlsx") )
+head(df)
+```
+
+<div style="font-size:28px;">
+- You may even import data from an **SPSS** document (`.sav`) using the `read.spss()` function from the `foreign` package
+</div>
+
+## Import/export
+### Figures
+
+R has a collection of functions for exporting figures in different formats: `pdf()`, `png()`, `jpeg()`, `bmp()`, `tiff()`, `svg()`.
+
+Here is an example using `png()` :
+
+```{r, eval=F}
+# set up a graphic output file named "MyFigure.png" with some settings
+png("MyFigure.png", height=1500, width=2000, units="px", res=300)
+
+# code for creating a simple boxplot
+boxplot(iris$Sepal.Width) 
+
+# close the graphic output file and actually export the plot
+dev.off()
+```
 
 <!-- --------------------------------------------------------------------- -->
 
