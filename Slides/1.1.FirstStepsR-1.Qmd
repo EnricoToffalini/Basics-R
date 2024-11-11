@@ -22,8 +22,8 @@ execute:
 ---
 ## Let's see how to
 
-<div style="font-size:40px;">
-*Part 1:*
+<div style="font-size:36px;">
+**Part 1:**
 
 - Create, name objects;
 
@@ -31,9 +31,11 @@ execute:
 
 - Basic types of data; 
 
-*Part 2:* 
+*Part 2:*
 
 - Install, load from CRAN (and more), call functions, help;
+
+- Using functions;
 
 - Set up your Working Directory;
 
@@ -248,9 +250,6 @@ is.infinite(age)
 is.character(myName)
 is.na(myName) # checks if a value is missing (i.e., NA) 
 ```
-
-
-
 
 
 

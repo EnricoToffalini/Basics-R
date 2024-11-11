@@ -406,16 +406,17 @@ Enrico Toffalini
 </section>
 <section id="lets-see-how-to" class="slide level2">
 <h2>Let’s see how to</h2>
-<div style="font-size:40px;">
+<div style="font-size:36px;">
 <p><em>Part 1:</em></p>
 <ul>
 <li><p>Create, name objects;</p></li>
 <li><p>Use basic operations (arithmetical, relational, logical);</p></li>
 <li><p>Basic types of data;</p></li>
 </ul>
-<p><em>Part 2:</em></p>
+<p><strong>Part 2:</strong></p>
 <ul>
 <li><p>Install, load from CRAN (and more), call functions, help;</p></li>
+<li><p>Using functions;</p></li>
 <li><p>Set up your Working Directory;</p></li>
 <li><p>Import, export workspace and data</p></li>
 </ul>
@@ -457,14 +458,98 @@ Enrico Toffalini
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="" aria-hidden="true" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">fisherz</span>(<span class="at">rho=</span><span class="fl">0.8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<!-- --------------------------------------------------------------------- -->
 </section>
-<section id="install-packages-and-more-2" class="slide level2">
-<h2>Install packages… and more</h2>
-<h3 id="help-see-the-help-of-a-function"><em>HELP!</em> see the “help” of a function</h3>
-<p>We will explore how functions work, more in detail, later. For now, let’s look at how to access help if something is unclear. Let’s take the basic function <code>mean</code>:</p>
+<section id="functions-and-arguments" class="slide level2">
+<h2>Functions and arguments</h2>
+<p>Functions typically take some <b><em>input</em></b> parameters, known as arguments, process that, and yield some <b><em>output</em></b>/result(s)</p>
+<div style="text-align: center;">
+<p><img src="figures/functionsExamples.png"></p>
+</div>
+</section>
+<section id="functions-and-arguments-1" class="slide level2">
+<h2>Functions and arguments</h2>
+<h3 id="arguments">arguments</h3>
+<ul>
+<li>values or variables you pass to a function as input, or to control its behavior</li>
+</ul>
+<p>for example, <code>seq()</code> generates a sequence of numbers; “<code>from</code>” and “<code>to</code>” are arguments: it will provide the integers between these two extremes:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="" aria-hidden="true" tabindex="-1"></a>?mean <span class="co"># this will work</span></span>
-<span id="cb7-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">help</span>(mean) <span class="co"># this does the same</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">3</span>, <span class="at">to =</span> <span class="dv">7</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3 4 5 6 7</code></pre>
+</div>
+</div>
+<p><code>length.out</code> controls how many equally spaced numbers must be generated:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">3</span>, <span class="at">to =</span> <span class="dv">7</span>, <span class="at">length.out =</span> <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.000000 4.333333 5.666667 7.000000</code></pre>
+</div>
+</div>
+<p>alternatively, <code>by</code> defines the step size between numbers:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">3</span>, <span class="at">to =</span> <span class="dv">7</span>, <span class="at">by =</span> <span class="fl">0.6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.0 3.6 4.2 4.8 5.4 6.0 6.6</code></pre>
+</div>
+</div>
+</section>
+<section id="functions-and-arguments-2" class="slide level2">
+<h2>Functions and arguments</h2>
+<h3 id="arguments-1">arguments</h3>
+<ul>
+<li>values or variables you pass to a function as input, or to control its behavior</li>
+</ul>
+<p><code>rnorm()</code> will generate “<code>n</code>” random numbers from a normal distribution with “<code>mean</code>” as the average and “<code>sd</code>” as the standard deviation:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">5</span>, <span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">15</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  94.65888 119.91758 104.56752  75.68701  81.03177</code></pre>
+</div>
+</div>
+<p><strong>Positional matching</strong> - know that arguments names may be omitted if placed in the correct order</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="dv">100</span>, <span class="dv">15</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 110.98436 102.29120 100.27504  56.52488  90.08376</code></pre>
+</div>
+</div>
+</section>
+<section id="functions-and-arguments-3" class="slide level2">
+<h2>Functions and arguments</h2>
+<p><strong>Default arguments</strong> - a function <em>might</em> still work even if some arguments are omitted, as it can use its own <em>default values</em> (in this case “<code>mean=0, sd=1</code>”)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -0.7659995 -1.7573923 -0.1621952  1.5538232  0.2069355</code></pre>
+</div>
+</div>
+<p><strong>Errors</strong> - however, omitting mandatory parameters will result in an <em>Error</em></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">15</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error in rnorm(mean = 100, sd = 15): argument "n" is missing, with no default</code></pre>
+</div>
+</div>
+<p><strong>Warnings</strong> - Some inputs may cause the function to produce <em>Warnings</em> and bad output, but do <strong>not</strong> stop code execution</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">5</span>, <span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="sc">-</span><span class="dv">15</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in rnorm(n = 5, mean = 100, sd = -15): NAs produced</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] NaN NaN NaN NaN NaN</code></pre>
+</div>
+</div>
+</section>
+<section id="functions-and-arguments-4" class="slide level2">
+<h2>Functions and arguments</h2>
+<h3 id="help-see-the-documentation-of-a-function"><em>HELP!</em> see the documentation of a function</h3>
+<p>There are two ways to access documentation: using “<code>?</code>” and using <code>help()</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="" aria-hidden="true" tabindex="-1"></a>?rnorm <span class="co"># this will work</span></span>
+<span id="cb24-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">help</span>(rnorm) <span class="co"># this does the same</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div style="text-align: center;">
 <p><img src="figures/exampleHelp.png"></p>
@@ -478,7 +563,7 @@ Enrico Toffalini
 <p>If you import/export anything (<em>data</em>, <em>figures</em>, <em>workspaces</em>, etc.) you need to know your WD!</p>
 <p>The <code>getwd()</code> function allows you to display the location of your current WD. Let’s see my own:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "C:/Users/enric/OneDrive - Università degli Studi di Padova/Documents/Dottorato lezioni didattica/R for Data Science/_GITHUB Basics R DataScience/Slides"</code></pre>
 </div>
@@ -495,7 +580,7 @@ Enrico Toffalini
 <li><p>However, you can set a new WD at any time from within the R code, using the <code>setwd()</code> function, for example:</p></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>( <span class="st">"C:/Users/enric/"</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>( <span class="st">"C:/Users/enric/"</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="set-up-working-directory-2" class="slide level2">
@@ -530,14 +615,14 @@ Enrico Toffalini
 <p>All your R code (script) is generally stored in text files with a <code>.R</code> extension. But what about your data?!</p>
 <p>You can save the entire workspace (with all its objects) using the <code>save.image()</code> function:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># let's populate the workspace first</span></span>
-<span id="cb11-2"><a href="" aria-hidden="true" tabindex="-1"></a>myName <span class="ot">=</span> <span class="st">"Enrico"</span></span>
-<span id="cb11-3"><a href="" aria-hidden="true" tabindex="-1"></a>prof <span class="ot">=</span> <span class="cn">TRUE</span></span>
-<span id="cb11-4"><a href="" aria-hidden="true" tabindex="-1"></a>coursesTaught <span class="ot">=</span> <span class="dv">4</span>L</span>
-<span id="cb11-5"><a href="" aria-hidden="true" tabindex="-1"></a>age <span class="ot">=</span> <span class="dv">36</span></span>
-<span id="cb11-6"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># now let's save it</span></span>
-<span id="cb11-8"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">save.image</span>(<span class="st">"myWS.RData"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># let's populate the workspace first</span></span>
+<span id="cb28-2"><a href="" aria-hidden="true" tabindex="-1"></a>myName <span class="ot">=</span> <span class="st">"Enrico"</span></span>
+<span id="cb28-3"><a href="" aria-hidden="true" tabindex="-1"></a>prof <span class="ot">=</span> <span class="cn">TRUE</span></span>
+<span id="cb28-4"><a href="" aria-hidden="true" tabindex="-1"></a>coursesTaught <span class="ot">=</span> <span class="dv">4</span>L</span>
+<span id="cb28-5"><a href="" aria-hidden="true" tabindex="-1"></a>age <span class="ot">=</span> <span class="dv">36</span></span>
+<span id="cb28-6"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># now let's save it</span></span>
+<span id="cb28-8"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">save.image</span>(<span class="st">"myWS.RData"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Specifying <code>"myWS.RData"</code> is not mandatory but recommended, otherwise your file will simply be named <code>.RData</code>. (By the way… <em>where</em> will it be saved?)</p>
 </section>
@@ -546,16 +631,16 @@ Enrico Toffalini
 <h3 id="workspace-1">Workspace</h3>
 <p>Alternatively, you may even save just one or a few workspace objects, rather than all:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># let's populate the workspace first</span></span>
-<span id="cb12-2"><a href="" aria-hidden="true" tabindex="-1"></a>myName <span class="ot">=</span> <span class="st">"Enrico"</span></span>
-<span id="cb12-3"><a href="" aria-hidden="true" tabindex="-1"></a>prof <span class="ot">=</span> <span class="cn">TRUE</span></span>
-<span id="cb12-4"><a href="" aria-hidden="true" tabindex="-1"></a>coursesTaught <span class="ot">=</span> <span class="dv">4</span>L</span>
-<span id="cb12-5"><a href="" aria-hidden="true" tabindex="-1"></a>age <span class="ot">=</span> <span class="dv">36</span></span>
-<span id="cb12-6"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># now let's save only two objects</span></span>
-<span id="cb12-8"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(myName, age, <span class="at">file=</span><span class="st">"myWS.RData"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># let's populate the workspace first</span></span>
+<span id="cb29-2"><a href="" aria-hidden="true" tabindex="-1"></a>myName <span class="ot">=</span> <span class="st">"Enrico"</span></span>
+<span id="cb29-3"><a href="" aria-hidden="true" tabindex="-1"></a>prof <span class="ot">=</span> <span class="cn">TRUE</span></span>
+<span id="cb29-4"><a href="" aria-hidden="true" tabindex="-1"></a>coursesTaught <span class="ot">=</span> <span class="dv">4</span>L</span>
+<span id="cb29-5"><a href="" aria-hidden="true" tabindex="-1"></a>age <span class="ot">=</span> <span class="dv">36</span></span>
+<span id="cb29-6"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># now let's save only two objects</span></span>
+<span id="cb29-8"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(myName, age, <span class="at">file=</span><span class="st">"myWS.RData"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>This will save only variables <code>myName</code> and <code>age</code> into the newly created <code>myWS.RData</code> file</p>
+<p>This will save only variables <code>myName</code> and <code>age</code> into a newly created file named <code>myWS.RData</code></p>
 <p>This may be useful when you have an overcrowded workspace and prefer to save only a few objects that store the final results</p>
 </section>
 <section id="importexport-2" class="slide level2">
@@ -563,14 +648,14 @@ Enrico Toffalini
 <h3 id="workspace-2">Workspace</h3>
 <p>Once you open a new R session, you may load the previously stored workspace using the <code>load()</code> function, specifying <code>load("workspace_name.RData")</code>, like this:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># empty the workspace to make sure there's actually nothing!</span></span>
-<span id="cb13-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list=</span><span class="fu">ls</span>())</span>
-<span id="cb13-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span>
-<span id="cb13-4"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># now load the previously saved workspace</span></span>
-<span id="cb13-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"myWS.RData"</span>) </span>
-<span id="cb13-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># make sure that the objects have been loaded</span></span>
-<span id="cb13-8"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># empty the workspace to make sure there's actually nothing!</span></span>
+<span id="cb30-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list=</span><span class="fu">ls</span>())</span>
+<span id="cb30-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span>
+<span id="cb30-4"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># now load the previously saved workspace</span></span>
+<span id="cb30-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"myWS.RData"</span>) </span>
+<span id="cb30-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># make sure that the objects have been loaded</span></span>
+<span id="cb30-8"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="importexport-3" class="slide level2">
@@ -578,7 +663,7 @@ Enrico Toffalini
 <h3 id="data">Data</h3>
 <div style="font-size:38px;">
 <p>Arguably a <strong>fundamental skill</strong> for anyone working in data science!</p>
-<p>Most people use <em>MS Excel</em> or similar software (e.g., <em>LibreOffice Calc</em>) for handling data, which produce their own file formats (e.g., <code>.xlsx</code>). That’s perfectly fine. However, the <strong>most versatile data format is <code>.csv</code> (comma-separated values)</strong>, a simple text (no formatting, no licences required) file format for storing tabular data/dataframes.</p>
+<p>Most people use <em>MS Excel</em> or similar software (e.g., <em>LibreOffice Calc</em>) for handling data, which produce their own file formats (e.g., <code>.xlsx</code>). That’s perfectly fine. However… the <strong>most versatile data format is <code>.csv</code> (comma-separated values)</strong>, a simple text (no formatting, no licences required) file format for storing tabular data/dataframes.</p>
 <ul>
 <li><strong>Best practice</strong>: Save data in <code>.csv</code> format from your software of choice before importing it in R.</li>
 </ul>
@@ -587,12 +672,12 @@ Enrico Toffalini
 <section id="importexport-4" class="slide level2">
 <h2>Import/export</h2>
 <h3 id="data-1">Data</h3>
-<p>Here’s an example of using the <code>read.csv()</code> function for importing data:</p>
+<p>Here’s an example of using the <code>read.csv()</code> function for <strong>importing</strong> data:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># IMPORT csv data from a "data" subfolder, and store it in an object named "df"</span></span>
-<span id="cb14-2"><a href="" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">"data/Performance.csv"</span>, <span class="at">header=</span><span class="cn">TRUE</span>, <span class="at">sep=</span><span class="st">","</span>, <span class="at">dec=</span><span class="st">"."</span>)</span>
-<span id="cb14-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df) <span class="co"># have a look at the first few rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># IMPORT csv data from a "data" subfolder, and store it in an object named "df"</span></span>
+<span id="cb31-2"><a href="" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">"data/Performance.csv"</span>, <span class="at">header=</span><span class="cn">TRUE</span>, <span class="at">sep=</span><span class="st">","</span>, <span class="at">dec=</span><span class="st">"."</span>)</span>
+<span id="cb31-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df) <span class="co"># have a look at the first few rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  id  name anx acc     time
 1  1 nydga  20  15 2.077932
@@ -610,12 +695,12 @@ Enrico Toffalini
 <section id="importexport-5" class="slide level2">
 <h2>Import/export</h2>
 <h3 id="data-2">Data</h3>
-<p>If you absolutely want to import your data directly from a <strong>MS Excel</strong> document (<code>.xlsx</code>), you may use function <code>read_excel()</code> from the package <code>readxl</code>:</p>
+<p>If you absolutely want to <strong>import</strong> your data directly from a <strong>MS Excel</strong> document (<code>.xlsx</code>), you may use function <code>read_excel()</code> from the package <code>readxl</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
-<span id="cb16-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># function "data.frame" force it to be a dataframe, otherwise it's a tibble</span></span>
-<span id="cb16-3"><a href="" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> <span class="fu">data.frame</span>( <span class="fu">read_excel</span>(<span class="st">"data/Performance.xlsx"</span>) )</span>
-<span id="cb16-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb33-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># function "data.frame" forces it to be a dataframe, otherwise it's a tibble</span></span>
+<span id="cb33-3"><a href="" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> <span class="fu">data.frame</span>( <span class="fu">read_excel</span>(<span class="st">"data/Performance.xlsx"</span>) )</span>
+<span id="cb33-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  id  name anx acc     time
 1  1 nydga  20  15 2.077932
@@ -634,18 +719,31 @@ Enrico Toffalini
 </section>
 <section id="importexport-6" class="slide level2">
 <h2>Import/export</h2>
+<h3 id="data-3">Data</h3>
+<p>You have processed data with R, now… how to <strong>export</strong> it?</p>
+<p>When collaborating with someone also using R, you may choose to exchange data directly by exporting the object or the entire workspace as a <code>.RData</code> file, using the <code>save()</code> or <code>save.image()</code> function respectively.</p>
+<p>However, if you need to export your data in a more universally readable tabular format, such as <code>.csv</code>, you may use <code>write.table()</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># specify the dataframe to export (here named "df")</span></span>
+<span id="cb35-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># along with the desired file name, and other arguments</span></span>
+<span id="cb35-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">write.table</span>(df, <span class="at">file=</span><span class="st">"myExportedData.csv"</span>, <span class="at">sep=</span><span class="st">","</span>, <span class="at">row.names=</span>F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="importexport-7" class="slide level2">
+<h2>Import/export</h2>
 <h3 id="figures">Figures</h3>
 <p>R has a collection of functions for exporting figures in different formats: <code>pdf()</code>, <code>png()</code>, <code>jpeg()</code>, <code>bmp()</code>, <code>tiff()</code>, <code>svg()</code>.</p>
 <p>Here is an example using <code>png()</code> :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># set up a graphic output file named "MyFigure.png" with some settings</span></span>
-<span id="cb18-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">png</span>(<span class="st">"MyFigure.png"</span>, <span class="at">height=</span><span class="dv">1500</span>, <span class="at">width=</span><span class="dv">2000</span>, <span class="at">units=</span><span class="st">"px"</span>, <span class="at">res=</span><span class="dv">300</span>)</span>
-<span id="cb18-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># code for creating a simple boxplot</span></span>
-<span id="cb18-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(iris<span class="sc">$</span>Sepal.Width) </span>
-<span id="cb18-6"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># close the graphic output file and actually export the plot</span></span>
-<span id="cb18-8"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># set up a graphic output file named "MyFigure.png" with some settings</span></span>
+<span id="cb36-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">png</span>(<span class="st">"MyFigure.png"</span>, <span class="at">height=</span><span class="dv">1500</span>, <span class="at">width=</span><span class="dv">2000</span>, <span class="at">units=</span><span class="st">"px"</span>, <span class="at">res=</span><span class="dv">300</span>)</span>
+<span id="cb36-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># code for creating a simple boxplot</span></span>
+<span id="cb36-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(iris<span class="sc">$</span>Sepal.Width) </span>
+<span id="cb36-6"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># close the graphic output file and actually export the plot</span></span>
+<span id="cb36-8"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <!-- --------------------------------------------------------------------- -->
 <div class="quarto-auto-generated-content">

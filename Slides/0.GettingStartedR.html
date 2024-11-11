@@ -526,6 +526,136 @@ first of all, for getting started, follow the instructions in <a href="https://p
 <p><img src="figures/RStudioIDE.png"></p>
 </div>
 </section>
+<section id="section-1" class="slide level2">
+<h2></h2>
+<h4 id="a-few-r-packages-that-you-willmay-need-in-the-future-13">A few R packages that you will/may need in the future (1/3)</h4>
+<table>
+<colgroup>
+<col style="width: 17%">
+<col style="width: 44%">
+<col style="width: 37%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Package</th>
+<th>Used for what</th>
+<th>Example(s) of functions</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>base</code> <br>(base R)</td>
+<td>Basic functions</td>
+<td><code>sum</code>, <code>mean</code>, <code>sqrt</code>, <code>abs</code>, <code>c</code>, <code>data.frame</code>, <code>summary</code>, <code>plot</code>, <code>+</code>, <code>-</code></td>
+</tr>
+<tr class="even">
+<td><code>stats</code> <br>(base R)</td>
+<td>Basic statistical calculations and functions</td>
+<td><code>sd</code>, <code>cor</code>, <code>cor.test</code>, <code>t.test</code>, <code>lm</code>, <code>glm</code>, <code>AIC</code>, <code>rnorm</code>, <code>rbinom</code></td>
+</tr>
+<tr class="odd">
+<td><code>graphics</code> <br>(base R)</td>
+<td>Basic statistical calculations and functions</td>
+<td><code>boxplot</code>, <code>hist</code>, <code>barplot</code></td>
+</tr>
+<tr class="even">
+<td><code>effectsize</code></td>
+<td>Compute different effect sizes</td>
+<td><code>cohens_d</code>, <code>hedges_g</code>, <code>cohens_f</code>, <code>d_to_r</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="section-2" class="slide level2">
+<h2></h2>
+<h4 id="a-few-r-packages-that-you-willmay-need-in-the-future-23">A few R packages that you will/may need in the future (2/3)</h4>
+<table>
+<colgroup>
+<col style="width: 17%">
+<col style="width: 48%">
+<col style="width: 34%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Package</th>
+<th>Used for what</th>
+<th>Example(s) of functions</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>lme4</code></td>
+<td>Fitting (generalized) (non-)linear mixed-effects models</td>
+<td><code>lmer</code>, <code>glmer</code>, <code>ranef</code></td>
+</tr>
+<tr class="even">
+<td><code>performance</code></td>
+<td>Useful tools for models</td>
+<td><code>check_collinearity</code>, <code>r2_nagelkerke</code>, <code>icc</code></td>
+</tr>
+<tr class="odd">
+<td><code>effects</code></td>
+<td>Display effects for various statistical models</td>
+<td><code>allEffects</code></td>
+</tr>
+<tr class="even">
+<td><code>emmeans</code></td>
+<td>Estimate marginal means for various models</td>
+<td><code>emmeans</code></td>
+</tr>
+<tr class="odd">
+<td><code>ggplot2</code></td>
+<td>Create beautiful plots using The Grammar of Graphics</td>
+<td><code>ggplot</code>, <code>geom_*</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="section-3" class="slide level2">
+<h2></h2>
+<h4 id="a-few-r-packages-that-you-willmay-need-in-the-future-33">A few R packages that you will/may need in the future (3/3)</h4>
+<table>
+<colgroup>
+<col style="width: 17%">
+<col style="width: 48%">
+<col style="width: 34%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Package</th>
+<th>Used for what</th>
+<th>Example(s) of functions</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>lavaan</code></td>
+<td>Structural equation modeling (SEM)</td>
+<td><code>cfa</code>, <code>sem</code></td>
+</tr>
+<tr class="even">
+<td><code>semTools</code></td>
+<td>Useful tools for SEMs</td>
+<td><code>reliability</code></td>
+</tr>
+<tr class="odd">
+<td><code>metafor</code></td>
+<td>Perform meta-analysis</td>
+<td><code>rma</code>, <code>rma.mv</code>, <code>forest</code>, <code>funnel</code>, <code>regtest</code></td>
+</tr>
+<tr class="even">
+<td><code>brms</code></td>
+<td>Fitting practically any Bayesian model via MCMC with STAN</td>
+<td><code>brm</code>, <code>prior</code></td>
+</tr>
+<tr class="odd">
+<td><code>blavaan</code></td>
+<td>Fitting Bayesian SEMs</td>
+<td><code>bcfa</code>, <code>bsem</code></td>
+</tr>
+</tbody>
+</table>
+</section>
 <section id="lets-test-the-environment" class="slide level2">
 <h2>Let’s Test the Environment!</h2>
 <p>Let’s run a few commands in RStudio to familiarize with its console and see if the installation works properly</p>
@@ -549,7 +679,7 @@ first of all, for getting started, follow the instructions in <a href="https://p
 <br>
 </p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"psych"</span>) <span class="co"># install a package</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"psych"</span>) <span class="co"># install a package from CRAN</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(psych) <span class="co"># load the newly installed package</span></span>

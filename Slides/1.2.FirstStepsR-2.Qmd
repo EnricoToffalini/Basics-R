@@ -22,7 +22,7 @@ execute:
 ---
 ## Let's see how to
 
-<div style="font-size:40px;">
+<div style="font-size:36px;">
 *Part 1:*
 
 - Create, name objects;
@@ -31,9 +31,11 @@ execute:
 
 - Basic types of data; 
 
-*Part 2:* 
+**Part 2:**
 
 - Install, load from CRAN (and more), call functions, help;
+
+- Using functions;
 
 - Set up your Working Directory;
 
@@ -87,14 +89,77 @@ Also, you may directly call any function from any installed package, regardless 
 psych::fisherz(rho=0.8)
 ```
 
-## Install packages... and more
-### *HELP!* see the "help" of a function
+<!-- --------------------------------------------------------------------- -->
 
-We will explore how functions work, more in detail, later. For now, let’s look at how to access help if something is unclear. Let's take the basic function `mean`:
+## Functions and arguments
+
+Functions typically take some <b>*input*</b> parameters, known as arguments, process that, and yield some <b>*output*</b>/result(s)
+
+<div style="text-align: center;">
+  <img src="figures/functionsExamples.png"/>
+</div>
+
+## Functions and arguments
+### arguments
+
+- values or variables you pass to a function as input, or to control its behavior
+
+for example, `seq()` generates a sequence of numbers; "`from`" and "`to`" are arguments: it will provide the integers between these two extremes:
+```{r}
+seq(from = 3, to = 7)
+```
+
+`length.out` controls how many equally spaced numbers must be generated:
+```{r}
+seq(from = 3, to = 7, length.out = 4)
+```
+
+alternatively, `by` defines the step size between numbers:  
+```{r}
+seq(from = 3, to = 7, by = 0.6)
+```
+
+## Functions and arguments
+### arguments
+
+- values or variables you pass to a function as input, or to control its behavior
+
+`rnorm()` will generate "`n`" random numbers from a normal distribution with "`mean`" as the average and "`sd`" as the standard deviation:
+```{r}
+rnorm(n = 5, mean = 100, sd = 15)
+```
+
+**Positional matching** - know that arguments names may be omitted if placed in the correct order
+```{r}
+rnorm(5, 100, 15)
+```
+
+
+## Functions and arguments
+
+**Default arguments** - a function *might* still work even if some arguments are omitted, as it can use its own *default values* (in this case "`mean=0, sd=1`")
+```{r}
+rnorm(n = 5)
+```
+
+**Errors** - however, omitting mandatory parameters will result in an *Error*
+```{r, error=T}
+rnorm(mean = 100, sd = 15)
+```
+
+**Warnings** - Some inputs may cause the function to produce *Warnings* and bad output, but do **not** stop code execution
+```{r, warning=T}
+rnorm(n = 5, mean = 100, sd = -15)
+```
+
+## Functions and arguments
+### *HELP!* see the documentation of a function
+
+There are two ways to access documentation: using "`?`" and using `help()`
 
 ```{r, eval=FALSE}
-?mean # this will work
-help(mean) # this does the same
+?rnorm # this will work
+help(rnorm) # this does the same
 ```
 
 <div style="text-align: center;">
@@ -194,7 +259,7 @@ age = 36
 save(myName, age, file="myWS.RData") 
 ```
 
-This will save only variables `myName` and `age` into the newly created `myWS.RData` file
+This will save only variables `myName` and `age` into a newly created file named `myWS.RData`
 
 This may be useful when you have an overcrowded workspace and prefer to save only a few objects that store the final results
 
@@ -220,7 +285,7 @@ ls()
 <div style="font-size:38px;">
 Arguably a **fundamental skill** for anyone working in data science!
 
-Most people use *MS Excel* or similar software (e.g., *LibreOffice Calc*) for handling data, which produce their own file formats (e.g., `.xlsx`). That's perfectly fine. However, the **most versatile data format is `.csv` (comma-separated values)**, a simple text (no formatting, no licences required) file format for storing tabular data/dataframes. 
+Most people use *MS Excel* or similar software (e.g., *LibreOffice Calc*) for handling data, which produce their own file formats (e.g., `.xlsx`). That's perfectly fine. However... the **most versatile data format is `.csv` (comma-separated values)**, a simple text (no formatting, no licences required) file format for storing tabular data/dataframes. 
 
 - **Best practice**: Save data in `.csv` format from your software of choice before importing it in R.
 </div>
@@ -228,7 +293,7 @@ Most people use *MS Excel* or similar software (e.g., *LibreOffice Calc*) for ha
 ## Import/export
 ### Data
 
-Here's an example of using the `read.csv()` function for importing data:
+Here's an example of using the `read.csv()` function for **importing** data:
 
 ```{r}
 # IMPORT csv data from a "data" subfolder, and store it in an object named "df"
@@ -244,7 +309,7 @@ Actually, specifying "`header=TRUE, sep=",", dec="."`" is unnecessary and could 
 ## Import/export
 ### Data
 
-If you absolutely want to import your data directly from a **MS Excel** document (`.xlsx`), you may use function `read_excel()` from the package `readxl`: 
+If you absolutely want to **import** your data directly from a **MS Excel** document (`.xlsx`), you may use function `read_excel()` from the package `readxl`: 
 
 ```{r}
 library(readxl)
@@ -256,6 +321,22 @@ head(df)
 <div style="font-size:28px;">
 - You may even import data from an **SPSS** document (`.sav`) using the `read.spss()` function from the `foreign` package
 </div>
+
+## Import/export
+### Data
+
+You have processed data with R, now... how to **export** it? 
+
+When collaborating with someone also using R, you may choose to exchange data directly by exporting the object or the entire workspace as a `.RData` file, using the `save()` or `save.image()` function respectively.
+
+However, if you need to export your data in a more universally readable tabular format, such as `.csv`, you may use `write.table()`:
+
+```{r, eval=F}
+# specify the dataframe to export (here named "df")
+# along with the desired file name, and other arguments
+
+write.table(df, file="myExportedData.csv", sep=",", row.names=F)
+```
 
 ## Import/export
 ### Figures

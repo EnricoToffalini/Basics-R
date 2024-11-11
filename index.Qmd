@@ -65,9 +65,10 @@ Optional - only if enough time is left, we will introduce some basics of data vi
 
 #### Lectures
 
--   **topic 1** - [html](Slides/0.GettingStartedR.html){target="_blank"} - [pdf](Slides/0.GettingStartedR.pdf){target="_blank"}
--   **topic 2** - [html](Slides/xxxxxxxxxxxxxxxxxx){target="_blank"} - [pdf](xxxxxxxxxxxxxxxxxx){target="_blank"}
--   **topic 3** - [html](Slides/xxxxxxxxxxxxxxxxxx){target="_blank"} - [pdf](xxxxxxxxxxxxxxxxxx){target="_blank"}
+-   **Getting Started with R** - [html](Slides/0.GettingStartedR.html){target="_blank"} - [pdf](Slides/0.GettingStartedR.pdf){target="_blank"}
+-   **First Steps in R (part 1)** - [html](Slides/1.1.FirstStepsR-1.html){target="_blank"} - [pdf](xxxxxxxxxxxxxxxxxx){target="_blank"}
+-   **First Steps in R (part 2)** - [html](Slides/1.2.FirstStepsR-2.html){target="_blank"} - [pdf](xxxxxxxxxxxxxxxxxx){target="_blank"}
+-   **Data Structures** - [html](Slides/2.DataStructures.html){target="_blank"} - [pdf](xxxxxxxxxxxxxxxxxx){target="_blank"}
 
 #### Exercises
 
@@ -75,4 +76,14 @@ Optional - only if enough time is left, we will introduce some basics of data vi
 
 ------------------------------------------------------------------------
 
-<p style="font-size:10px;">GitHub repository associated to the present course website: [https://github.com/EnricoToffalini/Basics-R](https://github.com/EnricoToffalini/Basics-R){target="_blank"}</p>
+<p style="font-size:10px;">
+
+GitHub repository associated to the present course website: [https://github.com/EnricoToffalini/Basics-R](https://github.com/EnricoToffalini/Basics-R){target="_blank"}
+
+</p>
+
+<p style="font-size:10px;">
+
+Many thanks and love to Filippo Gambarota for sharing his expertise in using GitHub, Quarto, and creating GitHub Pages websites.
+
+</p>
