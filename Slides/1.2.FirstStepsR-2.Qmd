@@ -293,7 +293,7 @@ Most people use *MS Excel* or similar software (e.g., *LibreOffice Calc*) for ha
 ## Import/export
 ### Data
 
-Here's an example of using the `read.csv()` function for **importing** data:
+Here's an example of using the **`read.csv()`** function for **importing** data:
 
 ```{r}
 # IMPORT csv data from a "data" subfolder, and store it in an object named "df"
@@ -309,18 +309,47 @@ Actually, specifying "`header=TRUE, sep=",", dec="."`" is unnecessary and could 
 ## Import/export
 ### Data
 
-If you absolutely want to **import** your data directly from a **MS Excel** document (`.xlsx`), you may use function `read_excel()` from the package `readxl`: 
+If you absolutely want to **import** your data directly from a **MS Excel** document (`.xlsx`), you may use function **`read_excel()`** from the package `readxl`: 
 
 ```{r}
 library(readxl)
-# function "data.frame" forces it to be a dataframe, otherwise it's a tibble
 df = data.frame( read_excel("data/Performance.xlsx") )
+# data.frame() forces it to be a dataframe, otherwise it's a tibble
 head(df)
 ```
 
 <div style="font-size:28px;">
 - You may even import data from an **SPSS** document (`.sav`) using the `read.spss()` function from the `foreign` package
 </div>
+
+
+## Import/export
+### Data
+
+A good trick if you don't want to specify any relative or absolute path, and want to manually select data each time, is using the **`file.choose()`** function:
+
+```{r, eval=F}
+df = read.csv(file.choose(), header=TRUE, sep=",", dec=".")
+```
+
+<div style="text-align: center;">
+  <img src="figures/selectFileBox.png"/>
+</div>
+
+
+## Import/export
+### Data
+
+Other "tricks" for importing data involve using the functions in the **RStudio menu**, particularly:
+
+- File > Import Dataset > From text (base)...
+
+- File > Import Dataset > From Excel
+
+- File > Import Dataset > From SPSS...
+
+However ... using these functions is not best practice, because they are specific to the RStudio IDE. **It’s better to use code for reproducibility**
+
 
 ## Import/export
 ### Data

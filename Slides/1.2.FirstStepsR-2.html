@@ -505,14 +505,14 @@ Enrico Toffalini
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">5</span>, <span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">15</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1]  94.65888 119.91758 104.56752  75.68701  81.03177</code></pre>
+<pre><code>[1] 110.56862  78.11919  87.04354 106.11010 110.97822</code></pre>
 </div>
 </div>
 <p><strong>Positional matching</strong> - know that arguments names may be omitted if placed in the correct order</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="dv">100</span>, <span class="dv">15</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 110.98436 102.29120 100.27504  56.52488  90.08376</code></pre>
+<pre><code>[1] 124.74522  92.07243  78.32889  87.94061 115.78908</code></pre>
 </div>
 </div>
 </section>
@@ -522,7 +522,7 @@ Enrico Toffalini
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -0.7659995 -1.7573923 -0.1621952  1.5538232  0.2069355</code></pre>
+<pre><code>[1] -1.3297051 -1.6568995  0.8582354  2.0627342  0.4825531</code></pre>
 </div>
 </div>
 <p><strong>Errors</strong> - however, omitting mandatory parameters will result in an <em>Error</em></p>
@@ -672,7 +672,7 @@ Enrico Toffalini
 <section id="importexport-4" class="slide level2">
 <h2>Import/export</h2>
 <h3 id="data-1">Data</h3>
-<p>Here’s an example of using the <code>read.csv()</code> function for <strong>importing</strong> data:</p>
+<p>Here’s an example of using the <strong><code>read.csv()</code></strong> function for <strong>importing</strong> data:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># IMPORT csv data from a "data" subfolder, and store it in an object named "df"</span></span>
 <span id="cb31-2"><a href="" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">"data/Performance.csv"</span>, <span class="at">header=</span><span class="cn">TRUE</span>, <span class="at">sep=</span><span class="st">","</span>, <span class="at">dec=</span><span class="st">"."</span>)</span>
@@ -695,11 +695,11 @@ Enrico Toffalini
 <section id="importexport-5" class="slide level2">
 <h2>Import/export</h2>
 <h3 id="data-2">Data</h3>
-<p>If you absolutely want to <strong>import</strong> your data directly from a <strong>MS Excel</strong> document (<code>.xlsx</code>), you may use function <code>read_excel()</code> from the package <code>readxl</code>:</p>
+<p>If you absolutely want to <strong>import</strong> your data directly from a <strong>MS Excel</strong> document (<code>.xlsx</code>), you may use function <strong><code>read_excel()</code></strong> from the package <code>readxl</code>:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
-<span id="cb33-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># function "data.frame" forces it to be a dataframe, otherwise it's a tibble</span></span>
-<span id="cb33-3"><a href="" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> <span class="fu">data.frame</span>( <span class="fu">read_excel</span>(<span class="st">"data/Performance.xlsx"</span>) )</span>
+<span id="cb33-2"><a href="" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> <span class="fu">data.frame</span>( <span class="fu">read_excel</span>(<span class="st">"data/Performance.xlsx"</span>) )</span>
+<span id="cb33-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># data.frame() forces it to be a dataframe, otherwise it's a tibble</span></span>
 <span id="cb33-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  id  name anx acc     time
@@ -720,30 +720,52 @@ Enrico Toffalini
 <section id="importexport-6" class="slide level2">
 <h2>Import/export</h2>
 <h3 id="data-3">Data</h3>
+<p>A good trick if you don’t want to specify any relative or absolute path, and want to manually select data each time, is using the <strong><code>file.choose()</code></strong> function:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="fu">file.choose</span>(), <span class="at">header=</span><span class="cn">TRUE</span>, <span class="at">sep=</span><span class="st">","</span>, <span class="at">dec=</span><span class="st">"."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div style="text-align: center;">
+<p><img src="figures/selectFileBox.png"></p>
+</div>
+</section>
+<section id="importexport-7" class="slide level2">
+<h2>Import/export</h2>
+<h3 id="data-4">Data</h3>
+<p>Other “tricks” for importing data involve using the functions in the <strong>RStudio menu</strong>, particularly:</p>
+<ul>
+<li><p>File &gt; Import Dataset &gt; From text (base)…</p></li>
+<li><p>File &gt; Import Dataset &gt; From Excel</p></li>
+<li><p>File &gt; Import Dataset &gt; From SPSS…</p></li>
+</ul>
+<p>However … using these functions is not best practice, because they are specific to the RStudio IDE. <strong>It’s better to use code for reproducibility</strong></p>
+</section>
+<section id="importexport-8" class="slide level2">
+<h2>Import/export</h2>
+<h3 id="data-5">Data</h3>
 <p>You have processed data with R, now… how to <strong>export</strong> it?</p>
 <p>When collaborating with someone also using R, you may choose to exchange data directly by exporting the object or the entire workspace as a <code>.RData</code> file, using the <code>save()</code> or <code>save.image()</code> function respectively.</p>
 <p>However, if you need to export your data in a more universally readable tabular format, such as <code>.csv</code>, you may use <code>write.table()</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># specify the dataframe to export (here named "df")</span></span>
-<span id="cb35-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># along with the desired file name, and other arguments</span></span>
-<span id="cb35-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">write.table</span>(df, <span class="at">file=</span><span class="st">"myExportedData.csv"</span>, <span class="at">sep=</span><span class="st">","</span>, <span class="at">row.names=</span>F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># specify the dataframe to export (here named "df")</span></span>
+<span id="cb36-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># along with the desired file name, and other arguments</span></span>
+<span id="cb36-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">write.table</span>(df, <span class="at">file=</span><span class="st">"myExportedData.csv"</span>, <span class="at">sep=</span><span class="st">","</span>, <span class="at">row.names=</span>F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="importexport-7" class="slide level2">
+<section id="importexport-9" class="slide level2">
 <h2>Import/export</h2>
 <h3 id="figures">Figures</h3>
 <p>R has a collection of functions for exporting figures in different formats: <code>pdf()</code>, <code>png()</code>, <code>jpeg()</code>, <code>bmp()</code>, <code>tiff()</code>, <code>svg()</code>.</p>
 <p>Here is an example using <code>png()</code> :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># set up a graphic output file named "MyFigure.png" with some settings</span></span>
-<span id="cb36-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">png</span>(<span class="st">"MyFigure.png"</span>, <span class="at">height=</span><span class="dv">1500</span>, <span class="at">width=</span><span class="dv">2000</span>, <span class="at">units=</span><span class="st">"px"</span>, <span class="at">res=</span><span class="dv">300</span>)</span>
-<span id="cb36-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># code for creating a simple boxplot</span></span>
-<span id="cb36-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(iris<span class="sc">$</span>Sepal.Width) </span>
-<span id="cb36-6"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># close the graphic output file and actually export the plot</span></span>
-<span id="cb36-8"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># set up a graphic output file named "MyFigure.png" with some settings</span></span>
+<span id="cb37-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">png</span>(<span class="st">"MyFigure.png"</span>, <span class="at">height=</span><span class="dv">1500</span>, <span class="at">width=</span><span class="dv">2000</span>, <span class="at">units=</span><span class="st">"px"</span>, <span class="at">res=</span><span class="dv">300</span>)</span>
+<span id="cb37-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># code for creating a simple boxplot</span></span>
+<span id="cb37-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(iris<span class="sc">$</span>Sepal.Width) </span>
+<span id="cb37-6"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># close the graphic output file and actually export the plot</span></span>
+<span id="cb37-8"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <!-- --------------------------------------------------------------------- -->
 <div class="quarto-auto-generated-content">
