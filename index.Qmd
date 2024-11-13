@@ -63,9 +63,9 @@ Optional - only if enough time is left, we will introduce some basics of data vi
 
 ## Slides and Materials
 
-<em>**SECTION IN PROGRESS: NEW MATERIALS WILL BE ADDED HERE UNTIL THE END OF THE COURSE**</em>
+<em>**SECTION IN PROGRESS: NEW MATERIALS WILL BE ADDED HERE THROUGHOUT THE COURSE**</em>
 
-#### Lectures
+#### Lectures Slides
 
 -   **Getting Started with R** - [html](Slides/0.GettingStartedR.html){target="_blank"} - [pdf](Slides/0.GettingStartedR.pdf){target="_blank"}
 -   **First Steps in R (part 1)** - [html](Slides/1.1.FirstStepsR-1.html){target="_blank"} - [pdf](xxxxxxxxxxxxxxxxxx){target="_blank"}
@@ -74,18 +74,17 @@ Optional - only if enough time is left, we will introduce some basics of data vi
 
 #### Exercises
 
--   **topic 1** - [html](Exercises/0-Exercises-First-steps.html){target="_blank"}
+*These exercises go beyond practice: they integrate concepts from the slides and introduce new functions and methods that you want to know*
+
+-   **First steps in R** - [html](Exercises/1-Exercises-First-steps.html){target="_blank"}
+-   **Vectors** - [html](Exercises/2.1-Exercises-Vectors.html){target="_blank"}
 
 ------------------------------------------------------------------------
 
-<p style="font-size:10px;">
+<div style="font-size:11px;">
 
 GitHub repository associated to the present course website: [https://github.com/EnricoToffalini/Basics-R](https://github.com/EnricoToffalini/Basics-R){target="_blank"}
 
-</p>
-
-<p style="font-size:10px;">
-
 Many thanks and love to Filippo Gambarota for sharing his expertise in using GitHub, Quarto, and creating GitHub Pages websites.
 
-</p>
+</div>
