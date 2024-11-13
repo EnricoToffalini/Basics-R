@@ -32,14 +32,14 @@ This introductory course will prepare you for most future methodological courses
 
 The primary resource for the course is the online book available on GitHub: [***Introduction2R** (English edition)*](https://psicostat.github.io/Introduction2R_EN/){target="_blank"}.
 
-### Preparing for the Course
+### Getting Started with the Course
 
-1.  **Bookmark this course homepage**: Save the present URL [https://enricotoffalini.github.io/Basics-R/](https://enricotoffalini.github.io/Basics-R/){target="_blank"} for easy access to course materials.
-2.  **Install R and RStudio**. Follow the installation instructions in [*Chapter 1*](https://psicostat.github.io/Introduction2R_EN/install.html){target="_blank"} of *Introduction2R* to ensure R and RStudio are installed.
-3.  **Install the following R packages** by running this code in your R console:
+1.  **Bookmark the Course Homepage**: Save the URL of the present page [https://enricotoffalini.github.io/Basics-R/](https://enricotoffalini.github.io/Basics-R/){target="_blank"} for quick access to all course materials.
+2.  **Install R and RStudio**: go to [**this download page**](https://posit.co/download/rstudio-desktop/){target="_blank"} to install *R* and *RStudio Desktop* on your computer (further setup instructions can be found in [*Chapter 1*](https://psicostat.github.io/Introduction2R_EN/install.html){target="_blank"} of *Introduction2R*)
+3.  *Optional* - check your installation by running this code in your newly installed RStudio, and install a few packages: 
 
 ``` r
-pkgs = c("ggplot2", "psych", "readxl")
+pkgs = c("readxl", "psych", "ggplot2")
 install.packages(pkgs)
 ```
 
@@ -81,10 +81,8 @@ Optional - only if enough time is left, we will introduce some basics of data vi
 
 ------------------------------------------------------------------------
 
-<div style="font-size:11px;">
-
+::: {style="font-size:11px;"}
 GitHub repository associated to the present course website: [https://github.com/EnricoToffalini/Basics-R](https://github.com/EnricoToffalini/Basics-R){target="_blank"}
 
 Many thanks and love to Filippo Gambarota for sharing his expertise in using GitHub, Quarto, and creating GitHub Pages websites.
-
-</div>
+:::
