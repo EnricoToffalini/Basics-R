@@ -208,7 +208,7 @@ mean(Hours)
 
 ## Dataframes
 
-here is how I would import it in R, and display the first few rows:
+here is how I would import it in R (<a href="data/Courses40Cycle.xlsx" download>download here</a>), and display the first few rows:
 
 ```{r}
 library(readxl)
@@ -326,13 +326,26 @@ Let's use it to extract some dataframe rows:
 df[df$Teacher == "MASSIMILIANO PASTORE" , ] # some rows by condition , all columns
 ```
 
-
 ## Dataframes
 #### Indexing elements in a dataframe - A summary
 
 <div style="text-align: center;">
   <img src="figures/dataframeCourses.png"/>
 </div>
+
+
+## Dataframes
+#### Subset
+
+Base function **`subset()`** can also be used as an alternative to indexing
+
+```{r}
+subset(df, Teacher == "MASSIMILIANO PASTORE", select=c("Teacher","Hours","TypeOfCourse"))
+df[df$Teacher == "MASSIMILIANO PASTORE" , c("Teacher","Hours","TypeOfCourse")]
+```
+
+However, indexing with **`[]`** is more "computationally focused", computationally faster (especially if working with large datasets), and more similar to programming in other languages (e.g., **Python**), so should probably be favoured by data scientists!
+
 
 ## Dataframes
 #### Combine two dataframes using `rbind()`

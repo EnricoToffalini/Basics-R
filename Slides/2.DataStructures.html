@@ -636,7 +636,7 @@ Enrico Toffalini
 </section>
 <section id="dataframes" class="slide level2">
 <h2>Dataframes</h2>
-<p>here is how I would import it in R, and display the first few rows:</p>
+<p>here is how I would import it in R (<a href="data/Courses40Cycle.xlsx" download="">download here</a>), and display the first few rows:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
 <span id="cb53-2"><a href="" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="fu">read_excel</span>(<span class="st">"data/Courses40Cycle.xlsx"</span>))</span>
@@ -874,17 +874,39 @@ We may use many different, increasingly sophisticated, strategies:
 </section>
 <section id="dataframes-10" class="slide level2">
 <h2>Dataframes</h2>
+<h4 id="subset">Subset</h4>
+<p>Base function <strong><code>subset()</code></strong> can also be used as an alternative to indexing</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb99"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">subset</span>(df, Teacher <span class="sc">==</span> <span class="st">"MASSIMILIANO PASTORE"</span>, <span class="at">select=</span><span class="fu">c</span>(<span class="st">"Teacher"</span>,<span class="st">"Hours"</span>,<span class="st">"TypeOfCourse"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                Teacher Hours TypeOfCourse
+1  MASSIMILIANO PASTORE    10  METHODOLOGY
+16 MASSIMILIANO PASTORE    10  METHODOLOGY
+25 MASSIMILIANO PASTORE    10  METHODOLOGY</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb101"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a href="" aria-hidden="true" tabindex="-1"></a>df[df<span class="sc">$</span>Teacher <span class="sc">==</span> <span class="st">"MASSIMILIANO PASTORE"</span> , <span class="fu">c</span>(<span class="st">"Teacher"</span>,<span class="st">"Hours"</span>,<span class="st">"TypeOfCourse"</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                Teacher Hours TypeOfCourse
+1  MASSIMILIANO PASTORE    10  METHODOLOGY
+16 MASSIMILIANO PASTORE    10  METHODOLOGY
+25 MASSIMILIANO PASTORE    10  METHODOLOGY</code></pre>
+</div>
+</div>
+<p>However, indexing with <strong><code>[]</code></strong> is more “computationally focused”, computationally faster (especially if working with large datasets), and more similar to programming in other languages (e.g., <strong>Python</strong>), so should probably be favoured by data scientists!</p>
+</section>
+<section id="dataframes-11" class="slide level2">
+<h2>Dataframes</h2>
 <h4 id="combine-two-dataframes-using-rbind">Combine two dataframes using <code>rbind()</code></h4>
 <p>Imagine you have two datasets collected by two students, each including different participants:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb99"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href="" aria-hidden="true" tabindex="-1"></a>df1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb103"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb103-1"><a href="" aria-hidden="true" tabindex="-1"></a>df1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  subjName age accuracy
 1    Julie  12     0.92
 2    Tommy  10     0.78
 3     Phil  10     0.85</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb101"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a href="" aria-hidden="true" tabindex="-1"></a>df2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb105"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb105-1"><a href="" aria-hidden="true" tabindex="-1"></a>df2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  subjName age accuracy
 1    Amber   9     0.87
@@ -893,13 +915,13 @@ We may use many different, increasingly sophisticated, strategies:
 </div>
 <p>Our goal is to get one single dataset including all participant’s data for the final analysis. Of course, you could combined these files manually outside R (e.g., in Excel). However, it’s simpler and more efficient to do this directly in R using <code>rbind()</code></p>
 </section>
-<section id="dataframes-11" class="slide level2">
+<section id="dataframes-12" class="slide level2">
 <h2>Dataframes</h2>
 <h4 id="combine-two-dataframes-using-rbind-1">Combine two dataframes using <code>rbind()</code></h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb103"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb103-1"><a href="" aria-hidden="true" tabindex="-1"></a>dfTotal <span class="ot">=</span> <span class="fu">rbind</span>(df1, df2)</span>
-<span id="cb103-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb103-3"><a href="" aria-hidden="true" tabindex="-1"></a>dfTotal</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb107"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb107-1"><a href="" aria-hidden="true" tabindex="-1"></a>dfTotal <span class="ot">=</span> <span class="fu">rbind</span>(df1, df2)</span>
+<span id="cb107-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb107-3"><a href="" aria-hidden="true" tabindex="-1"></a>dfTotal</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  subjName age accuracy
 1    Julie  12     0.92
@@ -915,12 +937,12 @@ We may use many different, increasingly sophisticated, strategies:
 <li><p>the <strong>column names must be identical</strong> (remember that R is case-sensitive).</p></li>
 </ul>
 </section>
-<section id="dataframes-12" class="slide level2">
+<section id="dataframes-13" class="slide level2">
 <h2>Dataframes</h2>
 <h4 id="merge-two-dataframes-using-merge">Merge two dataframes using <code>merge()</code></h4>
 <p>Another frequent case is having data collected from the <strong>same participants</strong> across <strong>different dataframes</strong>, and having to analyze all information together:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb105"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb105-1"><a href="" aria-hidden="true" tabindex="-1"></a>df1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb109"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb109-1"><a href="" aria-hidden="true" tabindex="-1"></a>df1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  subjName age
 1    Julie  12
@@ -928,7 +950,7 @@ We may use many different, increasingly sophisticated, strategies:
 3    Tommy  10
 4     Phil  10</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb107"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb107-1"><a href="" aria-hidden="true" tabindex="-1"></a>df2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb111"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb111-1"><a href="" aria-hidden="true" tabindex="-1"></a>df2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  subjName accuracy time
 1    Julie     0.92 1203
@@ -938,14 +960,14 @@ We may use many different, increasingly sophisticated, strategies:
 </div>
 </div>
 </section>
-<section id="dataframes-13" class="slide level2">
+<section id="dataframes-14" class="slide level2">
 <h2>Dataframes</h2>
 <h4 id="merge-two-dataframes-using-merge-1">Merge two dataframes using <code>merge()</code></h4>
 <p>You can merge the two dataframes into a single, comprehensive dataframe:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb109"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb109-1"><a href="" aria-hidden="true" tabindex="-1"></a>dfTotal <span class="ot">=</span> <span class="fu">merge</span>(df1, df2, <span class="at">by=</span><span class="st">"subjName"</span>)</span>
-<span id="cb109-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb109-3"><a href="" aria-hidden="true" tabindex="-1"></a>dfTotal</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb113"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb113-1"><a href="" aria-hidden="true" tabindex="-1"></a>dfTotal <span class="ot">=</span> <span class="fu">merge</span>(df1, df2, <span class="at">by=</span><span class="st">"subjName"</span>)</span>
+<span id="cb113-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb113-3"><a href="" aria-hidden="true" tabindex="-1"></a>dfTotal</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  subjName age accuracy time
 1    Amber   9     0.87 1163
