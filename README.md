@@ -5,3 +5,5 @@ This introductory course will prepare you for most future methodological courses
 The primary resource for the course is the online book available on GitHub: <a href="https://psicostat.github.io/Introduction2R_EN/" target="_blank">***Introduction2R** (English edition)*</a>.
 
 The course website can be found at <a href="https://enricotoffalini.github.io/Basics-R/" target="_blank">https://enricotoffalini.github.io/Basics-R/</a>
+
+[prova](https://enricotoffalini.github.io/Basics-R/){:target="_blank"}
