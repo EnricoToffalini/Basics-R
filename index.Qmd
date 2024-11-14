@@ -36,7 +36,7 @@ The primary resource for the course is the online book available on GitHub: [***
 
 1.  **Bookmark the Course Homepage**: Save the URL of the present page [https://enricotoffalini.github.io/Basics-R/](https://enricotoffalini.github.io/Basics-R/){target="_blank"} for quick access to all course materials.
 2.  **Install R and RStudio**: go to [**this download page**](https://posit.co/download/rstudio-desktop/){target="_blank"} to install *R* and *RStudio Desktop* on your computer (further setup instructions can be found in [*Chapter 1*](https://psicostat.github.io/Introduction2R_EN/install.html){target="_blank"} of *Introduction2R*)
-3.  *Optional* - check your installation by running this code in your newly installed RStudio, and install a few packages: 
+3.  *Optional* - check your installation by running this code in your newly installed RStudio, and install a few packages:
 
 ``` r
 pkgs = c("readxl", "psych", "ggplot2")
@@ -55,7 +55,7 @@ We will introduce the main data structures in R and methods for interacting with
 
 #### Basics of Programming in R
 
-We will introduce essential programming concepts and their implementation in R, including conditional operations (such as `if...else`), loops (such as the `for` loops), and some common functions.
+We will introduce essential programming concepts and their implementation in R, including conditional operations (such as `if...else`), and iterative programming (including the `for` loops and `apply` functions).
 
 #### Data Visualization
 

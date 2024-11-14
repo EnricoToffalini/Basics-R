@@ -35,6 +35,12 @@ summary {
     font-size: 22px;
 }
 
+.reveal .cell-output-error pre code {
+  color: #FF2244 !important;
+  font-style: italic;
+  font-size: 110%;
+}
+
 pre code.sourceCode {
     background-color: #EEEEFF !important; 
     padding: 0.2em;

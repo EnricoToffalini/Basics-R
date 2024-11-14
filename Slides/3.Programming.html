@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.4.550">
 
   <meta name="author" content="Enrico Toffalini">
-  <title>Basics of Programming: Conditional Statements and Iterations</title>
+  <title>Basics of Programming:   if…else, and iterations</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -393,7 +393,7 @@
     <div class="slides">
 
 <section id="title-slide" data-background-image="figures/psicostatLogo.png" data-background-opacity="0.15" data-background-size="contain" class="quarto-title-block center">
-  <h1 class="title">Basics of Programming: Conditional Statements and Iterations</h1>
+  <h1 class="title">Basics of Programming: <br> if…else, and iterations</h1>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -404,614 +404,342 @@ Enrico Toffalini
 </div>
 
 </section>
-<section id="what-are-data-structures" class="slide level2">
-<h2>What are data structures</h2>
-<div style="font-size:46px;">
-<p>Data structures, like <strong>vectors</strong>, <strong>matrices</strong>, <strong>dataframes</strong>, <strong>lists</strong>, are fundamental tools that allow you to <strong>organize and store complex information</strong>, so that they can be easily <strong>processes by functions</strong> (e.g., <code>lm()</code> function to fit a linear model using variables stored in a dataframe)</p>
-<p>Most operations you will perform in R (e.g., <em>processing data</em>, <em>fitting models</em>, <em>plotting outputs</em>) are performed on these data structures</p>
-</div>
-<!-- --------------------------------------------------------------------- -->
-</section>
-<section id="vectors" class="slide level2">
-<h2>Vectors</h2>
-<p>Simple one-dimensional structures that store data of different types</p>
-<div style="text-align: center;">
-<p><img src="figures/vectorBase.png"></p>
-</div>
-<p>Here is an actual <strong>example</strong> (of a <em>numerical</em> vector):</p>
-<div style="text-align: center;">
-<p><img src="figures/vectorHours.png"></p>
-</div>
-</section>
-<section id="vectors-1" class="slide level2">
-<h2>Vectors</h2>
-<p>Vectors can easily be <strong>created using the <code>c()</code></strong> base function:</p>
+<section id="conditional-programming" class="slide level2">
+<h2>Conditional Programming</h2>
+<p>Conditional statements like <code>if</code>, <code>if...else</code>, and <code>ifelse</code> in R are essential tools for automating tasks and assisting decision making in data science. What follows are a few simple “toy examples”, but focus on the underlying logic. This will be greatly useful in more advanced applications</p>
+<hr>
+<h4 id="if-statement"><strong><code>if</code></strong> statement</h4>
+the <code>if</code> statement performs an action <em>only if</em> a condition is met
 <div class="large-code">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="" aria-hidden="true" tabindex="-1"></a>Teachers <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"Pastore"</span>, <span class="st">"Kiesner"</span>, <span class="st">"Granziol"</span>, <span class="st">"Toffalini"</span>, <span class="st">"Calignano"</span>,</span>
-<span id="cb1-2"><a href="" aria-hidden="true" tabindex="-1"></a>            <span class="st">"Epifania"</span>, <span class="st">"Bastianelli"</span>)</span>
-<span id="cb1-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="" aria-hidden="true" tabindex="-1"></a>Hours <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">20</span>, <span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">5</span>, <span class="dv">15</span>, <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="" aria-hidden="true" tabindex="-1"></a>age <span class="ot">=</span> <span class="dv">20</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>But be careful NOT to mix different types of data:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="" aria-hidden="true" tabindex="-1"></a>Hours <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">20</span>, <span class="dv">10</span>, <span class="dv">15</span>, <span class="st">"tbd"</span>, <span class="dv">15</span>, <span class="dv">5</span>)</span>
-<span id="cb2-2"><a href="" aria-hidden="true" tabindex="-1"></a>Hours <span class="co"># everthing is forced to become a character!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(age <span class="sc">&gt;=</span> <span class="dv">18</span>){</span>
+<span id="cb2-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Adult"</span>)</span>
+<span id="cb2-3"><a href="" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "10"  "15"  "20"  "10"  "15"  "tbd" "15"  "5"  </code></pre>
-</div>
-</div>
-<p>instead, if needed, use <code>NA</code> (Not Available):</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="" aria-hidden="true" tabindex="-1"></a>Hours <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">20</span>, <span class="dv">10</span>, <span class="dv">15</span>, <span class="cn">NA</span>, <span class="dv">15</span>, <span class="dv">5</span>)</span>
-<span id="cb4-2"><a href="" aria-hidden="true" tabindex="-1"></a>Hours <span class="co"># remains a numerical vector, NA does not affect type</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 10 15 20 10 15 NA 15  5</code></pre>
+<pre><code>[1] "Adult"</code></pre>
 </div>
 </div>
 </div>
 </section>
-<section id="vectors-2" class="slide level2">
-<h2>Vectors</h2>
-<p>Select/extract elements with <strong>INDEXING</strong> using square brackets <strong><code>[]</code></strong>:</p>
+<section id="if-statement-1" class="slide level2">
+<h2><code>if</code> statement</h2>
+<p>Basic flowchart showing the logic of the <strong><code>if</code></strong> statement:</p>
+<div style="text-align: center;">
+<p><img src="figures/if_chart.png" width="55%"></p>
+</div>
+</section>
+<section id="if...else-statement" class="slide level2">
+<h2><code>if...else</code> statement</h2>
+<p>Sometimes, however, you may need to perform <em>alternative</em> actions</p>
+<div style="text-align: center;">
+<p><img src="figures/ifelse_chart.png" width="55%"></p>
+</div>
+</section>
+<section id="if...else-statement-1" class="slide level2">
+<h2><code>if...else</code> statement</h2>
+<p>Sometimes, however, you may need to perform <em>alternative</em> actions</p>
+Here is a practical example of the <strong><code>if...else</code></strong> statement
 <div class="large-code">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="" aria-hidden="true" tabindex="-1"></a>Hours <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">20</span>, <span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">5</span>, <span class="dv">15</span>, <span class="dv">5</span>)</span>
-<span id="cb6-2"><a href="" aria-hidden="true" tabindex="-1"></a>Hours[<span class="dv">4</span>] <span class="co"># a single element</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 10</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="" aria-hidden="true" tabindex="-1"></a>Hours[<span class="dv">5</span><span class="sc">:</span><span class="dv">7</span>] <span class="co"># a range of elements</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 15  5 15</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="" aria-hidden="true" tabindex="-1"></a>Hours[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">6</span>)] <span class="co"># specific elements</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 10 20  5</code></pre>
-</div>
-</div>
-<p>Know the <strong>length</strong> of a vector using the <code>length()</code> function, and use it:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(Hours)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 8</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="" aria-hidden="true" tabindex="-1"></a>age <span class="ot">=</span> <span class="dv">15</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="" aria-hidden="true" tabindex="-1"></a>Hours[<span class="fu">length</span>(Hours)] <span class="co"># use it to extract the last element</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(age <span class="sc">&gt;=</span> <span class="dv">18</span>){</span>
+<span id="cb5-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Adult"</span>)</span>
+<span id="cb5-3"><a href="" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb5-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Minor"</span>)</span>
+<span id="cb5-5"><a href="" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 5</code></pre>
+<pre><code>[1] "Minor"</code></pre>
 </div>
 </div>
 </div>
-</section>
-<section id="vectors-3" class="slide level2">
-<h2>Vectors</h2>
-<p><strong>Negative indexing</strong></p>
-<p>You can use the <em>minus</em> sign <strong><code>-</code></strong> to select <strong>all elements except some</strong> from a vector. (This method is also applicable to dataframes)</p>
-<div class="large-code">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="" aria-hidden="true" tabindex="-1"></a>Hours <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">20</span>, <span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">5</span>, <span class="dv">15</span>, <span class="dv">5</span>)</span>
-<span id="cb16-2"><a href="" aria-hidden="true" tabindex="-1"></a>Hours[<span class="sc">-</span><span class="dv">4</span>] <span class="co"># ALL BUT a single element</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 10 15 20 15  5 15  5</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="" aria-hidden="true" tabindex="-1"></a>Hours[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">5</span><span class="sc">:</span><span class="dv">7</span>)] <span class="co"># ALL BUT a range of elements</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 10 15 20 10  5</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="" aria-hidden="true" tabindex="-1"></a>Hours[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">6</span>)] <span class="co"># ALL BUT specific elements</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 15 10 15 15  5</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="" aria-hidden="true" tabindex="-1"></a>Hours[<span class="sc">-</span><span class="fu">length</span>(Hours)] <span class="co"># ALL BUT the last element</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 10 15 20 10 15  5 15</code></pre>
-</div>
-</div>
-</div>
-</section>
-<section id="vectors-4" class="slide level2">
-<h2>Vectors</h2>
-<h4 id="logical-indexing">Logical indexing</h4>
-<p>Often, you’ll need to extract values from a vector based on specific <em><b>logical</b></em> conditions. Here’s an example:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="" aria-hidden="true" tabindex="-1"></a>Hours <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">20</span>, <span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">5</span>, <span class="dv">15</span>, <span class="dv">5</span>)</span>
-<span id="cb24-2"><a href="" aria-hidden="true" tabindex="-1"></a>Hours[Hours <span class="sc">&gt;=</span> <span class="dv">15</span>] <span class="co"># extract only values greater than or equal to 15</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 15 20 15 15</code></pre>
-</div>
-</div>
-<p>This is called <em><b>logical indexing</b></em> because you are selecting elements based on a logical vector (i.e., a sequence of <code>TRUE</code>, <code>FALSE</code>):</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="" aria-hidden="true" tabindex="-1"></a>Hours <span class="sc">&gt;=</span> <span class="dv">15</span> <span class="co"># the logical vector actually inside the square brackets</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] FALSE  TRUE  TRUE FALSE  TRUE FALSE  TRUE FALSE</code></pre>
-</div>
-</div>
-<p>Also, you can use a vector to extract values <strong>from another vector</strong>:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="" aria-hidden="true" tabindex="-1"></a>Teachers[Hours <span class="sc">&gt;=</span> <span class="dv">15</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "Kiesner"     "Granziol"    "Calignano"   "Bastianelli"</code></pre>
-</div>
-</div>
-</section>
-<section id="vectors-5" class="slide level2">
-<h2>Vectors</h2>
-<h4 id="operations">Operations</h4>
-<p>you can simultaneously apply an operation to a whole vector, like</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="" aria-hidden="true" tabindex="-1"></a>Hours <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">20</span>, <span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">5</span>, <span class="dv">15</span>, <span class="dv">5</span>)</span>
-<span id="cb30-2"><a href="" aria-hidden="true" tabindex="-1"></a>Hours <span class="sc">/</span> <span class="dv">5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 2 3 4 2 3 1 3 1</code></pre>
-</div>
-</div>
-<p>Of course, this is useful when you want to save the result as a new vector:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="" aria-hidden="true" tabindex="-1"></a>ECTS <span class="ot">=</span> Hours <span class="sc">/</span> <span class="dv">5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Similarly, you can apply functions to all elements of a vector:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(Hours) <span class="co"># computes square root of each element</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 3.162278 3.872983 4.472136 3.162278 3.872983 2.236068 3.872983 2.236068</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(Hours) <span class="co"># computes the natural logarithm of each element</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 2.302585 2.708050 2.995732 2.302585 2.708050 1.609438 2.708050 1.609438</code></pre>
-</div>
-</div>
-</section>
-<section id="vectors-6" class="slide level2">
-<h2>Vectors</h2>
-<h4 id="summary-statistics">Summary statistics</h4>
-<p>A whole vector may serve to compute summary statistics, for example using functions such as <code>mean()</code>, <code>sd()</code>, <code>median()</code>, <code>quantile()</code>, <code>max()</code>, <code>min()</code>:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(Hours) <span class="co"># returns the average value (mean) of the vector</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 11.875</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(Hours) <span class="co"># returns the Standard Deviation of the vector</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 5.303301</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(Hours) <span class="co"># returns the median value of the vector</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 12.5</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(Hours, <span class="at">probs=</span><span class="fu">c</span>(.<span class="dv">25</span>, .<span class="dv">75</span>)) <span class="co"># returns desired quantiles</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  25%   75% 
- 8.75 15.00 </code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(Hours) <span class="co"># returns largest value</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 20</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">min</span>(Hours) <span class="co"># returns smallest value</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 5</code></pre>
-</div>
-</div>
-</section>
-<section id="vectors-7" class="slide level2">
-<h2>Vectors</h2>
-<h4 id="summary-statistics---managing-missing-na-values">Summary statistics - Managing missing (<code>NA</code>) values</h4>
-<div style="large-code">
-<p>All of the previous summary statistics will <strong>fail</strong> if there is even a single <code>NA</code> value:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="" aria-hidden="true" tabindex="-1"></a>Hours <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">20</span>, <span class="dv">10</span>, <span class="dv">15</span>, <span class="cn">NA</span>, <span class="dv">15</span>, <span class="dv">5</span>)</span>
-<span id="cb49-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(Hours) <span class="co"># a single NA value implies that the average is impossible to determine</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] NA</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(Hours, <span class="at">probs=</span><span class="fu">c</span>(.<span class="dv">25</span>, .<span class="dv">75</span>)) <span class="co"># quantile() will even return an Error</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-error">
-<pre><code>Error in quantile.default(Hours, probs = c(0.25, 0.75)): missing values and NaN's not allowed if 'na.rm' is FALSE</code></pre>
-</div>
-</div>
-<p>You can easily manage missing values by adding the <strong><code>na.rm=TRUE</code></strong> argument:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(Hours, <span class="at">na.rm=</span><span class="cn">TRUE</span>) <span class="co"># NA values are ignored </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 12.85714</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(Hours, <span class="at">probs=</span><span class="fu">c</span>(.<span class="dv">25</span>, .<span class="dv">75</span>), <span class="at">na.rm=</span><span class="cn">TRUE</span>) <span class="co"># NA values are ignored </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>25% 75% 
- 10  15 </code></pre>
-</div>
-</div>
-</div>
-</section>
-<section id="vectors-8" class="slide level2">
-<h2>Vectors</h2>
-<h4 id="example-replacing-na-with-the-average-value">Example: replacing <code>NA</code> with the average value</h4>
-<div style="large-code">
-<p>Replacing a missing value with the average across valid values is risky, as it may alter many other summary statistics, but it is a good example for understanding different concepts seen so far:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="" aria-hidden="true" tabindex="-1"></a>Hours <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">20</span>, <span class="dv">10</span>, <span class="dv">15</span>, <span class="cn">NA</span>, <span class="dv">15</span>, <span class="dv">5</span>)</span>
-<span id="cb57-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb57-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># compute the average value ignoring NAs, and put it wherever </span></span>
-<span id="cb57-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># there is a NA value in the vector</span></span>
-<span id="cb57-5"><a href="" aria-hidden="true" tabindex="-1"></a>Hours[<span class="fu">is.na</span>(Hours)] <span class="ot">=</span> <span class="fu">mean</span>(Hours, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
-<span id="cb57-6"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb57-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># now let's inspect the updated content of the vector</span></span>
-<span id="cb57-8"><a href="" aria-hidden="true" tabindex="-1"></a>Hours</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 10.00000 15.00000 20.00000 10.00000 15.00000 12.85714 15.00000  5.00000</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># by the way... na.rm=TRUE is no longer needed now, as NA is no longer there</span></span>
-<span id="cb59-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(Hours)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 12.85714</code></pre>
-</div>
-</div>
-</div>
-<!-- --------------------------------------------------------------------- -->
-</section>
-<section id="section" class="slide level2">
-<h2></h2>
-<h3 id="a-type-of-data-structure-you-are-already-familiar-with">A type of data structure you are already familiar with</h3>
-<div style="text-align: center;">
-<p><img src="figures/Courses40Cycle.png"></p>
-</div>
-</section>
-<section id="dataframes" class="slide level2">
-<h2>Dataframes</h2>
-<p>here is how I would import it in R (<a href="data/Courses40Cycle.xlsx" download="">download here</a>), and display the first few rows:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
-<span id="cb61-2"><a href="" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="fu">read_excel</span>(<span class="st">"data/Courses40Cycle.xlsx"</span>))</span>
-<span id="cb61-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  Year TypeOfCourse                                                  Title
-1    1  METHODOLOGY CURRENT ISSUES IN STATISTICAL INFERENCE FOR PSYCHOLOGY
-2    1  METHODOLOGY               LINEAR AND MIXED EFFECT MODELS WITH SPSS
-3    1  METHODOLOGY                 BASICS OF STATISTICAL INFERENCE WITH R
-4    1  PROGRAMMING                           BASICS OF R FOR DATA SCIENCE
-5    1  METHODOLOGY                              PSYCHOLOGICAL MEASUREMENT
-6    1  METHODOLOGY                              POWER AND DESIGN ANALYSIS
-               Teacher Hours ECTS MandatoryAttendance DeliveryMethod Language
-1 MASSIMILIANO PASTORE    10    2                 YES      IN PERSON  ENGLISH
-2         JEFF KIESNER    15    3                  NO      IN PERSON  ENGLISH
-3     UMBERTO GRANZIOL    20    4                 YES      IN PERSON  ENGLISH
-4     ENRICO TOFFALINI    10    2                 YES      IN PERSON  ENGLISH
-5      LUCA STEFANUTTI    15    3                 YES      IN PERSON  ENGLISH
-6      GIANMARCO ALTOE     5    1                 YES      IN PERSON  ENGLISH</code></pre>
-</div>
-</div>
-</section>
-<section id="dataframes-1" class="slide level2">
-<h2>Dataframes</h2>
-<p>In fact, <strong>dataframes</strong> are just collections (lists) of <strong>vectors</strong> of different types, all with the same length. Each column in a dataframe is a vector (a variable):</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>Teacher</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> [1] "MASSIMILIANO PASTORE"    "JEFF KIESNER"           
- [3] "UMBERTO GRANZIOL"        "ENRICO TOFFALINI"       
- [5] "LUCA STEFANUTTI"         "GIANMARCO ALTOE"        
- [7] "GIANMARCO ALTOE"         "TATIANA MARCI"          
- [9] "MICHELE VICOVARO"        "FILIPPO GAMBAROTA"      
-[11] "LUCA STEFANUTTI"         "ENRICO TOFFALINI"       
-[13] "GIULIA CALIGNANO"        "LUCA BATTAGLINI"        
-[15] "SIMONE CUTINI"           "MASSIMILIANO PASTORE"   
-[17] "FILIPPO GAMBAROTA"       "TOMMASO FERACO"         
-[19] "ENRICO SELLA"            "MARINA OTTAVIA EPIFANIA"
-[21] "CHRISTIAN AGRILLO"       "NICOLA CELLINI"         
-[23] "ALESSIA BASTIANELLI"     "GIANMARCO ALTOE"        
-[25] "MASSIMILIANO PASTORE"    "MARA CADINU"            
-[27] "JEFF KIESNER"            "FRANCESCO VESPIGNANI"   </code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>Hours</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> [1] 10 15 20 10 15  5  5  5  5  5 10 10  5  5 10 10 15 20  5 15  5 10  5  5 10
-[26] 15  5  5</code></pre>
-</div>
-</div>
-</section>
-<section id="dataframes-2" class="slide level2">
-<h2>Dataframes</h2>
-<p>The “<strong><code>$</code></strong>” (dollar) operator is essential to access variables in a dataframe:</p>
-<div style="text-align: center;">
-<p><img src="figures/previewDataframe.png"></p>
-</div>
-</section>
-<section id="dataframes-3" class="slide level2">
-<h2>Dataframes</h2>
-<p>To know the names of all variables in a dataframe, use the <code>names()</code> function:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "Year"                "TypeOfCourse"        "Title"              
-[4] "Teacher"             "Hours"               "ECTS"               
-[7] "MandatoryAttendance" "DeliveryMethod"      "Language"           </code></pre>
-</div>
-</div>
-<p>Use the <code>dim()</code> function to view the dimensions of a dataframe:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># first value is number of rows, second is number of columns (variables)</span></span>
-<span id="cb69-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(df) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 28  9</code></pre>
-</div>
-</div>
-<p>Alternatively, you can use <code>nrow()</code> and <code>ncol()</code>:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(df) <span class="co"># number of rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 28</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ncol</span>(df) <span class="co"># number of columns</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 9</code></pre>
-</div>
-</div>
-</section>
-<section id="dataframes-4" class="slide level2">
-<h2>Dataframes</h2>
-<p>As an exercise, let’s check whether <code>ECTS</code> is actually always <code>Hours*5</code></p>
-We may use many different, increasingly sophisticated, strategies:
-<div class="large-code">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>Hours <span class="sc">/</span> df<span class="sc">$</span>ECTS</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> [1] 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="" aria-hidden="true" tabindex="-1"></a>(df<span class="sc">$</span>Hours <span class="sc">/</span> df<span class="sc">$</span>ECTS) <span class="sc">==</span> <span class="dv">5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> [1] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE
-[16] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>((df<span class="sc">$</span>Hours <span class="sc">/</span> df<span class="sc">$</span>ECTS) <span class="sc">==</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 28</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>((df<span class="sc">$</span>Hours <span class="sc">/</span> df<span class="sc">$</span>ECTS) <span class="sc">==</span> <span class="dv">5</span>) <span class="sc">==</span> <span class="fu">nrow</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] TRUE</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>((df<span class="sc">$</span>Hours <span class="sc">/</span> df<span class="sc">$</span>ECTS) <span class="sc">!=</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0</code></pre>
-</div>
-</div>
-</div>
-</section>
-<section id="dataframes-5" class="slide level2">
-<h2>Dataframes</h2>
-<p>Variables in a dataframe can be manipulated like any other vector:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(df<span class="sc">$</span>Hours)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> [1] 2.302585 2.708050 2.995732 2.302585 2.708050 1.609438 1.609438 1.609438
- [9] 1.609438 1.609438 2.302585 2.302585 1.609438 1.609438 2.302585 2.302585
-[17] 2.708050 2.995732 1.609438 2.708050 1.609438 2.302585 1.609438 1.609438
-[25] 2.302585 2.708050 1.609438 1.609438</code></pre>
-</div>
-</div>
-<p>Also, new variables can easily be created and added at any time:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>newVar <span class="ot">=</span> <span class="fu">log</span>(df<span class="sc">$</span>Hours)</span>
-<span id="cb87-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> [1] "Year"                "TypeOfCourse"        "Title"              
- [4] "Teacher"             "Hours"               "ECTS"               
- [7] "MandatoryAttendance" "DeliveryMethod"      "Language"           
-[10] "newVar"             </code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>newVar</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> [1] 2.302585 2.708050 2.995732 2.302585 2.708050 1.609438 1.609438 1.609438
- [9] 1.609438 1.609438 2.302585 2.302585 1.609438 1.609438 2.302585 2.302585
-[17] 2.708050 2.995732 1.609438 2.708050 1.609438 2.302585 1.609438 1.609438
-[25] 2.302585 2.708050 1.609438 1.609438</code></pre>
-</div>
-</div>
-</section>
-<section id="dataframes-6" class="slide level2">
-<h2>Dataframes</h2>
-<h4 id="indexing-elements-in-a-dataframe">Indexing elements in a dataframe</h4>
-<p>In addition to using the “<strong><code>$</code></strong>” (dollar) operator, you can directly access a variable of a dataframe using <strong>indexing</strong> with <strong>square brackets</strong> <code>[]</code>:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="" aria-hidden="true" tabindex="-1"></a>df[ , <span class="st">"Hours"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> [1] 10 15 20 10 15  5  5  5  5  5 10 10  5  5 10 10 15 20  5 15  5 10  5  5 10
-[26] 15  5  5</code></pre>
-</div>
-</div>
-<p>Notice the comma “<strong><code>,</code></strong>” above.</p>
-<p>Unlike vectors, dataframes must be indexed by <strong>both row and column</strong>. In the example above, we’re specifying only the desired column (<code>"Hours"</code>), leaving the row index blank before the comma <strong><code>,</code></strong> This selects all rows for the column named <code>"Hours"</code>. Remember that blank index means “all”. Importantly, the “<strong><code>,</code></strong>” must always be there when indexing dataframes!</p>
-</section>
-<section id="dataframes-7" class="slide level2">
-<h2>Dataframes</h2>
-<h4 id="indexing-elements-in-a-dataframe---examples">Indexing elements in a dataframe - Examples</h4>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb93"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="" aria-hidden="true" tabindex="-1"></a>df[ <span class="dv">1</span> , <span class="st">"Hours"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 10</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb95"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a href="" aria-hidden="true" tabindex="-1"></a>df[ <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span> , <span class="st">"Hours"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 10 15 20 10 15</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb97"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb97-1"><a href="" aria-hidden="true" tabindex="-1"></a>df[ <span class="dv">1</span> , <span class="fu">c</span>(<span class="st">"Teacher"</span>,<span class="st">"Hours"</span>,<span class="st">"TypeOfCourse"</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>               Teacher Hours TypeOfCourse
-1 MASSIMILIANO PASTORE    10  METHODOLOGY</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb99"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href="" aria-hidden="true" tabindex="-1"></a>df[ <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span> , <span class="fu">c</span>(<span class="st">"Teacher"</span>,<span class="st">"Hours"</span>,<span class="st">"TypeOfCourse"</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>               Teacher Hours TypeOfCourse
-1 MASSIMILIANO PASTORE    10  METHODOLOGY
-2         JEFF KIESNER    15  METHODOLOGY
-3     UMBERTO GRANZIOL    20  METHODOLOGY
-4     ENRICO TOFFALINI    10  PROGRAMMING
-5      LUCA STEFANUTTI    15  METHODOLOGY</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb101"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a href="" aria-hidden="true" tabindex="-1"></a>df[ <span class="dv">1</span> , <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">2</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>               Teacher Hours TypeOfCourse
-1 MASSIMILIANO PASTORE    10  METHODOLOGY</code></pre>
-</div>
-</div>
-</section>
-<section id="dataframes-8" class="slide level2">
-<h2>Dataframes</h2>
-<h4 id="logical-indexing-1">Logical indexing</h4>
-<p>Just like for vectors, you can use a logical condition for indexing a dataframe.</p>
-<p>Let’s consider this logical condition:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb103"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb103-1"><a href="" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>Teacher <span class="sc">==</span> <span class="st">"MASSIMILIANO PASTORE"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> [1]  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-[13] FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-[25]  TRUE FALSE FALSE FALSE</code></pre>
-</div>
-</div>
-<p>Let’s use it to extract some dataframe rows:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb105"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb105-1"><a href="" aria-hidden="true" tabindex="-1"></a>df[df<span class="sc">$</span>Teacher <span class="sc">==</span> <span class="st">"MASSIMILIANO PASTORE"</span> , ] <span class="co"># some rows by condition , all columns</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>   Year TypeOfCourse                                                  Title
-1     1  METHODOLOGY CURRENT ISSUES IN STATISTICAL INFERENCE FOR PSYCHOLOGY
-16  2-3  METHODOLOGY       BAYESIAN DATA ANALYSIS IN PSYCHOLOGICAL RESEARCH
-25  2-3  METHODOLOGY               DATA SIMULATION IN PSYCHOLOGICAL STUDIES
-                Teacher Hours ECTS MandatoryAttendance DeliveryMethod Language
-1  MASSIMILIANO PASTORE    10    2                 YES      IN PERSON  ENGLISH
-16 MASSIMILIANO PASTORE    10    2                  NO      IN PERSON  ENGLISH
-25 MASSIMILIANO PASTORE    10    2                  NO      IN PERSON  ENGLISH
-     newVar
-1  2.302585
-16 2.302585
-25 2.302585</code></pre>
-</div>
-</div>
-</section>
-<section id="dataframes-9" class="slide level2">
-<h2>Dataframes</h2>
-<h4 id="indexing-elements-in-a-dataframe---a-summary">Indexing elements in a dataframe - A summary</h4>
-<div style="text-align: center;">
-<p><img src="figures/dataframeCourses.png"></p>
-</div>
-</section>
-<section id="dataframes-10" class="slide level2">
-<h2>Dataframes</h2>
-<h4 id="subset">Subset</h4>
-<p>Base function <strong><code>subset()</code></strong> can also be used as an alternative to indexing</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb107"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb107-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">subset</span>(df, Teacher <span class="sc">==</span> <span class="st">"MASSIMILIANO PASTORE"</span>, <span class="at">select=</span><span class="fu">c</span>(<span class="st">"Teacher"</span>,<span class="st">"Hours"</span>,<span class="st">"TypeOfCourse"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>                Teacher Hours TypeOfCourse
-1  MASSIMILIANO PASTORE    10  METHODOLOGY
-16 MASSIMILIANO PASTORE    10  METHODOLOGY
-25 MASSIMILIANO PASTORE    10  METHODOLOGY</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb109"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb109-1"><a href="" aria-hidden="true" tabindex="-1"></a>df[df<span class="sc">$</span>Teacher <span class="sc">==</span> <span class="st">"MASSIMILIANO PASTORE"</span> , <span class="fu">c</span>(<span class="st">"Teacher"</span>,<span class="st">"Hours"</span>,<span class="st">"TypeOfCourse"</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>                Teacher Hours TypeOfCourse
-1  MASSIMILIANO PASTORE    10  METHODOLOGY
-16 MASSIMILIANO PASTORE    10  METHODOLOGY
-25 MASSIMILIANO PASTORE    10  METHODOLOGY</code></pre>
-</div>
-</div>
-<p>However, indexing with <strong><code>[]</code></strong> is more “computationally focused”, computationally faster (especially if working with large datasets), and more similar to programming in other languages (e.g., <strong>Python</strong>), so should probably be favoured by data scientists!</p>
-</section>
-<section id="dataframes-11" class="slide level2">
-<h2>Dataframes</h2>
-<h4 id="combine-two-dataframes-using-rbind">Combine two dataframes using <code>rbind()</code></h4>
-<p>Imagine you have two datasets collected by two students, each including different participants:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb111"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb111-1"><a href="" aria-hidden="true" tabindex="-1"></a>df1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  subjName age accuracy
-1    Julie  12     0.92
-2    Tommy  10     0.78
-3     Phil  10     0.85</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb113"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb113-1"><a href="" aria-hidden="true" tabindex="-1"></a>df2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  subjName age accuracy
-1    Amber   9     0.87
-2      Max  13     0.90</code></pre>
-</div>
-</div>
-<p>Our goal is to get one single dataset including all participant’s data for the final analysis. Of course, you could combined these files manually outside R (e.g., in Excel). However, it’s simpler and more efficient to do this directly in R using <code>rbind()</code></p>
-</section>
-<section id="dataframes-12" class="slide level2">
-<h2>Dataframes</h2>
-<h4 id="combine-two-dataframes-using-rbind-1">Combine two dataframes using <code>rbind()</code></h4>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb115"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb115-1"><a href="" aria-hidden="true" tabindex="-1"></a>dfTotal <span class="ot">=</span> <span class="fu">rbind</span>(df1, df2)</span>
-<span id="cb115-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb115-3"><a href="" aria-hidden="true" tabindex="-1"></a>dfTotal</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  subjName age accuracy
-1    Julie  12     0.92
-2    Tommy  10     0.78
-3     Phil  10     0.85
-4    Amber   9     0.87
-5      Max  13     0.90</code></pre>
-</div>
-</div>
-<p><strong>Important</strong>: for <code>rbind()</code> to work, the two to-be-combined dataframes must:</p>
+<p>In the above example:</p>
 <ul>
-<li><p>have the <strong>exact same number of columns</strong>;</p></li>
-<li><p>the <strong>column names must be identical</strong> (remember that R is case-sensitive).</p></li>
+<li><em>if</em> <code>age</code> is 18 or older, R will print <code>"Adult"</code>;</li>
+<li>otherwise (<em>else</em>) it will print <code>"Minor"</code></li>
 </ul>
 </section>
-<section id="dataframes-13" class="slide level2">
-<h2>Dataframes</h2>
-<h4 id="merge-two-dataframes-using-merge">Merge two dataframes using <code>merge()</code></h4>
-<p>Another frequent case is having data collected from the <strong>same participants</strong> across <strong>different dataframes</strong>, and having to analyze all information together:</p>
+<section id="if...else-if...else-statement" class="slide level2">
+<h2><code>if...else if...else</code> statement</h2>
+When you need to evaluate more than just two alternative conditions, you can use <strong>nested conditional statements</strong>, that is you combine multiple <code>if...else</code> statements
+<div class="large-code">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb117"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb117-1"><a href="" aria-hidden="true" tabindex="-1"></a>df1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  subjName age
-1    Julie  12
-2    Amber   9
-3    Tommy  10
-4     Phil  10</code></pre>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="" aria-hidden="true" tabindex="-1"></a>age <span class="ot">=</span> <span class="dv">10</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="sourceCode cell-code" id="cb119"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb119-1"><a href="" aria-hidden="true" tabindex="-1"></a>df2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (age <span class="sc">&gt;=</span> <span class="dv">18</span>) {</span>
+<span id="cb8-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Adult"</span>)</span>
+<span id="cb8-3"><a href="" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span> (age <span class="sc">&gt;=</span> <span class="dv">13</span>) {</span>
+<span id="cb8-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Adolescent"</span>)</span>
+<span id="cb8-5"><a href="" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span> (age <span class="sc">&gt;=</span> <span class="dv">2</span>){</span>
+<span id="cb8-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Child"</span>)</span>
+<span id="cb8-7"><a href="" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb8-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Infant"</span>)</span>
+<span id="cb8-9"><a href="" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  subjName accuracy time
-1    Julie     0.92 1203
-2    Tommy     0.78 3302
-3     Phil     0.85  994
-4    Amber     0.87 1163</code></pre>
+<pre><code>[1] "Child"</code></pre>
+</div>
 </div>
 </div>
 </section>
-<section id="dataframes-14" class="slide level2">
-<h2>Dataframes</h2>
-<h4 id="merge-two-dataframes-using-merge-1">Merge two dataframes using <code>merge()</code></h4>
-<p>You can merge the two dataframes into a single, comprehensive dataframe:</p>
+<section id="if...else-statement-2" class="slide level2">
+<h2><code>if...else</code> statement</h2>
+<p>Possible, pratical use of <strong><code>if...else</code></strong> in a preplanned analysis for a hypothetical preregistered study: automate the decision to conduct additional analyses based on the result of a preliminary test. This helps create a reproducible analysis pipeline with a clear set of decisions</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb121"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb121-1"><a href="" aria-hidden="true" tabindex="-1"></a>dfTotal <span class="ot">=</span> <span class="fu">merge</span>(df1, df2, <span class="at">by=</span><span class="st">"subjName"</span>)</span>
-<span id="cb121-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb121-3"><a href="" aria-hidden="true" tabindex="-1"></a>dfTotal</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="do">## PREPLANNED ANALYSIS</span></span>
+<span id="cb10-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># preliminary test</span></span>
+<span id="cb10-4"><a href="" aria-hidden="true" tabindex="-1"></a>tt1 <span class="ot">=</span> <span class="fu">t.test</span>(x1, x2, <span class="at">data=</span>df, <span class="at">paired=</span><span class="cn">TRUE</span>)</span>
+<span id="cb10-5"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># based on the p-value of the preliminary t-test, choose the next step</span></span>
+<span id="cb10-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (tt1<span class="sc">$</span>p.value <span class="sc">&lt;</span> <span class="fl">0.05</span>) {</span>
+<span id="cb10-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="co"># If significant, perform an additional analysis with a linear model (lm)</span></span>
+<span id="cb10-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Significant result: proceeding with follow-up analysis"</span>)</span>
+<span id="cb10-10"><a href="" aria-hidden="true" tabindex="-1"></a>  fit <span class="ot">=</span> <span class="fu">lm</span>(outcome <span class="sc">~</span> pred1 <span class="sc">+</span> pred2 <span class="sc">*</span> moder1, <span class="at">data =</span> df)</span>
+<span id="cb10-11"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>(fit)</span>
+<span id="cb10-12"><a href="" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb10-13"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="co"># else, report only the preliminary test</span></span>
+<span id="cb10-14"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"No significant result: reporting preliminary results only"</span>)</span>
+<span id="cb10-15"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(tt1)</span>
+<span id="cb10-16"><a href="" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="ifelse-statement" class="slide level2">
+<h2><code>ifelse</code> statement</h2>
+<p>All previous statements work with a single value at a time. However, you often want to apply this type of operation to an entire vector</p>
+<p>Using <code>if</code> and <code>if..else</code> directly on a vector will <strong>NOT</strong> work as intended:</p>
+<div class="large-code">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="" aria-hidden="true" tabindex="-1"></a>age <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">28</span>, <span class="dv">15</span>, <span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">67</span>, <span class="dv">42</span>, <span class="dv">14</span>, <span class="dv">7</span>)</span>
+<span id="cb11-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(age <span class="sc">&gt;=</span> <span class="dv">18</span>){</span>
+<span id="cb11-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Adult"</span>)</span>
+<span id="cb11-5"><a href="" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb11-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Minor"</span>)</span>
+<span id="cb11-7"><a href="" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error in if (age &gt;= 18) {: the condition has length &gt; 1</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="ifelse-statement-1" class="slide level2">
+<h2><code>ifelse</code> statement</h2>
+<p>All previous statements work with a single value at a time. However, you often want to apply this type of operation to an entire vector</p>
+<p>To handle such cases you can use the base <strong><code>ifelse</code></strong> function, that evaluates each element of a vector individually:</p>
+<div class="large-code">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="" aria-hidden="true" tabindex="-1"></a>age <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">28</span>, <span class="dv">15</span>, <span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">67</span>, <span class="dv">42</span>, <span class="dv">14</span>, <span class="dv">7</span>)</span>
+<span id="cb13-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ifelse</span>(age <span class="sc">&gt;=</span> <span class="dv">18</span>, <span class="st">"Adult"</span>, <span class="st">"Minor"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  subjName age accuracy time
-1    Amber   9     0.87 1163
-2    Julie  12     0.92 1203
-3     Phil  10     0.85  994
-4    Tommy  10     0.78 3302</code></pre>
+<pre><code>[1] "Minor" "Adult" "Minor" "Minor" "Minor" "Adult" "Adult" "Minor" "Minor"</code></pre>
 </div>
 </div>
-<p><strong>Important</strong>: <code>merge()</code> will work even if some or even all values that should be used for merging do not match… but in that case part of or all data will be lost</p>
+<p>…of course, it is always recommended to store the output:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="" aria-hidden="true" tabindex="-1"></a>ageCategory <span class="ot">=</span> <span class="fu">ifelse</span>(age <span class="sc">&gt;=</span> <span class="dv">18</span>, <span class="st">"Adult"</span>, <span class="st">"Minor"</span>)</span>
+<span id="cb15-2"><a href="" aria-hidden="true" tabindex="-1"></a>ageCategory</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Minor" "Adult" "Minor" "Minor" "Minor" "Adult" "Adult" "Minor" "Minor"</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="ifelse-statement-2" class="slide level2">
+<h2><code>ifelse</code> statement</h2>
+<p>The <strong><code>ifelse</code></strong> statement can also be nested to manage multiple conditions, such as in the following example:</p>
+<div class="large-code">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="" aria-hidden="true" tabindex="-1"></a>age <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">28</span>, <span class="dv">15</span>, <span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">67</span>, <span class="dv">42</span>, <span class="dv">14</span>, <span class="dv">7</span>)</span>
+<span id="cb17-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ifelse</span>(age <span class="sc">&gt;=</span> <span class="dv">18</span>, <span class="st">"Adult"</span> , </span>
+<span id="cb17-4"><a href="" aria-hidden="true" tabindex="-1"></a>               <span class="fu">ifelse</span>(age <span class="sc">&gt;=</span> <span class="dv">13</span>, <span class="st">"Adolescent"</span> ,</span>
+<span id="cb17-5"><a href="" aria-hidden="true" tabindex="-1"></a>                            <span class="fu">ifelse</span>(age <span class="sc">&gt;=</span> <span class="dv">2</span>, <span class="st">"Child"</span>, <span class="st">"Infant"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Child"      "Adult"      "Adolescent" "Infant"     "Child"     
+[6] "Adult"      "Adult"      "Adolescent" "Child"     </code></pre>
+</div>
+</div>
+</div>
+<!-- --------------------------------------------------------------------- -->
+</section>
+<section id="iterative-programming" class="slide level2">
+<h2>Iterative Programming</h2>
+<p><strong>Iterative programming</strong> allows you to repeat one or a series of actions automatically, for a predetermined number of times or until a condition is met</p>
+<p>Let’s start with understanding the basics of iterative programming with the <strong><code>for</code></strong> loop:</p>
+<div style="text-align: center;">
+<p><img src="figures/for_loop.png" width="50%"></p>
+</div>
+</section>
+<section id="for-loop" class="slide level2">
+<h2><code>for</code> loop</h2>
+Here are a few simple examples of using the <strong><code>for</code></strong> loop
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+<div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>){</span>
+<span id="cb19-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(i)</span>
+<span id="cb19-3"><a href="" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1
+[1] 2
+[1] 3
+[1] 4
+[1] 5</code></pre>
+</div>
+</div>
+</div>
+<div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>){</span>
+<span id="cb21-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(i<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb21-3"><a href="" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1
+[1] 4
+[1] 9
+[1] 16
+[1] 25</code></pre>
+</div>
+</div>
+</div>
+<div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>){</span>
+<span id="cb23-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">Sys.time</span>())</span>
+<span id="cb23-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">Sys.sleep</span>(<span class="dv">1</span>)</span>
+<span id="cb23-4"><a href="" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "2024-11-14 14:38:18 CET"
+[1] "2024-11-14 14:38:19 CET"
+[1] "2024-11-14 14:38:20 CET"
+[1] "2024-11-14 14:38:21 CET"
+[1] "2024-11-14 14:38:22 CET"</code></pre>
+</div>
+</div>
+</div>
+<div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>){</span>
+<span id="cb25-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">Sys.time</span>())</span>
+<span id="cb25-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">Sys.sleep</span>(<span class="dv">2</span>)</span>
+<span id="cb25-4"><a href="" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "2024-11-14 14:38:23 CET"
+[1] "2024-11-14 14:38:25 CET"
+[1] "2024-11-14 14:38:27 CET"
+[1] "2024-11-14 14:38:30 CET"
+[1] "2024-11-14 14:38:32 CET"</code></pre>
+</div>
+</div>
+</div>
+<div>
+
+</div></div></section>
+<section id="for-loop-1" class="slide level2">
+<h2><code>for</code> loop</h2>
+<p>Here’s a more interesting example of iterative <strong><code>for</code></strong> loop with practical usefulness: we want to repeat a data simulation for a predetermined number of times (5 iterations), each time drawing <span class="math inline">\(n = 30\)</span> values from a <em>standard normal distribution</em>, computing and displaying the average … (This is actually a simple example of <em>Monte Carlo simulation</em>! 😃)</p>
+<div class="large-code">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">0</span>) <span class="co"># set a seed for reproducibility: best practice! </span></span>
+<span id="cb27-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>){</span>
+<span id="cb27-4"><a href="" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">30</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb27-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">mean</span>(x))</span>
+<span id="cb27-6"><a href="" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.02195079
+[1] -0.02577153
+[1] -0.009581231
+[1] 0.03212316
+[1] -0.2946441</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="for-loop-2" class="slide level2">
+<h2><code>for</code> loop</h2>
+<p>In fact, in the previous example, the <strong><code>for</code></strong> loop displayed the results but didn’t store it. For more effective use, you can combine the <strong><code>for</code></strong> loop with indexing with <strong><code>[]</code></strong> to save each result:</p>
+<div class="large-code">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">0</span>) <span class="co"># set a seed for reproducibility: best practice! </span></span>
+<span id="cb29-2"><a href="" aria-hidden="true" tabindex="-1"></a>niter <span class="ot">=</span> <span class="dv">5</span> <span class="co"># set the desired number of iterations: best practice! </span></span>
+<span id="cb29-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># initialize a results vector with NAs: best practice!</span></span>
+<span id="cb29-4"><a href="" aria-hidden="true" tabindex="-1"></a>results <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, niter) </span>
+<span id="cb29-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># now run the for loop! :-)</span></span>
+<span id="cb29-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>niter){</span>
+<span id="cb29-7"><a href="" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">30</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb29-8"><a href="" aria-hidden="true" tabindex="-1"></a>  results[i] <span class="ot">=</span> <span class="fu">mean</span>(x)</span>
+<span id="cb29-9"><a href="" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb29-10"><a href="" aria-hidden="true" tabindex="-1"></a>results <span class="co"># display results</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  0.021950789 -0.025771530 -0.009581231  0.032123159 -0.294644080</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(results) <span class="co"># estimate standard error of the mean</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.1358843</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="for-loop-3" class="slide level2">
+<h2><code>for</code> loop</h2>
+Let’s extend the previous example with … a few more iterations!
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+<div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># STEP 1: RUN SIMULATION</span></span>
+<span id="cb33-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># set number of iterations</span></span>
+<span id="cb33-4"><a href="" aria-hidden="true" tabindex="-1"></a>niter <span class="ot">=</span> <span class="dv">10000</span></span>
+<span id="cb33-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># initialize results vector</span></span>
+<span id="cb33-6"><a href="" aria-hidden="true" tabindex="-1"></a>results <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, niter) </span>
+<span id="cb33-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># actually run simulation</span></span>
+<span id="cb33-8"><a href="" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>niter){</span>
+<span id="cb33-9"><a href="" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">30</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb33-10"><a href="" aria-hidden="true" tabindex="-1"></a>  results[i] <span class="ot">=</span> <span class="fu">mean</span>(x)</span>
+<span id="cb33-11"><a href="" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># STEP 2: PLOT RESULTS</span></span>
+<span id="cb34-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># histogram, with a large number of bins</span></span>
+<span id="cb34-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(results, <span class="at">breaks=</span><span class="dv">50</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="3.Programming_files/figure-revealjs/unnamed-chunk-19-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># STEP 3: COMPUTE SD OF RESULTS</span></span>
+<span id="cb35-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(results)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.1806616</code></pre>
+</div>
+</div>
+</div>
+<div>
+
+<p>→ Enjoy it! This is a proper estimation of the <em>Standard Error of the Mean</em> via Monte Carlo simulation! 😊</p>
 <!-- --------------------------------------------------------------------- -->
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
 </div>
 </div>
-</section>
+</div></div></section>
     </div>
   </div>
 
