@@ -75,10 +75,11 @@ We will introduce essential programming concepts and their implementation in R, 
 
 #### Exercises
 
-*— These exercises go beyond practice: they integrate concepts from the slides and introduce new functions and methods that you want to know*
+*— These exercises go beyond practice: they integrate concepts from the slides and introduce new functions and methods that you want to know!*
 
 -   **First steps in R** - [html](Exercises/1-Exercises-First-steps.html){target="_blank"}
 -   **Vectors** - [html](Exercises/2.1-Exercises-Vectors.html){target="_blank"}
+-   **Dataframes** - [html](Exercises/2.2-Exercises-Dataframes.html){target="_blank"}
 
 ------------------------------------------------------------------------
 
