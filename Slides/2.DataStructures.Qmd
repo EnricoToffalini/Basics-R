@@ -238,30 +238,39 @@ df$Hours
 
 ## Dataframes
 
+To know the names of all variables in a dataframe, use the **`names()`** function:
+```{r}
+names(df)
+```
+
+Use the **`dim()`** function to view the dimensions of a dataframe: 
+```{r}
+# first value is number of rows, second is number of columns (variables)
+dim(df) 
+```
+
+Alternatively, you can use **`nrow()`** and **`ncol()`**:
+```{r}
+nrow(df) # number of rows
+ncol(df) # number of columns
+```
+
+## Dataframes
+
+The **`str()`** function provides a quick overview of the structure of a dataframe, including its dimensions, variables, their data types, and first few observations: 
+```{r}
+str(df)
+```
+
+
+## Dataframes
+
 The "**`$`**" (dollar) operator is essential to access variables in a dataframe:
 
 <div style="text-align: center;">
   <img src="figures/previewDataframe.png"/>
 </div>
 
-## Dataframes
-
-To know the names of all variables in a dataframe, use the `names()` function:
-```{r}
-names(df)
-```
-
-Use the `dim()` function to view the dimensions of a dataframe: 
-```{r}
-# first value is number of rows, second is number of columns (variables)
-dim(df) 
-```
-
-Alternatively, you can use `nrow()` and `ncol()`:
-```{r}
-nrow(df) # number of rows
-ncol(df) # number of columns
-```
 
 ## Dataframes
 

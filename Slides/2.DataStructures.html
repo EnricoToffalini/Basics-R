@@ -717,14 +717,7 @@ Enrico Toffalini
 </section>
 <section id="dataframes-2" class="slide level2">
 <h2>Dataframes</h2>
-<p>The “<strong><code>$</code></strong>” (dollar) operator is essential to access variables in a dataframe:</p>
-<div style="text-align: center;">
-<p><img src="figures/previewDataframe.png"></p>
-</div>
-</section>
-<section id="dataframes-3" class="slide level2">
-<h2>Dataframes</h2>
-<p>To know the names of all variables in a dataframe, use the <code>names()</code> function:</p>
+<p>To know the names of all variables in a dataframe, use the <strong><code>names()</code></strong> function:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -733,7 +726,7 @@ Enrico Toffalini
 [7] "MandatoryAttendance" "DeliveryMethod"      "Language"           </code></pre>
 </div>
 </div>
-<p>Use the <code>dim()</code> function to view the dimensions of a dataframe:</p>
+<p>Use the <strong><code>dim()</code></strong> function to view the dimensions of a dataframe:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># first value is number of rows, second is number of columns (variables)</span></span>
 <span id="cb69-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(df) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -741,7 +734,7 @@ Enrico Toffalini
 <pre><code>[1] 28  9</code></pre>
 </div>
 </div>
-<p>Alternatively, you can use <code>nrow()</code> and <code>ncol()</code>:</p>
+<p>Alternatively, you can use <strong><code>nrow()</code></strong> and <strong><code>ncol()</code></strong>:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(df) <span class="co"># number of rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -753,41 +746,67 @@ Enrico Toffalini
 </div>
 </div>
 </section>
+<section id="dataframes-3" class="slide level2">
+<h2>Dataframes</h2>
+<p>The <strong><code>str()</code></strong> function provides a quick overview of the structure of a dataframe, including its dimensions, variables, their data types, and first few observations:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   28 obs. of  9 variables:
+ $ Year               : chr  "1" "1" "1" "1" ...
+ $ TypeOfCourse       : chr  "METHODOLOGY" "METHODOLOGY" "METHODOLOGY" "PROGRAMMING" ...
+ $ Title              : chr  "CURRENT ISSUES IN STATISTICAL INFERENCE FOR PSYCHOLOGY" "LINEAR AND MIXED EFFECT MODELS WITH SPSS" "BASICS OF STATISTICAL INFERENCE WITH R" "BASICS OF R FOR DATA SCIENCE" ...
+ $ Teacher            : chr  "MASSIMILIANO PASTORE" "JEFF KIESNER" "UMBERTO GRANZIOL" "ENRICO TOFFALINI" ...
+ $ Hours              : num  10 15 20 10 15 5 5 5 5 5 ...
+ $ ECTS               : num  2 3 4 2 3 1 1 1 1 1 ...
+ $ MandatoryAttendance: chr  "YES" "NO" "YES" "YES" ...
+ $ DeliveryMethod     : chr  "IN PERSON" "IN PERSON" "IN PERSON" "IN PERSON" ...
+ $ Language           : chr  "ENGLISH" "ENGLISH" "ENGLISH" "ENGLISH" ...</code></pre>
+</div>
+</div>
+</section>
 <section id="dataframes-4" class="slide level2">
+<h2>Dataframes</h2>
+<p>The “<strong><code>$</code></strong>” (dollar) operator is essential to access variables in a dataframe:</p>
+<div style="text-align: center;">
+<p><img src="figures/previewDataframe.png"></p>
+</div>
+</section>
+<section id="dataframes-5" class="slide level2">
 <h2>Dataframes</h2>
 <p>As an exercise, let’s check whether <code>ECTS</code> is actually always <code>Hours*5</code></p>
 We may use many different, increasingly sophisticated, strategies:
 <div class="large-code">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>Hours <span class="sc">/</span> df<span class="sc">$</span>ECTS</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>Hours <span class="sc">/</span> df<span class="sc">$</span>ECTS</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="" aria-hidden="true" tabindex="-1"></a>(df<span class="sc">$</span>Hours <span class="sc">/</span> df<span class="sc">$</span>ECTS) <span class="sc">==</span> <span class="dv">5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="" aria-hidden="true" tabindex="-1"></a>(df<span class="sc">$</span>Hours <span class="sc">/</span> df<span class="sc">$</span>ECTS) <span class="sc">==</span> <span class="dv">5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE
 [16] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>((df<span class="sc">$</span>Hours <span class="sc">/</span> df<span class="sc">$</span>ECTS) <span class="sc">==</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>((df<span class="sc">$</span>Hours <span class="sc">/</span> df<span class="sc">$</span>ECTS) <span class="sc">==</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 28</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>((df<span class="sc">$</span>Hours <span class="sc">/</span> df<span class="sc">$</span>ECTS) <span class="sc">==</span> <span class="dv">5</span>) <span class="sc">==</span> <span class="fu">nrow</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>((df<span class="sc">$</span>Hours <span class="sc">/</span> df<span class="sc">$</span>ECTS) <span class="sc">==</span> <span class="dv">5</span>) <span class="sc">==</span> <span class="fu">nrow</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>((df<span class="sc">$</span>Hours <span class="sc">/</span> df<span class="sc">$</span>ECTS) <span class="sc">!=</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>((df<span class="sc">$</span>Hours <span class="sc">/</span> df<span class="sc">$</span>ECTS) <span class="sc">!=</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0</code></pre>
 </div>
 </div>
 </div>
 </section>
-<section id="dataframes-5" class="slide level2">
+<section id="dataframes-6" class="slide level2">
 <h2>Dataframes</h2>
 <p>Variables in a dataframe can be manipulated like any other vector:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(df<span class="sc">$</span>Hours)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(df<span class="sc">$</span>Hours)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] 2.302585 2.708050 2.995732 2.302585 2.708050 1.609438 1.609438 1.609438
  [9] 1.609438 1.609438 2.302585 2.302585 1.609438 1.609438 2.302585 2.302585
@@ -797,15 +816,15 @@ We may use many different, increasingly sophisticated, strategies:
 </div>
 <p>Also, new variables can easily be created and added at any time:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>newVar <span class="ot">=</span> <span class="fu">log</span>(df<span class="sc">$</span>Hours)</span>
-<span id="cb87-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>newVar <span class="ot">=</span> <span class="fu">log</span>(df<span class="sc">$</span>Hours)</span>
+<span id="cb89-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] "Year"                "TypeOfCourse"        "Title"              
  [4] "Teacher"             "Hours"               "ECTS"               
  [7] "MandatoryAttendance" "DeliveryMethod"      "Language"           
 [10] "newVar"             </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>newVar</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>newVar</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] 2.302585 2.708050 2.995732 2.302585 2.708050 1.609438 1.609438 1.609438
  [9] 1.609438 1.609438 2.302585 2.302585 1.609438 1.609438 2.302585 2.302585
@@ -814,12 +833,12 @@ We may use many different, increasingly sophisticated, strategies:
 </div>
 </div>
 </section>
-<section id="dataframes-6" class="slide level2">
+<section id="dataframes-7" class="slide level2">
 <h2>Dataframes</h2>
 <h4 id="indexing-elements-in-a-dataframe">Indexing elements in a dataframe</h4>
 <p>In addition to using the “<strong><code>$</code></strong>” (dollar) operator, you can directly access a variable of a dataframe using <strong>indexing</strong> with <strong>square brackets</strong> <code>[]</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="" aria-hidden="true" tabindex="-1"></a>df[ , <span class="st">"Hours"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb93"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="" aria-hidden="true" tabindex="-1"></a>df[ , <span class="st">"Hours"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] 10 15 20 10 15  5  5  5  5  5 10 10  5  5 10 10 15 20  5 15  5 10  5  5 10
 [26] 15  5  5</code></pre>
@@ -828,24 +847,24 @@ We may use many different, increasingly sophisticated, strategies:
 <p>Notice the comma “<strong><code>,</code></strong>” above.</p>
 <p>Unlike vectors, dataframes must be indexed by <strong>both row and column</strong>. In the example above, we’re specifying only the desired column (<code>"Hours"</code>), leaving the row index blank before the comma <strong><code>,</code></strong> This selects all rows for the column named <code>"Hours"</code>. Remember that blank index means “all”. Importantly, the “<strong><code>,</code></strong>” must always be there when indexing dataframes!</p>
 </section>
-<section id="dataframes-7" class="slide level2">
+<section id="dataframes-8" class="slide level2">
 <h2>Dataframes</h2>
 <h4 id="indexing-elements-in-a-dataframe---examples">Indexing elements in a dataframe - Examples</h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb93"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="" aria-hidden="true" tabindex="-1"></a>df[ <span class="dv">1</span> , <span class="st">"Hours"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb95"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a href="" aria-hidden="true" tabindex="-1"></a>df[ <span class="dv">1</span> , <span class="st">"Hours"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 10</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb95"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a href="" aria-hidden="true" tabindex="-1"></a>df[ <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span> , <span class="st">"Hours"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb97"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb97-1"><a href="" aria-hidden="true" tabindex="-1"></a>df[ <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span> , <span class="st">"Hours"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 10 15 20 10 15</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb97"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb97-1"><a href="" aria-hidden="true" tabindex="-1"></a>df[ <span class="dv">1</span> , <span class="fu">c</span>(<span class="st">"Teacher"</span>,<span class="st">"Hours"</span>,<span class="st">"TypeOfCourse"</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb99"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href="" aria-hidden="true" tabindex="-1"></a>df[ <span class="dv">1</span> , <span class="fu">c</span>(<span class="st">"Teacher"</span>,<span class="st">"Hours"</span>,<span class="st">"TypeOfCourse"</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>               Teacher Hours TypeOfCourse
 1 MASSIMILIANO PASTORE    10  METHODOLOGY</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb99"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href="" aria-hidden="true" tabindex="-1"></a>df[ <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span> , <span class="fu">c</span>(<span class="st">"Teacher"</span>,<span class="st">"Hours"</span>,<span class="st">"TypeOfCourse"</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb101"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a href="" aria-hidden="true" tabindex="-1"></a>df[ <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span> , <span class="fu">c</span>(<span class="st">"Teacher"</span>,<span class="st">"Hours"</span>,<span class="st">"TypeOfCourse"</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>               Teacher Hours TypeOfCourse
 1 MASSIMILIANO PASTORE    10  METHODOLOGY
@@ -854,20 +873,20 @@ We may use many different, increasingly sophisticated, strategies:
 4     ENRICO TOFFALINI    10  PROGRAMMING
 5      LUCA STEFANUTTI    15  METHODOLOGY</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb101"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a href="" aria-hidden="true" tabindex="-1"></a>df[ <span class="dv">1</span> , <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">2</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb103"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb103-1"><a href="" aria-hidden="true" tabindex="-1"></a>df[ <span class="dv">1</span> , <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">2</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>               Teacher Hours TypeOfCourse
 1 MASSIMILIANO PASTORE    10  METHODOLOGY</code></pre>
 </div>
 </div>
 </section>
-<section id="dataframes-8" class="slide level2">
+<section id="dataframes-9" class="slide level2">
 <h2>Dataframes</h2>
 <h4 id="logical-indexing-1">Logical indexing</h4>
 <p>Just like for vectors, you can use a logical condition for indexing a dataframe.</p>
 <p>Let’s consider this logical condition:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb103"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb103-1"><a href="" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>Teacher <span class="sc">==</span> <span class="st">"MASSIMILIANO PASTORE"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb105"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb105-1"><a href="" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>Teacher <span class="sc">==</span> <span class="st">"MASSIMILIANO PASTORE"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1]  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
 [13] FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
@@ -876,7 +895,7 @@ We may use many different, increasingly sophisticated, strategies:
 </div>
 <p>Let’s use it to extract some dataframe rows:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb105"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb105-1"><a href="" aria-hidden="true" tabindex="-1"></a>df[df<span class="sc">$</span>Teacher <span class="sc">==</span> <span class="st">"MASSIMILIANO PASTORE"</span> , ] <span class="co"># some rows by condition , all columns</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb107"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb107-1"><a href="" aria-hidden="true" tabindex="-1"></a>df[df<span class="sc">$</span>Teacher <span class="sc">==</span> <span class="st">"MASSIMILIANO PASTORE"</span> , ] <span class="co"># some rows by condition , all columns</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Year TypeOfCourse                                                  Title
 1     1  METHODOLOGY CURRENT ISSUES IN STATISTICAL INFERENCE FOR PSYCHOLOGY
@@ -893,26 +912,26 @@ We may use many different, increasingly sophisticated, strategies:
 </div>
 </div>
 </section>
-<section id="dataframes-9" class="slide level2">
+<section id="dataframes-10" class="slide level2">
 <h2>Dataframes</h2>
 <h4 id="indexing-elements-in-a-dataframe---a-summary">Indexing elements in a dataframe - A summary</h4>
 <div style="text-align: center;">
 <p><img src="figures/dataframeCourses.png"></p>
 </div>
 </section>
-<section id="dataframes-10" class="slide level2">
+<section id="dataframes-11" class="slide level2">
 <h2>Dataframes</h2>
 <h4 id="subset">Subset</h4>
 <p>Base function <strong><code>subset()</code></strong> can also be used as an alternative to indexing</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb107"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb107-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">subset</span>(df, Teacher <span class="sc">==</span> <span class="st">"MASSIMILIANO PASTORE"</span>, <span class="at">select=</span><span class="fu">c</span>(<span class="st">"Teacher"</span>,<span class="st">"Hours"</span>,<span class="st">"TypeOfCourse"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb109"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb109-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">subset</span>(df, Teacher <span class="sc">==</span> <span class="st">"MASSIMILIANO PASTORE"</span>, <span class="at">select=</span><span class="fu">c</span>(<span class="st">"Teacher"</span>,<span class="st">"Hours"</span>,<span class="st">"TypeOfCourse"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                Teacher Hours TypeOfCourse
 1  MASSIMILIANO PASTORE    10  METHODOLOGY
 16 MASSIMILIANO PASTORE    10  METHODOLOGY
 25 MASSIMILIANO PASTORE    10  METHODOLOGY</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb109"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb109-1"><a href="" aria-hidden="true" tabindex="-1"></a>df[df<span class="sc">$</span>Teacher <span class="sc">==</span> <span class="st">"MASSIMILIANO PASTORE"</span> , <span class="fu">c</span>(<span class="st">"Teacher"</span>,<span class="st">"Hours"</span>,<span class="st">"TypeOfCourse"</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb111"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb111-1"><a href="" aria-hidden="true" tabindex="-1"></a>df[df<span class="sc">$</span>Teacher <span class="sc">==</span> <span class="st">"MASSIMILIANO PASTORE"</span> , <span class="fu">c</span>(<span class="st">"Teacher"</span>,<span class="st">"Hours"</span>,<span class="st">"TypeOfCourse"</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                Teacher Hours TypeOfCourse
 1  MASSIMILIANO PASTORE    10  METHODOLOGY
@@ -922,19 +941,19 @@ We may use many different, increasingly sophisticated, strategies:
 </div>
 <p>However, indexing with <strong><code>[]</code></strong> is more “computationally focused”, computationally faster (especially if working with large datasets), and more similar to programming in other languages (e.g., <strong>Python</strong>), so should probably be favoured by data scientists!</p>
 </section>
-<section id="dataframes-11" class="slide level2">
+<section id="dataframes-12" class="slide level2">
 <h2>Dataframes</h2>
 <h4 id="combine-two-dataframes-using-rbind">Combine two dataframes using <code>rbind()</code></h4>
 <p>Imagine you have two datasets collected by two students, each including different participants:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb111"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb111-1"><a href="" aria-hidden="true" tabindex="-1"></a>df1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb113"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb113-1"><a href="" aria-hidden="true" tabindex="-1"></a>df1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  subjName age accuracy
 1    Julie  12     0.92
 2    Tommy  10     0.78
 3     Phil  10     0.85</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb113"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb113-1"><a href="" aria-hidden="true" tabindex="-1"></a>df2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb115"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb115-1"><a href="" aria-hidden="true" tabindex="-1"></a>df2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  subjName age accuracy
 1    Amber   9     0.87
@@ -943,13 +962,13 @@ We may use many different, increasingly sophisticated, strategies:
 </div>
 <p>Our goal is to get one single dataset including all participant’s data for the final analysis. Of course, you could combined these files manually outside R (e.g., in Excel). However, it’s simpler and more efficient to do this directly in R using <code>rbind()</code></p>
 </section>
-<section id="dataframes-12" class="slide level2">
+<section id="dataframes-13" class="slide level2">
 <h2>Dataframes</h2>
 <h4 id="combine-two-dataframes-using-rbind-1">Combine two dataframes using <code>rbind()</code></h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb115"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb115-1"><a href="" aria-hidden="true" tabindex="-1"></a>dfTotal <span class="ot">=</span> <span class="fu">rbind</span>(df1, df2)</span>
-<span id="cb115-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb115-3"><a href="" aria-hidden="true" tabindex="-1"></a>dfTotal</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb117"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb117-1"><a href="" aria-hidden="true" tabindex="-1"></a>dfTotal <span class="ot">=</span> <span class="fu">rbind</span>(df1, df2)</span>
+<span id="cb117-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb117-3"><a href="" aria-hidden="true" tabindex="-1"></a>dfTotal</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  subjName age accuracy
 1    Julie  12     0.92
@@ -965,12 +984,12 @@ We may use many different, increasingly sophisticated, strategies:
 <li><p>the <strong>column names must be identical</strong> (remember that R is case-sensitive).</p></li>
 </ul>
 </section>
-<section id="dataframes-13" class="slide level2">
+<section id="dataframes-14" class="slide level2">
 <h2>Dataframes</h2>
 <h4 id="merge-two-dataframes-using-merge">Merge two dataframes using <code>merge()</code></h4>
 <p>Another frequent case is having data collected from the <strong>same participants</strong> across <strong>different dataframes</strong>, and having to analyze all information together:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb117"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb117-1"><a href="" aria-hidden="true" tabindex="-1"></a>df1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb119"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb119-1"><a href="" aria-hidden="true" tabindex="-1"></a>df1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  subjName age
 1    Julie  12
@@ -978,7 +997,7 @@ We may use many different, increasingly sophisticated, strategies:
 3    Tommy  10
 4     Phil  10</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb119"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb119-1"><a href="" aria-hidden="true" tabindex="-1"></a>df2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb121"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb121-1"><a href="" aria-hidden="true" tabindex="-1"></a>df2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  subjName accuracy time
 1    Julie     0.92 1203
@@ -988,14 +1007,14 @@ We may use many different, increasingly sophisticated, strategies:
 </div>
 </div>
 </section>
-<section id="dataframes-14" class="slide level2">
+<section id="dataframes-15" class="slide level2">
 <h2>Dataframes</h2>
 <h4 id="merge-two-dataframes-using-merge-1">Merge two dataframes using <code>merge()</code></h4>
 <p>You can merge the two dataframes into a single, comprehensive dataframe:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb121"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb121-1"><a href="" aria-hidden="true" tabindex="-1"></a>dfTotal <span class="ot">=</span> <span class="fu">merge</span>(df1, df2, <span class="at">by=</span><span class="st">"subjName"</span>)</span>
-<span id="cb121-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb121-3"><a href="" aria-hidden="true" tabindex="-1"></a>dfTotal</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb123"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb123-1"><a href="" aria-hidden="true" tabindex="-1"></a>dfTotal <span class="ot">=</span> <span class="fu">merge</span>(df1, df2, <span class="at">by=</span><span class="st">"subjName"</span>)</span>
+<span id="cb123-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb123-3"><a href="" aria-hidden="true" tabindex="-1"></a>dfTotal</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  subjName age accuracy time
 1    Amber   9     0.87 1163

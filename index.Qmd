@@ -59,7 +59,7 @@ We will introduce essential programming concepts and their implementation in R, 
 
 #### Data Visualization
 
-Optional - only if enough time is left, we will introduce some basics of data visualization. If we do not have time, just have a look at the slides and don't despair: some data visualization will still be presented in future courses in this PhD program.
+*Optional* - only if enough time is left, we will introduce some basics of data visualization. If we do not have time, just have a look at the slides and don't despair: some data visualization will still be presented in future courses in this PhD program.
 
 ## Slides and Materials
 
@@ -71,10 +71,11 @@ Optional - only if enough time is left, we will introduce some basics of data vi
 -   **First Steps in R (part 1)** - [html](Slides/1.1.FirstStepsR-1.html){target="_blank"} - [pdf](xxxxxxxxxxxxxxxxxx){target="_blank"}
 -   **First Steps in R (part 2)** - [html](Slides/1.2.FirstStepsR-2.html){target="_blank"} - [pdf](xxxxxxxxxxxxxxxxxx){target="_blank"}
 -   **Data Structures** - [html](Slides/2.DataStructures.html){target="_blank"} - [pdf](xxxxxxxxxxxxxxxxxx){target="_blank"}
+-   **Basics of Programming** - [html](Slides/3.Programming.html){target="_blank"} - [pdf](xxxxxxxxxxxxxxxxxx){target="_blank"}
 
 #### Exercises
 
-*These exercises go beyond practice: they integrate concepts from the slides and introduce new functions and methods that you want to know*
+*— These exercises go beyond practice: they integrate concepts from the slides and introduce new functions and methods that you want to know*
 
 -   **First steps in R** - [html](Exercises/1-Exercises-First-steps.html){target="_blank"}
 -   **Vectors** - [html](Exercises/2.1-Exercises-Vectors.html){target="_blank"}
