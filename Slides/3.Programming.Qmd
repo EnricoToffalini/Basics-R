@@ -222,7 +222,7 @@ for(i in 1:5){
 
 ## `for` loop
 
-Here's a more interesting example of iterative **`for`** loop with practical usefulness: we want to repeat a data simulation for a predetermined number of times (5 iterations), each time drawing $n = 30$ values from a *standard normal distribution*, computing and displaying the average ... (This is actually a simple example of *Monte Carlo simulation*! 😃)
+Here's a more interesting example of iterative **`for`** loop with practical usefulness: we want to repeat a data simulation for a predetermined number of times (5 iterations), each time drawing $n = 30$ values from a *standard normal distribution*, computing and displaying the average ... (This is actually the starting point of a *Monte Carlo simulation*! 😃)
 
 <div class="large-code">
 ```{r}
@@ -290,5 +290,144 @@ sd(results)
 → Enjoy it! This is a proper estimation of the *Standard Error of the Mean* via Monte Carlo simulation! 😊
 
 <!-- --------------------------------------------------------------------- -->
+
+
+## `while` loop
+
+The **`while`** loop is another type of iterative structure in R. It may be useful when the precise number of iterations is *not* predetermined, but depends on a target being reached
+
+```{r}
+amount = 1000
+month = 0
+interest_rate = 0.001 # 0.1% monthly interest rate
+
+while(amount < 1500){
+  month = month + 1
+  amount = amount + amount * interest_rate
+}
+
+month
+```
+
+<p style="font-size:20px;"> *Interpretation: it takes `r month` months to reach an amount of $€1,500$ when starting with an amount of $€1,000$ with a $0.1$% monthly interest rate*</p>
+
+## `repeat` loop
+
+The **`repeat`** loop has a logic similar to the `while` loop but 1) it always runs at least one iteration, 2) It explicitly emphasizes repetition until a condition (not necessarily a target) is met, using a `break` statement to terminate
+
+```{r,echo=F}
+set.seed(5)
+```
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;"> <div>
+```{r}
+repeat{
+  roll_die = sample(1:6,1)
+  print(roll_die)
+  if(roll_die == 6) break
+}
+```
+</div> <div>
+```{r,echo=F}
+set.seed(2)
+```
+```{r}
+attemptedExper = 0
+
+repeat{
+  attemptedExper = attemptedExper + 1
+  tt = t.test(rnorm(10),rnorm(10))
+  if(tt$p.value < 0.05) break
+}
+
+# number of experiments I attempted to... 
+# get a false positive :-)
+attemptedExper
+
+round( tt$p.value , 3 )
+```
+</div> <div>
+
+<!-- --------------------------------------------------------------------- -->
+
+## `apply` family
+
+**`apply`** is a family of base functions that provide **efficient tools** for running iterations on structures like dataframes, vectors, matrices, lists
+
+Traditional loops provide a straghtforward, intuitive way to compute sequences of operations, but the **`apply` family allows you to run faster computations**... this may become particularly important when you need to *parallelize* for computationally intensive tasks
+
+The following is *not* a computationally heavy task — but for example, let's say we want to compute the mean value *per column* in <a href="data/wisc.csv" download>this dataframe</a>:
+
+```{r, echo=F}
+df = read.csv("data/wisc.csv")
+df
+```
+
+## `apply` family
+
+Here is how you could use the base **`apply` function** for computing the *mean* value by column:
+
+```{r}
+apply(df, MARGIN=2, FUN=mean, na.rm=T)
+```
+
+In fact, for such a simple task, even `colMeans()` could be sufficient: 
+
+```{r}
+colMeans(df, na.rm=T)
+```
+
+\
+*but let consider slightly more complex cases ...*
+
+## `apply` family
+
+Let's say you need to compute the *standard deviation* per column ...
+```{r}
+apply(df, MARGIN=2, FUN=sd, na.rm=T)
+```
+
+\
+... or to count the number of `NA` occurrences per column
+```{r}
+apply(df, MARGIN=2, FUN=function(x) sum(is.na(x)) )
+```
+
+\
+<p style="font-size:28px;">*in the latter case, we had to define a custom function, but that's relatively simple to do!*</p>
+
+## `apply` family
+
+Although any of such tasks could be done using a `for` loop, the code would be more cumbersome and less efficient. For example, here's how the exact same result as the latter `apply` example could be obtained using a `for` loop:
+
+```{r}
+results = rep(NA, ncol(df))
+names(results) = colnames(df)
+
+for(i in 1:length(results)){
+  results[i] = sum(is.na(df[,i]))
+}
+
+results
+```
+
+## `apply` family
+
+FYI, other functions within the **`apply` family**: 
+<div style="font-size:26px;">
+- **`tapply()`**: applies a function to subsets of a vector grouped by a factor, example `tapply(df$values, df$group, FUN=mean)` (know that the function `aggregate()` might be more convenient in some cases)
+
+- **`lapply()`**: applies a function to each element of a *list*, returning results in a *list* format, example `lapply(my_list, length)`
+
+- **`sapply()`**: the same as the previous one but returns results as a *vector* if possible, example `sapply(my_list, length)`
+
+- **`mapply()`** multivariate version of `sapply()` that runs across more lists or vectors
+```{r}
+mapply(rnorm, n=c(2, 6, 4), mean=c(0, 100, 200), sd=c(1, 15, 30))
+```
+</div>
+
+
+<!-- --------------------------------------------------------------------- -->
+
 
 

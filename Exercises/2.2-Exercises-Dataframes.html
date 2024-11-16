@@ -3117,14 +3117,16 @@ window.Quarto = {
 <li><p>Use the <code>mean()</code> function to compute the average value of the numeric variable in <code>dx</code> but only for rows where the logical variable has value <code>TRUE</code> (<em>Hint:</em> use indexing with <code>[]</code> to select values of the numerical variable based on the values of the logical variable)</p></li>
 <li><p>Download <a href="datasets/exerData1.csv" download>this dataset</a>, then import it in R as a dataframe named <code>df</code></p></li>
 <li><p>Use functions <code>head()</code>, <code>str()</code>, and <code>summary()</code> on <code>df</code> and understand what they do</p></li>
-<li><p>Select and display only the rows in <code>df</code> where the <code>school</code> variable is equal to <code>&quot;school4&quot;</code>. Do this using indexing with <code>[]</code>, then redo using the <code>subset</code> function</p></li>
+<li><p>In <code>df</code>, select and display the values of the variable <code>mathAvgTime</code> that are <em>greater than</em> <span class="math inline">\(30,000\)</span> <em>(thirty thousand)</em></p></li>
+<li><p>In <code>df</code>, select and display the values of the variable <code>mathAcc</code> only for rows where variable <code>mathAvgTime</code> is <em>greater than</em> <span class="math inline">\(30,000\)</span> <em>(thirty thousand)</em></p></li>
 </ul>
 </section>
 <section id="working-with-dataframes" class="level4">
 <h4 class="anchored" data-anchor-id="working-with-dataframes">Working with dataframes</h4>
-<p><em>This section continues using <a href="datasets/exerData1.csv" download><code>df</code></a> downloaded and imported for the previous exercises</em></p>
+<p><em>This section continues using</em> <a href="datasets/exerData1.csv" download><code>df</code></a> downloaded and imported for the previous exercises</p>
 <ul>
-<li><p>In <code>df</code>, select and display the values of the variable <code>mathAcc</code> only for rows where variable <code>mathAvgTime</code> is <em>greater than</em> <span class="math inline">\(30,000\)</span> <em>(thirty thousand)</em></p></li>
+<li><p>Use the <code>table()</code> function on the <code>school</code> variable in the <code>df</code> dataframe to count the number of observations for each school</p></li>
+<li><p>Select and display only the rows in <code>df</code> where the <code>school</code> variable is equal to <code>&quot;school4&quot;</code>. Do this using indexing with <code>[]</code>, then redo using the <code>subset</code> function</p></li>
 <li><p>Learn how to use the <code>aggregate()</code> function by reading its documentation. Then, use it to calculate the <em>mean</em> value of each variable in <code>df</code>, grouped by the <code>school</code> variable</p></li>
 <li><p>Repeat the previous exercise, but this time calculate the <em>median</em> and the <em>standard deviation</em> of each variable grouped by <code>school</code></p></li>
 <li><p>Understand why <em>warnings</em> occurred in the previous two exercises. Then, avoid these warnings by limiting the computations to some variables only (achieve this by using indexing with <code>[]</code>)</p></li>

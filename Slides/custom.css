@@ -53,3 +53,15 @@ span.co {
 span.fu {
     color: darkblue !important;
 }
+
+.reveal a {
+  color: #760000;
+  background-color: #ffeeee;
+  border-radius: 3px;
+  
+}
+
+.reveal ::selection {
+    background-color: #760000 !important;
+    color: white;
+}
