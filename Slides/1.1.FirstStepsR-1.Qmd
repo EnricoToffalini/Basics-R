@@ -8,7 +8,7 @@ format:
     css: custom.css
     theme: default
     slide-number: c/t
-    self-contained: false
+    self-contained: true
     code-fold: false
     code-summary: "Show code"
     code-overflow: wrap

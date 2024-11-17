@@ -3081,7 +3081,7 @@ vertical-align: -.125em;
 <hr>
 <p><strong>SCENARIO:</strong></p>
 <p>Some students (or colleagues) have provided you with data collected from various scales in a sample of participants (Wechsler, INVALSI [Italian National Assessment of Students], Personality Questionnaires). Your task is to perform some computations like a data scientist. However, before this, you will need to fix some inconsistencies, correct possible errors, and merge and combine different dataframes, as the data is scattered across multiple documents.</p>
-<p><strong>DATA:</strong></p>
+<p><strong>DOWNLOAD DATA:</strong></p>
 <ul>
 <li>INVALSI data: Items from the INVALSI tasks, data for some participants are <a href="datasets/ExerData_Invalsi_1.csv" download>here</a>, others are <a href="datasets/ExerData_Invalsi_2.csv" download>here</a>;</li>
 <li><a href="datasets/ExerData_Wechsler.xlsx" download>Wechsler data</a>: Scaled scores from the 10 core subtests;</li>
@@ -3089,11 +3089,22 @@ vertical-align: -.125em;
 <li><a href="datasets/ExerData_Questionnaires.csv" download>Personality data</a>: Scores from two personality scales (Openness, Agreeableness)</li>
 </ul>
 <p><strong>FINAL GOALS:</strong></p>
-<p>Your task is to create a comprehensive data science report that includes the following:</p>
+<p>Your task is to create a data science report that includes the following:</p>
 <ul>
 <li>A correlation matrix (<code>cor()</code>) showing the relationships between total scores for these variables: 1. INVALSI; 2. Wechsler; 3. Experimental task; 4. Openness; 5. Agreableness;</li>
-<li>An analysis to determine if there are any significant differences in mean scores between males and females across these variables, using a t-test (<code>t.test()</code>)</li>
-<li>Some plots such as boxplots (<code>boxplot()</code>) and/or histograms (<code>hist()</code>) to visualize distributions, and basic scatterplots (<code>plot()</code>) to better understand relationships between correlated variables</li>
+<li>The descriptive statistics of all the above variables including: mean (<code>mean()</code>), standard deviation (<code>sd()</code>), median (<code>median()</code>), skewness and kurtosis (<code>skewness()</code> and <code>kurtosis()</code> from the <code>moments</code> package);</li>
+<li>An analysis to determine if there are any significant differences in mean scores between males and females across these variables, using t-tests (<code>t.test()</code>)</li>
+<li>Some basic plots such as boxplots (<code>boxplot()</code>) and/or histograms (<code>hist()</code>) to visualize distributions, and basic scatterplots (<code>plot()</code>) to better understand relationships between correlated variables</li>
+</ul>
+<p><strong>HINTS:</strong></p>
+<ul>
+<li>This whole exercise focuses mostly on data structures and dataframes, but it may also involve other concepts, such as using the <code>for</code> loop (programming) to streamline operations across several variables.</li>
+<li>If a variable is treated by R as a character but should be numeric instead, you can use the <code>as.numeric()</code> function to convert it. But be cautious! Non-numeric values, such as those containing spaces (“<code></code>”), will be converted to <code>NA</code>, even if they include numbers.</li>
+<li>To automatically replace a character with another character in a string variable/vector in R, you can use the <code>gsub()</code> function (note: this can help solve the issue mentioned in the previous point with less damage).</li>
+<li>The <code>rbind()</code> function allows you to combine two dataframes with the same structure, containing data collected from different participants.</li>
+<li>The <code>merge()</code> function allows you to merge two dataframes that contain different variables collected for the same participants (note: use the <code>by</code> argument to specify the subject identifier to match the different dataframes).</li>
+<li>When computing correlations, the <code>cor()</code> function allows you to handle missing values (<code>NA</code>s) by using the <code>use</code> argument, note that this argument offers several options such as <code>&quot;complete.obs&quot;</code>, and <code>&quot;pairwise.complete.obs&quot;</code>, which lead to different results.</li>
+<li><strong><em>Long</em> vs <em>wide</em> format</strong>: The data presented as the <em>“Experimental data”</em> is in <em>long format</em>, meaning it has multiple rows (observations) per participant. This format is a very common output from many experimental software tools, so this is realistic! To aggregate data, in this case, you can use the <code>aggregate()</code> function. However, for additional practice and to enhance your data manipulation skills, try to convert the dataset to a <em>wide format</em> to arrange it with <em>one row per participant</em> (use the <code>reshape()</code> function from base R, or the more intuitive <code>pivot_wider()</code> function from package <code>tidyr</code>).</li>
 </ul>
 </section>
 

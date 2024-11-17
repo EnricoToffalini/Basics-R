@@ -63,15 +63,20 @@ We will introduce essential programming concepts and their implementation in R, 
 
 ## Slides and Materials
 
-<p style="color:#999999;"><em>**SECTION IN PROGRESS: NEW MATERIALS WILL BE ADDED HERE THROUGHOUT THE COURSE**</em></p>
+<p style="color:#999999;">
+
+<em>**SECTION IN PROGRESS: NEW MATERIALS WILL BE ADDED HERE THROUGHOUT THE COURSE**</em>
+
+</p>
 
 #### Lectures Slides
 
 -   **Getting Started with R** - [html](Slides/0.GettingStartedR.html){target="_blank"} - [pdf](Slides/0.GettingStartedR.pdf){target="_blank"}
--   **First Steps in R (part 1)** - [html](Slides/1.1.FirstStepsR-1.html){target="_blank"} - [pdf](xxxxxxxxxxxxxxxxxx){target="_blank"}
--   **First Steps in R (part 2)** - [html](Slides/1.2.FirstStepsR-2.html){target="_blank"} - [pdf](xxxxxxxxxxxxxxxxxx){target="_blank"}
--   **Data Structures** - [html](Slides/2.DataStructures.html){target="_blank"} - [pdf](xxxxxxxxxxxxxxxxxx){target="_blank"}
--   **Basics of Programming** - [html](Slides/3.Programming.html){target="_blank"} - [pdf](xxxxxxxxxxxxxxxxxx){target="_blank"}
+-   **First Steps in R (part 1)** - [html](Slides/1.1.FirstStepsR-1.html){target="_blank"} - [pdf](Slides/1.1.FirstStepsR-1.pdf){target="_blank"}
+-   **First Steps in R (part 2)** - [html](Slides/1.2.FirstStepsR-2.html){target="_blank"} - [pdf](Slides/1.2.FirstStepsR-2.pdf){target="_blank"}
+-   **Data Structures (part 1)** - [html](Slides/2.DataStruct-1.html){target="_blank"} - [pdf](Slides/2.DataStruct-1.pdf){target="_blank"}
+-   **Data Structures (part 2)** - [html](Slides/2.DataStruct-2.html){target="_blank"} - [pdf](Slides/2.DataStruct-2.pdf){target="_blank"}
+-   **Basics of Programming** - [html](Slides/3.Programming.html){target="_blank"} - [pdf](Slides/3.Programming.pdf){target="_blank"}
 
 #### Exercises
 
@@ -80,6 +85,7 @@ We will introduce essential programming concepts and their implementation in R, 
 -   **First steps in R** - [html](Exercises/1-Exercises-First-steps.html){target="_blank"}
 -   **Vectors** - [html](Exercises/2.1-Exercises-Vectors.html){target="_blank"}
 -   **Dataframes** - [html](Exercises/2.2-Exercises-Dataframes.html){target="_blank"}
+-   **Data** <em>nightmare</em> exercise - [html](Exercises/2.3-Exercises-DataScientist.html){target="_blank"}
 
 ------------------------------------------------------------------------
 
