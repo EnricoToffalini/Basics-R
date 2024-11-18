@@ -25,11 +25,11 @@ execute:
 <div style="font-size:30px;">
 - **Mainstream in academia** for data science, increasingly used in business. *Job market advantage!*
 
-- **Free & open-source**: wherever you go, R will be with you at no costs (unlike *SPSS*, *MPLUS*, *MATLAB*, etc.)
+- **Free & open-source**: wherever you go, R will be with you at no costs (unlike *MPLUS*, *MATLAB*, *SPSS*, etc.)
 
-- **Real programming language**: difficult at the beginning? but: 1) gives you lots of flexibility; 2) facilitates learning any other programming language (e.g., **Python**).
+- **Real programming language**: difficult at the beginning, but: 1) gives you lots of flexibility; 2) has transfer on other programming languages (e.g., <em>**Python**</em>).
 
-- **Vast community support** thanks to a large and active community (also, chatGPT knows it pretty well!).
+- **Vast community support** thanks to a large and active community (also, *chatGPT*, *Lucrez-IA*, etc., know it pretty well!).
 
 - **Huge ecosystem**, >20,000 packages on CRAN, more from other sources (e.g., GitHub), to do amazing stuff with statistical data analysis, machine learning, data visualization, developing webapps [*shiny*], writing reports and even entire books [*bookdown*, *rmarkdown*]), can integrate with *quarto*, *github*.
 
@@ -38,10 +38,10 @@ execute:
 
 ## What you may expect to learn in this course:
 
-<div style="font-size:40px;">
-- Executing fundamental operations and using basic functions in R; 
+<div style="font-size:44px;">
+- Executing fundamental operations and using basic functions; 
 
-- working with essential data types and structures;
+- Working with essential data types and structures;
 
 - Gaining some proficiency in managing and manipulating data with vectors and dataframes;
 
@@ -49,8 +49,7 @@ execute:
 </div>
 
 ##
-
-### Over the next couple of years, you may expect to learn to use R to perform at least some fundamentals about: 
+### Over the next *couple of years*, following this PhD program, you may have the opportunity to learn to use R to perform at least some fundamentals about: 
 
 <div style="font-size:36px;">
 - Core statistical inference methods;
@@ -61,9 +60,9 @@ execute:
 
 - Power analysis via data simulation ; 
 
-- Structural Equation Modeling; 
+- Structural Equation Modeling (SEM); 
 
-- Conducting meta-analysis.
+- Conducting Meta-Analysis.
 </div>
 
 ## you may even create greeting cards
@@ -148,7 +147,7 @@ first of all, for getting started, follow the instructions in [*Chapter 1*](http
 
 | Package  |   Used for what  | Example(s) of functions
 |-----|-------------|-----------|
-| `base` <br/>(base R) | Basic functions | `sum`, `mean`, `sqrt`, `abs`, `c`, `data.frame`, `summary`, `plot`, `+`, `-`
+| `base` <br/>(base R) | Basic functions | `sum`, `mean`, `sqrt`, `abs`, `c`, `data.frame`, `summary`, `scale`, `plot`, `+`, `-`
 | `stats` <br/>(base R) | Basic statistical calculations and functions | `sd`, `cor`, `cor.test`, `t.test`, `lm`, `glm`, `AIC`, `rnorm`, `rbinom`
 | `graphics` <br/>(base R) | Basic statistical calculations and functions | `boxplot`, `hist`, `barplot`
 | `effectsize` | Compute different effect sizes | `cohens_d`, `hedges_g`, `cohens_f`, `d_to_r`

@@ -354,7 +354,7 @@ df$newVar
 ## Dataframes
 #### Indexing elements in a dataframe
 
-In addition to using the "**`$`**" (dollar) operator, you can directly access a variable of a dataframe using **indexing** with **square brackets** `[]`: 
+In addition to using the "**`$`**" (dollar) operator, you can directly access a variable of a dataframe using **indexing** with **square brackets `[]`**: 
 ```{r}
 df[ , "Hours"]
 ```
@@ -394,7 +394,7 @@ df[df$Teacher == "MASSIMILIANO PASTORE" , ] # some rows by condition , all colum
 #### Indexing elements in a dataframe - A summary
 
 <div style="text-align: center;">
-  <img src="figures/dataframeCourses.png"/>
+  <img src="figures/dataframeCourses.png" style="width: 80%;"/>
 </div>
 
 
