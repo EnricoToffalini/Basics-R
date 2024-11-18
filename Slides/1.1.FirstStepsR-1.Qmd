@@ -223,7 +223,7 @@ myName > "Bob" # is my name larger than Bob? (??? alphabetically!)
 ## Basic types of data
 ### know the type of a variable
 
-The `typeof( )` function tells you what type of data you are handling:
+The **`typeof()`** function tells you what type of data you are handling:
 ```{r}
 myName = "Enrico"
 prof = TRUE
