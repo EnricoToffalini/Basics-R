@@ -22,9 +22,9 @@ editor: visual
 | Day        | Time        | Room |
 |------------|-------------|------|
 | 18/11/2024 | 14:30-16:30 | 4N   |
-| 19/11/2024 | 14:30-16:30 |      |
-| 25/03/2024 | 09:00-12:00 |      |
-| 26/03/2024 | 14:00-17:00 |      |
+| 19/11/2024 | 14:30-16:30 | 4T   |
+| 25/03/2024 | 09:00-12:00 | 4M   |
+| 26/03/2024 | 14:00-17:00 | 4M   |
 
 ## About This Course
 
@@ -85,7 +85,7 @@ We will introduce essential programming concepts and their implementation in R, 
 -   **First steps in R** - [html](Exercises/1-Exercises-First-steps.html){target="_blank"}
 -   **Vectors** - [html](Exercises/2.1-Exercises-Vectors.html){target="_blank"}
 -   **Dataframes** - [html](Exercises/2.2-Exercises-Dataframes.html){target="_blank"}
--   **Data** <em>nightmare</em> exercise - [html](Exercises/2.3-Exercises-DataScientist.html){target="_blank"}
+-   **Data <em>nightmare</em> exercise** - [html](Exercises/2.3-Exercises-DataScientist.html){target="_blank"}
 
 ------------------------------------------------------------------------
 
