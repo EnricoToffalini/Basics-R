@@ -64,7 +64,9 @@ We will introduce essential programming concepts and their implementation in R, 
 ## Slides and Materials
 
 <p style="color: #999; font-weight: bold; font-style: italic;">
+
 SECTION IN PROGRESS: NEW MATERIALS WILL BE ADDED HERE THROUGHOUT THE COURSE
+
 </p>
 
 #### Lectures Slides
@@ -72,9 +74,10 @@ SECTION IN PROGRESS: NEW MATERIALS WILL BE ADDED HERE THROUGHOUT THE COURSE
 -   **Getting Started with R** - [html](Slides/0.GettingStartedR.html){target="_blank"} - [pdf](Slides/0.GettingStartedR.pdf){target="_blank"}
 -   **First Steps in R (part 1)** - [html](Slides/1.1.FirstStepsR-1.html){target="_blank"} - [pdf](Slides/1.1.FirstStepsR-1.pdf){target="_blank"}
 -   **First Steps in R (part 2)** - [html](Slides/1.2.FirstStepsR-2.html){target="_blank"} - [pdf](Slides/1.2.FirstStepsR-2.pdf){target="_blank"}
--   **Data Structures (part 1)** - [html](Slides/2.DataStruct-1.html){target="_blank"} - [pdf](Slides/2.DataStruct-1.pdf){target="_blank"}
--   **Data Structures (part 2)** - [html](Slides/2.DataStruct-2.html){target="_blank"} - [pdf](Slides/2.DataStruct-2.pdf){target="_blank"}
--   **Basics of Programming** - [html](Slides/3.Programming.html){target="_blank"} - [pdf](Slides/3.Programming.pdf){target="_blank"}
+-   **Data Structures (part 1)** - [html](Slides/2.1.DataStruc-1.html){target="_blank"} - [pdf](Slides/2.1.DataStruc-1.pdf){target="_blank"} *(vectors)*
+-   **Data Structures (part 2)** - [html](Slides/2.2.DataStruc-2.html){target="_blank"} - [pdf](Slides/2.2.DataStruc-2.pdf){target="_blank"} *(dataframes)*
+-   **Data Structures (part 3)** - [html](Slides/2.3.DataStruc-2.html){target="_blank"} - [pdf](Slides/2.3.DataStruc-3.pdf){target="_blank"} *(lists and more)*
+-   **Basics of Programming** - [html](Slides/3.Programming.html){target="_blank"} - [pdf](Slides/3.Programming.pdf){target="_blank"} *(if, else, loops)*
 
 #### Exercises
 
