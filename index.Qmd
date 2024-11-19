@@ -63,11 +63,7 @@ We will introduce essential programming concepts and their implementation in R, 
 
 ## Slides and Materials
 
-<p style="color: #999; font-weight: bold; font-style: italic;">
-
-SECTION IN PROGRESS: NEW MATERIALS WILL BE ADDED HERE THROUGHOUT THE COURSE
-
-</p>
+<p style="color: #999; font-weight: bold; font-style: italic;">SECTION IN PROGRESS: NEW MATERIALS WILL BE ADDED HERE THROUGHOUT THE COURSE</p>
 
 #### Lectures Slides
 
