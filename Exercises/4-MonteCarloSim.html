@@ -3084,6 +3084,7 @@ window.Quarto = {
   <ul>
   <li><a href="#computing-the-power-of-a-t-test-via-monte-carlo-simulation" id="toc-computing-the-power-of-a-t-test-via-monte-carlo-simulation" class="nav-link active" data-scroll-target="#computing-the-power-of-a-t-test-via-monte-carlo-simulation">Computing the Power of a T-Test via Monte Carlo Simulation</a></li>
   <li><a href="#computing-the-type-m-error-for-a-correlation" id="toc-computing-the-type-m-error-for-a-correlation" class="nav-link" data-scroll-target="#computing-the-type-m-error-for-a-correlation">Computing the <em>“Type M Error”</em> for a Correlation</a></li>
+  <li><a href="#advanced---computing-the-power-of-a-linear-regression-via-monte-carlo-simulation" id="toc-advanced---computing-the-power-of-a-linear-regression-via-monte-carlo-simulation" class="nav-link" data-scroll-target="#advanced---computing-the-power-of-a-linear-regression-via-monte-carlo-simulation"><em>Advanced</em> - Computing the Power of a Linear Regression via Monte Carlo Simulation</a></li>
   <li><a href="#advanced---computing-the-power-of-a-mixed-effects-binomial-regression-via-monte-carlo-simulation" id="toc-advanced---computing-the-power-of-a-mixed-effects-binomial-regression-via-monte-carlo-simulation" class="nav-link" data-scroll-target="#advanced---computing-the-power-of-a-mixed-effects-binomial-regression-via-monte-carlo-simulation"><em>Advanced</em> - Computing the Power of a Mixed-Effects Binomial Regression via Monte Carlo Simulation</a></li>
   </ul>
 </nav>
@@ -3110,14 +3111,16 @@ window.Quarto = {
 </header>
 
 
-<p>Performing a Monte Carlo simulation for power analysis is much more than just computing power. It involves clarifying the entire research scenario in depth, thinking about all possible sources of variability, defining the parameters that govern the phenomenon of interest. It requires explicitly stating the research hypothesis, distinguishing between hypothesis testing and research questions that will be limited to exploratory analyses. Additionally, it help produce a comprehensive set of preplanned analysis that you may use for a preregistration, because the process involves writing the actual code for the analysis.</p>
+<div style="font-size:13px;">
+Performing a Monte Carlo simulation for power analysis is much more than just computing power. It means clarifying the entire research scenario in depth, thinking about all possible sources of variability, defining the parameters that govern the phenomenon of interest. It requires explicitly stating the research hypothesis, distinguishing between hypothesis testing and research questions that will be limited to exploratory analyses. Additionally, it help produce a comprehensive set of preplanned analysis that you may use for a preregistration, because the process involves writing the actual code for the analysis.
+</div>
 <section id="computing-the-power-of-a-t-test-via-monte-carlo-simulation" class="level3">
 <h3 class="anchored" data-anchor-id="computing-the-power-of-a-t-test-via-monte-carlo-simulation">Computing the Power of a T-Test via Monte Carlo Simulation</h3>
-<p>Computing power of a t-test for a particular <em>Standardized Mean Difference</em> does not necessarily require a simulation. For example, you could use <code>pwr.t.test</code> function from the <code>pwr</code> package, for an analytical computation. However, let’s use this scenario as a starting point for practice.</p>
+<p>Computing power of a t-test for a particular <em>Standardized Mean Difference</em> does not necessarily require a simulation. For example, you could use <code>pwr.t.test()</code> function from the <code>pwr</code> package, for an analytical computation. However, let’s use this scenario as a starting point for practice.</p>
 <ul>
 <li><p>The goal of the first exercise is to run a simulation with a large number of iterations (<em>hint:</em> at least a few thousand) for a single value of <em>Standardized Mean Difference</em> (named <code>d</code>) and a single <em>sample size</em> (named <code>N</code>)</p>
 <ul>
-<li>use a <code>for</code> loop to iterate through the simulation for simplicity (but know that it is not the only option);</li>
+<li>use a <code>for</code> loop to iterate through the simulation for simplicity (though there are other options);</li>
 <li>at each iteration, you need to generate two sets of random numbers from a random normal distribution (use the <code>rnorm()</code> function; remember than their mean difference must be <code>d</code>);</li>
 <li>at each iteration, you need to run a t-test (use the <code>t.test()</code> function);</li>
 <li>at each iteration, you need to store some information, which at minimum is the <em>p-value</em> from the t-test, that you must extract from the t-test (note that you can use the <code>$</code> operator for extracting information from an object);</li>
@@ -3144,6 +3147,21 @@ window.Quarto = {
 </ul></li>
 <li><em>Optional:</em> you can repeat this entire exercise for a t-test (with <em>Cohen’s d</em> as the effect size).</li>
 </ul>
+</section>
+<section id="advanced---computing-the-power-of-a-linear-regression-via-monte-carlo-simulation" class="level3">
+<h3 class="anchored" data-anchor-id="advanced---computing-the-power-of-a-linear-regression-via-monte-carlo-simulation"><em>Advanced</em> - Computing the Power of a Linear Regression via Monte Carlo Simulation</h3>
+<p>Once you’ve completed the previous two exercises, you are ready to move to the next phase: using simulation to calculate power for real statistical models.</p>
+<p><strong>Model setup:</strong> Simulate data for a simple linear regression model:</p>
+<p><span class="math inline">\(y = b0 + b1*x + residual\)</span></p>
+<p>where <span class="math inline">\(residual \sim Normal(0, \sigma)\)</span></p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><p>Choose a specific sample size <span class="math inline">\(N\)</span> for your simulation;</p></li>
+<li><p>Assume <span class="math inline">\(\sigma = 1\)</span> for simplicity, so you can focus only on <span class="math inline">\(b1\)</span> as the effect size (practically, a <em>standardized regression coefficient</em>);</p></li>
+<li><p><em>note:</em> intercept <span class="math inline">\(b0\)</span> is irrelevant for power estimation.</p></li>
+</ul>
+<p>Run <span class="math inline">\(10,000\)</span> iterations and see the power for the particular combination of <span class="math inline">\(N\)</span> and standardized <span class="math inline">\(b1\)</span>.</p>
+<p><em>Note</em>: extracting <em>p-values</em> for predictors from a fitted <code>lm</code> object might not be so easy. You will need to access the model’s <em>summary</em>. The <em>p-values</em> are stored in a coefficients table within the <em>summary</em>, and the extraction may look like this: <br> <code>summary(fit)$coefficients[&quot;predictorName&quot;, &quot;Pr(&gt;|t|)&quot;]</code> <br> … Make it your habit to inspect fitted objects and their <em>summaries</em> with the <strong><code>str()</code></strong> function to locate and extract different pieces of information!</p>
 </section>
 <section id="advanced---computing-the-power-of-a-mixed-effects-binomial-regression-via-monte-carlo-simulation" class="level3">
 <h3 class="anchored" data-anchor-id="advanced---computing-the-power-of-a-mixed-effects-binomial-regression-via-monte-carlo-simulation"><em>Advanced</em> - Computing the Power of a Mixed-Effects Binomial Regression via Monte Carlo Simulation</h3>

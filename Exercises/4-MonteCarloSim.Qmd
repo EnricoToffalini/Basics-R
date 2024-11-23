@@ -14,15 +14,15 @@ format:
 editor: visual
 ---
 
-Performing a Monte Carlo simulation for power analysis is much more than just computing power. It involves clarifying the entire research scenario in depth, thinking about all possible sources of variability, defining the parameters that govern the phenomenon of interest. It requires explicitly stating the research hypothesis, distinguishing between hypothesis testing and research questions that will be limited to exploratory analyses. Additionally, it help produce a comprehensive set of preplanned analysis that you may use for a preregistration, because the process involves writing the actual code for the analysis.
+<div style="font-size:13px;">Performing a Monte Carlo simulation for power analysis is much more than just computing power. It means clarifying the entire research scenario in depth, thinking about all possible sources of variability, defining the parameters that govern the phenomenon of interest. It requires explicitly stating the research hypothesis, distinguishing between hypothesis testing and research questions that will be limited to exploratory analyses. Additionally, it help produce a comprehensive set of preplanned analysis that you may use for a preregistration, because the process involves writing the actual code for the analysis.</div>
 
 ### Computing the Power of a T-Test via Monte Carlo Simulation
 
-Computing power of a t-test for a particular *Standardized Mean Difference* does not necessarily require a simulation. For example, you could use `pwr.t.test` function from the `pwr` package, for an analytical computation. However, let's use this scenario as a starting point for practice.
+Computing power of a t-test for a particular *Standardized Mean Difference* does not necessarily require a simulation. For example, you could use `pwr.t.test()` function from the `pwr` package, for an analytical computation. However, let's use this scenario as a starting point for practice.
 
 -   The goal of the first exercise is to run a simulation with a large number of iterations (*hint:* at least a few thousand) for a single value of *Standardized Mean Difference* (named `d`) and a single *sample size* (named `N`)
 
-    -   use a `for` loop to iterate through the simulation for simplicity (but know that it is not the only option);
+    -   use a `for` loop to iterate through the simulation for simplicity (though there are other options);
     -   at each iteration, you need to generate two sets of random numbers from a random normal distribution (use the `rnorm()` function; remember than their mean difference must be `d`);
     -   at each iteration, you need to run a t-test (use the `t.test()` function);
     -   at each iteration, you need to store some information, which at minimum is the *p-value* from the t-test, that you must extract from the t-test (note that you can use the `$` operator for extracting information from an object);
@@ -45,31 +45,55 @@ When testing hypotheses without sufficient power, statistically significant resu
     -   to simulate correlated variables, you can use the `mvrnorm()` function from the `MASS` package;
     -   to test the statistical significance of a correlation and calculate its effect size, you can use the `cor.test()` function;
     -   in addition to computing the *Type M Error*, try to approximate the smallest significant effect size given your $N$.
-
 -   *Optional:* you can repeat this entire exercise for a t-test (with *Cohen's d* as the effect size).
 
+
+### *Advanced* - Computing the Power of a Linear Regression via Monte Carlo Simulation
+
+Once you've completed the previous two exercises, you are ready to move to the next phase: using simulation to calculate power for real statistical models.
+
+**Model setup:** Simulate data for a simple linear regression model:
+
+$y = b0 + b1*x + residual$
+
+where $residual \sim Normal(0, \sigma)$
+
+**Parameters:**
+
+- Choose a specific sample size $N$ for your simulation;
+
+- Assume $\sigma = 1$ for simplicity, so you can focus only on $b1$ as the effect size (practically, a *standardized regression coefficient*);
+
+- *note:* intercept $b0$ is irrelevant for power estimation.
+
+Run $10,000$ iterations and see the power for the particular combination of $N$ and standardized $b1$. 
+
+*Note*: extracting *p-values* for predictors from a fitted `lm` object might not be so easy. You will need to access the model's *summary*. The *p-values* are stored in a coefficients table within the *summary*, and the extraction may look like this:
+<br/> `summary(fit)$coefficients["predictorName", "Pr(>|t|)"]` <br/>
+... Make it your habit to inspect fitted objects and their *summaries* with the **`str()`** function to locate and extract different pieces of information! 
 
 ### *Advanced* - Computing the Power of a Mixed-Effects Binomial Regression via Monte Carlo Simulation
 
 In psychological studies, power depends not only on the sample size $N$, but also on the number of trials or items $k$ administered to each subject. More trials means more precision and higher power, up to a certain point.
 
-Our goal now is to simulate a scenario where a particular predictor `x` (e.g., *age, years of education, amount of training,* or *global intelligence*) affects an underlying ability `y` which is measured using a series of `k` binomial-response trials for a sample of `N` subject. 
+Our goal now is to simulate a scenario where a particular predictor `x` (e.g., *age, years of education, amount of training,* or *global intelligence*) affects an underlying ability `y` which is measured using a series of `k` binomial-response trials for a sample of `N` subject.
 
-- Mixed-effects binomial regression is a type of Generalized Linear-Mixed effects models, which can be implemented using functions like `glmer()` from the `lme4` package, or `glmmTMB()` from the `glmmTMB` package. Remember to set `family=binomial`.
+-   Mixed-effects binomial regression is a type of Generalized Linear-Mixed effects models, which can be implemented using functions like `glmer()` from the `lme4` package, or `glmmTMB()` from the `glmmTMB` package. Remember to set `family=binomial`.
 
-- The effect size can be conceptualized as the true correlation `r` between predictor `x` and the underlying ability `y`.
+-   The effect size can be conceptualized as the true correlation `r` between predictor `x` and the underlying ability `y`.
 
-- While `y` is an underlying (latent) ability that you will simulate, it is not directly observed in the data you analyze. Instead, you will analyze only the binomial responses from trials that reflect `y`. 
+-   While `y` is an underlying (latent) ability that you will simulate, it is not directly observed in the data you analyze. Instead, you will analyze only the binomial responses from trials that reflect `y`.
 
-- Remember that `x` cannot be the only factor affecting the binomial responses. Individual variability must also be considered. In generating data, remember that random intercept of the subject must also be a cause of the responses. Random intercepts `rInt` for subjects should be included in the data generation process.
+-   Remember that `x` cannot be the only factor affecting the binomial responses. Individual variability must also be considered. In generating data, remember that random intercept of the subject must also be a cause of the responses. Random intercepts `rInt` for subjects should be included in the data generation process.
 
-- Suggestions for simulating the binomial responses: 
-   - generate `y` as a standard normal distribution (correlated with or caused by `x`);
-   - use the `pnorm()` function to convert `y` (or better, `y + rInt`) into probabilities of success for each trial;
-   - generate binomial responses using the `rbinom()` function.
+-   Suggestions for simulating the binomial responses:
 
-- Here is an example of a possible model specification: <br/> `glmer(resp ~ x + (1|idSubj), family=binomial(link=probit))`
+    -   generate `y` as a standard normal distribution (correlated with or caused by `x`);
+    -   use the `pnorm()` function to convert `y` (or better, `y + rInt`) into probabilities of success for each trial;
+    -   generate binomial responses using the `rbinom()` function.
 
-- Remember that the simulated and analyzed dataframe must be in *long format*, with each row representing an individual response. This means each subject and all their information (`idSubj`, `x`) must be repeated across multiple rows (use `rep()` for this purpose).
+-   Here is an example of a possible model specification: <br/> `glmer(resp ~ x + (1|idSubj), family=binomial(link=probit))`
 
-- Finally, see how statistical power varies with the number of trials $k$ given the same sample size $N$.
+-   Remember that the simulated and analyzed dataframe must be in *long format*, with each row representing an individual response. This means each subject and all their information (`idSubj`, `x`) must be repeated across multiple rows (use `rep()` for this purpose).
+
+-   Finally, see how statistical power varies with the number of trials $k$ given the same sample size $N$.

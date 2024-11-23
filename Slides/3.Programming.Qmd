@@ -1,5 +1,5 @@
 ---
-title: "Basics of Programming: <br/> if...else, and iterations"
+title: "Basics of Programming: <br/> if...else, iterations, <br/>custom functions"
 author: "Enrico Toffalini"
 include-in-header: ../assets/slidesheader.html
 format:
@@ -172,10 +172,30 @@ age = c(2, 28, 15, 1, 4, 67, 42, 14, 7)
 
 ifelse(age >= 18, "Adult" , 
                ifelse(age >= 13, "Adolescent" ,
-                            ifelse(age >= 2, "Child", "Infant")))
+                            ifelse(age >= 2, "Child", 
+                                                 "Infant")))
 
 ```
 </div>
+
+## `dplyr::case_when()`
+
+While this works, the nested structure can become cumbersome as the number of conditions increases.
+
+The above case may become cumbersome and less readable when you need to combine a large number of conditions. In such cases, the **`case_when()`** function from the `dplyr` package (part of the *tidyverse* collection)
+
+```{r}
+age = c(2, 28, 15, 1, 4, 67, 42, 14, 7)
+
+library(dplyr)
+
+case_when(
+  age >= 18 ~ "Adult",
+  age >= 13 ~ "Adolescent",
+  age >= 2  ~ "Child",
+  TRUE      ~ "Infant"
+)
+```
 
 <!-- --------------------------------------------------------------------- -->
 
@@ -222,7 +242,7 @@ for(i in 1:5){
 
 ## `for` loop
 
-Here's a more interesting example of iterative **`for`** loop with practical usefulness: we want to repeat a data simulation for a predetermined number of times (5 iterations), each time drawing $n = 30$ values from a *standard normal distribution*, computing and displaying the average ... (This is actually the starting point of a *Monte Carlo simulation*! 😃)
+Here's a more interesting example of iterative **`for`** loop with practical usefulness: we want to repeat a data simulation for a predetermined number of times (5 iterations), each time drawing $n = 30$ values from a *standard normal distribution*, computing and displaying the average ... 
 
 <div class="large-code">
 ```{r}
@@ -236,9 +256,13 @@ for(i in 1:5){
 ```
 </div>
 
+<div style="font-size:24px;">
+*This is actually the starting point of a Monte Carlo simulation*! 😃
+</div>
+
 ## `for` loop
 
-In fact, in the previous example, the **`for`** loop displayed the results but didn't store it. For more effective use, you can combine the **`for`** loop with indexing with **`[]`** to save each result: 
+in the previous example, the **`for`** loop displayed the results but didn't store it. For more effective use, you can combine the **`for`** loop with indexing with **`[]`** to save each result: 
 
 <div class="large-code">
 ```{r}
@@ -426,8 +450,124 @@ mapply(rnorm, n=c(2, 6, 4), mean=c(0, 100, 200), sd=c(1, 15, 30))
 ```
 </div>
 
+## `apply` family
+
+For example, here's how you can rewrite the code for computing the *standard error of the mean* via *Monte Carlo simulation* using **`sapply`** instead of a `for` loop
+
+<div class="large-code">
+```{r}
+results = sapply(1:10000, function(i) mean(rnorm(30,0,1)) )
+
+sd(results)
+```
+</div>
 
 <!-- --------------------------------------------------------------------- -->
 
+## Define Custom Functions with `function()`
 
+Previously, we saw a few cases of custom functions, for example for counting `NA`s in vectors, or computing the mean of a randomly generated vector
+
+Here is the schema for defining custom functions with input (argument[s]), body, and output (return):
+
+<div class="large-code">
+```{r, eval=F}
+# define new function with some argument(s) as input
+myFunctName = function(arg1 = NA, arg2 = NA, arg3 = TRUE){ 
+  
+  # body, series of operations
+    computes several operations 
+    variously uses arg1, arg2, arg3 
+    get an object named "res" as final result 
+ 
+  # gives an output
+  return(res)
+}
+```
+</div>
+
+## Define Custom Functions with `function()`
+
+Here's a full example:
+
+```{r}
+z_score = function(vect = NA){
+  
+  vectM = mean(vect, na.rm=T)
+  vectSD = sd(vect, na.rm=T)
+  z = (vect - vectM) / vectSD
+  
+  return(z)
+}
+```
+
+After creating it, a custom function can be used like any other function: 
+
+```{r}
+x = c(101, 90, NA, NA, 114, 87, 106, 98, 93)
+z_score(x)
+```
+
+
+## Define Custom Functions with `function()`
+
+Here's a slightly more sophisticated example: 
+
+```{r}
+z_score = function(vect = NA, naRemove = FALSE){
+  
+  vectM = mean(vect, na.rm=naRemove)
+  vectSD = sd(vect, na.rm=naRemove)
+  z = (vect - vectM) / vectSD
+  
+  return(z)
+}
+```
+
+Let's use it:
+
+```{r}
+x = c(101, 90, NA, NA, 114, 87, 106, 98, 93)
+z_score(x)
+z_score(x, naRemove=TRUE)
+```
+
+
+## Define Custom Functions with `function()`
+
+In some previous examples, custom functions were used directly in combination with `apply()`, without curly brackets `{}` or `return()`, yet they worked!
+
+Why? 
+
+Generally, curly brackets `{}` and `return()` enhance clarity and are best practice, but in some cases they can be omitted for more compact code:
+
+- Curly brackets `{}` can be skipped if all code fits on a single line
+
+- `return()` can be omitted if the last (or only) code line represents the output
+
+## Define Custom Functions with `function()`
+
+To clarify the previous slide, these are **four alternative and increasingly compact ways** of writing the same function: 
+
+```{r}
+naCount = function(vect){
+  whereNAs = is.na(vect)
+  totalNAs = sum(whereNAs)
+  return(totalNAs)
+}
+
+naCount = function(vect){
+  whereNAs = is.na(vect)
+  totalNAs = sum(whereNAs)
+  totalNAs
+}
+
+naCount = function(vect){
+  sum(is.na(vect))
+}
+
+naCount = function(vect) sum(is.na(vect))
+```
+
+<!-- --------------------------------------------------------------------- -->
 

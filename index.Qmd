@@ -91,6 +91,8 @@ SECTION IN PROGRESS: NEW MATERIALS WILL BE ADDED HERE THROUGHOUT THE COURSE
 -   **Creating a word cloud** - [html](Exercises/3-WordCloud.html){target="_blank"}
 -   **Monte Carlo simulations for Power analysis** - [html](Exercises/4-MonteCarloSim.html){target="_blank"}
 
+<div style="font-size:15px;">*<b>Hints:</b> see some [suggestions](Exercises/ExampleStrings.html){target="_blank"} on manipulating strings, and some [examples](Exercises/ExampleMC.html){target="_blank"} of Monte Carlo simulations*</div>
+
 ------------------------------------------------------------------------
 
 ::: {style="font-size:11px;"}
