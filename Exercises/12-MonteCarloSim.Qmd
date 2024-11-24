@@ -14,7 +14,9 @@ format:
 editor: visual
 ---
 
-<div style="font-size:13px;">Performing a Monte Carlo simulation for power analysis is much more than just computing power. It means clarifying the entire research scenario in depth, thinking about all possible sources of variability, defining the parameters that govern the phenomenon of interest. It requires explicitly stating the research hypothesis, distinguishing between hypothesis testing and research questions that will be limited to exploratory analyses. Additionally, it help produce a comprehensive set of preplanned analysis that you may use for a preregistration, because the process involves writing the actual code for the analysis.</div>
+::: {style="font-size:13px;"}
+Performing a Monte Carlo simulation for power analysis is much more than just computing power. It means clarifying the entire research scenario in depth, thinking about all possible sources of variability, defining the parameters that govern the phenomenon of interest. It requires explicitly stating the research hypothesis, distinguishing between hypothesis testing and research questions that will be limited to exploratory analyses. Additionally, it help produce a comprehensive set of preplanned analysis that you may use for a preregistration, because the process involves writing the actual code for the analysis.
+:::
 
 ### Computing the Power of a T-Test via Monte Carlo Simulation
 
@@ -47,7 +49,6 @@ When testing hypotheses without sufficient power, statistically significant resu
     -   in addition to computing the *Type M Error*, try to approximate the smallest significant effect size given your $N$.
 -   *Optional:* you can repeat this entire exercise for a t-test (with *Cohen's d* as the effect size).
 
-
 ### *Advanced* - Computing the Power of a Linear Regression via Monte Carlo Simulation
 
 Once you've completed the previous two exercises, you are ready to move to the next phase: using simulation to calculate power for real statistical models.
@@ -60,17 +61,15 @@ where $residual \sim Normal(0, \sigma)$
 
 **Parameters:**
 
-- Choose a specific sample size $N$ for your simulation;
+-   Choose a specific sample size $N$ for your simulation;
 
-- Assume $\sigma = 1$ for simplicity, so you can focus only on $b1$ as the effect size (practically, a *standardized regression coefficient*);
+-   Assume $\sigma = 1$ for simplicity, so you can focus only on $b1$ as the effect size (practically, a *standardized regression coefficient*);
 
-- *note:* intercept $b0$ is irrelevant for power estimation.
+-   *note:* intercept $b0$ is irrelevant for power estimation.
 
-Run $10,000$ iterations and see the power for the particular combination of $N$ and standardized $b1$. 
+Run $10,000$ iterations and see the power for the particular combination of $N$ and standardized $b1$.
 
-*Note*: extracting *p-values* for predictors from a fitted `lm` object might not be so easy. You will need to access the model's *summary*. The *p-values* are stored in a coefficients table within the *summary*, and the extraction may look like this:
-<br/> `summary(fit)$coefficients["predictorName", "Pr(>|t|)"]` <br/>
-... Make it your habit to inspect fitted objects and their *summaries* with the **`str()`** function to locate and extract different pieces of information! 
+*Note*: extracting *p-values* for predictors from a fitted `lm` object might not be so easy. You will need to access the model's *summary*. The *p-values* are stored in a coefficients table within the *summary*, and the extraction may look like this: <br/> `summary(fit)$coefficients["predictorName", "Pr(>|t|)"]` <br/> ... Make it your habit to inspect fitted objects and their *summaries* with the **`str()`** function to locate and extract different pieces of information!
 
 ### *Advanced* - Computing the Power of a Mixed-Effects Binomial Regression via Monte Carlo Simulation
 

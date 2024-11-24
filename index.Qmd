@@ -85,13 +85,18 @@ SECTION IN PROGRESS: NEW MATERIALS WILL BE ADDED HERE THROUGHOUT THE COURSE
 -   **Vectors** - [html](Exercises/2.1-Exercises-Vectors.html){target="_blank"}
 -   **Dataframes** - [html](Exercises/2.2-Exercises-Dataframes.html){target="_blank"}
 -   <b>Data <em>nightmare</em> exercise</b> - [html](Exercises/2.3-Exercises-DataScientist.html){target="_blank"}
+-   **Programming and more** - [html](Exercises/3-Exercises-ProgrMore.html){target="_blank"}
 
 *— These other exercises are beyond the scope of this introductory course, but they could be stimulating and useful for more advanced R users:*
 
--   **Creating a word cloud** - [html](Exercises/3-WordCloud.html){target="_blank"}
-    - <div style="font-size:14px;">see [here](Exercises/ExampleStrings.html){target="_blank"} some suggestions on manipulating strings</div>
--   **Monte Carlo simulations for Power analysis** - [html](Exercises/4-MonteCarloSim.html){target="_blank"}
-    - <div style="font-size:14px;">see [here](Exercises/ExampleMC.html){target="_blank"} some examples of Monte Carlo simulations</div>
+-   **Creating a word cloud** - [html](Exercises/11-WordCloud.html){target="_blank"}
+    -   ::: {style="font-size:14px;"}
+        see [here](Exercises/ExampleStrings.html){target="_blank"} some suggestions on manipulating strings
+        :::
+-   **Monte Carlo simulations for Power analysis** - [html](Exercises/12-MonteCarloSim.html){target="_blank"}
+    -   ::: {style="font-size:14px;"}
+        see [here](Exercises/ExampleMC.html){target="_blank"} some examples of Monte Carlo simulations
+        :::
 
 ------------------------------------------------------------------------
 
