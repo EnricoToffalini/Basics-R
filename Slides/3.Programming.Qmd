@@ -316,6 +316,20 @@ sd(results)
 
 → Enjoy it! This is a proper estimation of the *Standard Error of the Mean* via Monte Carlo simulation! 😊
 
+## `for` loop
+
+You don't necessarily have to iterate over a sequence of integers (e.g., "`i in 1:10000`"; "`j in 1:ncol(df)`"), although this is the most common practice. You could iterate over whatever, for example, directly over the elements of a vector or other data structures
+
+<div class="large-code">
+```{r}
+myVect = c("this", "is", "a", "vector", "of", "strings")
+
+for(x in myVect){
+  print(toupper(x))
+}
+```
+</div>
+
 <!-- --------------------------------------------------------------------- -->
 
 
@@ -348,7 +362,7 @@ set.seed(5)
 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;"> <div>
 ```{r}
 repeat{
-  roll_die = sample(1:6,1)
+  roll_die = sample(1:6, 1)
   print(roll_die)
   if(roll_die == 6) break
 }
