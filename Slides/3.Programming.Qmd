@@ -444,7 +444,7 @@ Although any of such tasks could be done using a `for` loop, the code would be m
 results = rep(NA, ncol(df))
 names(results) = colnames(df)
 
-for(i in 1:length(results)){
+for(i in 1:ncol(df)){
   results[i] = sum(is.na(df[,i]))
 }
 
