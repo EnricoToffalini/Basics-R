@@ -124,9 +124,9 @@ if (tt1$p.value < 0.05) {
 }
 ```
 
-## `ifelse` statement
+## `if...else` statement
 
-All previous statements work with a single value at a time. However, you often want to apply this type of operation to an entire vector
+All previous examples required to evaluate a single particular condition that might be `TRUE` or `FALSE`. However, you often want to apply this type of operation to an entire vector
 
 Using `if` and `if..else` directly on a vector will **NOT** work as intended:
 
@@ -142,11 +142,11 @@ if(age >= 18){
 ```
 </div>
 
-## `ifelse` statement
+## `ifelse()`
 
-All previous statements work with a single value at a time. However, you often want to apply this type of operation to an entire vector
+All previous examples required to evaluate a single particular condition that might be `TRUE` or `FALSE`. However, you often want to apply this type of operation to an entire vector
 
-To handle such cases you can use the base **`ifelse`** function, that evaluates each element of a vector individually:
+To handle such cases you can use the base **`ifelse()`** function, that evaluates each element of a vector individually:
 
 <div class="large-code">
 ```{r}
@@ -165,9 +165,9 @@ ageCategory = factor(ageCategory, levels=c("Minor", "Adult"))
 ageCategory
 ```
 
-## `ifelse` statement
+## `ifelse()`
 
-The **`ifelse`** statement can also be nested to manage multiple conditions, such as in the following example:
+The **`ifelse()`** function can also be nested to manage multiple conditions, such as in the following example:
  
 <div class="large-code">
 ```{r}
