@@ -1373,29 +1373,76 @@ Levels: METHODOLOGY &lt; PROGRAMMING &lt; SOFT SKILLS &lt; THEMATIC COURSE</code
 </section>
 <section id="lists-2" class="slide level2">
 <h2>Lists</h2>
+<p>If you <strong>name</strong> each element in the list, you can also access them using the <strong><code>$</code></strong> operator, just like a dataframe</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href aria-hidden="true" tabindex="-1"></a>myLittleList <span class="ot">=</span> <span class="fu">list</span>(<span class="at">name =</span> <span class="st">&quot;Enrico&quot;</span>, </span>
+<span id="cb20-2"><a href aria-hidden="true" tabindex="-1"></a>                    <span class="at">sector =</span> <span class="st">&quot;m-psi/01&quot;</span>,</span>
+<span id="cb20-3"><a href aria-hidden="true" tabindex="-1"></a>                    <span class="at">hours =</span> <span class="fu">c</span>(<span class="dv">42</span>,<span class="dv">40</span>,<span class="dv">10</span>,<span class="dv">10</span>), </span>
+<span id="cb20-4"><a href aria-hidden="true" tabindex="-1"></a>                    <span class="at">school =</span> <span class="fu">c</span>(<span class="st">&quot;psychology&quot;</span>,<span class="st">&quot;amv&quot;</span>,<span class="st">&quot;psychology&quot;</span>,<span class="st">&quot;psychology&quot;</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href aria-hidden="true" tabindex="-1"></a>myLittleList<span class="sc">$</span>sector</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] &quot;m-psi/01&quot;</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href aria-hidden="true" tabindex="-1"></a>myLittleList<span class="sc">$</span>hours</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 42 40 10 10</code></pre>
+</div>
+</div>
+<div style="font-size:28px; font-style:italic;">
+<p>That’s not surprising… a dataframe is actually a special kind of list! just two key constraints: 1) all elements are vectors of the same length; 2) vectors are named.</p>
+</div>
+</section>
+<section id="lists-3" class="slide level2">
+<h2>Lists</h2>
 <p><strong>Why use lists?</strong></p>
 <ul>
 <li><p>Provide <strong>very flexible storage</strong> (for example, in a complex Monte Carlo simulation you might want to store not just a single result from each iteration, but multiple objects, such as each simulated dataframe, or whole model outputs)</p></li>
 <li><p><strong>Common in R</strong>: many functions (e.g., <code>lm()</code>) return their summaries and results as lists (even dataframes themselves are special cases of lists), so get familiar with them!</p></li>
 <li><p>Are used in many context for handling <strong>nested data</strong> (e.g., JSON-formatted data)</p></li>
 </ul>
+</section>
+<section id="lists-4" class="slide level2">
+<h2>Lists</h2>
+<h4 id="example-with-a-power-simulation">example with a power simulation</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href aria-hidden="true" tabindex="-1"></a>N <span class="ot">=</span> <span class="dv">30</span>; b0 <span class="ot">=</span> <span class="dv">0</span>; b1 <span class="ot">=</span> <span class="fl">0.3</span>; sigma <span class="ot">=</span> <span class="dv">1</span></span>
+<span id="cb25-2"><a href aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href aria-hidden="true" tabindex="-1"></a>niter <span class="ot">=</span> <span class="dv">1000</span></span>
+<span id="cb25-4"><a href aria-hidden="true" tabindex="-1"></a>results <span class="ot">=</span> <span class="fu">list</span>()</span>
+<span id="cb25-5"><a href aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-6"><a href aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>niter){</span>
+<span id="cb25-7"><a href aria-hidden="true" tabindex="-1"></a>  x <span class="ot">=</span> <span class="fu">rnorm</span>(N, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb25-8"><a href aria-hidden="true" tabindex="-1"></a>  y <span class="ot">=</span> b0 <span class="sc">+</span> b1<span class="sc">*</span>x <span class="sc">+</span> <span class="fu">rnorm</span>(N, <span class="dv">0</span>, sigma)</span>
+<span id="cb25-9"><a href aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb25-10"><a href aria-hidden="true" tabindex="-1"></a>  results[[i]] <span class="ot">=</span> <span class="fu">lm</span>(y <span class="sc">~</span> x)</span>
+<span id="cb25-11"><a href aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This is an example of using a list in a power simulation. Typically, you store only one or a few values (e.g., p-values), but lists allow storing all fitted objects if needed.</p>
 <!-- --------------------------------------------------------------------- -->
 </section>
 <section id="matrices" class="slide level2">
 <h2>Matrices</h2>
 <p>In R, a <strong>matrix</strong> is a <strong>2-dimensional</strong> structure that contains only elements <strong>of the same type</strong>. Essentially, it can be thought of as a 2D vector.</p>
 <p>You can create a matrix easily using the <strong><code>matrix()</code></strong> function:</p>
-<p>For example:</p>
 <div class="large-code">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href aria-hidden="true" tabindex="-1"></a>myMat <span class="ot">=</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">28</span>, <span class="at">nrow=</span><span class="dv">4</span>, <span class="at">ncol=</span><span class="dv">7</span>)</span>
-<span id="cb20-2"><a href aria-hidden="true" tabindex="-1"></a>myMat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href aria-hidden="true" tabindex="-1"></a>( <span class="at">myMat =</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">28</span>, <span class="at">nrow=</span><span class="dv">4</span>, <span class="at">ncol=</span><span class="dv">7</span>) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     [,1] [,2] [,3] [,4] [,5] [,6] [,7]
 [1,]    1    5    9   13   17   21   25
 [2,]    2    6   10   14   18   22   26
 [3,]    3    7   11   15   19   23   27
 [4,]    4    8   12   16   20   24   28</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href aria-hidden="true" tabindex="-1"></a>( <span class="at">myMat =</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">28</span>, <span class="at">nrow=</span><span class="dv">4</span>, <span class="at">ncol=</span><span class="dv">7</span>, <span class="at">byrow=</span>T) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2] [,3] [,4] [,5] [,6] [,7]
+[1,]    1    2    3    4    5    6    7
+[2,]    8    9   10   11   12   13   14
+[3,]   15   16   17   18   19   20   21
+[4,]   22   23   24   25   26   27   28</code></pre>
 </div>
 </div>
 </div>
@@ -1404,30 +1451,74 @@ Levels: METHODOLOGY &lt; PROGRAMMING &lt; SOFT SKILLS &lt; THEMATIC COURSE</code
 <h2>Matrices</h2>
 <p><strong>Indexing</strong> in matrices is similar to dataframes, with indexes for row(s) and column(s), using <strong><code>[ &lt;row(s) index&gt; , &lt;column(s) index&gt; ]</code></strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href aria-hidden="true" tabindex="-1"></a>myMat[<span class="dv">2</span>, <span class="dv">5</span>] <span class="co"># access a single element </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href aria-hidden="true" tabindex="-1"></a>myMat[<span class="dv">2</span>, <span class="dv">5</span>] <span class="co"># access a single element </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 18</code></pre>
+<pre><code>[1] 12</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href aria-hidden="true" tabindex="-1"></a>myMat[<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>, <span class="dv">5</span><span class="sc">:</span><span class="dv">7</span>] <span class="co"># access ranges of elements</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href aria-hidden="true" tabindex="-1"></a>myMat[<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>, <span class="dv">5</span><span class="sc">:</span><span class="dv">7</span>] <span class="co"># access ranges of elements</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     [,1] [,2] [,3]
-[1,]   18   22   26
-[2,]   19   23   27</code></pre>
+[1,]   12   13   14
+[2,]   19   20   21</code></pre>
 </div>
 </div>
 <p>Like in vectors, you can perform <strong>appropriate operations</strong> on matrix data:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href aria-hidden="true" tabindex="-1"></a>myMat<span class="sc">^</span><span class="dv">2</span> <span class="co"># element-wise squaring of all values</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href aria-hidden="true" tabindex="-1"></a>myMat<span class="sc">^</span><span class="dv">2</span> <span class="co"># element-wise squaring of all values</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     [,1] [,2] [,3] [,4] [,5] [,6] [,7]
-[1,]    1   25   81  169  289  441  625
-[2,]    4   36  100  196  324  484  676
-[3,]    9   49  121  225  361  529  729
-[4,]   16   64  144  256  400  576  784</code></pre>
+[1,]    1    4    9   16   25   36   49
+[2,]   64   81  100  121  144  169  196
+[3,]  225  256  289  324  361  400  441
+[4,]  484  529  576  625  676  729  784</code></pre>
 </div>
 </div>
 </section>
 <section id="matrices-2" class="slide level2">
+<h2>Matrices</h2>
+<table>
+<colgroup>
+<col style="width: 44%">
+<col style="width: 29%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Operator</th>
+<th>What it does</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>t()</code></td>
+<td>Transposes a matrix</td>
+<td><code>t(matrix(1:6,2))</code></td>
+</tr>
+<tr class="even">
+<td><code>%*%</code></td>
+<td>Matrix multiplication</td>
+<td><code>matrix(1:8,2) %*% matrix(1:8,4)</code></td>
+</tr>
+<tr class="odd">
+<td><code>*</code></td>
+<td>Element-wise matrix multiplication</td>
+<td><code>matrix(1:8,2) * matrix(1:8,2)</code></td>
+</tr>
+<tr class="even">
+<td><code>det()</code></td>
+<td>Determinant of a square matrix</td>
+<td><code>det(matrix(rnorm(16),4))</code></td>
+</tr>
+<tr class="odd">
+<td><code>solve(A, b)</code></td>
+<td>Solves <code>A*x = b</code></td>
+<td><code>solve(matrix(rnorm(16),4), rnorm(4))</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="matrices-3" class="slide level2">
 <h2>Matrices</h2>
 <div style="font-size:38px;">
 <p><strong>Why use (know) matrices?</strong></p>
@@ -1446,8 +1537,8 @@ It’s easy to create an array using the <strong><code>array()</code></strong> f
 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
 <div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href aria-hidden="true" tabindex="-1"></a>myArr <span class="ot">=</span> <span class="fu">array</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">30</span>, <span class="at">dim =</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">2</span>))</span>
-<span id="cb28-2"><a href aria-hidden="true" tabindex="-1"></a>myArr</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href aria-hidden="true" tabindex="-1"></a>myArr <span class="ot">=</span> <span class="fu">array</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">30</span>, <span class="at">dim =</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">2</span>))</span>
+<span id="cb36-2"><a href aria-hidden="true" tabindex="-1"></a>myArr</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>, , 1
 
@@ -1467,8 +1558,8 @@ It’s easy to create an array using the <strong><code>array()</code></strong> f
 </div>
 <div>
 <p><br>
-→ Note that this is kind of a “cubic-structure” (3D structure): 3 rows, 5 columns, 2 slices</p>
-<p>In a similar way, you could create hypercubes and so on</p>
+→ this is kind of a “cubic-structure” (3D structure): 3 rows, 5 columns, 2 slices</p>
+<p>In a similar way, you could create hypercubes and so on (4D+)</p>
 </div>
 <div>
 
@@ -1478,11 +1569,11 @@ It’s easy to create an array using the <strong><code>array()</code></strong> f
 <h3 id="indexing">indexing</h3>
 <p><strong>Indexing</strong> is exactly the same as with matrices but… with 3 (sets of) indices!</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href aria-hidden="true" tabindex="-1"></a>myArr[<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">2</span>] <span class="co"># extract a single element</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href aria-hidden="true" tabindex="-1"></a>myArr[<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">2</span>] <span class="co"># extract a single element</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 25</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href aria-hidden="true" tabindex="-1"></a>myArr[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span> , <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span> , ] <span class="co"># extract subsets of elements</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href aria-hidden="true" tabindex="-1"></a>myArr[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span> , <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span> , ] <span class="co"># extract subsets of elements</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>, , 1
 
@@ -1504,8 +1595,8 @@ It’s easy to create an array using the <strong><code>array()</code></strong> f
 <p><strong>Why use (know) arrays?</strong></p>
 <ul>
 <li><p>Might be useful for storing, and manipulate efficiently structure of <strong>multi-dimensional data</strong></p></li>
-<li><p>Generally used in advanced topics and <em>machine learning</em> like when working on <strong>image processing</strong> and <strong>spatial data</strong></p></li>
-<li><p>Arrays in R are conceptually similar to <strong>tensors</strong> in Python (e.g., <code>NumPy</code>, <code>TensorFlow</code>), where they play a fundamental role in <strong>machine learning</strong> and <strong>deep learning</strong>, as they allow researchers to manage large amounts of data with complex structures</p></li>
+<li><p>Generally used in advanced topics and <em>machine learning</em> like when working on <strong>image/video processing</strong> and <strong>spatial data</strong></p></li>
+<li><p>Arrays in R are conceptually similar to <strong>tensors</strong> in Python (e.g., <code>NumPy</code>, <code>TensorFlow</code>), where they play a fundamental role in <em><strong>machine learning</strong></em> and <em><strong>deep learning</strong></em>, as they allow researchers to manage large amounts of data with complex structures</p></li>
 </ul>
 </div>
 <!-- --------------------------------------------------------------------- -->

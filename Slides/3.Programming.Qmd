@@ -154,13 +154,16 @@ age = c(2, 28, 15, 1, 4, 67, 42, 14, 7)
 
 ifelse(age >= 18, "Adult", "Minor")
 ```
+</div>
 
-...of course, it is always recommended to store the output:
+<div style="font-size:26px; font-style:italic;">
+— Best practices: store results and set type as appropriate!
+</div>
 ```{r}
 ageCategory = ifelse(age >= 18, "Adult", "Minor")
+ageCategory = factor(ageCategory, levels=c("Minor", "Adult"))
 ageCategory
 ```
-</div>
 
 ## `ifelse` statement
 
@@ -450,17 +453,46 @@ mapply(rnorm, n=c(2, 6, 4), mean=c(0, 100, 200), sd=c(1, 15, 30))
 ```
 </div>
 
-## `apply` family
+## `sapply`
 
-For example, here's how you can rewrite the code for computing the *standard error of the mean* via *Monte Carlo simulation* using **`sapply`** instead of a `for` loop
+Here's how **`sapply()`** can be used to help compute the *standard error of the mean* via *Monte Carlo simulation*
 
 <div class="large-code">
 ```{r}
-results = sapply(1:10000, function(i) mean(rnorm(30,0,1)) )
+myList = list()
+for(i in 1:10000) myList[[i]] = rnorm(30)
 
-sd(results)
+ms = sapply(myList, mean)
+
+sd(ms)
 ```
 </div>
+<div style="font-size:22px; font-style:italic;"> 
+1) an empty list is initialized; 
+2) a `for` loop is used to fill each slot in the list with a vector of 30 randomly generated numbers; 
+3) <b>`sapply` is  used to compute the `mean` of each vector in the list; </b>
+4) *standard error of the mean* is computed as the `sd` on the vector of the *means*</div>
+
+Saving all generated data allows for more flexibility in analysis, although it uses more memory
+
+## `lapply` and `sapply`
+
+Here's another, even more compact way of doing the same, without using any `for` loop, but this requires defining a small custom function:
+
+<div class="large-code">
+```{r}
+results = lapply(1:10000, function(i) rnorm(30) )
+
+ms = sapply(results, mean)
+
+sd(ms)
+```
+</div>
+
+\
+
+<div style="font-size:22px; font-style:italic;"> Note: `"i"` represents the current element of `1:10000` over which `lapply` iterates. Even though it is practically useless here, because only random numbers are generated at each iteration, it must be included because `sapply` must pass an alement as the argument to the function by default</div>
+
 
 <!-- --------------------------------------------------------------------- -->
 

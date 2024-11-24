@@ -3082,10 +3082,14 @@ vertical-align: -.125em;
   <li><a href="#dates-and-rooms" id="toc-dates-and-rooms" class="nav-link active" data-scroll-target="#dates-and-rooms">Dates and Rooms</a></li>
   <li><a href="#about-this-course" id="toc-about-this-course" class="nav-link" data-scroll-target="#about-this-course">About This Course</a>
   <ul class="collapse">
-  <li><a href="#getting-started-with-the-course" id="toc-getting-started-with-the-course" class="nav-link" data-scroll-target="#getting-started-with-the-course">Getting Started with the Course</a></li>
+  <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started">Getting Started</a></li>
   <li><a href="#course-topics" id="toc-course-topics" class="nav-link" data-scroll-target="#course-topics">Course Topics</a></li>
   </ul></li>
-  <li><a href="#slides-and-materials" id="toc-slides-and-materials" class="nav-link" data-scroll-target="#slides-and-materials">Slides and Materials</a></li>
+  <li><a href="#materials" id="toc-materials" class="nav-link" data-scroll-target="#materials">Materials</a>
+  <ul class="collapse">
+  <li><a href="#slides" id="toc-slides" class="nav-link" data-scroll-target="#slides">Slides</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a></li>
+  </ul></li>
   </ul>
 </nav>
 </div>
@@ -3156,8 +3160,8 @@ vertical-align: -.125em;
 <h2 class="anchored" data-anchor-id="about-this-course">About This Course</h2>
 <p>This introductory course will prepare you for most future methodological courses in the <a href="https://dottorato.psy.unipd.it/en" target="_blank"><em>PhD program in Psychological Sciences</em></a> <em>(University of Padova)</em>, where R is extensively used. We will navigate the development environment, work with basic data structures like vectors and dataframes, learn about essential concepts of programming like loops and functions, and see some fundamentals of data visualization. Advanced topics like statistical modelling and data simulation will be covered in future courses and are <strong>not</strong> presented here (though occasional simple examples may appear).</p>
 <p>The primary resource for the course is the online book available on GitHub: <a href="https://psicostat.github.io/Introduction2R_EN/" target="_blank"><em><strong>Introduction2R</strong> (English edition)</em></a>.</p>
-<section id="getting-started-with-the-course" class="level3">
-<h3 class="anchored" data-anchor-id="getting-started-with-the-course">Getting Started with the Course</h3>
+<section id="getting-started" class="level3">
+<h3 class="anchored" data-anchor-id="getting-started">Getting Started</h3>
 <ol type="1">
 <li><strong>Bookmark the Course Homepage</strong>: Save the URL of the present page <a href="https://enricotoffalini.github.io/Basics-R/" target="_blank">https://enricotoffalini.github.io/Basics-R/</a> for quick access to all course materials.</li>
 <li><strong>Install R and RStudio</strong>: go to <a href="https://posit.co/download/rstudio-desktop/" target="_blank"><strong>this download page</strong></a> to install <em>R</em> and <em>RStudio Desktop</em> on your computer (further setup instructions can be found in <a href="https://psicostat.github.io/Introduction2R_EN/install.html" target="_blank"><em>Chapter 1</em></a> of <em>Introduction2R</em>)</li>
@@ -3168,31 +3172,31 @@ vertical-align: -.125em;
 </section>
 <section id="course-topics" class="level3">
 <h3 class="anchored" data-anchor-id="course-topics">Course Topics</h3>
-<section id="introduction-to-the-r-environment" class="level4">
-<h4 class="anchored" data-anchor-id="introduction-to-the-r-environment">Introduction to the R Environment</h4>
-<p>We will cover the installation of R and introduce how to organize and manage a work session in R Studio, and how to import a dataset.</p>
+<section id="introduction-to-the-r-environment-and-first-steps-in-r" class="level5">
+<h5 class="anchored" data-anchor-id="introduction-to-the-r-environment-and-first-steps-in-r">Introduction to the R Environment and First Steps in R</h5>
+<p>We will cover the installation of R and see how to organize and manage a work session in R Studio, how to create objects, what are data types, how to perform basic operations on them, and how to import and export data, figures, and workspaces.</p>
 </section>
-<section id="data-structures-and-object-manipulation" class="level4">
-<h4 class="anchored" data-anchor-id="data-structures-and-object-manipulation">Data Structures and Object Manipulation</h4>
-<p>We will introduce the main data structures in R and methods for interacting with them effectively. In particular, we will focus on vectors and dataframes.</p>
+<section id="data-structures" class="level5">
+<h5 class="anchored" data-anchor-id="data-structures">Data Structures</h5>
+<p>We will introduce the main data structures in R and methods for interacting with them effectively. We will focus on vectors, dataframes, lists, and more. Dataframes will be given special attention.</p>
 </section>
-<section id="basics-of-programming-in-r" class="level4">
-<h4 class="anchored" data-anchor-id="basics-of-programming-in-r">Basics of Programming in R</h4>
-<p>We will introduce essential programming concepts and their implementation in R, including conditional operations (such as <code>if...else</code>), and iterative programming (including the <code>for</code> loops and <code>apply</code> functions).</p>
+<section id="basics-of-programming-in-r" class="level5">
+<h5 class="anchored" data-anchor-id="basics-of-programming-in-r">Basics of Programming in R</h5>
+<p>We will introduce essential programming concepts and their implementation in R, including conditional operations (such as <code>if...else</code>), iterative programming (including the <code>for</code> loops and the <code>apply</code> family), and defining custom functions.</p>
 </section>
-<section id="data-visualization" class="level4">
-<h4 class="anchored" data-anchor-id="data-visualization">Data Visualization</h4>
-<p><em>Optional</em> - only if enough time is left, we will introduce some basics of data visualization. If we do not have time, don’t despair: some data visualization will still be presented in future courses in this PhD program.</p>
+<section id="advanced" class="level5">
+<h5 class="anchored" data-anchor-id="advanced"><em>Advanced</em></h5>
+<p><em>For more experienced R users, some materials under the Exercises section will provide more stimulating challenges and instructions, even beyond the scope of the present introductory course.</em></p>
 </section>
 </section>
 </section>
-<section id="slides-and-materials" class="level2">
-<h2 class="anchored" data-anchor-id="slides-and-materials">Slides and Materials</h2>
+<section id="materials" class="level2">
+<h2 class="anchored" data-anchor-id="materials">Materials</h2>
 <div style="color: #999; font-weight: bold; font-style: italic;">
 <p>SECTION IN PROGRESS: NEW MATERIALS WILL BE ADDED HERE THROUGHOUT THE COURSE</p>
 </div>
-<section id="lectures-slides" class="level4">
-<h4 class="anchored" data-anchor-id="lectures-slides">Lectures Slides</h4>
+<section id="slides" class="level3">
+<h3 class="anchored" data-anchor-id="slides">Slides</h3>
 <ul>
 <li><strong>Getting Started with R</strong> - <a href="Slides/0.GettingStartedR.html" target="_blank">html</a> - <a href="Slides/0.GettingStartedR.pdf" target="_blank">pdf</a></li>
 <li><strong>First Steps in R (part 1)</strong> - <a href="Slides/1.1.FirstStepsR-1.html" target="_blank">html</a> - <a href="Slides/1.1.FirstStepsR-1.pdf" target="_blank">pdf</a></li>
@@ -3200,11 +3204,11 @@ vertical-align: -.125em;
 <li><strong>Data Structures (part 1)</strong> - <a href="Slides/2.1.DataStruc-1.html" target="_blank">html</a> - <a href="Slides/2.1.DataStruc-1.pdf" target="_blank">pdf</a> <em>(vectors)</em></li>
 <li><strong>Data Structures (part 2)</strong> - <a href="Slides/2.2.DataStruc-2.html" target="_blank">html</a> - <a href="Slides/2.2.DataStruc-2.pdf" target="_blank">pdf</a> <em>(dataframes)</em></li>
 <li><strong>Data Structures (part 3)</strong> - <a href="Slides/2.3.DataStruc-3.html" target="_blank">html</a> - <a href="Slides/2.3.DataStruc-3.pdf" target="_blank">pdf</a> <em>(lists and more)</em></li>
-<li><strong>Basics of Programming</strong> - <a href="Slides/3.Programming.html" target="_blank">html</a> - <a href="Slides/3.Programming.pdf" target="_blank">pdf</a> <em>(if, else, loops)</em></li>
+<li><strong>Basics of Programming</strong> - <a href="Slides/3.Programming.html" target="_blank">html</a> - <a href="Slides/3.Programming.pdf" target="_blank">pdf</a> <em>(conditions, iterations, custom functions)</em></li>
 </ul>
 </section>
-<section id="exercises" class="level4">
-<h4 class="anchored" data-anchor-id="exercises">Exercises</h4>
+<section id="exercises" class="level3">
+<h3 class="anchored" data-anchor-id="exercises">Exercises</h3>
 <p><em>— The following exercises are fundamental, and they importantly integrate concepts from the slides and introduce new functions and methods that you want to know!</em></p>
 <ul>
 <li><strong>First steps in R</strong> - <a href="Exercises/1-Exercises-First-steps.html" target="_blank">html</a></li>
@@ -3214,12 +3218,19 @@ vertical-align: -.125em;
 </ul>
 <p><em>— These other exercises are beyond the scope of this introductory course, but they could be stimulating and useful for more advanced R users:</em></p>
 <ul>
-<li><strong>Creating a word cloud</strong> - <a href="Exercises/3-WordCloud.html" target="_blank">html</a></li>
-<li><strong>Monte Carlo simulations for Power analysis</strong> - <a href="Exercises/4-MonteCarloSim.html" target="_blank">html</a></li>
+<li><strong>Creating a word cloud</strong> - <a href="Exercises/3-WordCloud.html" target="_blank">html</a>
+<ul>
+<li><div style="font-size:14px;">
+see <a href="Exercises/ExampleStrings.html" target="_blank">here</a> some suggestions on manipulating strings
+</div></li>
+</ul></li>
+<li><strong>Monte Carlo simulations for Power analysis</strong> - <a href="Exercises/4-MonteCarloSim.html" target="_blank">html</a>
+<ul>
+<li><div style="font-size:14px;">
+see <a href="Exercises/ExampleMC.html" target="_blank">here</a> some examples of Monte Carlo simulations
+</div></li>
+</ul></li>
 </ul>
-<div style="font-size:15px;">
-<em><b>Hints:</b> see some <a href="Exercises/ExampleStrings.html" target="_blank">suggestions</a> on manipulating strings, and some <a href="Exercises/ExampleMC.html" target="_blank">examples</a> of Monte Carlo simulations</em>
-</div>
 <hr>
 <div style="font-size:11px;">
 <p>GitHub repository associated to the present course website: <a href="https://github.com/EnricoToffalini/Basics-R" target="_blank">https://github.com/EnricoToffalini/Basics-R</a></p>

@@ -126,6 +126,25 @@ str(myChaos)
 
 ## Lists
 
+If you **name** each element in the list, you can also access them using the **`$`** operator, just like a dataframe
+
+```{r}
+myLittleList = list(name = "Enrico", 
+                    sector = "m-psi/01",
+                    hours = c(42,40,10,10), 
+                    school = c("psychology","amv","psychology","psychology"))
+```
+```{r}
+myLittleList$sector
+myLittleList$hours
+```
+
+<div style="font-size:28px; font-style:italic;">
+That's not surprising... a dataframe is actually a special kind of list! just two key constraints: 1) all elements are vectors of the same length; 2) vectors are named.
+</div>
+
+## Lists
+
 **Why use lists?**
 
 - Provide **very flexible storage** (for example, in a complex Monte Carlo simulation you might want to store not just a single result from each iteration, but multiple objects, such as each simulated dataframe, or whole model outputs)
@@ -133,6 +152,26 @@ str(myChaos)
 - **Common in R**: many functions (e.g., `lm()`) return their summaries and results as lists (even dataframes themselves are special cases of lists), so get familiar with them!
 
 - Are used in many context for handling **nested data** (e.g., JSON-formatted data)
+
+## Lists
+#### example with a power simulation
+
+```{r, eval=F}
+N = 30; b0 = 0; b1 = 0.3; sigma = 1
+
+niter = 1000
+results = list()
+
+for(i in 1:niter){
+  x = rnorm(N, 0, 1)
+  y = b0 + b1*x + rnorm(N, 0, sigma)
+  
+  results[[i]] = lm(y ~ x)
+}
+
+```
+
+This is an example of using a list in a power simulation. Typically, you store only one or a few values (e.g., p-values), but lists allow storing all fitted objects if needed.
 
 <!-- --------------------------------------------------------------------- -->
 
@@ -142,12 +181,11 @@ In R, a **matrix** is a **2-dimensional** structure that contains only elements 
 
 You can create a matrix easily using the **`matrix()`** function:
 
-For example:
-
 <div class="large-code">
 ```{r}
-myMat = matrix(1:28, nrow=4, ncol=7)
-myMat
+( myMat = matrix(1:28, nrow=4, ncol=7) )
+
+( myMat = matrix(1:28, nrow=4, ncol=7, byrow=T) )
 ```
 </div>
 
@@ -164,6 +202,16 @@ Like in vectors, you can perform **appropriate operations** on matrix data:
 ```{r}
 myMat^2 # element-wise squaring of all values
 ```
+
+## Matrices
+
+| Operator | What it does | Example |
+|------------|--------|-------|
+| `t()` | Transposes a matrix | `t(matrix(1:6,2))`|
+| `%*%` | Matrix multiplication | `matrix(1:8,2) %*% matrix(1:8,4)` |
+| `*` | Element-wise matrix multiplication | `matrix(1:8,2) * matrix(1:8,2)` |
+| `det()` | Determinant of a square matrix | `det(matrix(rnorm(16),4))`|
+| `solve(A, b)` | Solves `A*x = b` | `solve(matrix(rnorm(16),4), rnorm(4))`|
 
 ## Matrices
 
@@ -191,9 +239,9 @@ myArr
 ```
 </div><div>
 \
-→ Note that this is kind of a "cubic-structure" (3D structure): 3 rows, 5 columns, 2 slices
+→ this is kind of a "cubic-structure" (3D structure): 3 rows, 5 columns, 2 slices
 
-In a similar way, you could create hypercubes and so on
+In a similar way, you could create hypercubes and so on (4D+)
 </div><div>
 
 ## Arrays
@@ -214,9 +262,9 @@ myArr[1:2 , 1:2 , ] # extract subsets of elements
 
 - Might be useful for storing, and manipulate efficiently structure of **multi-dimensional data**
 
-- Generally used in advanced topics and *machine learning* like when working on **image processing** and **spatial data**
+- Generally used in advanced topics and *machine learning* like when working on **image/video processing** and **spatial data**
 
-- Arrays in R are conceptually similar to **tensors** in Python (e.g., `NumPy`, `TensorFlow`), where they play a fundamental role in **machine learning** and **deep learning**, as they allow researchers to manage large amounts of data with complex structures
+- Arrays in R are conceptually similar to **tensors** in Python (e.g., `NumPy`, `TensorFlow`), where they play a fundamental role in <em>**machine learning**</em> and <em>**deep learning**</em>, as they allow researchers to manage large amounts of data with complex structures
 </div>
 
 
