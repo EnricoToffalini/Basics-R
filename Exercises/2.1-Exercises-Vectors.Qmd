@@ -44,7 +44,7 @@ editor: visual
 
 #### Like a data scientist
 
--   Use the `rnorm()` function to create an `y0` vector containing $1,000,000$ normally-distributed numbers (know that $1,000,000$ can be written as `1e+06` in R) on an IQ scale (i.e., with $\mu$ = $100$, $\sigma$ = $15$)
+-   Use the `rnorm()` function to create an `y0` vector containing $1,000,000$ normally-distributed numbers (know that $1,000,000$ can be written as `1e6` in R) on an IQ scale (i.e., with $\mu$ = $100$, $\sigma$ = $15$)
 
 -   Display the first few values of the `y0` vector using both the `head()` function and the indexing with `[]`
 
