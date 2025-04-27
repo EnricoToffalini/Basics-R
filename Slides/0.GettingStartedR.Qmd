@@ -68,13 +68,13 @@ execute:
 ## you may even create greeting cards
 
 <div style="text-align: center;">
-  <img src="figures/christmasTree.png" />
+  <img src="figures/christmasTree.png" style="width: 90%;" />
 </div>
 
 ## you may even create greeting cards
 
 <div style="text-align: center;">
-  <img src="figures/happyBirthday.png" />
+  <img src="figures/happyBirthday.png" style="width: 90%;" />
 </div>
 
 ## or like fancy infographics
@@ -86,13 +86,13 @@ execute:
 ## or like fancy infographics
 
 <div style="text-align: center;">
-  <img src="figures/ItalyInfographic.png" width="650px" height="550px" />
+  <img src="figures/ItalyInfographic.png" style="width: 60%"  />
 </div>
 
 ## perform classical data analysis
 
 <div style="text-align: center;">
-  <img src="figures/colorfulPlot.png"/>
+  <img src="figures/colorfulPlot.png" style="width: 85%"/>
 </div>
 
 ## you may create interactive webapps with Shiny

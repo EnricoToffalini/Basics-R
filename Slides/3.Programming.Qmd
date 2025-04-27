@@ -45,7 +45,7 @@ if(age >= 18){
 Basic flowchart showing the logic of the **`if`** statement:
 
 <div style="text-align: center;">
-  <img src="figures/if_chart.png" width="55%"/>
+  <img src="figures/if_chart.png" width="53%"/>
 </div>
 
 
@@ -128,7 +128,7 @@ if (tt1$p.value < 0.05) {
 
 All previous examples required to evaluate a single particular condition that might be `TRUE` or `FALSE`. However, you often want to apply this type of operation to an entire vector
 
-Using `if` and `if..else` directly on a vector will **NOT** work as intended:
+Using `if` and `if...else` directly on a vector will **NOT** work as intended:
 
 <div class="large-code">
 ```{r, error=T}
@@ -400,7 +400,7 @@ The following is *not* a computationally heavy task — but for example, let's s
 
 ```{r, echo=F}
 df = read.csv("data/wisc.csv")
-df
+df[1:12,]
 ```
 
 ## `apply` family

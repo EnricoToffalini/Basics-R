@@ -68,7 +68,7 @@ str(age)
 ## Create, name objects
 ### Assignment operators
 
-In R, both the assignment operator "**`=`**" and "**`<-`**" can be used to assign values to objects. In fact, "`**<-**`" is considered more traditional in R. and preferred for clarity, also because it allows differentiating assignment from other uses of "**`=`**". 
+In R, both the assignment operator "**`=`**" and "**`<-`**" can be used to assign values to objects. In fact, "**`<-`**" is considered more traditional in R. and preferred for clarity, also because it allows differentiating assignment from other uses of "**`=`**". 
 
 ```{r}
 # these two commands do the same thing 

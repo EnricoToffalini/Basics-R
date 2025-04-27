@@ -345,7 +345,7 @@ df = read.csv(file.choose(), header=TRUE, sep=",", dec=".")
 ```
 
 <div style="text-align: center;">
-  <img src="figures/selectFileBox.png"/>
+  <img src="figures/selectFileBox.png" style="width: 80%"/>
 </div>
 
 
