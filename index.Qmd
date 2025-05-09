@@ -15,7 +15,11 @@ format:
 editor: visual
 ---
 
-[**R**](https://www.r-project.org/){target="_blank"} is an open-source programming language with a huge library ecosystem that allows you to perform flexible and powerful data analysis. It is extensively used in academic research, but also increasingly adopted in business for data science. [**RStudio**](https://posit.co/download/rstudio-desktop/){target="_blank"} is a popular IDE *(Integrated Development Environment)* which provides tools for coding, visualization, and report generation when using programming in R (and in many other languages!)
+## About This Course
+
+This is a short (10 hours) introductory course on [**R**](https://www.r-project.org/){target="_blank"} that is offered within the [*PhD program in Psychological Sciences*](https://dottorato.psy.unipd.it/en){target="_blank"} *(University of Padova)*. The course is aimed to prepare students for many future methodological courses in this program, where R is used extensively. [**R**](https://www.r-project.org/){target="_blank"} is a high-level open-source programming language that is widely used in academic research, but also increasingly adopted in business for data science. It has a large ecosystem of libraries and tools that allow you to perform flexible and powerful data analysis. [**RStudio**](https://posit.co/download/rstudio-desktop/){target="_blank"} is a popular IDE *(Integrated Development Environment)* which provides an excellent environment for coding, visualization, and report generation when programming in R (and in other languages).
+
+The primary resource for the course is the online book available on GitHub: [***Introduction2R***](https://psicostat.github.io/Introduction2R_EN/){target="_blank"}
 
 ## Dates and Rooms
 
@@ -25,12 +29,6 @@ editor: visual
 | 19/11/2024 | 14:30-16:30 | 4N   |
 | 25/03/2024 | 09:00-12:00 | 4T   |
 | 26/03/2024 | 14:00-17:00 | 4M   |
-
-## About This Course
-
-This introductory course will prepare you for most future methodological courses in the [*PhD program in Psychological Sciences*](https://dottorato.psy.unipd.it/en){target="_blank"} *(University of Padova)*, where R is extensively used. We will explore the development environment, work with basic data structures like vectors, dataframes, matrices, and lists, and learn about essential concepts of programming like conditional statements, loops, and functions. Advanced topics like statistical modelling and data simulation will be covered in future courses and are **not** presented here (though occasional simple examples may appear).
-
-The primary resource for the course is the online book available on GitHub: [***Introduction2R** (English edition)*](https://psicostat.github.io/Introduction2R_EN/){target="_blank"}.
 
 ### Getting Started
 
@@ -44,6 +42,8 @@ install.packages(pkgs)
 ```
 
 ### Course Topics
+
+We will explore the development environment, work with basic data structures like vectors, dataframes, matrices, and lists, and learn about essential concepts of programming like conditional statements, loops, and functions. Advanced topics like statistical modelling and data simulation will be covered in future courses and are **not** presented here (although occasional simple examples may appear).
 
 ##### Introduction to the R Environment and First Steps in R
 
