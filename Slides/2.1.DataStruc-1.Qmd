@@ -1,6 +1,5 @@
 ---
-title: "Data Structures (part 1)"
-subtitle: "<b><em>Vectors</em></b>"
+title: "Data Structures: Vectors"
 author: "Enrico Toffalini"
 include-in-header: ../assets/slidesheader.html
 format:

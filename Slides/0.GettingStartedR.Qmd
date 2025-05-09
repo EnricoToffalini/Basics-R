@@ -1,5 +1,5 @@
 ---
-title: "Getting Started with R"
+title: "Intro to This Course; <br/>Getting Started with R"
 author: "Enrico Toffalini"
 include-in-header: ../assets/slidesheader.html
 format:

@@ -71,31 +71,31 @@ SECTION IN PROGRESS: NEW MATERIALS WILL BE ADDED HERE THROUGHOUT THE COURSE
 
 ### Slides
 
--   **Getting Started with R** - [html](Slides/0.GettingStartedR.html){target="_blank"} - [pdf](Slides/0.GettingStartedR.pdf){target="_blank"}
--   **First Steps in R (part 1)** - [html](Slides/1.1.FirstStepsR-1.html){target="_blank"} - [pdf](Slides/1.1.FirstStepsR-1.pdf){target="_blank"}
--   **First Steps in R (part 2)** - [html](Slides/1.2.FirstStepsR-2.html){target="_blank"} - [pdf](Slides/1.2.FirstStepsR-2.pdf){target="_blank"}
--   **Data Structures (part 1)** - [html](Slides/2.1.DataStruc-1.html){target="_blank"} - [pdf](Slides/2.1.DataStruc-1.pdf){target="_blank"} *(vectors)*
--   **Data Structures (part 2)** - [html](Slides/2.2.DataStruc-2.html){target="_blank"} - [pdf](Slides/2.2.DataStruc-2.pdf){target="_blank"} *(dataframes)*
--   **Data Structures (part 3)** - [html](Slides/2.3.DataStruc-3.html){target="_blank"} - [pdf](Slides/2.3.DataStruc-3.pdf){target="_blank"} *(lists and more)*
--   **Basics of Programming** - [html](Slides/3.Programming.html){target="_blank"} - [pdf](Slides/3.Programming.pdf){target="_blank"} *(conditions, iterations, custom functions)*
+-   [**Intro to This Course, Getting Started with R**](Slides/0.GettingStartedR.html){target="_blank"} - ([pdf](Slides/0.GettingStartedR.pdf){target="_blank"})
+-   [**Basic Operations, Basic Types of Data**](Slides/1.1.FirstStepsR-1.html){target="_blank"} - ([pdf](Slides/1.1.FirstStepsR-1.pdf){target="_blank"})
+-   [**Environment, Packages, Functions, Import/Export**](Slides/1.2.FirstStepsR-2.html){target="_blank"} - ([pdf](Slides/1.2.FirstStepsR-2.pdf){target="_blank"})
+-   [**Data Structures: Vectors**](Slides/2.1.DataStruc-1.html){target="_blank"} - ([pdf](Slides/2.1.DataStruc-1.pdf){target="_blank"})
+-   [**Data Structures: Data Frames**](Slides/2.2.DataStruc-2.html){target="_blank"} - ([pdf](Slides/2.2.DataStruc-2.pdf){target="_blank"})
+-   [**Data Structures: Factors, Lists, Matrices, Arrays**](Slides/2.3.DataStruc-3.html){target="_blank"} - ([pdf](Slides/2.3.DataStruc-3.pdf){target="_blank"})
+-   [**Basics of Programming: If...Else, Iterations, Custom Functions**](Slides/3.Programming.html){target="_blank"} - ([pdf](Slides/3.Programming.pdf){target="_blank"})
 
 ### Exercises
 
 *— The following exercises are fundamental, and they importantly integrate concepts from the slides and introduce new functions and methods that you want to know!*
 
--   **First steps in R** - [html](Exercises/1-Exercises-First-steps.html){target="_blank"}
--   **Vectors** - [html](Exercises/2.1-Exercises-Vectors.html){target="_blank"}
--   **Dataframes** - [html](Exercises/2.2-Exercises-Dataframes.html){target="_blank"}
--   <b>Data <em>nightmare</em> exercise</b> - [html](Exercises/2.3-Exercises-DataScientist.html){target="_blank"}
--   **Programming and more** - [html](Exercises/3-Exercises-ProgrMore.html){target="_blank"}
+-   [**First steps in R**](Exercises/1-Exercises-First-steps.html){target="_blank"}
+-   [**Vectors**](Exercises/2.1-Exercises-Vectors.html){target="_blank"}
+-   [**Dataframes**](Exercises/2.2-Exercises-Dataframes.html){target="_blank"}
+-   [<b>Data <em>nightmare</em> exercise</b>](Exercises/2.3-Exercises-DataScientist.html){target="_blank"}
+-   [**Programming and more**](Exercises/3-Exercises-ProgrMore.html){target="_blank"}
 
 *— These other exercises are beyond the scope of this introductory course, but they could be stimulating and useful for more advanced R users:*
 
--   **Creating a word cloud** - [html](Exercises/11-WordCloud.html){target="_blank"}
+-   [**Creating a word cloud**](Exercises/11-WordCloud.html){target="_blank"}
     -   ::: {style="font-size:14px;"}
         see [here](Exercises/ExampleStrings.html){target="_blank"} some suggestions on manipulating strings
         :::
--   **Monte Carlo simulations for Power analysis** - [html](Exercises/12-MonteCarloSim.html){target="_blank"}
+-   [**Monte Carlo simulations for Power analysis**](Exercises/12-MonteCarloSim.html){target="_blank"}
     -   ::: {style="font-size:14px;"}
         see [here](Exercises/ExampleMC.html){target="_blank"} some examples of Monte Carlo simulations
         :::

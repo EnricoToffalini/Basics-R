@@ -1,5 +1,5 @@
 ---
-title: "First Steps in R (part 1)"
+title: "Basic Operations, <br/>Basic Types of Data"
 author: "Enrico Toffalini"
 include-in-header: ../assets/slidesheader.html
 format:
@@ -20,29 +20,6 @@ execute:
   echo: true
   output: true
 ---
-## Let's see how to
-
-<div style="font-size:36px;">
-**Part 1:**
-
-- Create, name objects;
-
-- Use basic operations (arithmetical, relational, logical); 
-
-- Basic types of data; 
-
-*Part 2:*
-
-- Install, load from CRAN (and more), call functions, help;
-
-- Using functions;
-
-- Set up your Working Directory;
-
-- Import, export workspace and data
-</div>
-
-<!-- --------------------------------------------------------------------- -->
 
 ## Create, name objects
 

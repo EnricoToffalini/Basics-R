@@ -1,6 +1,5 @@
 ---
-title: "Data Structures (part 3)"
-subtitle: "<b><em>Factors, Lists, Matrices, Arrays</em></b>"
+title: "Data Structures: <br/>Factors, Lists, Matrices, Arrays"
 author: "Enrico Toffalini"
 include-in-header: ../assets/slidesheader.html
 format:
