@@ -6,9 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Enrico Toffalini">
 
-<title>Basics of R for Data Science</title>
+<title>Exercises - Like a Data Scientist</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,40 +18,6 @@ ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
 width: 0.8em;
 margin: 0 0.8em 0.2em -1em;  vertical-align: middle;
-}
-
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-{ counter-reset: source-line 0; }
-pre.numberSource code > span
-{ position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-{ content: counter(source-line);
-position: relative; left: -1em; text-align: right; vertical-align: baseline;
-border: none; display: inline-block;
--webkit-touch-callout: none; -webkit-user-select: none;
--khtml-user-select: none; -moz-user-select: none;
--ms-user-select: none; user-select: none;
-padding: 0 4px; width: 4em;
-}
-pre.numberSource { margin-left: 3em; padding-left: 4px; }
-div.sourceCode
-{ }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -3075,42 +3040,20 @@ vertical-align: -.125em;
 
 <div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
 <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-  <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="3">
-    <h2 id="toc-title">Table of contents</h2>
-   
-  <ul>
-  <li><a href="#about-this-course" id="toc-about-this-course" class="nav-link active" data-scroll-target="#about-this-course">About This Course</a></li>
-  <li><a href="#dates-and-rooms" id="toc-dates-and-rooms" class="nav-link" data-scroll-target="#dates-and-rooms">Dates and Rooms</a>
-  <ul class="collapse">
-  <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started">Getting Started</a></li>
-  <li><a href="#course-topics" id="toc-course-topics" class="nav-link" data-scroll-target="#course-topics">Course Topics</a></li>
-  </ul></li>
-  <li><a href="#materials" id="toc-materials" class="nav-link" data-scroll-target="#materials">Materials</a>
-  <ul class="collapse">
-  <li><a href="#slides" id="toc-slides" class="nav-link" data-scroll-target="#slides">Slides</a></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a></li>
-  </ul></li>
-  </ul>
-</nav>
+  
 </div>
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Basics of R for Data Science</h1>
-<p class="subtitle lead">PhD Course in Psychological Sciences - University of Padova</p>
+<h1 class="title">Exercises - Like a Data Scientist</h1>
+<p class="subtitle lead"><em>Basics of R for Data Science</em></p>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Enrico Toffalini </p>
-          </div>
-  </div>
     
   
     
@@ -3121,127 +3064,22 @@ vertical-align: -.125em;
 </header>
 
 
-<section id="about-this-course" class="level2">
-<h2 class="anchored" data-anchor-id="about-this-course">About This Course</h2>
-<p>This is a short (10 hours) introductory course on <a href="https://www.r-project.org/" target="_blank"><strong>R</strong></a> that is offered within the <a href="https://dottorato.psy.unipd.it/en" target="_blank"><em>PhD program in Psychological Sciences</em></a> <em>(University of Padova)</em>. The course is aimed to prepare students for many future methodological courses in this program, where R is used extensively. <a href="https://www.r-project.org/" target="_blank"><strong>R</strong></a> is a high-level open-source programming language that is widely used in academic research, but also increasingly adopted in business for data science. It has a large ecosystem of libraries and tools that allow you to perform flexible and powerful data analysis. <a href="https://posit.co/download/rstudio-desktop/" target="_blank"><strong>RStudio</strong></a> is a popular IDE <em>(Integrated Development Environment)</em> which provides an excellent environment for coding, visualization, and report generation when programming in R (and in other languages).</p>
-<p>The primary resource for the course is the online book available on GitHub: <a href="https://psicostat.github.io/Introduction2R_EN/" target="_blank"><strong><em>Introduction2R</em></strong></a></p>
-</section>
-<section id="dates-and-rooms" class="level2">
-<h2 class="anchored" data-anchor-id="dates-and-rooms">Dates and Rooms</h2>
-<table class="table">
-<thead>
-<tr class="header">
-<th>Day</th>
-<th>Time</th>
-<th>Room</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>18/11/2024</td>
-<td>14:30-16:30</td>
-<td>4N</td>
-</tr>
-<tr class="even">
-<td>19/11/2024</td>
-<td>14:30-16:30</td>
-<td>4N</td>
-</tr>
-<tr class="odd">
-<td>25/03/2024</td>
-<td>09:00-12:00</td>
-<td>4T</td>
-</tr>
-<tr class="even">
-<td>26/03/2024</td>
-<td>14:00-17:00</td>
-<td>4M</td>
-</tr>
-</tbody>
-</table>
-<section id="getting-started" class="level3">
-<h3 class="anchored" data-anchor-id="getting-started">Getting Started</h3>
-<ol type="1">
-<li><strong>Bookmark the Course Homepage</strong>: Save the URL of the present page <a href="https://enricotoffalini.github.io/Basics-R/" target="_blank">https://enricotoffalini.github.io/Basics-R/</a> for quick access to all course materials.</li>
-<li><strong>Install R and RStudio</strong>: go to <a href="https://posit.co/download/rstudio-desktop/" target="_blank"><strong>this download page</strong></a> to install <em>R</em> and <em>RStudio Desktop</em> on your computer (further setup instructions can be found in <a href="https://psicostat.github.io/Introduction2R_EN/install.html" target="_blank"><em>Chapter 1</em></a> of <em>Introduction2R</em>)</li>
-<li><em>Optional</em> - check your installation by running this code in your newly installed RStudio, and install a few packages:</li>
-</ol>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pkgs <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;readxl&quot;</span>, <span class="st">&quot;psych&quot;</span>, <span class="st">&quot;ggplot2&quot;</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(pkgs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="course-topics" class="level3">
-<h3 class="anchored" data-anchor-id="course-topics">Course Topics</h3>
-<p>We will explore the development environment, work with basic data structures like vectors, dataframes, matrices, and lists, and learn about essential concepts of programming like conditional statements, loops, and functions. Advanced topics like statistical modelling and data simulation will be covered in future courses and are <strong>not</strong> presented here (although occasional simple examples may appear).</p>
-<section id="introduction-to-the-r-environment-and-first-steps-in-r" class="level5">
-<h5 class="anchored" data-anchor-id="introduction-to-the-r-environment-and-first-steps-in-r">Introduction to the R Environment and First Steps in R</h5>
-<p>We will cover the installation of R and see how to organize and manage a work session in R Studio, how to create objects, what are data types, how to perform basic operations on them, and how to import and export data, figures, and workspaces.</p>
-</section>
-<section id="data-structures" class="level5">
-<h5 class="anchored" data-anchor-id="data-structures">Data Structures</h5>
-<p>We will introduce the main data structures in R and methods for interacting with them effectively. We will focus on vectors, dataframes, lists, and more. Dataframes will be given special attention.</p>
-</section>
-<section id="basics-of-programming-in-r" class="level5">
-<h5 class="anchored" data-anchor-id="basics-of-programming-in-r">Basics of Programming in R</h5>
-<p>We will introduce essential programming concepts and their implementation in R, including conditional operations (such as <code>if...else</code>), iterative programming (including the <code>for</code> loops and the <code>apply</code> family), and defining custom functions.</p>
-</section>
-<section id="advanced" class="level5">
-<h5 class="anchored" data-anchor-id="advanced"><em>Advanced</em></h5>
-<p><em>For more experienced R users, some materials under the Exercises section will provide more stimulating challenges and instructions, even beyond the scope of the present introductory course.</em></p>
-</section>
-</section>
-</section>
-<section id="materials" class="level2">
-<h2 class="anchored" data-anchor-id="materials">Materials</h2>
-<!--
-::: {style="color: #999; font-weight: bold; font-style: italic;"}
-SECTION IN PROGRESS: NEW MATERIALS WILL BE ADDED HERE THROUGHOUT THE COURSE
-:::
--->
-<section id="slides" class="level3">
-<h3 class="anchored" data-anchor-id="slides">Slides</h3>
+<p><em>This set of exercises includes practicing and integrating various skills: working with dataframes and lists, applying conditional logic and iterative programming. Some of these exercises are pretty advanced for the purposes of the present course!</em></p>
 <ul>
-<li><a href="Slides/0.GettingStartedR.html" target="_blank"><strong>Intro to This Course, Getting Started with R</strong></a> - (<a href="Slides/0.GettingStartedR.pdf" target="_blank">pdf</a>)</li>
-<li><a href="Slides/1.1.FirstStepsR-1.html" target="_blank"><strong>Basic Operations, Basic Types of Data</strong></a> - (<a href="Slides/1.1.FirstStepsR-1.pdf" target="_blank">pdf</a>)</li>
-<li><a href="Slides/1.2.FirstStepsR-2.html" target="_blank"><strong>Environment, Packages, Functions, Import/Export</strong></a> - (<a href="Slides/1.2.FirstStepsR-2.pdf" target="_blank">pdf</a>)</li>
-<li><a href="Slides/2.1.DataStruc-1.html" target="_blank"><strong>Data Structures: Vectors</strong></a> - (<a href="Slides/2.1.DataStruc-1.pdf" target="_blank">pdf</a>)</li>
-<li><a href="Slides/2.2.DataStruc-2.html" target="_blank"><strong>Data Structures: Data Frames</strong></a> - (<a href="Slides/2.2.DataStruc-2.pdf" target="_blank">pdf</a>)</li>
-<li><a href="Slides/2.3.DataStruc-3.html" target="_blank"><strong>Data Structures: Factors, Lists, Matrices, Arrays</strong></a> - (<a href="Slides/2.3.DataStruc-3.pdf" target="_blank">pdf</a>)</li>
-<li><a href="Slides/3.Programming.html" target="_blank"><strong>Basics of Programming: If…Else, Iterations, Custom Functions</strong></a> - (<a href="Slides/3.Programming.pdf" target="_blank">pdf</a>)</li>
-</ul>
-</section>
-<section id="exercises" class="level3">
-<h3 class="anchored" data-anchor-id="exercises">Exercises</h3>
-<p><em>— The following exercises are fundamental, and they importantly integrate concepts from the slides and introduce new functions and methods that you want to know!</em></p>
+<li><p>Download <a href="datasets/ExerProgr.RData" download>this workspace</a> and import it using the <code>load()</code> function.</p></li>
+<li><p>The dataframe <code>df1</code> has all its columns stored as character, but many are mostly numeric, and should be treated as such. Your task is to determine which columns can reasonably be coerced to numeric. Use a combination of iterative and conditional programming to complete the following steps:</p>
 <ul>
-<li><a href="Exercises/1-Exercises-First-steps.html" target="_blank"><strong>First steps in R</strong></a></li>
-<li><a href="Exercises/2.1-Exercises-Vectors.html" target="_blank"><strong>Vectors</strong></a></li>
-<li><a href="Exercises/2.2-Exercises-Dataframes.html" target="_blank"><strong>Dataframes</strong></a></li>
-<li><a href="Exercises/3-Exercises-ProgrMore.html" target="_blank"><strong>Basics of Programming</strong></a></li>
-<li><a href="Exercises/4-Exercises-LikeDataScientist.html" target="_blank"><strong>Like a Data Scientist</strong></a></li>
-<li><a href="Exercises/2.3-Exercises-DataScientist.html" target="_blank"><b>The data <em>nightmare</em> exercise</b></a></li>
-</ul>
-<p><em>— These other exercises are beyond the scope of this introductory course, but they could be stimulating and useful for more advanced R users:</em></p>
-<ul>
-<li><a href="Exercises/11-WordCloud.html" target="_blank"><strong>Creating a word cloud</strong></a>
-<ul>
-<li><div style="font-size:14px;">
-<p>see <a href="Exercises/ExampleStrings.html" target="_blank">here</a> some suggestions on manipulating strings</p>
-</div></li>
+<li>Iterate over all columns of <code>df1</code> (using a <code>for</code> loop is recommended);</li>
+<li>For each column, calculate the percentage of observations that remain valid (i.e., do not become <code>NA</code>) when coerced to numeric using <code>as.numeric()</code>;</li>
+<li>If the percentage exceeds 80%, coerce the column to numeric;</li>
+<li>Keep track of the columns that were coerced to numeric;</li>
+<li>After processing all columns, compute a correlation matrix that includes only the columns that were coerced to numeric (use the <code>cor()</code> function; set argument <code>use=&quot;pairwise.complete&quot;</code> to avoid losing too many observation with listwise-deletion);</li>
+<li><em>for fun: use the <code>corrplot()</code> function from the <code>corrplot</code> package to obtain a more colorful correlation matrix</em></li>
 </ul></li>
-<li><a href="Exercises/12-MonteCarloSim.html" target="_blank"><strong>Monte Carlo simulations for Power analysis</strong></a>
-<ul>
-<li><div style="font-size:14px;">
-<p>see <a href="Exercises/ExampleMC.html" target="_blank">here</a> some examples of Monte Carlo simulations</p>
-</div></li>
-</ul></li>
+<li><p><em>Extra for advanced users:</em> The dataframe <code>dfWide1</code> contains data for treated subjects at three times (<code>&quot;T0&quot;</code>, <code>&quot;T1&quot;</code>, and <code>&quot;T2&quot;</code>) in <em><b>wide format</b></em>, but it needs to be reshaped to <em><b>long format</b></em> for data analysis. Your task is to reshape it to <em>long format</em> using the basic <code>reshape()</code> function (first of all, have a look at the documentation of <code>reshape()</code>).</p></li>
+<li><p><em>Extra for advanced users:</em> Repeat the previous task using the convenient <code>pivot_longer()</code> function from the <code>tidyr</code> package.</p></li>
+<li><p><em>Extra for super advanced users:</em> The dataframe <code>dfWide2</code> is even more complex: as it contains two variables, <code>Acc</code> and <code>RT</code>, measured at three times. Reshape <code>dfWide2</code> to <em>long format</em>, but keeping <code>Acc</code> and <code>RT</code> values in separate columns. Use any approach you like, but try to keep the code compact if possible.</p></li>
 </ul>
-<hr>
-<div style="font-size:11px;">
-<p>GitHub repository associated to the present course website: <a href="https://github.com/EnricoToffalini/Basics-R" target="_blank">https://github.com/EnricoToffalini/Basics-R</a></p>
-<p>Many thanks and love to Filippo Gambarota for sharing his expertise in using GitHub, Quarto, and creating GitHub Pages websites.</p>
-</div>
-</section>
-</section>
 
 </main>
 <!-- /main column -->
