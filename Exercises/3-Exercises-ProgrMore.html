@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Exercises - Basics of Programming… and More</title>
+<title>Exercises - Basics of Programming… With a Little Data Science</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -3078,20 +3078,13 @@ window.Quarto = {
 
 <div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
 <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-  <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="4">
-    <h2 id="toc-title">Table of contents</h2>
-   
-  <ul>
-  <li><a href="#basics-of-programming-with-a-little-data-science" id="toc-basics-of-programming-with-a-little-data-science" class="nav-link active" data-scroll-target="#basics-of-programming-with-a-little-data-science">Basics of Programming… with a little data science</a></li>
-  <li><a href="#like-a-data-scientist" id="toc-like-a-data-scientist" class="nav-link" data-scroll-target="#like-a-data-scientist">Like a Data Scientist</a></li>
-  </ul>
-</nav>
+  
 </div>
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Exercises - Basics of Programming… and More</h1>
+<h1 class="title">Exercises - Basics of Programming… With a Little Data Science</h1>
 <p class="subtitle lead"><em>Basics of R for Data Science</em></p>
 </div>
 
@@ -3110,8 +3103,6 @@ window.Quarto = {
 
 
 <p><em>This set of exercises includes practicing and integrating various skills: working with dataframes and lists, applying conditional logic and iterative programming. Some of these exercises are pretty advanced for the purposes of the present course!</em></p>
-<section id="basics-of-programming-with-a-little-data-science" class="level2">
-<h2 class="anchored" data-anchor-id="basics-of-programming-with-a-little-data-science">Basics of Programming… with a little data science</h2>
 <ul>
 <li><p>Write a <code>for</code> loop that runs 20 iterations, each time generating and printing a single random number from a distribution of your choice (e.g., <code>rbinom()</code>, <code>rnorm()</code>, <code>rgamma()</code>, <code>rpois()</code>, <code>rlogis()</code>).</p></li>
 <li><p>Write a <code>for</code> loop that runs 20 iterations, each time: 1) drawing a single number from a <em>standard normal distribution</em> (with <code>rnorm()</code>); 2) if the number is negative print it, otherwise print the string <code>&quot;positive&quot;</code>.</p></li>
@@ -3124,25 +3115,6 @@ window.Quarto = {
 <li><p><em>Extra for advanced users:</em> Repeat the previous exercise without using a <code>for</code> loop, employing an alternative iterative method.</p></li>
 <li><p><em>Extra for advanced users:</em> Repeat the previous exercise using your preferred iterative method, but this time under the following scenario: <span class="math inline">\(N = 30\)</span>, true correlation <span class="math inline">\(r = 0.50\)</span>. To generate correlated random variables, you can use the <code>mvrnorm()</code> function from the <code>MASS</code> package.</p></li>
 </ul>
-</section>
-<section id="like-a-data-scientist" class="level2">
-<h2 class="anchored" data-anchor-id="like-a-data-scientist">Like a Data Scientist</h2>
-<ul>
-<li><p>Download <a href="datasets/ExerProgr.RData" download>this workspace</a> and import it using the <code>load()</code> function.</p></li>
-<li><p>The dataframe <code>df1</code> has all its columns stored as character, but many are mostly numeric, and should be treated as such. Your task is to determine which columns can reasonably be coerced to numeric. Use a combination of iterative and conditional programming to complete the following steps:</p>
-<ul>
-<li>Iterate over all columns of <code>df1</code> (using a <code>for</code> loop is recommended);</li>
-<li>For each column, calculate the percentage of observations that remain valid (i.e., do not become <code>NA</code>) when coerced to numeric using <code>as.numeric()</code>;</li>
-<li>If the percentage exceeds 80%, coerce the column to numeric;</li>
-<li>Keep track of the columns that were coerced to numeric;</li>
-<li>After processing all columns, compute a correlation matrix that includes only the columns that were coerced to numeric (use the <code>cor()</code> function; set argument <code>use=&quot;pairwise.complete&quot;</code> to avoid losing too many observation with listwise-deletion);</li>
-<li><em>for fun: use the <code>corrplot()</code> function from the <code>corrplot</code> package to obtain a more colorful correlation matrix</em></li>
-</ul></li>
-<li><p><em>Extra for advanced users:</em> The dataframe <code>dfWide1</code> contains data for treated subjects at three times (<code>&quot;T0&quot;</code>, <code>&quot;T1&quot;</code>, and <code>&quot;T2&quot;</code>) in <em><b>wide format</b></em>, but it needs to be reshaped to <em><b>long format</b></em> for data analysis. Your task is to reshape it to <em>long format</em> using the basic <code>reshape()</code> function (first of all, have a look at the documentation of <code>reshape()</code>).</p></li>
-<li><p><em>Extra for advanced users:</em> Repeat the previous task using the convenient <code>pivot_longer()</code> function from the <code>tidyr</code> package.</p></li>
-<li><p><em>Extra for super advanced users:</em> The dataframe <code>dfWide2</code> is even more complex: as it contains two variables, <code>Acc</code> and <code>RT</code>, measured at three times. Reshape <code>dfWide2</code> to <em>long format</em>, but keeping <code>Acc</code> and <code>RT</code> values in separate columns. Use any approach you like, but try to keep the code compact if possible.</p></li>
-</ul>
-</section>
 
 </main>
 <!-- /main column -->

@@ -29,4 +29,3 @@ editor: visual
 -   *Extra for advanced users:* Repeat the previous exercise without using a `for` loop, employing an alternative iterative method.
 
 -   *Extra for advanced users:* Repeat the previous exercise using your preferred iterative method, but this time under the following scenario: $N = 30$, true correlation $r = 0.50$. To generate correlated random variables, you can use the `mvrnorm()` function from the `MASS` package.
-
