@@ -1,5 +1,5 @@
 ---
-title: "Exercises - Like a Data Scientist"
+title: "Exercises - Programming Like a Data Scientist"
 subtitle: "*Basics of R for Data Science*"
 include-in-header: ../assets/header.html
 format: 

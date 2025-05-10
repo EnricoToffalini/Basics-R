@@ -86,8 +86,8 @@ SECTION IN PROGRESS: NEW MATERIALS WILL BE ADDED HERE THROUGHOUT THE COURSE
 -   [**First steps in R**](Exercises/1-Exercises-First-steps.html){target="_blank"}
 -   [**Vectors**](Exercises/2.1-Exercises-Vectors.html){target="_blank"}
 -   [**Dataframes**](Exercises/2.2-Exercises-Dataframes.html){target="_blank"}
--   [**Basics of Programming**](Exercises/3-Exercises-ProgrMore.html){target="_blank"}
--   [**Like a Data Scientist**](Exercises/4-Exercises-LikeDataScientist.html){target="_blank"}
+-   [**Basics of Programming... with some data science**](Exercises/3-Exercises-ProgrMore.html){target="_blank"}
+-   [**Programming like a data scientist**](Exercises/4-Exercises-LikeDataScientist.html){target="_blank"}
 -   [<b>The data <em>nightmare</em> exercise</b>](Exercises/2.3-Exercises-DataScientist.html){target="_blank"}
 
 *— These other exercises are beyond the scope of this introductory course, but they could be stimulating and useful for more advanced R users:*

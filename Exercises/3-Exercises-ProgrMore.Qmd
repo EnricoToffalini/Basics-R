@@ -1,5 +1,5 @@
 ---
-title: "Exercises - Basics of Programming... With a Little Data Science"
+title: "Exercises - Basics of Programming... With Some Data Science"
 subtitle: "*Basics of R for Data Science*"
 include-in-header: ../assets/header.html
 format: 
@@ -14,18 +14,28 @@ format:
 editor: visual
 ---
 
-*This set of exercises includes practicing and integrating various skills: working with dataframes and lists, applying conditional logic and iterative programming. Some of these exercises are pretty advanced for the purposes of the present course!*
-
 -   Write a `for` loop that runs 20 iterations, each time generating and printing a single random number from a distribution of your choice (e.g., `rbinom()`, `rnorm()`, `rgamma()`, `rpois()`, `rlogis()`).
 
--   Write a `for` loop that runs 20 iterations, each time: 1) drawing a single number from a *standard normal distribution* (with `rnorm()`); 2) if the number is negative print it, otherwise print the string `"positive"`.
+-   Write a `for` loop that runs 20 iterations, each time: 1) drawing a single number from a *standard normal distribution* (with `rnorm()`); 2) `if` the number is negative print it, `else` print the string `"positive"`.
 
--   Use a `for` loop to address the following task: We aim to examine the sampling variability of the estimated correlation between two normally distributed, completely unrelated variables (i.e., their underlying true correlation is $r = 0$), when the sample size is $N = 30$
+-   Create a vector of 10 random numbers from a standard normal distribution (using `rnorm()`), then the `ifelse` function to convert the vector into a character one where each element is: `"neg"` if the number is negative, `"pos"` otherwise.
+
+-   Use a `for` loop to address the following task: We aim to examine the sampling variability of the correlation between two normally distributed but unrelated variables (i.e., their underlying true correlation is $r = 0$), when the sample size is $N = 30$
 
     -   run thousands of iterations, each time generating two independent random variables (using `rnorm()`) with the above characteristics;
-    -   for each iteration, compute the estimated correlation coefficient with `cor()` and store it in a vector;
+    -   for each iteration, compute the estimated correlation coefficient with `cor()` and store it as an number in a vector;
     -   after completing the iterations, visualize the distribution of estimated correlation coefficients with `hist()` or any other plotting method; also, compute the `median()` and the *95% confidence interval* using the quantile methods (i.e., with `quantile()` setting the argument `probs=c(.025,.975)`).
 
--   *Extra for advanced users:* Repeat the previous exercise without using a `for` loop, employing an alternative iterative method.
+-   Write a custom function called `describe_sign()` that takes a number as input and returns `"negative"` if the input is below zero, `"zero"` if it is exactly zero, or `"positive"` if the input is greater than zero.
 
--   *Extra for advanced users:* Repeat the previous exercise using your preferred iterative method, but this time under the following scenario: $N = 30$, true correlation $r = 0.50$. To generate correlated random variables, you can use the `mvrnorm()` function from the `MASS` package.
+-   Write a custom function called `simulate_correlations()` that does the following (this is a bit advanced but funny 🙂):
+
+    -   take two numeric arguments as input: `N` and `n_sim`;
+    -   initializes a vector that has `n_sim` elements, all filled with `NA`;
+    -   runs a `for` loop `n_sim` times;
+    -   inside the loop, at each iteration it generates two independent normally distributed variables each with `N` observations, computes the correlation coefficient between them, and stores it in the appropriate position of the previously initialized vector; 
+    -   returns the vector filled with simulated correlation coefficients
+
+-   *Extra for advanced users:* Repeat one of the previous exercise that used the `for` loop, but without using the `for` loop (i.e., employing an alternative iterative method)
+
+-   *Extra for super advanced users:* Repeat the above exercise where you had to define the `simulate_correlations()` custom function, but now adding a third numeric argument as input, called `r`, which defines the true correlation between the two normally distributed variables. To generate correlated variables, you can use the `mvrnorm()` function from the `MASS` package
