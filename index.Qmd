@@ -94,11 +94,11 @@ SECTION IN PROGRESS: NEW MATERIALS WILL BE ADDED HERE THROUGHOUT THE COURSE
 
 -   [**Creating a word cloud**](Exercises/11-WordCloud.html){target="_blank"}
     -   ::: {style="font-size:14px;"}
-        see [here](Exercises/ExampleStrings.html){target="_blank"} some suggestions on manipulating strings
+        **see additional material on [Working With Strings](exercises/ExampleStrings.html){target="_blank"}**
         :::
 -   [**Monte Carlo simulations for Power analysis**](Exercises/12-MonteCarloSim.html){target="_blank"}
     -   ::: {style="font-size:14px;"}
-        see [here](Exercises/ExampleMC.html){target="_blank"} some examples of Monte Carlo simulations
+        **see some examples of [Monte Carlo Simulations](Exercises/ExampleMC.html){target="_blank"}**
         :::
 
 ------------------------------------------------------------------------
