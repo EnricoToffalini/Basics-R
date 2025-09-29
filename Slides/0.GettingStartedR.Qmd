@@ -103,7 +103,7 @@ see [**Shiny gallery**](https://shiny.posit.co/r/gallery/#feature-demos){target=
 \
 here's a couple of recent real examples from **Psicostat** members:
 
-- this [game-like shiny app](https://feracot.shinyapps.io/shiny/){target="_blank"} developed for the science4all event in Padova; see [here](https://psicostat.github.io/science4all/){target="_blank"} some explanation in Italian
+- this [game-like shiny app](https://psicostat.shinyapps.io/science4allshiny/){target="_blank"} developed for the science4all event in Padova; see [here](https://psicostat.github.io/science4all/){target="_blank"} some explanation in Italian
 
 - practical [ad-hoc shiny app](https://enricotoffalini.shinyapps.io/TimeTasks/){target="_blank"} for scoring experimental data collected by students
 
@@ -116,19 +116,25 @@ here's a couple of recent real examples from **Psicostat** members:
 
 ## or entire websites and books
 
-- this [entire course](https://enricotoffalini.github.io/Basics-R/){target="_blank"} is a website in its own right
+examples of other resources that can be **created within the R ecosystem**, integrating other tools such as *GitHub* and *Quarto*:
 
-- the [course textbook](https://psicostat.github.io/Introduction2R_EN/){target="_blank"} is a book/website
+- this very [course support material](https://enricotoffalini.github.io/Basics-R/){target="_blank"} is a website in its own right
 
-- also see [this wonderful book](https://lakens.github.io/statistical_inferences/){target="_blank"} by Daniël Lakens explaining Statistical Inference
+- this very [course textbook](https://psicostat.github.io/Introduction2R_EN/){target="_blank"} is a book/website
 
-of course, these resources integrate other tools such as GitHub and Quarto, but they can be created within the R ecosystem
+- [this book](https://lakens.github.io/statistical_inferences/){target="_blank"} by Daniël Lakens explaining Statistical Inference
+
 
 ## install R and Rstudio
 
 \
 \
-first of all, for getting started, follow the instructions in [*Chapter 1*](https://psicostat.github.io/Introduction2R_EN/install.html){target="_blank"} of *Introduction2R* to ensure that both R and RStudio are installed
+first of all, for getting started, follow the instructions in [*Chapter 1*](https://psicostat.github.io/Introduction2R_EN/install.html){target="_blank"} of *Introduction2R* to ensure that both 
+
+- **R** (the basic software itself to run the programming language) and 
+- **RStudio** (as the IDE of election)
+
+are installed
 
 ## R Console (just base R)
 
@@ -149,29 +155,31 @@ first of all, for getting started, follow the instructions in [*Chapter 1*](http
 |-----|-------------|-----------|
 | `base` <br/>(base R) | Basic functions | `sum`, `mean`, `sqrt`, `abs`, `c`, `data.frame`, `summary`, `scale`, `plot`, `+`, `-`
 | `stats` <br/>(base R) | Basic statistical calculations and functions | `sd`, `cor`, `cor.test`, `t.test`, `lm`, `glm`, `AIC`, `rnorm`, `rbinom`
-| `graphics` <br/>(base R) | Basic statistical calculations and functions | `boxplot`, `hist`, `barplot`
-| `effectsize` | Compute different effect sizes | `cohens_d`, `hedges_g`, `cohens_f`, `d_to_r`
+| `graphics` <br/>(base R) | Basic statistical calculations and functions | `plot`, `boxplot`, `hist`, `barplot`
+
+*(You may actually use these "base" packages very often without even realizing that they are packages)*
 
 ## 
 #### Some R packages that you will or may need in the future (2/3)
 
 | Package  |   Used for what  | Example(s) of functions
 |-----|--------------|----------|
+| `effectsize` | Compute different effect sizes | `cohens_d`, `hedges_g`, `cohens_f`, `d_to_r`
 | `lme4` | Fitting (generalized) (non-)linear mixed-effects models | `lmer`, `glmer`, `ranef`
 | `performance` | Useful tools for models | `check_collinearity`, `r2_nagelkerke`, `icc`
 | `effects` | Display effects for various statistical models | `allEffects`
 | `emmeans` | Estimate marginal means for various models | `emmeans`
-| `ggplot2` | Create beautiful plots using The Grammar of Graphics | `ggplot`, `geom_*`
 
 ## 
 #### Some R packages that you will or may need in the future (3/3)
 
 | Package  |   Used for what  | Example(s) of functions
 |-----|--------------|----------|
-| `lavaan` | Structural equation modeling (SEM) | `cfa`, `sem`
-| `semTools` | Useful tools for SEMs | `reliability`
+| `ggplot2` | Create beautiful plots using The Grammar of Graphics | `ggplot`, `geom_point`, `geom_line`, ...
+| `lavaan` | Structural Equation Models (SEM) | `sem`, `cfa`
+| `semTools` | Useful tools for SEMs | `compRelSEM`, `measEq.syntax`
 | `metafor` | Perform meta-analysis | `rma`, `rma.mv`, `forest`, `funnel`, `regtest`
-| `brms` | Fitting practically any Bayesian model via MCMC with STAN | `brm`, `prior`
+| `brms` | Fitting practically any Bayesian model via MCMC with STAN | `brm`, `set_prior`
 | `blavaan` | Fitting Bayesian SEMs | `bcfa`, `bsem`
 
 
@@ -196,7 +204,7 @@ install.packages("psych") # install a package from CRAN
 ```{r}
 library(psych) # load the newly installed package
 
-fisherz(rho=0.9) # use it to transform a correlation into a Fisher's z
+fisherz(rho=0.5) # use it to transform a correlation into a Fisher's z
 ```
 
 <!-- --------------------------------------------------------------------- -->
