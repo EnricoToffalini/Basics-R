@@ -30,36 +30,41 @@ The primary resource for the course is the online book available on GitHub: [***
 | 25/03/2024 | 09:00-12:00 | 4T   |
 | 26/03/2024 | 14:00-17:00 | 4M   |
 
-### Getting Started
+## Getting Started
 
-1.  **Bookmark the Course Homepage**: Save the URL of the present page [https://enricotoffalini.github.io/Basics-R/](https://enricotoffalini.github.io/Basics-R/){target="_blank"} for quick access to all course materials.
-2.  **Install R and RStudio**: go to [**this download page**](https://posit.co/download/rstudio-desktop/){target="_blank"} to install *R* and *RStudio Desktop* on your computer (further setup instructions can be found in [*Chapter 1*](https://psicostat.github.io/Introduction2R_EN/install.html){target="_blank"} of *Introduction2R*)
-3.  *Optional* - check your installation by running this code in your newly installed RStudio, and install a few packages:
+**Bookmark this course homepage** to have quick access to this material ([https://enricotoffalini.github.io/Basics-R/](https://enricotoffalini.github.io/Basics-R/){target="_blank"}). Then do this:
+
+1.  **Install R**: go to the official [R download page](https://cran.r-project.org/){target="_blank"} and follow the installation instructions for your operating system (further setup instructions can be found in [*Chapter 1*](https://psicostat.github.io/Introduction2R_EN/install.html){target="_blank"} of *Introduction2R*).
+2. **Install RStudio as the IDE** *(Integrated Development Environment)*: go to [the *RStudio Desktop* download page](https://posit.co/download/rstudio-desktop/){target="_blank"} to install the IDE on your computer. *(If you don't like RStudio or want to try alternative environments, have a look at [Positron](https://positron.posit.co/){target="_blank"}, or [Jupyter notebook](https://jupyter.org/){target="_blank"} or even [Google Colab](https://colab.research.google.com/){target="_blank"} setting R kernel for fully online coding).*
+3. **Test your local setup**: Make sure that you local R installation works. Open RStudio and run the following code in the console panel:
 
 ``` r
 pkgs = c("readxl", "psych", "ggplot2")
 install.packages(pkgs)
+
+psych::fisherz(0.5)
+rnorm(10)
 ```
 
-### Course Topics
+## Course Topics
 
 We will explore the development environment, work with basic data structures like vectors, dataframes, matrices, and lists, and learn about essential concepts of programming like conditional statements, loops, and functions. Advanced topics like statistical modelling and data simulation will be covered in future courses and are **not** presented here (although occasional simple examples may appear).
 
-##### Introduction to the R Environment and First Steps in R
+#### Introduction to the R Environment and First Steps in R
 
 We will cover the installation of R and see how to organize and manage a work session in R Studio, how to create objects, what are data types, how to perform basic operations on them, and how to import and export data, figures, and workspaces.
 
-##### Data Structures
+#### Data Structures
 
-We will introduce the main data structures in R and methods for interacting with them effectively. We will focus on vectors, dataframes, lists, and more. Dataframes will be given special attention.
+We will introduce the main data structures in R and methods for interacting with them effectively. We will focus on vectors, dataframes, lists, and more. Working with dataframes will be given special attention.
 
-##### Basics of Programming in R
+#### Basics of Programming in R
 
 We will introduce essential programming concepts and their implementation in R, including conditional operations (such as `if...else`), iterative programming (including the `for` loops and the `apply` family), and defining custom functions.
 
-##### *Advanced*
+#### *A bit more*
 
-*For more experienced R users, some materials under the Exercises section will provide more stimulating challenges and instructions, even beyond the scope of the present introductory course.*
+Depending on the interest, some materials under the [Exercises section](http://localhost:6635/#exercises) will provide more stimulating challenges and instructions, even beyond the scope of the present introductory course, for more experienced R users.
 
 ## Materials
 
