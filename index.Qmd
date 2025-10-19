@@ -26,9 +26,9 @@ The primary resource for the course is the online book available on GitHub: [***
 | Day        | Time        | Room |
 |------------|-------------|------|
 | 10/11/2025 | 10:30-12:30 | 4M   |
-| 11/11/2025 |  9:30-12:30 | 4M   |
-| 12/11/2025 |  9:30-12:30 | 4M   |
-| 13/11/2025 |  8:30-10:30 | 4M   |
+| 11/11/2025 | 9:30-12:30  | 4M   |
+| 12/11/2025 | 9:30-12:30  | 4M   |
+| 13/11/2025 | 8:30-10:30  | 4M   |
 
 ## Getting Started
 
@@ -48,23 +48,23 @@ rnorm(10)
 
 ## Course Topics
 
-The goal is to make you proficient with the development environment, basic data structures including vectors, dataframes, matrices, and lists, and essential concepts of programming like conditional statements, loops, and functions. Advanced topics like statistical modelling and data simulation will be covered in future courses and are not presented here, although occasional simple examples may appear.
+The goal of this short course is to make you proficient with the development environment, basic data structures, and essential concepts of programming in R. Advanced topics like statistical modelling and data simulation will be covered in future courses and are not presented here, although occasional simple examples may appear
 
 #### Introduction to the R Environment and First Steps in R
 
-The installation of R and how to organize and manage a work session in R Studio, how to create objects, what are data types, how to perform basic operations on them, and how to import and export data, figures, and workspaces.
+Install R, manage work sessions in R Studio, create objects, understand data types and perform basic operations on them, import and export data, figures, and workspaces
 
 #### Data Structures
 
-Main data structures in R and methods for interacting with them effectively: we will focus on vectors, dataframes, lists, and more. Working with dataframes will be given special attention.
+Understand main data structures in R and interact with them effectively: vectors, matrices, dataframes, factors, lists. Manipulating data with dataframes will be given special attention
 
 #### Basics of Programming in R
 
-Essential programming concepts and their implementation in R, including conditional operations (e.g., `if...else`), iterative programming (e.g., the `for` loops and the `apply` family), and defining custom functions.
+Understand essential programming concepts and their implementation in R: write conditional operations (e.g., `if...else`), run iterative programming (`for` and other loops; `*apply` family), define custom functions
 
 #### *A bit more*
 
-Depending on the interest, some materials under the *Exercises section* below will provide more stimulating challenges and instructions, even beyond the scope of the present introductory course, for more experienced R users.
+Some materials in the *Exercises section* below will provide more stimulating challenges even beyond the scope of the present introductory course, depending on the interest and the prior experience with R
 
 ## Materials
 
@@ -102,7 +102,7 @@ Depending on the interest, some materials under the *Exercises section* below wi
 
 ------------------------------------------------------------------------
 
-::: {style="font-size:11px; color:#555555"}
+:::: {style="font-size:11px; color:#555555"}
 GitHub repository associated to the present course website: [https://github.com/EnricoToffalini/Basics-R](https://github.com/EnricoToffalini/Basics-R){target="_blank"}
 
 Access <b><a href="https://padlet.com/enricotoffalini/basicsr-1msunv8lba3mqf5k" target="_blank">padlet</a></b>
@@ -112,5 +112,4 @@ Thousands of thanks to <a href="https://filippogambarota.github.io/" target="_bl
 ::: {style="display: flex; align-items: center; gap: 25px; white-space: nowrap"}
 [Read a modest proposal for <a href="https://docs.google.com/document/d/1-2Ty2Sd1QQzCCFt3SZpz3hhRkM3XEdvf/" target="_blank">open source software in the PhD program in Psychological Sciences]{style="font-size: 11px;"} <br/><img src="figures/qrcode_manifesto_opensource.png" style="height: 50px;"/>
 :::
-
-:::
+::::
