@@ -96,3 +96,8 @@ Our goal now is to simulate a scenario where a particular predictor `x` (e.g., *
 -   Remember that the simulated and analyzed dataframe must be in *long format*, with each row representing an individual response. This means each subject and all their information (`idSubj`, `x`) must be repeated across multiple rows (use `rep()` for this purpose).
 
 -   Finally, see how statistical power varies with the number of trials $k$ given the same sample size $N$.
+
+```{python}
+a=1
+print(a)
+```

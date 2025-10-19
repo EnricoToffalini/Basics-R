@@ -25,18 +25,18 @@ The primary resource for the course is the online book available on GitHub: [***
 
 | Day        | Time        | Room |
 |------------|-------------|------|
-| 18/11/2024 | 14:30-16:30 | 4N   |
-| 19/11/2024 | 14:30-16:30 | 4N   |
-| 25/03/2024 | 09:00-12:00 | 4T   |
-| 26/03/2024 | 14:00-17:00 | 4M   |
+| 10/11/2025 | 10:30-12:30 | 4M   |
+| 11/11/2025 |  9:30-12:30 | 4M   |
+| 12/11/2025 |  9:30-12:30 | 4M   |
+| 13/11/2025 |  8:30-10:30 | 4M   |
 
 ## Getting Started
 
 **Bookmark this course homepage** to have quick access to this material ([https://enricotoffalini.github.io/Basics-R/](https://enricotoffalini.github.io/Basics-R/){target="_blank"}). Then do this:
 
 1.  **Install R**: go to the official [R download page](https://cran.r-project.org/){target="_blank"} and follow the installation instructions for your operating system (further setup instructions can be found in [*Chapter 1*](https://psicostat.github.io/Introduction2R_EN/install.html){target="_blank"} of *Introduction2R*).
-2. **Install RStudio as the IDE** *(Integrated Development Environment)*: go to [the *RStudio Desktop* download page](https://posit.co/download/rstudio-desktop/){target="_blank"} to install the IDE on your computer. *(If you don't like RStudio or want to try alternative environments, have a look at [Positron](https://positron.posit.co/){target="_blank"}, or [Jupyter notebook](https://jupyter.org/){target="_blank"} or even [Google Colab](https://colab.research.google.com/){target="_blank"} setting R kernel for fully online coding).*
-3. **Test your local setup**: Make sure that you local R installation works. Open RStudio and run the following code in the console panel:
+2.  **Install RStudio as the IDE** *(Integrated Development Environment)*: go to [the *RStudio Desktop* download page](https://posit.co/download/rstudio-desktop/){target="_blank"} to install the IDE on your computer. *(If you don't like RStudio or want to try alternative environments, have a look at [Positron](https://positron.posit.co/){target="_blank"}, or [Jupyter notebook](https://jupyter.org/){target="_blank"} or even [Google Colab](https://colab.research.google.com/){target="_blank"} setting R kernel for fully online coding).*
+3.  **Test your local setup**: Make sure that you local R installation works. Open RStudio and run the following code in the console panel:
 
 ``` r
 pkgs = c("readxl", "psych", "ggplot2")
@@ -48,31 +48,25 @@ rnorm(10)
 
 ## Course Topics
 
-We will explore the development environment, work with basic data structures like vectors, dataframes, matrices, and lists, and learn about essential concepts of programming like conditional statements, loops, and functions. Advanced topics like statistical modelling and data simulation will be covered in future courses and are **not** presented here (although occasional simple examples may appear).
+The goal is to make you proficient with the development environment, basic data structures including vectors, dataframes, matrices, and lists, and essential concepts of programming like conditional statements, loops, and functions. Advanced topics like statistical modelling and data simulation will be covered in future courses and are not presented here, although occasional simple examples may appear.
 
 #### Introduction to the R Environment and First Steps in R
 
-We will cover the installation of R and see how to organize and manage a work session in R Studio, how to create objects, what are data types, how to perform basic operations on them, and how to import and export data, figures, and workspaces.
+The installation of R and how to organize and manage a work session in R Studio, how to create objects, what are data types, how to perform basic operations on them, and how to import and export data, figures, and workspaces.
 
 #### Data Structures
 
-We will introduce the main data structures in R and methods for interacting with them effectively. We will focus on vectors, dataframes, lists, and more. Working with dataframes will be given special attention.
+Main data structures in R and methods for interacting with them effectively: we will focus on vectors, dataframes, lists, and more. Working with dataframes will be given special attention.
 
 #### Basics of Programming in R
 
-We will introduce essential programming concepts and their implementation in R, including conditional operations (such as `if...else`), iterative programming (including the `for` loops and the `apply` family), and defining custom functions.
+Essential programming concepts and their implementation in R, including conditional operations (e.g., `if...else`), iterative programming (e.g., the `for` loops and the `apply` family), and defining custom functions.
 
 #### *A bit more*
 
-Depending on the interest, some materials under the [Exercises section](http://localhost:6635/#exercises) will provide more stimulating challenges and instructions, even beyond the scope of the present introductory course, for more experienced R users.
+Depending on the interest, some materials under the *Exercises section* below will provide more stimulating challenges and instructions, even beyond the scope of the present introductory course, for more experienced R users.
 
 ## Materials
-
-<!--
-::: {style="color: #999; font-weight: bold; font-style: italic;"}
-SECTION IN PROGRESS: NEW MATERIALS WILL BE ADDED HERE THROUGHOUT THE COURSE
-:::
--->
 
 ### Slides
 
@@ -108,8 +102,15 @@ SECTION IN PROGRESS: NEW MATERIALS WILL BE ADDED HERE THROUGHOUT THE COURSE
 
 ------------------------------------------------------------------------
 
-::: {style="font-size:11px;"}
+::: {style="font-size:11px; color:#555555"}
 GitHub repository associated to the present course website: [https://github.com/EnricoToffalini/Basics-R](https://github.com/EnricoToffalini/Basics-R){target="_blank"}
 
-Many thanks and love to Filippo Gambarota for sharing his expertise in using GitHub, Quarto, and creating GitHub Pages websites.
+Access <b><a href="https://padlet.com/enricotoffalini/basicsr-1msunv8lba3mqf5k" target="_blank">padlet</a></b>
+
+Thousands of thanks to <a href="https://filippogambarota.github.io/" target="_blank">Filippo Gambarota</a> for sharing his expertise in using GitHub and Quarto.
+
+::: {style="display: flex; align-items: center; gap: 25px; white-space: nowrap"}
+[Read a modest proposal for <a href="https://docs.google.com/document/d/1-2Ty2Sd1QQzCCFt3SZpz3hhRkM3XEdvf/" target="_blank">open source software in the PhD program in Psychological Sciences]{style="font-size: 11px;"} <br/><img src="figures/qrcode_manifesto_opensource.png" style="height: 50px;"/>
+:::
+
 :::
