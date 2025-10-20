@@ -206,7 +206,7 @@ case_when(
 
 **Iterative programming** allows you to repeat one or a series of actions automatically, for a predetermined number of times or until a condition is met
 
-Let's start with understanding the basics of iterative programming with the **`for`** loop:
+Here's the basics of iterative programming with the **`for`** loop:
 
 <div style="text-align: center;">
   <img src="figures/for_loop.png" width="50%"/>
@@ -217,15 +217,11 @@ Let's start with understanding the basics of iterative programming with the **`f
 Here are a few simple examples of using the **`for`** loop
 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;"> <div>
 ```{r}
-for(i in 1:5){
-  print(i)
-}
+for(i in 1:5)  print(i)
 ```
 </div> <div>
 ```{r}
-for(i in 1:5){
-  print(i^2)
-}
+for(i in 1:5)  print(i^2)
 ```
 </div> <div>
 ```{r, cache=T}
@@ -241,7 +237,7 @@ for(i in 1:5){
   Sys.sleep(2)
 }
 ```
-</div> <div>
+</div> </div>
 
 ## `for` loop
 
@@ -286,7 +282,7 @@ sd(results) # estimate standard error of the mean
 ## `for` loop
 
 Let's extend the previous example with ... a few more iterations!
-<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;"> <div>
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 5px;"> <div>
 ```{r}
 # STEP 1: RUN SIMULATION
 
@@ -304,7 +300,6 @@ for(i in 1:niter){
 ```{r}
 # STEP 2: PLOT RESULTS
 
-# histogram, with a large number of bins
 hist(results, breaks=50) 
 ```
 </div> <div>
@@ -312,7 +307,7 @@ hist(results, breaks=50)
 # STEP 3: COMPUTE SD OF RESULTS
 sd(results)
 ```
-</div> <div>
+</div> </div>
 
 → Enjoy it! This is a proper estimation of the *Standard Error of the Mean* via Monte Carlo simulation! 😊
 
@@ -386,7 +381,7 @@ attemptedExper
 
 round( tt$p.value , 3 )
 ```
-</div> <div>
+</div> </div>
 
 <!-- --------------------------------------------------------------------- -->
 
@@ -485,7 +480,8 @@ sd(ms)
 1) an empty list is initialized; 
 2) a `for` loop is used to fill each slot in the list with a vector of 30 randomly generated numbers; 
 3) <b>`sapply` is  used to compute the `mean` of each vector in the list; </b>
-4) *standard error of the mean* is computed as the `sd` on the vector of the *means*</div>
+4) *standard error of the mean* is computed as the `sd` on the vector of the *means*
+</div>
 
 Saving all generated data allows for more flexibility in analysis, although it uses more memory
 

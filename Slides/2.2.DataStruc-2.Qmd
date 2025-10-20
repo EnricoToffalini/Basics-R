@@ -160,11 +160,11 @@ dx
 ```
 </div><div>
 ```{r}
+# Replace some elements with 'NA'
 dx[3:5, "score"] = NA
-
 dx
 ```
-</div><div>
+</div></div>
 
 ## 
 ### Indexing and Modifying Elements in a Dataframe
@@ -182,11 +182,11 @@ dx
 ```
 </div><div>
 ```{r}
+# Multiply all elements times 10
 dx$score = dx$score * 10
-
 dx
 ```
-</div><div>
+</div></div>
 
 ## 
 ### Indexing and Modifying Elements in a Dataframe
@@ -204,11 +204,11 @@ dx
 ```
 </div><div>
 ```{r}
+# Linearly transform all elements
 dx$score = round( 100 + dx$score * 15 )
-
 dx
 ```
-</div><div>
+</div></div>
 
 ## 
 ### Indexing and Modifying Elements in a Dataframe
@@ -226,11 +226,11 @@ dx
 ```
 </div><div>
 ```{r}
+# Replace all elements with a constant
 dx$score = 3
-
 dx
 ```
-</div><div>
+</div></div>
 
 ## 
 ### Indexing Dataframes by Logical Conditions

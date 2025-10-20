@@ -51,17 +51,17 @@ span.co {
     font-style: italic !important;
 }
 span.fu {
-    color: darkblue !important;
+    color: #3070f6 !important;
 }
 
 .reveal a {
-  color: #760000;
+  color: #000076;
   background-color: #ffeeee;
   border-radius: 3px;
   
 }
 
 .reveal ::selection {
-    background-color: #760000 !important;
+    background-color: #000076 !important;
     color: white;
 }
