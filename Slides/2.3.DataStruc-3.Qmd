@@ -241,7 +241,7 @@ myArr
 → this is kind of a "cubic-structure" (3D structure): 3 rows, 5 columns, 2 slices
 
 In a similar way, you could create hypercubes and so on (4D+)
-</div><div>
+</div></div>
 
 ## Arrays
 ### indexing

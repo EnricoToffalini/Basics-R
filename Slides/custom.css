@@ -55,13 +55,13 @@ span.fu {
 }
 
 .reveal a {
-  color: #000076;
+  color: #760000;
   background-color: #ffeeee;
   border-radius: 3px;
   
 }
 
 .reveal ::selection {
-    background-color: #000076 !important;
+    background-color: #760000 !important;
     color: white;
 }
