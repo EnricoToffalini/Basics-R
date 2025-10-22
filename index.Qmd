@@ -78,6 +78,13 @@ Some materials in the *Exercises section* below will provide more stimulating ch
 -   [**Data Structures: Factors, Lists, Matrices, Arrays**](Slides/2.3.DataStruc-3.html){target="_blank"} - ([pdf](Slides/2.3.DataStruc-3.pdf){target="_blank"})
 -   [**Basics of Programming: If...Else, Iterations, Custom Functions**](Slides/3.Programming.html){target="_blank"} - ([pdf](Slides/3.Programming.pdf){target="_blank"})
 
+### Extra materials
+
+*Have a look at these pages, and remember that they are here if you need them later:*
+
+-   List of [**RStudio Shortcuts that Everyone Should Know**](Examples-Tutorials/TutorialShortcuts.html){target="_blank"}
+-   Tutorial on [**files extensions (in Windows)**](Examples-Tutorials/TutorialExtensions.html){target="_blank"}
+
 ### Exercises
 
 *— The following exercises are fundamental, and they importantly integrate concepts from the slides and introduce new functions and methods that you want to know!*
@@ -93,11 +100,11 @@ Some materials in the *Exercises section* below will provide more stimulating ch
 
 -   [**Creating a word cloud**](Exercises/11-WordCloud.html){target="_blank"}
     -   ::: {style="font-size:14px;"}
-        **see additional material on [Working With Strings](exercises/ExampleStrings.html){target="_blank"}**
+        **see additional material on [Working With Strings](Examples-Tutorials/ExampleStrings.html){target="_blank"}**
         :::
 -   [**Monte Carlo simulations for Power analysis**](Exercises/12-MonteCarloSim.html){target="_blank"}
     -   ::: {style="font-size:14px;"}
-        **see some examples of [Monte Carlo Simulations](Exercises/ExampleMC.html){target="_blank"}**
+        **see some examples of [Monte Carlo Simulations](Examples-Tutorials/ExampleMC.html){target="_blank"}**
         :::
 
 ------------------------------------------------------------------------

@@ -1,0 +1,112 @@
+---
+title: "RStudio Shortcuts Everyone Should Know"
+subtitle: "*Basics of R for Data Science*"
+include-in-header: ../assets/header.html
+format: 
+  html:
+    self-contained: true
+    code-fold: false 
+    message: false
+    css: "../assets/custom.css"
+editor: visual
+---
+
+This short guide introduces the **most useful keyboard shortcuts in RStudio**, i.e., tools that will make your workflow more efficient, smoother and easier. Even small habits (like running code with `Ctrl + Enter` instead of the mouse, or using the up `↑` and down `↓` arrows of the keyboard for moving across past commands) will make your coding incredibly faster and more focused
+
+⚠️ Not of the below shortcuts may work in your specific case, depending on the version of the operating system, the keyboard language, the RStudio settings, or possible interference with custom shortcuts. Just try and see what happens! Also, some commands may not work if lock keys, such as `Num Lock`, are on
+
+<br/>
+
+## *Absolutely Most Relevant*
+
+| Action | Windows/Linux | macOS |
+|-------------|-------|-------|
+| **Run current / selected code line(s)** | `Ctrl + Enter` | `Cmd + Enter` |
+| **Browse past commands in console** | `↑` / `↓` | `↑` / `↓` |
+| **Clear console** | `Ctrl + L` | `Ctrl + L` |
+| **Save current file** | `Ctrl + S` | `Cmd + S` |
+| **Interrupt running code** | `Esc` | `Esc` |
+
+<br/>
+
+## Running Code
+
+| Action | Windows/Linux | macOS | Description |
+|--------|-------|-------|-----------|
+| **Run the entire script** | `Ctrl + Shift + Enter` | `Cmd + Shift + Enter` | Runs the whole file from start to finish. |
+| **Run code line(s)** | `Ctrl + Enter` | `Cmd + Enter` | Runs the current line or a whole block of selected lines |
+| **Run all lines above** | `Ctrl + Alt + B` | `Cmd + Option + B` | Executes everything *up to* the current line. |
+| **Run all lines below** | `Ctrl + Alt + E` | `Cmd + Option + E` | Executes everything *from* the current line downward. |
+| **Interrupt running code** | `Esc` | `Esc` | Stops the current computation (useful for infinite loops). |
+
+<br/>
+
+## Navigating in the Script Editor
+
+| Action | Windows/Linux | macOS | Description |
+|--------|-------|-------|-----------|
+| **Jump to beginning of line** | `Alt + left` or `↖` | `Cmd + Left` | Quickly move to start of current line. |
+| **Jump to end of line** | `Alt + right` or `End` | `Cmd + Right` | Move to end of current line. |
+| **Comment / uncomment all selected lines** | `Ctrl + Shift + C` | `Cmd + Shift + C` | Turns (or unturns) all selected lines into comments (e.g., in R or Python editor it adds / removes `#` at the beginning of all selected lines). |
+| **Find in current file** | `Ctrl + F` | `Cmd + F` | Search text within the current script. |
+| **Find and replace** | `Ctrl + Shift + F` | `Cmd + Shift + F` | Search text across all files in the project. |
+| **Indent / unindent code** | `Tab` / `Shift + Tab` | same | Clean up indentation. |
+| **Go to matching bracket** | `Ctrl + P` | `Cmd + P` | Jump between matching `(`, `{`, or `[` pairs. |
+
+<br/>
+
+## Working with Console and Environment
+
+| Action | Windows/Linux | macOS | Description |
+|--------|-------|-------|-----------|
+| **Clear console** | `Ctrl + L` | `Ctrl + L` | Clean / remove all text from the console |
+| **Empty environment** | – | – | *type `rm(list = ls())` in console* |
+| **Insert pipe (`|>` or `%>%`)** | `Ctrl + Shift + M` | `Cmd + Shift + M` | Inserts the R native pipe operator (`|>`) or magrittr pipe (`%>%`) depending on settings. |
+| **Move focus to console** | `Ctrl + 2` | `Cmd + 2` | Switch from editor to console. |
+| **Move focus to editor** | `Ctrl + 1` | `Cmd + 1` | Switch from console to editor. |
+
+<br/>
+
+## Viewing Data and Help
+
+| Action | Windows/Linux | macOS | Description |
+|--------|-------|-------|-----------|
+| **View a dataset** | - | - | *type `View(df)` in console* |
+| **Help for a function** | `F1` | `F1` | Shows documentation for the function under cursor. |
+| **Search in help** | `Ctrl + Shift + F1` | `Cmd + Shift + F1` | Opens Help tab for manual search. |
+| **Autocomplete suggestions** | `Tab` | `Tab` | Auto-completion of variable names or functions. |
+
+<br/>
+
+## Managing R Projects and Files
+
+| Action | Windows/Linux | macOS | Description |
+|--------|-------|-------|-----------|
+| **Open a new R Script** | `Ctrl + Shift + N` | `Cmd + Shift + N` | Opens a new R script file. |
+| **Open recent file** | `Ctrl + O` | `Cmd + O` | Open an existing file. |
+| **Save current file** | `Ctrl + S` | `Cmd + S` | Save your work. |
+| **Save all open files** | `Ctrl + Shift + S` | `Cmd + Shift + S` | Save everything before running large jobs. |
+| **Close current file** | `Ctrl + W` | `Cmd + W` | Close script tab. |
+
+<br/>
+
+## Working with Projects, Plots, and Packages
+
+| Action | Windows/Linux | macOS | Description |
+|--------|-------|-------|-----------|
+| **Reload R session (restart R)** | `Ctrl + Shift + F10` | `Cmd + Shift + F10` | Restarts R without restarting RStudio. |
+| **Run selected lines and show plot** | `Ctrl + Enter` | `Cmd + Enter` | (Plots appear automatically in the *Plots* pane.) |
+| **Install package** | – | – | *type `install.packages("dplyr")` in console* |
+| **Load package** | – | – | *type `library(dplyr)` in console* |
+
+<br/>
+
+## Workflow Shortcuts (R Projects)
+
+| Action | Windows/Linux | macOS | Description |
+|--------|-------|-------|-----------|
+| **Switch between open files** | `Ctrl + Tab` | `Cmd + Option + → / ←` | Move between script tabs. |
+| **Open terminal** | `Alt + Shift + R` | `Option + Shift + R` | Opens a terminal tab in RStudio. |
+| **Render Quarto / R Markdown file** | `Ctrl + Shift + K` | `Cmd + Shift + K` | Knits or renders the current document. |
+| **Open working directory** | `Ctrl + Shift + H` | `Cmd + Shift + H` | Opens current working directory in file explorer. |
+

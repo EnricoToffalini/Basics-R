@@ -1,0 +1,60 @@
+---
+title: "Understanding and Showing Files Extensions - in Windows"
+subtitle: "*Basics of R for Data Science*"
+include-in-header: ../assets/header.html
+format: 
+  html:
+    self-contained: true
+    code-fold: false 
+    message: false
+    css: "../assets/custom.css"
+editor: visual
+---
+
+A file extension is the short group of letters that comes after the dot (`.`) in a file name — for example:
+
+-   `report.pdf` → extension: `.pdf`
+-   `photo.jpg` → extension: `.jpg`
+-   `script.R` → extension: `.R`
+
+The extension tells the operating system and software what type of file it is, and which program / app should be used to open it.
+
+For instance these are common associations:
+
+-   `.html` → default Browser
+-   `.docx` → Microsoft Word document
+-   `.xlsx` → Excel spreadsheet
+-   `.png` → Photo viewer
+-   `.R` → R file, opened with RStudio
+
+For better or for worse, Windows tends to hide know file extensions, so you may see something like this (i.e., **NO** file extensions visible next to the files names):
+
+<img src="figures/noExtensionsViewable.png" style="max-width:100%; height:auto; border:2px solid black"/></img>
+
+Sometimes, however, you may want to explicitly view & edit the files extensions to understand what they really are, or to fix / change them manually (e.g., from `.txt` to `.csv` for managing datasets, from `.txt` to `.R` for turning notepads into R scripts, from `.md` to `.Qmd` for managing markdown documents, from `.pptx` to `.zip` for easier access to media inside power point slides)
+
+------------------------------------------------------------------------
+
+## Ok, now how can I view files extensions in Windows?
+
+Here's how you do... The following was done on Windows 11, but other versions of Windows are only slightly different.
+
+##### Step 0: open a folder - doesn't matter which, just open any folder!
+
+##### Step 1: open the `Folder Options` panel
+
+<img src="figures/extensionsOptions0.png" style="max-width:100%; height:auto; border:2px solid black"/></img>
+
+##### Step 2: go to the `View` tab
+
+<img src="figures/extensionsOptions1.png" style="max-width:100%; height:auto; border:2px solid black"/></img>
+
+##### Step 3: remove the checkmark from the *`Hide extensions for known file types`* option under the `Advanced settings` menu, so that it NO longer hides
+
+<img src="figures/extensionsOptions2.png" style="max-width:100%; height:auto; border:2px solid black"/></img>
+
+##### Step 3: go back to your folder, or wherever there are files (not just folders), and check that the files extensions are now visible
+
+<img src="figures/yesExtensionsViewable.png" style="max-width:100%; height:auto; border:2px solid black"/></img>
+
+##### ⚠️ Be careful! De-hiding the extensions will now show files extensions throughout your operating system, in any folder. From now on, if you accidentally change a file extension (for example while renaming the file) this may affect the default app with which that file is open (therefore, the file may no longer behave as it did before, until the original extension is restored)

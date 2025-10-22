@@ -24,28 +24,32 @@ toupper(text)
 tolower(text)
 ```
 
-#### Replace a character with another character in a string using `gsub()`
+#### Replace a character with another in a string using `gsub()`
+
 ```{r}
 text = "this is a string"
 
 gsub("t", "X", text)
 ```
 
-#### Removing all punctuation 
+#### Removing all punctuation
+
 ```{r}
 text = "This is a string. For some reason, there is some punctuation."
 
 gsub("[[:punct:]]", "", text)
 ```
 
-#### Removing all digits 
+#### Removing all digits
+
 ```{r}
-text = "in this string231 there are some 1241useless digits 443perhaps because 3434someone copy and pasted 985from a pdf"
+text = "in this string231 there are some 1241useless digits 443perhaps because 3434someone copied and pasted 985from a pdf"
 
 gsub("[[:digit:]]", "", text)
 ```
 
-#### Splitting a string into a vector of words 
+#### Splitting a string into a vector of words
+
 ```{r}
 text = "this is a string"
 
@@ -55,6 +59,7 @@ unlist(strsplit(text, split=" "))
 *Note:* `strplit()` actually does the job, but it returns a list; if you want a vector for convenience, use `unlist()` on the output list
 
 #### Removing a few cases from a vector
+
 ```{r}
 myVect = c("this", "is", "a", "vector")
 
@@ -62,6 +67,7 @@ myVect[!myVect %in% c("is", "a")]
 ```
 
 #### Counting characters in strings
+
 ```{r}
 myVect = c("this", "is", "a", "vector")
 
@@ -75,6 +81,3 @@ myVect = c("this", "is", "a", "vector")
 
 paste(myVect, collapse=" ")
 ```
-
-
-

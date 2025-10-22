@@ -44,13 +44,13 @@ editor: visual
 
 #### Like a data scientist
 
--   Use the `rnorm()` function to create an `y0` vector containing $1,000,000$ normally-distributed numbers (know that $1,000,000$ can be written as `1e6` in R) on an IQ scale (i.e., with $\mu$ = $100$, $\sigma$ = $15$)
+-   Use the `rnorm()` function to create an `y0` vector containing $1,000,000$ normally-distributed numbers on an IQ scale (i.e., with $\mu$ = $100$, $\sigma$ = $15$) (remember that $1,000,000$ can be written as `1e6` in R)
 
 -   Display the first few values of the `y0` vector using both the `head()` function and the indexing with `[]`
 
 -   Round all values of `y0` to the nearest integer using the `round()` function, then once again display the first few values to make sure it worked
 
--   Use the `mean()` function and indexing on the vector `y0` to find the expected average IQ value between +1 SD and +2 SD from the mean (i.e., between $115$ and $130$)
+-   Index on the vector `y0` with `[ ]` and use the `mean()` function to calculate the average of the IQ values in the range between +1 SD and +2 SD from the mean (i.e., between $115$ and $130$)
 
 -   Use the `sd()` function and indexing on the vector `y0` to find the standard deviation of IQ values that are below the mean (i.e., where IQ \< $100$)
 
@@ -61,3 +61,5 @@ editor: visual
 -   Use `rnorm()` to create a vector `x0` containing a large number of values simulated from a standard normal distribution (i.e., with $\mu$ = $0$, $\sigma$ = $1$); then, create a second vector `x1` by applying a linear transformation to `x0`, such as `(x0 + 6) / 11`, and observe how the mean value and standard deviation have changed from `x0` to `x1`
 
 -   Use the `cor()` function to verify that the previously created vectors `x0` and `x1` (being linear transformations of each other), have a correlation of $r = 1$
+
+- Repeat the previous two points, but now add a random "error term" to `x1`, e.g., compute `x1 = 2*x0 + 0.5 + rnorm(n = length(x0), mean = 0, sd = 0.3)`, and check that the correlation between `x0` and `x1` is now smaller than 1. Also, see how increasing the `sd` of the "error term" decreases the correlation between `x1` and `x0`
