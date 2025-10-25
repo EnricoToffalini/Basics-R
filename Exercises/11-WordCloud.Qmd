@@ -1,46 +1,235 @@
 ---
-title: "Exercises - Creating a Word Cloud"
+title: "Exercises – Basics of Text Mining with R: Creating a Word Cloud"
 subtitle: "*Basics of R for Data Science*"
 include-in-header: ../assets/header.html
 format: 
   html:
     self-contained: true
-    toc: true   
-    toc-depth: 4  
+    toc: true
+    toc-depth: 4
     toc-expand: 4
-    code-fold: false 
+    code-fold: false
     message: false
     css: "../assets/custom.css"
 editor: visual
 ---
 
-This exercise goes beyond the scope of the present introductory course but is a nice challenge for more advanced R users. It integrates multiple skills: importing data, manipulating text and strings, performing basic string operations, visualizing data, exporting figures. Plus, the result is visually appealing and can make for a great showcase!
+Create a colorful Word Cloud that represents the corpus of research published by your supervisor (or any other researcher with a sufficiently large corpus of publications), and impress them! 🙂
 
-<em>GOAL:</em> Create a colorful Word Cloud that represents the corpus of research published by your supervisor (or any other researcher with a sufficiently large corpus of publications). This word cloud must highlight key terms and themes in their work, based on their titles, abstracts, or other content.
+This exercise goes a bit beyond the scope of the present introductory course, but it is a nice challenge for more advanced R users. It integrates multiple skills: importing data, manipulating text and strings, performing basic string operations, visualizing data, exporting figures.
 
-<em>**HINTS:**</em>
+## Scenario
 
--   *Select your data source:* Focus on titles + abstracts, as they generally provide a sufficient summary of a publication's content. If you wish, you can include keywords or even the full text of articles (e.g., PDF content).
+We will work with a small text corpus derived from research publications. The goal is to build a **clean text workflow** and create a **colorful word cloud** that highlights the most frequent and informative terms.
 
--   *Retrieve publication data:* A straightforward way to collect publication titles, abstracts, and keywords is via Scopus (in case of need, you can use my own <a href="wordcloud/scopustoff.csv" download>dataset</a>):
+The dataset contains titles and abstracts of research outputs. We will combine and clean the text, compute word frequencies, and visualize the result with a word cloud. The workflow mirrors the style used in the Python sentiment exercise, but here the focus is on **basic text mining in R**.
 
-    -   Go to <a href="https://www.scopus.com/search/form.uri?display=basic" target="_blank">Scopus.com</a>
-    -   Under *Documents*, open the *"Search within"* dropdown and choose *"Authors"*, then input your supervisor’s name (recommended format is: *Surname, N.*).
-    -   From the results, select *"All"*, Export the data in *CSV format*, and then select all and only the needed fields.
+We will:
 
--   *Data processing in R:*
+- Import a CSV of publication metadata taken from <a href="http://scopus.com/" target="_blank">Scopus.com</a>,
+- Clean the text,
+- Tokenize and remove stopwords,
+- Compute and inspect term frequencies,
+- Build and export a word cloud image.
 
-    -   There are different ways to complete this task in R. Now, let's minimize the use of external packages and rely on base functions wherever possible. However, you will need at least one package from CRAN to create a word cloud; the recommended option is the `wordcloud` package.
-    -   After importing all text into R, you can combine multiple strings into a single one using the `paste()` function with arguments `collapse=" "`
-    -   Since R is case-sensitive, it is recommended to convert all text to lowercase using the `tolower()` function (alternatively, you can convert everything to uppercase with `toupper()`).
-    -   To remove punctuation from text, you can use the following command: `gsub("[[:punct:]]","",text)`
-    -   To remove digits from text, you can use the following command: `gsub("[[:digit:]]","",text)`
-    -   You can split a text into a list of words using spaces as separators with the function `strsplit(text, " ")`. If you need a vector of strings for easier computation, you can wrap the result using the `unlist()` function.
-    -   For a word cloud, it is recommended to remove non-informative stopwords. Some R packages can do this, but otherwise you can also use this vector of stopwords for manual removal: `c("the", "and", "to", "of", "a", "in", "that", "is", "on", "for", "with", "as",` `"it", "was", "at", "by", "an", "are", "be", "this", "or", "from", "which", "not",` `"but", "also", "has", "have", "had","were", "their", "will", "can", "if", "would")`
-    -   You may want to remove words that are too short. To do so, remember that you can count the number of characters in a string using the `nchar()` function.
-    -   If you use the `wordcloud()` function from the `wordcloud` package, know that the minimum required input is: 1. a vector of unique words as the first argument; 2. a vector of their corresponding frequencies as the second argument. To compute the frequencies of strings, remember that you can use the `table()` function on the entire corpus of words.
-    -   To export the result as an image, you can use functions like `png()`, `pdf()` or others. But before that, make sure that the result from `wordcloud()` is visually appealing and colorful as intended!
+## Preliminary Steps
 
-::: {style="text-align: center;"}
-<img src="wordcloud/wclexample.png" width="60%"/>
+```{r, message=F}
+# recommended if not already done
+# install.packages("wordcloud")     # for the word cloud
+# install.packages("RColorBrewer")  # just for nice color palettes
+
+# load required packages
+library(wordcloud)
+library(RColorBrewer)
+```
+
+## Import and Inspect Dataset
+
+You can download an example dataset here: <a href="wordcloud/scopustoff.csv" download>`scopustoff.csv`</a>
+
+It includes publication **titles**, **abstracts**, and possibly **keywords**. We will focus on titles and abstracts, since they usually summarize the core ideas.
+
+```{r}
+df = read.csv("wordcloud/scopustoff.csv", stringsAsFactors = FALSE)
+nrow(df)        # how many records
+ncol(df)        # how many columns
+names(df)       # column names
+head(df$Title)     # preview first few titles
+```
+
+If your file uses different column names, adapt the code below accordingly. We will assume there are columns named `"Title"` and `"Abstract"`.
+
+## Combine Text Fields into One Corpus
+
+We first merge titles and abstracts into a single text field. This will give the word cloud denser and more informative content.
+
+```{r}
+# better replace possible missing values with empty strings
+df$Title[is.na(df$Title)]       = ""
+df$Abstract[is.na(df$Abstract)] = ""
+
+# combine Title + Abstract into a single field
+df$text_full = paste(df$Title, df$Abstract, sep = " ")
+
+# collapse all documents into one corpus string
+corpus = paste(df$text_full, collapse = " ")
+nchar(corpus)  # total number of characters
+```
+
+## Clean and Normalize the Text
+
+We apply a series of base R transformations: lowercase conversion, removal of punctuation and digits, trimming extra spaces, and accent normalization (accents are coded quite inconsistently on international datasets: better remove them all).
+
+```{r}
+# to lowercase
+corpus = tolower(corpus)
+
+# remove punctuation and digits
+corpus = gsub("[[:punct:]]", " ", corpus)
+corpus = gsub("[[:digit:]]", " ", corpus)
+
+# normalize whitespace
+corpus = gsub("\\s+", " ", corpus)
+corpus = trimws(corpus)
+
+# optional: simple accent folding (basic replacement)
+corpus = chartr("àèéìòóù", "aeeioou", corpus)
+```
+
+## Tokenize and Remove Stopwords
+
+We split the text into words/tokens, remove common stopwords and very short tokens that add little information. You can adjust the stopword list to fit your needs.
+
+```{r}
+# split into tokens (vector of words)
+tokens_list = strsplit(corpus, " ", fixed = TRUE)
+tokens = unlist(tokens_list)
+
+# define a basic English stopword list (extend as needed)
+stop_basic = c(
+  "the","and","to","of","a","in","that","is","on","for","with","as","it","was",
+  "at","by","an","are","be","this","or","from","which","not","also","has","have",
+  "had","were","their","will","can","if","would","we","our","you","your","they",
+  "them","but","about","more","than","between","into","using","use","used","may",
+  "based","these","those","there","such","however","while","within","both","each"
+)
+
+# remove stopwords
+tokens = tokens[ !(tokens %in% stop_basic) ]
+
+# remove very short tokens (<= 2 characters)
+tokens = tokens[ nchar(tokens) > 2 ]
+
+length(tokens)  # how many tokens (words) remain
+```
+
+## Compute Word Frequencies
+
+We compute term frequencies with `table()`, sort them, then inspect the top terms. This helps validate that cleaning was effective.
+
+```{r}
+freq = table(tokens)
+freq = sort(freq, decreasing = TRUE)
+
+# inspect the top 20 terms
+head(freq, 20)
+```
+
+### Quick Diagnostic Plot of Top Terms
+
+A simple bar plot is useful to check if the distribution makes sense before building the word cloud.
+
+```{r}
+top_n = 20
+top_terms = head(freq, top_n)
+
+par(mar = c(6, 4, 2, 1))
+barplot(
+  height = as.numeric(top_terms),
+  names.arg = names(top_terms),
+  las = 2, cex.names = 0.8,
+  main = "Top Terms (Frequency)",
+  ylab = "Count"
+)
+```
+
+**Question:** do the most frequent terms match your expectation of the author’s main research themes?
+
+## Build the Word Cloud
+
+The `wordcloud()` function requires:
+1. a vector of **unique words**,
+2. a vector of their **frequencies**.
+
+We will provide a palette and set a reproducible seed.
+
+```{r, warning=F, message=F}
+set.seed(123)
+
+# extract words and frequencies
+words = names(freq)
+counts = as.numeric(freq)
+
+# choose a color palette
+pal = brewer.pal(8, "Dark2")
+
+# draw the word cloud
+wordcloud(
+  words, counts,
+  scale = c(4, 0.8),          # largest to smallest font sizes
+  max.words = 200,            # limit the total number of words
+  random.order = FALSE,       # place most frequent words at the center
+  rot.per = 0.15,             # proportion of words with vertical orientation
+  colors = pal,
+  use.r.layout = FALSE
+)
+```
+
+## Export the Word Cloud as an Image
+
+Before exporting, experiment interactively with `wordcloud()` until you like the look. Then save it to file.
+
+```{r, warning=F, message=F}
+# save to PNG
+png("wordcloud/wordcloud_output.png", width = 1600, height = 900, res = 200)
+set.seed(123)
+wordcloud(
+  words, counts,
+  scale = c(4.5, 0.9),
+  max.words = 250,
+  random.order = FALSE,
+  rot.per = 0.12,
+  colors = pal
+)
+dev.off()
+```
+
+```{r, warning=F, message=F}
+# alternatively save to PDF (vector format, useful for print)
+pdf("wordcloud/wordcloud_output.pdf", width = 11, height = 7)
+set.seed(123)
+wordcloud(
+  words, counts,
+  scale = c(4.5, 0.9),
+  max.words = 250,
+  random.order = FALSE,
+  rot.per = 0.12,
+  colors = pal
+)
+dev.off()
+```
+
+## What could you do now?
+
+::: {style="font-size:17px;"}
+- Redo everything with your own supervisor's titles & abstracts.
+- Combine additional fields, for example keywords, to widen the corpus... or even import entire pdf texts (if you have them all somewhere).
+- Divide into **subsets** and compare clouds, for example early vs recent papers, to visualize what changed over time.
+- Try **alternative visualizations** of term frequencies, for example lollipop charts or word clouds with different palettes.
+- Try with **bigrams** (pairs of words) instead of single words to capture common expressions.
+:::
+
+::: {.callout-warning title="Preprocessing choices matter"}
+Text cleaning and tokenization have strong effects on the final word cloud. Domain-specific stopwords, stemming choices, and the inclusion of titles vs abstracts can bias which terms appear most salient. Always document your preprocessing steps.
 :::

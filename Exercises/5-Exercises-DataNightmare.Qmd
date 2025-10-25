@@ -1,0 +1,69 @@
+---
+title: "Exercises - Dataframes: *The nightmare*... in R"
+subtitle: "*Basics of R for Data Science*"
+include-in-header: ../assets/header.html
+format: 
+  html:
+    self-contained: true
+    toc-depth: 4  
+    toc-expand: 4
+    code-fold: false 
+    message: false
+    css: "../assets/custom.css"
+editor: visual
+---
+
+## Like a ~~data scientist~~ data cleaner
+
+The following set of exercises is a simulation of the challenges **you will actually encounter in real life** as a data scientist. Know that like \>70% of your time as a data scientist will be spent on data management and cleaning! *(Source: experience.)*
+
+In the following scenario, imagine that you have received messy datasets, full of inconsistencies, obvious errors, varying formats, data scattered across different files, and other issues. Some guidance is provided here, but your goal is to think critically and figure out the most effective solutions. And don’t worry: **the real world out there is more nightmarish!** 🙂
+
+## Scenario
+
+You have received messy datasets from students or colleagues who have been collecting data from different tests: INVALSI \[Italian National Assessment of Students\], Wechsler \[Intelligence\], Big Five \[Personality\], and an experimental attention task. Before you can do any meaningful analysis, you need to **clean**, **merge**, **combine**, and **analyze** the data.
+
+### Datasets:
+
+-   INVALSI items data: <a href="datasets/ExerData_Invalsi_1.csv" download="ExerData_Invalsi_1.csv">`ExerData_Invalsi_1.csv`</a> and <a href="datasets/ExerData_Invalsi_2.csv" download="ExerData_Invalsi_2.csv">`ExerData_Invalsi_2.csv`</a>, participant responses to INVALSI tasks split into two datasets (need to be combined first);
+-   Wechsler subtests data: <a href="datasets/ExerData_Wechsler.xlsx" download="ExerData_Wechsler.xlsx">`ExerData_Wechsler.xlsx`</a>;
+-   Lab-based trials data on an attentional task, includes accuracies to repeated trials: <a href="datasets/ExerData_LabTrials.csv" download="ExerData_LabTrials.csv">`ExerData_LabTrials.csv`</a>;
+-   Personality questionnaires: <a href="datasets/ExerData_Questionnaires.csv" download="ExerData_Questionnaires.csv">`ExerData_Questionnaires.csv`</a>, includes item-by-item scores for Openness and Agreeableness.
+
+## Your Final Goals
+
+-   Produce a single clean dataframe with one row per participant including only the total/aggregate scores for each type of data (e.g., "`InvalsiTot`" for INVALSI items data, "`WechslerTot`" for Wechsler subtests data, "`meanAcc`" for the lab-based trials data, "`OpennessTot`" and "`AgreabTot`" for the personality-questionnaires data);
+-   Produce a readable correlation matrix between all aggregate scores;
+-   Produce some descriptive statistics for the aggregate scores (e.g., medians, means, standard deviations, skewness and kurtosis coefficients, counts of missing values);
+-   Conduct a t-test comparison on INVALSI data (for males vs females);
+-   Create some basic visualizations (histograms, scatter plots, boxplots) to explore distributions and relationships among variables.
+
+------------------------------------------------------------------------
+
+## Recommended functions and methods
+
+| **Task** | **Subtask** | **Function / Method** |
+|------------------|---------------------------|---------------------------|
+| **Data Import** | Load datasets from CSV/Excel | `read.csv(...)` <br/> `readxl::read_excel(...)` |
+| **Data Cleaning** | In a dataframe column, replace character with another (e.g., "," with ".") | `gsub(",", ".", df$colName)` |
+|  | Coerce a string column to numbers, handling errors as `NA` | `as.numeric(df$colName)` |
+|  | Remove invalid values (e.g., implausibly large scores) replacing them with missing values | `df$colName[...] = NA` |
+| **Data Wrangling** | Sum repeated observations by participant | `aggregate(. ~ idName, data = df, FUN = sum)` |
+|  | Combine dataframes that have the same columns | `rbind(df1, df2)` |
+|  | Merge info across different dataframes by the same participant ID, keeping all information | `merge(df1, df2, by = "idName", all = TRUE)` |
+| **Variable Creation** | Compute a new "total score" column that includes the sum of values across other columns | `df$totScore = rowSums(df[ , c(...)])` |
+| **Descriptive Stats** | Quickly compute some summary statistics from a dataframe | `summary(df)` |
+|  | Correlation matrix from a selection of dataframe columns | `cor(df[ , c(...)], use = "pairwise.complete.obs")` |
+|  | Skewness and kurtosis of dataframe column(s) | `moments::skewness(...)`<br/> `moments::kurtosis(...)` |
+| **Inferential Stats** | Compare genders using t-test, dropping missing values | `t.test(y ~ gender, data = df)` |
+| **Visualization** | Histograms, scatterplots, boxplots | `hist(...)`<br/> `plot(...)`<br/> `boxplot(...)` |
+
+------------------------------------------------------------------------
+
+### Notes
+
+-   *Try to solve all issues* <b>using code</b> rather than manual corrections. Imagine one day you might be working with tens of thousands of rows, manual fixes won’t be feasible!
+-   *This exercise mainly focuses on data structures and dataframes, but it may also involve other concepts such as loops or apply-type functions to compute repetitive operations.*
+-   *While brute-force solutions may work, strive for clean, efficient, and concise R code. The goal is to balance correctness, clarity, and minimal redundancy.*
+
+------------------------------------------------------------------------
