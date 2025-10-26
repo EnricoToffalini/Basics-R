@@ -23,20 +23,19 @@ The primary resource for the course is the online book available on GitHub: [***
 
 ## Dates and Rooms
 
-| Day        | Time        | Room |
-|------------|-------------|------|
-| 10/11/2025 | 10:30-12:30 | 4M   |
-| 11/11/2025 | 9:30-12:30  | 4M   |
-| 12/11/2025 | 9:30-12:30  | 4M   |
-| 13/11/2025 | 8:30-10:30  | 4M   |
+| Day | Time | Room |
+|------|------|------|
+| Monday, 10^th^ November 2025 | 10:30-12:30 | 4M |
+| Tuesday, 11^th^ November 2025 | 9:30-12:30 | 4M |
+| Wednesday, 12^th^ November 2025 | 9:30-12:30 | 4M |
+| Thursday, 13^th^ November 2025 | 8:30-10:30 | 4M |
 
 ## Getting Started
 
-**Bookmark this course homepage** to have quick access to this material ([https://enricotoffalini.github.io/Basics-R/](https://enricotoffalini.github.io/Basics-R/){target="_blank"}). Then do this:
-
-1.  **Install R**: go to the official [R download page](https://cran.r-project.org/){target="_blank"} and follow the installation instructions for your operating system (further setup instructions can be found in [*Chapter 1*](https://psicostat.github.io/Introduction2R_EN/install.html){target="_blank"} of *Introduction2R*).
-2.  **Install RStudio as the IDE** *(Integrated Development Environment)*: go to [the *RStudio Desktop* download page](https://posit.co/download/rstudio-desktop/){target="_blank"} to install the IDE on your computer. *(If you don't like RStudio or want to try alternative environments, have a look at [Positron](https://positron.posit.co/){target="_blank"}, or [Jupyter notebook](https://jupyter.org/){target="_blank"} or even [Google Colab](https://colab.research.google.com/){target="_blank"} setting R kernel for fully online coding).*
-3.  **Test your local setup**: Make sure that you local R installation works. Open RStudio and run the following code in the console panel:
+1.   **Bookmark this course homepage** to have quick access to this material ([https://enricotoffalini.github.io/Basics-R/](https://enricotoffalini.github.io/Basics-R/){target="_blank"}).
+2.  **Install R**: go to the official [R download page](https://cran.r-project.org/){target="_blank"} and follow the installation instructions for your operating system (further setup instructions can be found in [*Chapter 1*](https://psicostat.github.io/Introduction2R_EN/install.html){target="_blank"} of *Introduction2R*).
+3.  **Install RStudio as the IDE** *(Integrated Development Environment)*: go to [the *RStudio Desktop* download page](https://posit.co/download/rstudio-desktop/){target="_blank"} to install the IDE on your computer. *(If you don't like RStudio or want to try alternative environments, have a look at [Positron](https://positron.posit.co/){target="_blank"}, or [Jupyter notebook](https://jupyter.org/){target="_blank"} or even [Google Colab](https://colab.research.google.com/){target="_blank"} setting R kernel for fully online coding).*
+4.  **Test your local setup**: Make sure that you local R installation works. Open RStudio and run the following code in the console panel:
 
 ``` r
 pkgs = c("readxl", "psych", "ggplot2")
