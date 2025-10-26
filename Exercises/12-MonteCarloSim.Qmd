@@ -1,103 +1,359 @@
 ---
-title: "Exercises - Monte Carlo Simulations for Statistical Power"
+title: "Exercises – Monte Carlo Simulations for Statistical Power"
 subtitle: "*Basics of R for Data Science*"
 include-in-header: ../assets/header.html
 format: 
   html:
     self-contained: true
-    toc: true   
-    toc-depth: 4  
+    toc: true
+    toc-depth: 2
     toc-expand: 4
-    code-fold: false 
+    code-fold: false
     message: false
     css: "../assets/custom.css"
 editor: visual
 ---
 
-::: {style="font-size:13px;"}
-Performing a Monte Carlo simulation for power analysis is much more than just computing power. It means clarifying the entire research scenario in depth, thinking about all possible sources of variability, defining the parameters that govern the phenomenon of interest. It requires explicitly stating the research hypothesis, distinguishing between hypothesis testing and research questions that will be limited to exploratory analyses. Additionally, it help produce a comprehensive set of preplanned analysis that you may use for a preregistration, because the process involves writing the actual code for the analysis.
+## Scenario
+
+Performing **Monte Carlo simulations for statistical power is much more than just computing power**. It is about building a complete *research scenario*, clarifying all sources of variability, defining the key parameters, and writing explicit code for the intended analysis. It gives you an insight that <em>G*Power</em> and other similar point-and-click software will never give you. 
+
+Simulating helps you:
+
+- Understand the data-generating process (*super important!* especially when fitting models),
+- Understand the general logic behind power analysis,
+- Write pre-registered, transparent analyses for fully reproducible research.
+
+We will start from the simplest scenario: a t-test (actually **not** something for which you actually need a simulation, and **not** something you would normally choose for a pre-registration, but that's for learning), and then move toward correlation and regression models.
+
+> We will use **`for` loops** as the *primary method* because they are explicit and easy to read  
+> However, we will also show a **compact alternative using the `replicate()` function**, a member of the *apply family*, that performs the same task more concisely once you’re comfortable with functional programming.
+
+---
+
+## Part 1 – Power of a *t-Test* via Monte Carlo Simulation
+
+In this exercise, we will simulate the statistical power of a **two-sample t-test** for a given *effect size* (`d`) and *sample size* (`N`). Although power can be computed analytically using `pwr.t.test()` from the `pwr` package, we will replicate the process using simulation to better understand what happens "under the hood".
+
+#### Step 1: Setup
+
+```{r}
+# Define parameters
+d  = 0.5        # standardized mean difference (Cohen's d)
+N  = 50         # sample size per group
+nsim = 5000     # number of simulations (reduce for speed if needed)
+alpha = 0.05    # significance threshold
+
+# Initialize a vector to store p-values
+p_values = rep(NA, nsim)
+```
+
+#### Step 2: Run the Simulation (`for` loop)
+
+Each iteration: 1. simulates two groups; 2. performs a t-test; 3. stores the resulting p-value.
+
+```{r}
+set.seed(0) # set a seed for reproducibility
+
+for (i in 1:nsim) {
+  group1 = rnorm(N, mean = 0, sd = 1)
+  group2 = rnorm(N, mean = d, sd = 1)
+  
+  test = t.test(group1, group2)
+  
+  p_values[i] = test$p.value
+}
+```
+
+#### Step 3: Estimate Power
+
+Power is simply the proportion of simulations where the null hypothesis is rejected (p < α).
+
+```{r}
+simulated_power = mean(p_values < alpha)
+simulated_power
+```
+
+### Step 4: Compare with Analytical Solution
+
+```{r}
+# install.packages("pwr")
+library(pwr)
+
+analytic_power = pwr.t.test(d = d, n = N, sig.level = alpha, type = "two.sample")$power
+analytic_power
+```
+
+**Question:** Are the two power estimates close?  
+Try increasing `nsim` to improve precision.
+
+---
+
+#### Step 5 (Optional): Rewriting with `replicate()`
+
+The same simulation can be written more compactly using **`replicate`()`**, which repeatedly applies a function to a sequence (here, 1 to `nsim`).
+
+```{r}
+set.seed(0) # set a seed for reproducibility
+
+simulate_t_p = function(N, d) {
+  g1 = rnorm(N, 0, 1)
+  g2 = rnorm(N, d, 1)
+  
+  return(t.test(g1, g2)$p.value)
+}
+
+p_values_replicate = replicate(nsim, simulate_t_p(N, d))
+mean(p_values_replicate < alpha)
+```
+
+> `replicate()` performs the same job as the `for` loop but is designed specifically for repeated simulations;
+> `replicate()` is actually just a wrapper of `sapply()` for repeating the exact same expression (usually with just different random numbers, like in our case).
+
+---
+
+## Part 2 – Power Curve for Different Effect Sizes and Sample Sizes
+
+Next, we will compute power for multiple combinations of `d` (effect size) and `N` (sample size).
+
+#### Step 1: Define Parameter Grid
+
+```{r}
+# Define parameters
+d_values = c(0.1, 0.3, 0.5)
+N_values = c(50, 100, 200, 300, 500)
+nsim = 1000
+alpha = 0.05
+
+# Prepare all combinations of parameters (d and N)
+param_grid = expand.grid(d = d_values, N = N_values)
+param_grid
+
+# Initialize dataframe of results (best practice)
+results = cbind(param_grid, power=NA)
+```
+
+### Step 2: Compute Power for Each Combination (nested `for`)
+
+For computational simplicity, we will use fewer simulations per condition (e.g., 1000).
+
+```{r}
+set.seed(0) # set a seed for reproducibility
+
+for (i in 1:nrow(results)) {
+  d  = results$d[i]
+  N  = results$N[i]
+  p_values = rep(NA, nsim)
+  for (j in 1:nsim) {
+    group1 = rnorm(N, mean = 0, sd = 1)
+    group2 = rnorm(N, mean = d, sd = 1)
+    p_values[j] = t.test(group1, group2)$p.value
+  }
+  power_est = mean(p_values < alpha)
+  results$power[i] = power_est
+}
+results
+```
+
+#### Step 3: Plot the Power Curves
+
+```{r}
+library(ggplot2)
+
+ggplot(results, aes(x = N, y = power, color = factor(d))) +
+  geom_line(linewidth = 1.2) +
+  geom_point(size = 2) +
+  labs(
+    title = "Power Curves for Two-Sample t-Test",
+    x = "Sample Size per Group (N)",
+    y = "Estimated Power",
+    color = "Effect Size (d)"
+  ) +
+  theme_minimal(base_size = 14)
+```
+
+**Question:** For what combination of `N` and `d` does power exceed 0.80?
+
+---
+
+### Step 4 (Optional): Using `replicate()` (and `mapply()`) Instead of Loops
+
+You can achieve the same results using functions of the `*apply()` family and the support of a custom function... This might look less readable if you are not used to it, but an approach like this will become more convenient and efficient if you need to run computationally heavy simulations, and especially if you want to parallelize.
+
+```r
+power_once = function(N, d, nsim = 1000, alpha = 0.05) {
+  pvals = replicate(nsim, {
+    g1 = rnorm(N, 0, 1)
+    g2 = rnorm(N, d, 1)
+    t.test(g1, g2)$p.value
+  })
+  return(mean(pvals < alpha))
+}
+
+results = data.frame(
+  d = param_grid$d,
+  N = param_grid$N,
+  power = mapply(power_once, param_grid$N, param_grid$d,
+                 nsim = nsim, alpha = alpha)
+)
+```
+
+---
+
+## Part 3 – Type M Error for Correlation Tests
+
+When power is low, statistically significant correlations tend to overestimate the *true* effect size.  
+This phenomenon is called the **Type M (Magnitude) Error**.
+
+We will simulate correlations and assess how much the significant results overestimate the true correlation `r`.
+
+#### Step 1: Setup
+
+```{r}
+# Recommended package
+# install.packages("MASS")
+
+library(MASS)
+
+# Set parameters
+N = 100
+true_r = 0.15
+nsim = 3000
+alpha = 0.05
+
+# Initialize results vectors (best practice)
+p_values = rep(NA, nsim)
+r_observed = rep(NA, nsim)
+```
+
+#### Step 2: Simulation Loop (Primary: `for`)
+
+```{r}
+set.seed(0) # set a seed for reproducibility
+
+for (i in 1:nsim) {
+  Sigma = matrix(c(1, true_r, 
+                   true_r, 1), nrow = 2)
+  data = MASS::mvrnorm(N, mu = c(0, 0), Sigma = Sigma)
+  
+  test = cor.test(data[,1], data[,2])
+  p_values[i] = test$p.value
+  r_observed[i] = test$estimate
+}
+
+# Compute power and Type M error
+power_est = mean(p_values < alpha)
+typeM = mean(r_observed[p_values < alpha]) / true_r
+
+power_est
+typeM
+```
+
+**Interpretation:**  
+If Type M = 1.5, significant results overestimate the true correlation by 50%.
+
+---
+
+#### Step 3 (Optional): Using `replicate()` for the Same Simulation
+
+```r
+simulate_cor_once = function(N, true_r) {
+  Sigma = matrix(c(1, true_r, true_r, 1), nrow = 2)
+  XY = MASS::mvrnorm(N, mu = c(0, 0), Sigma = Sigma)
+  test = cor.test(XY[,1], XY[,2])
+  return(c(p = test$p.value, r_obs = unname(test$estimate)))
+}
+
+# Apply the simulation nsim times using replicate()
+out = replicate(nsim, simulate_cor_once(N, true_r))
+
+# Extract results (rows: p-values, observed r)
+power_est = mean(out["p", ] < alpha)
+typeM = mean(out["r_obs", out["p", ] < alpha]) / true_r
+
+power_est
+typeM
+```
+
+---
+
+## Part 4 – Power for a Simple Linear Regression
+
+Now we extend the simulation idea to a **linear regression** model.
+
+We will simulate data following:
+
+$$
+y = b0 + b1 \cdot x + \epsilon
+$$
+<div style="text-align:center;">
+where $\epsilon \sim Normal(0, 1)$
+</div>
+
+#### Step 1: Setup
+
+```{r}
+N = 80
+
+b0 = 0    # intercept, not of interest now
+b1 = 0.25 # regression coefficient (true effect)
+sigma = 1 # std.dev. of residuals/epsilon
+
+nsim = 3000
+alpha = 0.05
+
+p_values = rep(NA, nsim)
+```
+
+#### Step 2: Simulation (Primary: `for`)
+
+```{r}
+set.seed(0) # set a seed for reproducibility
+
+for (i in 1:nsim) {
+  x = rnorm(N)
+  y = b0 + b1 * x + rnorm(N,0,sigma)
+  fit = lm(y ~ x)
+  p_values[i] = summary(fit)$coefficients["x", "Pr(>|t|)"]
+}
+
+power_est = mean(p_values < alpha)
+power_est
+```
+
+#### Step 3 (Optional): Same with `replicate()`
+
+```r
+simulate_lm = function(N, b1) {
+  x = rnorm(N)
+  y = b0 + b1 * x + rnorm(N, 0, sigma)
+  fit = lm(y ~ x)
+  pval = summary(fit)$coefficients["x", "Pr(>|t|)"]
+  return(pval)
+}
+
+p_values = replicate(nsim, simulate_lm(N, b1))
+mean(p_values < alpha)
+```
+
+**Questions:**
+
+- How does increasing `b1` affect power? 
+- What if you double the sample size?
+- What if you increase or reduce `sigma`?
+
+---
+
+## What Could You Do Next?
+
+::: {style="font-size:17px;"}
+- Extend the above `t.test` simulations to **paired t-tests** or **one-sample t-tests**.
+- Explore how power changes with different alpha levels (e.g., 0.01, 0.10) or with various p-value adjustments (`p.adjust()`) for multiple comparisons.
+- Visualize the distribution of *p-values* or *observed effect sizes* across all iterations.
+- Understand how increasing the number of iterations `nsim` make your power simulation more precise.
+- Try power simulation for **logistic regression** (e.g., `plogis()` for generating probabilities from a linear term, `rbinom()` for generating binomial data, and `glm(y ~ x, data=df, family=binomial(link="logit"))` for fitting models).
 :::
 
-### Computing the Power of a T-Test via Monte Carlo Simulation
-
-Computing power of a t-test for a particular *Standardized Mean Difference* does not necessarily require a simulation. For example, you could use `pwr.t.test()` function from the `pwr` package, for an analytical computation. However, let's use this scenario as a starting point for practice.
-
--   The goal of the first exercise is to run a simulation with a large number of iterations (*hint:* at least a few thousand) for a single value of *Standardized Mean Difference* (named `d`) and a single *sample size* (named `N`)
-
-    -   use a `for` loop to iterate through the simulation for simplicity (though there are other options);
-    -   at each iteration, you need to generate two sets of random numbers from a random normal distribution (use the `rnorm()` function; remember than their mean difference must be `d`);
-    -   at each iteration, you need to run a t-test (use the `t.test()` function);
-    -   at each iteration, you need to store some information, which at minimum is the *p-value* from the t-test, that you must extract from the t-test (note that you can use the `$` operator for extracting information from an object);
-    -   after all iterations, you must compute power as the mean number of iterations where *p-value* was below a critical threshold $\alpha$ (generally set at $0.05$).
-
--   Verify that the result from the previous exercise is sufficiently close, within an acceptable margin of approximation, to the analytical result obtained using the `pwr.t.test()` from the `pwr` package.
-
--   Extend the above exercise by repeating the simulation across a range of `N` values (e.g., $25, 50, 75, 100, 150, 200, 250, 300, 500$), and a at least three values of `d` (e.g., $0.10, 0.20, 0.30$).
-
-    -   you can use the `expand.grid()` function to generate all combinations of `N` and `d` automatically;
-    -   once you have these combinations of `N` and `d`, you can iterate over them using a nested loop structure: one `for` loop to go through all combinations of `N` and `d`, and an inner loop running the iterations for computing power at each step (note that you may also explore other approaches involving defining custom functions and other ways of iterating, which could even be more efficient than nested loops).
-
--   Plot the results of the previous exercise with different lines for different values of `d`, with `N` on the horizontal axis, and `power` on the vertical axis.
-
-### Computing the *"Type M Error"* for a Correlation
-
-When testing hypotheses without sufficient power, statistically significant results tend to be associated with overestimated effect sizes (because only sufficiently large effects reach significance, leading to an average overestimation of the true effect). When power is very low, this overestimation can be notably large. (Among other articles, *Type M Error* is described by <a href="https://journals.sagepub.com/doi/full/10.1177/1745691614551642" target="_blank">Gelman & Carlin, 2014</a>)
-
--   Your primary task is to run a Monte Carlo simulation for power analysis, similar to the above t-test exercise, but this time for a correlation. However, in addition to storing the p-value for computing power, also store the observed effect size at each iteration. Finally, calculate how much the estimated effect size exceeds the true effect size (as a percentage), when $p < 0.05$. Choose a particular combination of `N` and `r` (e.g., $N = 100$ and $r = 0.15$ results in low power and a clear overestimation).
-    -   to simulate correlated variables, you can use the `mvrnorm()` function from the `MASS` package;
-    -   to test the statistical significance of a correlation and calculate its effect size, you can use the `cor.test()` function;
-    -   in addition to computing the *Type M Error*, try to approximate the smallest significant effect size given your $N$.
--   *Optional:* you can repeat this entire exercise for a t-test (with *Cohen's d* as the effect size).
-
-### *Advanced* - Computing the Power of a Linear Regression via Monte Carlo Simulation
-
-Once you've completed the previous two exercises, you are ready to move to the next phase: using simulation to calculate power for real statistical models.
-
-**Model setup:** Simulate data for a simple linear regression model:
-
-$y = b0 + b1*x + residual$
-
-where $residual \sim Normal(0, \sigma)$
-
-**Parameters:**
-
--   Choose a specific sample size $N$ for your simulation;
-
--   Assume $\sigma = 1$ for simplicity, so you can focus only on $b1$ as the effect size (practically, a *standardized regression coefficient*);
-
--   *note:* intercept $b0$ is irrelevant for power estimation.
-
-Run $10,000$ iterations and see the power for the particular combination of $N$ and standardized $b1$.
-
-*Note*: extracting *p-values* for predictors from a fitted `lm` object might not be so easy. You will need to access the model's *summary*. The *p-values* are stored in a coefficients table within the *summary*, and the extraction may look like this: <br/> `summary(fit)$coefficients["predictorName", "Pr(>|t|)"]` <br/> ... Make it your habit to inspect fitted objects and their *summaries* with the **`str()`** function to locate and extract different pieces of information!
-
-### *Advanced* - Computing the Power of a Mixed-Effects Binomial Regression via Monte Carlo Simulation
-
-In psychological studies, power depends not only on the sample size $N$, but also on the number of trials or items $k$ administered to each subject. More trials means more precision and higher power, up to a certain point.
-
-Our goal now is to simulate a scenario where a particular predictor `x` (e.g., *age, years of education, amount of training,* or *global intelligence*) affects an underlying ability `y` which is measured using a series of `k` binomial-response trials for a sample of `N` subject.
-
--   Mixed-effects binomial regression is a type of Generalized Linear-Mixed effects models, which can be implemented using functions like `glmer()` from the `lme4` package, or `glmmTMB()` from the `glmmTMB` package. Remember to set `family=binomial`.
-
--   The effect size can be conceptualized as the true correlation `r` between predictor `x` and the underlying ability `y`.
-
--   While `y` is an underlying (latent) ability that you will simulate, it is not directly observed in the data you analyze. Instead, you will analyze only the binomial responses from trials that reflect `y`.
-
--   Remember that `x` cannot be the only factor affecting the binomial responses. Individual variability must also be considered. In generating data, remember that random intercept of the subject must also be a cause of the responses. Random intercepts `rInt` for subjects should be included in the data generation process.
-
--   Suggestions for simulating the binomial responses:
-
-    -   generate `y` as a standard normal distribution (correlated with or caused by `x`);
-    -   use the `pnorm()` function to convert `y` (or better, `y + rInt`) into probabilities of success for each trial;
-    -   generate binomial responses using the `rbinom()` function.
-
--   Here is an example of a possible model specification: <br/> `glmer(resp ~ x + (1|idSubj), family=binomial(link=probit))`
-
--   Remember that the simulated and analyzed dataframe must be in *long format*, with each row representing an individual response. This means each subject and all their information (`idSubj`, `x`) must be repeated across multiple rows (use `rep()` for this purpose).
-
--   Finally, see how statistical power varies with the number of trials $k$ given the same sample size $N$.
-
-```{python}
-a=1
-print(a)
-```
+::: {.callout-warning title="Simulations can be computationally heavy"}
+Simulations with many iterations or complex models (like generalized mixed-effects models, SEM, computational models) can take a long time to run. If time is very long, start small (e.g., 5-10 iterations) to test your code and then increase to improve precision. Plus, learning how to parallelize computation (e.g., with the `parallel()` package and its `mclapply()` function).
+:::

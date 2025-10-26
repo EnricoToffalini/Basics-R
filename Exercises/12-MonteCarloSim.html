@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Exercises - Monte Carlo Simulations for Statistical Power</title>
+<title>Exercises – Monte Carlo Simulations for Statistical Power</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -2310,7 +2310,7 @@ window.Quarto = {
 };
 </script>
 
-<style type="text/css">a {color: #760000;}a:hover {color: black;}::selection {background-color: #760000; color: white; }.sidebar nav[role="doc-toc"] ul > li > a.active {color: #760000 !important;border-left: 2px solid #760000 !important;}.sidebar nav[role="doc-toc"] ul > li > a:hover {color: #760000 !important;border-left: 4px solid #760000 !important;}.sidebar nav[role="doc-toc"] ul > li > ul > li > a.active {color: #760000 !important;border-left: 2px solid #760000 !important;}.sidebar nav[role="doc-toc"] ul > li > ul > li > a:hover {color: #760000 !important;border-left: 4px solid #760000 !important;}</style>
+<style type="text/css">a {color: #760000;}a:hover {color: #222222;}::selection {background-color: #760000; color: white; }.sidebar nav[role="doc-toc"] ul > li > a.active {color: #760000 !important;border-left: 2px solid #760000 !important;}.sidebar nav[role="doc-toc"] ul > li > a:hover {color: #760000 !important;border-left: 4px solid #760000 !important;}.sidebar nav[role="doc-toc"] ul > li > ul > li > a.active {color: #760000 !important;border-left: 2px solid #760000 !important;}.sidebar nav[role="doc-toc"] ul > li > ul > li > a:hover {color: #760000 !important;border-left: 4px solid #760000 !important;}</style>
 
 
 
@@ -2320,11 +2320,13 @@ window.Quarto = {
   <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="4">
     <h2 id="toc-title">Table of contents</h2>
    
-  <ul>
-  <li><a href="#computing-the-power-of-a-t-test-via-monte-carlo-simulation" id="toc-computing-the-power-of-a-t-test-via-monte-carlo-simulation" class="nav-link active" data-scroll-target="#computing-the-power-of-a-t-test-via-monte-carlo-simulation">Computing the Power of a T-Test via Monte Carlo Simulation</a></li>
-  <li><a href="#computing-the-type-m-error-for-a-correlation" id="toc-computing-the-type-m-error-for-a-correlation" class="nav-link" data-scroll-target="#computing-the-type-m-error-for-a-correlation">Computing the <em>“Type M Error”</em> for a Correlation</a></li>
-  <li><a href="#advanced---computing-the-power-of-a-linear-regression-via-monte-carlo-simulation" id="toc-advanced---computing-the-power-of-a-linear-regression-via-monte-carlo-simulation" class="nav-link" data-scroll-target="#advanced---computing-the-power-of-a-linear-regression-via-monte-carlo-simulation"><em>Advanced</em> - Computing the Power of a Linear Regression via Monte Carlo Simulation</a></li>
-  <li><a href="#advanced---computing-the-power-of-a-mixed-effects-binomial-regression-via-monte-carlo-simulation" id="toc-advanced---computing-the-power-of-a-mixed-effects-binomial-regression-via-monte-carlo-simulation" class="nav-link" data-scroll-target="#advanced---computing-the-power-of-a-mixed-effects-binomial-regression-via-monte-carlo-simulation"><em>Advanced</em> - Computing the Power of a Mixed-Effects Binomial Regression via Monte Carlo Simulation</a></li>
+  <ul class="collapse">
+  <li><a href="#scenario" id="toc-scenario" class="nav-link active" data-scroll-target="#scenario">Scenario</a></li>
+  <li><a href="#part-1-power-of-a-t-test-via-monte-carlo-simulation" id="toc-part-1-power-of-a-t-test-via-monte-carlo-simulation" class="nav-link" data-scroll-target="#part-1-power-of-a-t-test-via-monte-carlo-simulation">Part 1 – Power of a <em>t-Test</em> via Monte Carlo Simulation</a></li>
+  <li><a href="#part-2-power-curve-for-different-effect-sizes-and-sample-sizes" id="toc-part-2-power-curve-for-different-effect-sizes-and-sample-sizes" class="nav-link" data-scroll-target="#part-2-power-curve-for-different-effect-sizes-and-sample-sizes">Part 2 – Power Curve for Different Effect Sizes and Sample Sizes</a></li>
+  <li><a href="#part-3-type-m-error-for-correlation-tests" id="toc-part-3-type-m-error-for-correlation-tests" class="nav-link" data-scroll-target="#part-3-type-m-error-for-correlation-tests">Part 3 – Type M Error for Correlation Tests</a></li>
+  <li><a href="#part-4-power-for-a-simple-linear-regression" id="toc-part-4-power-for-a-simple-linear-regression" class="nav-link" data-scroll-target="#part-4-power-for-a-simple-linear-regression">Part 4 – Power for a Simple Linear Regression</a></li>
+  <li><a href="#what-could-you-do-next" id="toc-what-could-you-do-next" class="nav-link" data-scroll-target="#what-could-you-do-next">What Could You Do Next?</a></li>
   </ul>
 </nav>
 </div>
@@ -2332,7 +2334,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Exercises - Monte Carlo Simulations for Statistical Power</h1>
+<h1 class="title">Exercises – Monte Carlo Simulations for Statistical Power</h1>
 <p class="subtitle lead"><em>Basics of R for Data Science</em></p>
 </div>
 
@@ -2350,82 +2352,393 @@ window.Quarto = {
 </header>
 
 
-<div style="font-size:13px;">
-<p>Performing a Monte Carlo simulation for power analysis is much more than just computing power. It means clarifying the entire research scenario in depth, thinking about all possible sources of variability, defining the parameters that govern the phenomenon of interest. It requires explicitly stating the research hypothesis, distinguishing between hypothesis testing and research questions that will be limited to exploratory analyses. Additionally, it help produce a comprehensive set of preplanned analysis that you may use for a preregistration, because the process involves writing the actual code for the analysis.</p>
+<section id="scenario" class="level2">
+<h2 class="anchored" data-anchor-id="scenario">Scenario</h2>
+<p>Performing <strong>Monte Carlo simulations for statistical power is much more than just computing power</strong>. It is about building a complete <em>research scenario</em>, clarifying all sources of variability, defining the key parameters, and writing explicit code for the intended analysis. It gives you an insight that <em>G*Power</em> and other similar point-and-click software will never give you.</p>
+<p>Simulating helps you:</p>
+<ul>
+<li>Understand the data-generating process (<em>super important!</em> especially when fitting models),</li>
+<li>Understand the general logic behind power analysis,</li>
+<li>Write pre-registered, transparent analyses for fully reproducible research.</li>
+</ul>
+<p>We will start from the simplest scenario: a t-test (actually <strong>not</strong> something for which you actually need a simulation, and <strong>not</strong> something you would normally choose for a pre-registration, but that’s for learning), and then move toward correlation and regression models.</p>
+<blockquote class="blockquote">
+<p>We will use <strong><code>for</code> loops</strong> as the <em>primary method</em> because they are explicit and easy to read<br>
+However, we will also show a <strong>compact alternative using the <code>replicate()</code> function</strong>, a member of the <em>apply family</em>, that performs the same task more concisely once you’re comfortable with functional programming.</p>
+</blockquote>
+<hr>
+</section>
+<section id="part-1-power-of-a-t-test-via-monte-carlo-simulation" class="level2">
+<h2 class="anchored" data-anchor-id="part-1-power-of-a-t-test-via-monte-carlo-simulation">Part 1 – Power of a <em>t-Test</em> via Monte Carlo Simulation</h2>
+<p>In this exercise, we will simulate the statistical power of a <strong>two-sample t-test</strong> for a given <em>effect size</em> (<code>d</code>) and <em>sample size</em> (<code>N</code>). Although power can be computed analytically using <code>pwr.t.test()</code> from the <code>pwr</code> package, we will replicate the process using simulation to better understand what happens “under the hood”.</p>
+<section id="step-1-setup" class="level4">
+<h4 class="anchored" data-anchor-id="step-1-setup">Step 1: Setup</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define parameters</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>d  <span class="ot">=</span> <span class="fl">0.5</span>        <span class="co"># standardized mean difference (Cohen&#39;s d)</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>N  <span class="ot">=</span> <span class="dv">50</span>         <span class="co"># sample size per group</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>nsim <span class="ot">=</span> <span class="dv">5000</span>     <span class="co"># number of simulations (reduce for speed if needed)</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">=</span> <span class="fl">0.05</span>    <span class="co"># significance threshold</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize a vector to store p-values</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>p_values <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, nsim)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="computing-the-power-of-a-t-test-via-monte-carlo-simulation" class="level3">
-<h3 class="anchored" data-anchor-id="computing-the-power-of-a-t-test-via-monte-carlo-simulation">Computing the Power of a T-Test via Monte Carlo Simulation</h3>
-<p>Computing power of a t-test for a particular <em>Standardized Mean Difference</em> does not necessarily require a simulation. For example, you could use <code>pwr.t.test()</code> function from the <code>pwr</code> package, for an analytical computation. However, let’s use this scenario as a starting point for practice.</p>
-<ul>
-<li><p>The goal of the first exercise is to run a simulation with a large number of iterations (<em>hint:</em> at least a few thousand) for a single value of <em>Standardized Mean Difference</em> (named <code>d</code>) and a single <em>sample size</em> (named <code>N</code>)</p>
-<ul>
-<li>use a <code>for</code> loop to iterate through the simulation for simplicity (though there are other options);</li>
-<li>at each iteration, you need to generate two sets of random numbers from a random normal distribution (use the <code>rnorm()</code> function; remember than their mean difference must be <code>d</code>);</li>
-<li>at each iteration, you need to run a t-test (use the <code>t.test()</code> function);</li>
-<li>at each iteration, you need to store some information, which at minimum is the <em>p-value</em> from the t-test, that you must extract from the t-test (note that you can use the <code>$</code> operator for extracting information from an object);</li>
-<li>after all iterations, you must compute power as the mean number of iterations where <em>p-value</em> was below a critical threshold <span class="math inline">\(\alpha\)</span> (generally set at <span class="math inline">\(0.05\)</span>).</li>
-</ul></li>
-<li><p>Verify that the result from the previous exercise is sufficiently close, within an acceptable margin of approximation, to the analytical result obtained using the <code>pwr.t.test()</code> from the <code>pwr</code> package.</p></li>
-<li><p>Extend the above exercise by repeating the simulation across a range of <code>N</code> values (e.g., <span class="math inline">\(25, 50, 75, 100, 150, 200, 250, 300, 500\)</span>), and a at least three values of <code>d</code> (e.g., <span class="math inline">\(0.10, 0.20, 0.30\)</span>).</p>
-<ul>
-<li>you can use the <code>expand.grid()</code> function to generate all combinations of <code>N</code> and <code>d</code> automatically;</li>
-<li>once you have these combinations of <code>N</code> and <code>d</code>, you can iterate over them using a nested loop structure: one <code>for</code> loop to go through all combinations of <code>N</code> and <code>d</code>, and an inner loop running the iterations for computing power at each step (note that you may also explore other approaches involving defining custom functions and other ways of iterating, which could even be more efficient than nested loops).</li>
-</ul></li>
-<li><p>Plot the results of the previous exercise with different lines for different values of <code>d</code>, with <code>N</code> on the horizontal axis, and <code>power</code> on the vertical axis.</p></li>
-</ul>
 </section>
-<section id="computing-the-type-m-error-for-a-correlation" class="level3">
-<h3 class="anchored" data-anchor-id="computing-the-type-m-error-for-a-correlation">Computing the <em>“Type M Error”</em> for a Correlation</h3>
-<p>When testing hypotheses without sufficient power, statistically significant results tend to be associated with overestimated effect sizes (because only sufficiently large effects reach significance, leading to an average overestimation of the true effect). When power is very low, this overestimation can be notably large. (Among other articles, <em>Type M Error</em> is described by <a href="https://journals.sagepub.com/doi/full/10.1177/1745691614551642" target="_blank">Gelman &amp; Carlin, 2014</a>)</p>
-<ul>
-<li>Your primary task is to run a Monte Carlo simulation for power analysis, similar to the above t-test exercise, but this time for a correlation. However, in addition to storing the p-value for computing power, also store the observed effect size at each iteration. Finally, calculate how much the estimated effect size exceeds the true effect size (as a percentage), when <span class="math inline">\(p &lt; 0.05\)</span>. Choose a particular combination of <code>N</code> and <code>r</code> (e.g., <span class="math inline">\(N = 100\)</span> and <span class="math inline">\(r = 0.15\)</span> results in low power and a clear overestimation).
-<ul>
-<li>to simulate correlated variables, you can use the <code>mvrnorm()</code> function from the <code>MASS</code> package;</li>
-<li>to test the statistical significance of a correlation and calculate its effect size, you can use the <code>cor.test()</code> function;</li>
-<li>in addition to computing the <em>Type M Error</em>, try to approximate the smallest significant effect size given your <span class="math inline">\(N\)</span>.</li>
-</ul></li>
-<li><em>Optional:</em> you can repeat this entire exercise for a t-test (with <em>Cohen’s d</em> as the effect size).</li>
-</ul>
+<section id="step-2-run-the-simulation-for-loop" class="level4">
+<h4 class="anchored" data-anchor-id="step-2-run-the-simulation-for-loop">Step 2: Run the Simulation (<code>for</code> loop)</h4>
+<p>Each iteration: 1. simulates two groups; 2. performs a t-test; 3. stores the resulting p-value.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">0</span>) <span class="co"># set a seed for reproducibility</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nsim) {</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  group1 <span class="ot">=</span> <span class="fu">rnorm</span>(N, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  group2 <span class="ot">=</span> <span class="fu">rnorm</span>(N, <span class="at">mean =</span> d, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  test <span class="ot">=</span> <span class="fu">t.test</span>(group1, group2)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  p_values[i] <span class="ot">=</span> test<span class="sc">$</span>p.value</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
-<section id="advanced---computing-the-power-of-a-linear-regression-via-monte-carlo-simulation" class="level3">
-<h3 class="anchored" data-anchor-id="advanced---computing-the-power-of-a-linear-regression-via-monte-carlo-simulation"><em>Advanced</em> - Computing the Power of a Linear Regression via Monte Carlo Simulation</h3>
-<p>Once you’ve completed the previous two exercises, you are ready to move to the next phase: using simulation to calculate power for real statistical models.</p>
-<p><strong>Model setup:</strong> Simulate data for a simple linear regression model:</p>
-<p><span class="math inline">\(y = b0 + b1*x + residual\)</span></p>
-<p>where <span class="math inline">\(residual \sim Normal(0, \sigma)\)</span></p>
-<p><strong>Parameters:</strong></p>
-<ul>
-<li><p>Choose a specific sample size <span class="math inline">\(N\)</span> for your simulation;</p></li>
-<li><p>Assume <span class="math inline">\(\sigma = 1\)</span> for simplicity, so you can focus only on <span class="math inline">\(b1\)</span> as the effect size (practically, a <em>standardized regression coefficient</em>);</p></li>
-<li><p><em>note:</em> intercept <span class="math inline">\(b0\)</span> is irrelevant for power estimation.</p></li>
-</ul>
-<p>Run <span class="math inline">\(10,000\)</span> iterations and see the power for the particular combination of <span class="math inline">\(N\)</span> and standardized <span class="math inline">\(b1\)</span>.</p>
-<p><em>Note</em>: extracting <em>p-values</em> for predictors from a fitted <code>lm</code> object might not be so easy. You will need to access the model’s <em>summary</em>. The <em>p-values</em> are stored in a coefficients table within the <em>summary</em>, and the extraction may look like this: <br> <code>summary(fit)$coefficients[&quot;predictorName&quot;, &quot;Pr(&gt;|t|)&quot;]</code> <br> … Make it your habit to inspect fitted objects and their <em>summaries</em> with the <strong><code>str()</code></strong> function to locate and extract different pieces of information!</p>
-</section>
-<section id="advanced---computing-the-power-of-a-mixed-effects-binomial-regression-via-monte-carlo-simulation" class="level3">
-<h3 class="anchored" data-anchor-id="advanced---computing-the-power-of-a-mixed-effects-binomial-regression-via-monte-carlo-simulation"><em>Advanced</em> - Computing the Power of a Mixed-Effects Binomial Regression via Monte Carlo Simulation</h3>
-<p>In psychological studies, power depends not only on the sample size <span class="math inline">\(N\)</span>, but also on the number of trials or items <span class="math inline">\(k\)</span> administered to each subject. More trials means more precision and higher power, up to a certain point.</p>
-<p>Our goal now is to simulate a scenario where a particular predictor <code>x</code> (e.g., <em>age, years of education, amount of training,</em> or <em>global intelligence</em>) affects an underlying ability <code>y</code> which is measured using a series of <code>k</code> binomial-response trials for a sample of <code>N</code> subject.</p>
-<ul>
-<li><p>Mixed-effects binomial regression is a type of Generalized Linear-Mixed effects models, which can be implemented using functions like <code>glmer()</code> from the <code>lme4</code> package, or <code>glmmTMB()</code> from the <code>glmmTMB</code> package. Remember to set <code>family=binomial</code>.</p></li>
-<li><p>The effect size can be conceptualized as the true correlation <code>r</code> between predictor <code>x</code> and the underlying ability <code>y</code>.</p></li>
-<li><p>While <code>y</code> is an underlying (latent) ability that you will simulate, it is not directly observed in the data you analyze. Instead, you will analyze only the binomial responses from trials that reflect <code>y</code>.</p></li>
-<li><p>Remember that <code>x</code> cannot be the only factor affecting the binomial responses. Individual variability must also be considered. In generating data, remember that random intercept of the subject must also be a cause of the responses. Random intercepts <code>rInt</code> for subjects should be included in the data generation process.</p></li>
-<li><p>Suggestions for simulating the binomial responses:</p>
-<ul>
-<li>generate <code>y</code> as a standard normal distribution (correlated with or caused by <code>x</code>);</li>
-<li>use the <code>pnorm()</code> function to convert <code>y</code> (or better, <code>y + rInt</code>) into probabilities of success for each trial;</li>
-<li>generate binomial responses using the <code>rbinom()</code> function.</li>
-</ul></li>
-<li><p>Here is an example of a possible model specification: <br> <code>glmer(resp ~ x + (1|idSubj), family=binomial(link=probit))</code></p></li>
-<li><p>Remember that the simulated and analyzed dataframe must be in <em>long format</em>, with each row representing an individual response. This means each subject and all their information (<code>idSubj</code>, <code>x</code>) must be repeated across multiple rows (use <code>rep()</code> for this purpose).</p></li>
-<li><p>Finally, see how statistical power varies with the number of trials <span class="math inline">\(k\)</span> given the same sample size <span class="math inline">\(N\)</span>.</p></li>
-</ul>
-<div id="3f7c9ffe" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>a<span class="op">=</span><span class="dv">1</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="step-3-estimate-power" class="level4">
+<h4 class="anchored" data-anchor-id="step-3-estimate-power">Step 3: Estimate Power</h4>
+<p>Power is simply the proportion of simulations where the null hypothesis is rejected (p &lt; α).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>simulated_power <span class="ot">=</span> <span class="fu">mean</span>(p_values <span class="sc">&lt;</span> alpha)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>simulated_power</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>1</code></pre>
+<pre><code>[1] 0.6974</code></pre>
+</div>
+</div>
+</section>
+<section id="step-4-compare-with-analytical-solution" class="level3">
+<h3 class="anchored" data-anchor-id="step-4-compare-with-analytical-solution">Step 4: Compare with Analytical Solution</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;pwr&quot;)</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pwr)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>analytic_power <span class="ot">=</span> <span class="fu">pwr.t.test</span>(<span class="at">d =</span> d, <span class="at">n =</span> N, <span class="at">sig.level =</span> alpha, <span class="at">type =</span> <span class="st">&quot;two.sample&quot;</span>)<span class="sc">$</span>power</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>analytic_power</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.6968934</code></pre>
+</div>
+</div>
+<p><strong>Question:</strong> Are the two power estimates close?<br>
+Try increasing <code>nsim</code> to improve precision.</p>
+<hr>
+<section id="step-5-optional-rewriting-with-replicate" class="level4">
+<h4 class="anchored" data-anchor-id="step-5-optional-rewriting-with-replicate">Step 5 (Optional): Rewriting with <code>replicate()</code></h4>
+<p>The same simulation can be written more compactly using **<code>replicate</code>()<code>**, which repeatedly applies a function to a sequence (here, 1 to</code>nsim`).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">0</span>) <span class="co"># set a seed for reproducibility</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>simulate_t_p <span class="ot">=</span> <span class="cf">function</span>(N, d) {</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  g1 <span class="ot">=</span> <span class="fu">rnorm</span>(N, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  g2 <span class="ot">=</span> <span class="fu">rnorm</span>(N, d, <span class="dv">1</span>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">t.test</span>(g1, g2)<span class="sc">$</span>p.value)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>p_values_replicate <span class="ot">=</span> <span class="fu">replicate</span>(nsim, <span class="fu">simulate_t_p</span>(N, d))</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(p_values_replicate <span class="sc">&lt;</span> alpha)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.6974</code></pre>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><code>replicate()</code> performs the same job as the <code>for</code> loop but is designed specifically for repeated simulations; <code>replicate()</code> is actually just a wrapper of <code>sapply()</code> for repeating the exact same expression (usually with just different random numbers, like in our case).</p>
+</blockquote>
+<hr>
+</section>
+</section>
+</section>
+<section id="part-2-power-curve-for-different-effect-sizes-and-sample-sizes" class="level2">
+<h2 class="anchored" data-anchor-id="part-2-power-curve-for-different-effect-sizes-and-sample-sizes">Part 2 – Power Curve for Different Effect Sizes and Sample Sizes</h2>
+<p>Next, we will compute power for multiple combinations of <code>d</code> (effect size) and <code>N</code> (sample size).</p>
+<section id="step-1-define-parameter-grid" class="level4">
+<h4 class="anchored" data-anchor-id="step-1-define-parameter-grid">Step 1: Define Parameter Grid</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define parameters</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>d_values <span class="ot">=</span> <span class="fu">c</span>(<span class="fl">0.1</span>, <span class="fl">0.3</span>, <span class="fl">0.5</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>N_values <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">50</span>, <span class="dv">100</span>, <span class="dv">200</span>, <span class="dv">300</span>, <span class="dv">500</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>nsim <span class="ot">=</span> <span class="dv">1000</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">=</span> <span class="fl">0.05</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Prepare all combinations of parameters (d and N)</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>param_grid <span class="ot">=</span> <span class="fu">expand.grid</span>(<span class="at">d =</span> d_values, <span class="at">N =</span> N_values)</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>param_grid</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     d   N
+1  0.1  50
+2  0.3  50
+3  0.5  50
+4  0.1 100
+5  0.3 100
+6  0.5 100
+7  0.1 200
+8  0.3 200
+9  0.5 200
+10 0.1 300
+11 0.3 300
+12 0.5 300
+13 0.1 500
+14 0.3 500
+15 0.5 500</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize dataframe of results (best practice)</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>results <span class="ot">=</span> <span class="fu">cbind</span>(param_grid, <span class="at">power=</span><span class="cn">NA</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="step-2-compute-power-for-each-combination-nested-for" class="level3">
+<h3 class="anchored" data-anchor-id="step-2-compute-power-for-each-combination-nested-for">Step 2: Compute Power for Each Combination (nested <code>for</code>)</h3>
+<p>For computational simplicity, we will use fewer simulations per condition (e.g., 1000).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">0</span>) <span class="co"># set a seed for reproducibility</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(results)) {</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  d  <span class="ot">=</span> results<span class="sc">$</span>d[i]</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  N  <span class="ot">=</span> results<span class="sc">$</span>N[i]</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  p_values <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, nsim)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nsim) {</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    group1 <span class="ot">=</span> <span class="fu">rnorm</span>(N, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    group2 <span class="ot">=</span> <span class="fu">rnorm</span>(N, <span class="at">mean =</span> d, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    p_values[j] <span class="ot">=</span> <span class="fu">t.test</span>(group1, group2)<span class="sc">$</span>p.value</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>  power_est <span class="ot">=</span> <span class="fu">mean</span>(p_values <span class="sc">&lt;</span> alpha)</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>  results<span class="sc">$</span>power[i] <span class="ot">=</span> power_est</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>results</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     d   N power
+1  0.1  50 0.065
+2  0.3  50 0.303
+3  0.5  50 0.694
+4  0.1 100 0.116
+5  0.3 100 0.573
+6  0.5 100 0.949
+7  0.1 200 0.185
+8  0.3 200 0.841
+9  0.5 200 0.997
+10 0.1 300 0.235
+11 0.3 300 0.961
+12 0.5 300 1.000
+13 0.1 500 0.342
+14 0.3 500 0.998
+15 0.5 500 1.000</code></pre>
+</div>
+</div>
+<section id="step-3-plot-the-power-curves" class="level4">
+<h4 class="anchored" data-anchor-id="step-3-plot-the-power-curves">Step 3: Plot the Power Curves</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(results, <span class="fu">aes</span>(<span class="at">x =</span> N, <span class="at">y =</span> power, <span class="at">color =</span> <span class="fu">factor</span>(d))) <span class="sc">+</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Power Curves for Two-Sample t-Test&quot;</span>,</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Sample Size per Group (N)&quot;</span>,</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Estimated Power&quot;</span>,</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;Effect Size (d)&quot;</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img role="img" src="data:image/png;base64,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" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Question:</strong> For what combination of <code>N</code> and <code>d</code> does power exceed 0.80?</p>
+<hr>
+</section>
+</section>
+<section id="step-4-optional-using-replicate-and-mapply-instead-of-loops" class="level3">
+<h3 class="anchored" data-anchor-id="step-4-optional-using-replicate-and-mapply-instead-of-loops">Step 4 (Optional): Using <code>replicate()</code> (and <code>mapply()</code>) Instead of Loops</h3>
+<p>You can achieve the same results using functions of the <code>*apply()</code> family and the support of a custom function… This might look less readable if you are not used to it, but an approach like this will become more convenient and efficient if you need to run computationally heavy simulations, and especially if you want to parallelize.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>power_once <span class="ot">=</span> <span class="cf">function</span>(N, d, <span class="at">nsim =</span> <span class="dv">1000</span>, <span class="at">alpha =</span> <span class="fl">0.05</span>) {</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  pvals <span class="ot">=</span> <span class="fu">replicate</span>(nsim, {</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    g1 <span class="ot">=</span> <span class="fu">rnorm</span>(N, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    g2 <span class="ot">=</span> <span class="fu">rnorm</span>(N, d, <span class="dv">1</span>)</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">t.test</span>(g1, g2)<span class="sc">$</span>p.value</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">mean</span>(pvals <span class="sc">&lt;</span> alpha))</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>results <span class="ot">=</span> <span class="fu">data.frame</span>(</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">d =</span> param_grid<span class="sc">$</span>d,</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">N =</span> param_grid<span class="sc">$</span>N,</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">power =</span> <span class="fu">mapply</span>(power_once, param_grid<span class="sc">$</span>N, param_grid<span class="sc">$</span>d,</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>                 <span class="at">nsim =</span> nsim, <span class="at">alpha =</span> alpha)</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<hr>
+</section>
+</section>
+<section id="part-3-type-m-error-for-correlation-tests" class="level2">
+<h2 class="anchored" data-anchor-id="part-3-type-m-error-for-correlation-tests">Part 3 – Type M Error for Correlation Tests</h2>
+<p>When power is low, statistically significant correlations tend to overestimate the <em>true</em> effect size.<br>
+This phenomenon is called the <strong>Type M (Magnitude) Error</strong>.</p>
+<p>We will simulate correlations and assess how much the significant results overestimate the true correlation <code>r</code>.</p>
+<section id="step-1-setup-1" class="level4">
+<h4 class="anchored" data-anchor-id="step-1-setup-1">Step 1: Setup</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Recommended package</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;MASS&quot;)</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Set parameters</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>N <span class="ot">=</span> <span class="dv">100</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>true_r <span class="ot">=</span> <span class="fl">0.15</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>nsim <span class="ot">=</span> <span class="dv">3000</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">=</span> <span class="fl">0.05</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize results vectors (best practice)</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>p_values <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, nsim)</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>r_observed <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, nsim)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="step-2-simulation-loop-primary-for" class="level4">
+<h4 class="anchored" data-anchor-id="step-2-simulation-loop-primary-for">Step 2: Simulation Loop (Primary: <code>for</code>)</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">0</span>) <span class="co"># set a seed for reproducibility</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nsim) {</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  Sigma <span class="ot">=</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>, true_r, </span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>                   true_r, <span class="dv">1</span>), <span class="at">nrow =</span> <span class="dv">2</span>)</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  data <span class="ot">=</span> MASS<span class="sc">::</span><span class="fu">mvrnorm</span>(N, <span class="at">mu =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), <span class="at">Sigma =</span> Sigma)</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  test <span class="ot">=</span> <span class="fu">cor.test</span>(data[,<span class="dv">1</span>], data[,<span class="dv">2</span>])</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>  p_values[i] <span class="ot">=</span> test<span class="sc">$</span>p.value</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>  r_observed[i] <span class="ot">=</span> test<span class="sc">$</span>estimate</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute power and Type M error</span></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>power_est <span class="ot">=</span> <span class="fu">mean</span>(p_values <span class="sc">&lt;</span> alpha)</span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>typeM <span class="ot">=</span> <span class="fu">mean</span>(r_observed[p_values <span class="sc">&lt;</span> alpha]) <span class="sc">/</span> true_r</span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>power_est</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.3126667</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>typeM</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.71148</code></pre>
+</div>
+</div>
+<p><strong>Interpretation:</strong><br>
+If Type M = 1.5, significant results overestimate the true correlation by 50%.</p>
+<hr>
+</section>
+<section id="step-3-optional-using-replicate-for-the-same-simulation" class="level4">
+<h4 class="anchored" data-anchor-id="step-3-optional-using-replicate-for-the-same-simulation">Step 3 (Optional): Using <code>replicate()</code> for the Same Simulation</h4>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>simulate_cor_once <span class="ot">=</span> <span class="cf">function</span>(N, true_r) {</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  Sigma <span class="ot">=</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>, true_r, true_r, <span class="dv">1</span>), <span class="at">nrow =</span> <span class="dv">2</span>)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  XY <span class="ot">=</span> MASS<span class="sc">::</span><span class="fu">mvrnorm</span>(N, <span class="at">mu =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), <span class="at">Sigma =</span> Sigma)</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  test <span class="ot">=</span> <span class="fu">cor.test</span>(XY[,<span class="dv">1</span>], XY[,<span class="dv">2</span>])</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">c</span>(<span class="at">p =</span> test<span class="sc">$</span>p.value, <span class="at">r_obs =</span> <span class="fu">unname</span>(test<span class="sc">$</span>estimate)))</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply the simulation nsim times using replicate()</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>out <span class="ot">=</span> <span class="fu">replicate</span>(nsim, <span class="fu">simulate_cor_once</span>(N, true_r))</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract results (rows: p-values, observed r)</span></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>power_est <span class="ot">=</span> <span class="fu">mean</span>(out[<span class="st">&quot;p&quot;</span>, ] <span class="sc">&lt;</span> alpha)</span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>typeM <span class="ot">=</span> <span class="fu">mean</span>(out[<span class="st">&quot;r_obs&quot;</span>, out[<span class="st">&quot;p&quot;</span>, ] <span class="sc">&lt;</span> alpha]) <span class="sc">/</span> true_r</span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>power_est</span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>typeM</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<hr>
+</section>
+</section>
+<section id="part-4-power-for-a-simple-linear-regression" class="level2">
+<h2 class="anchored" data-anchor-id="part-4-power-for-a-simple-linear-regression">Part 4 – Power for a Simple Linear Regression</h2>
+<p>Now we extend the simulation idea to a <strong>linear regression</strong> model.</p>
+<p>We will simulate data following:</p>
+<span class="math display">\[
+y = b0 + b1 \cdot x + \epsilon
+\]</span>
+<div style="text-align:center;">
+<p>where <span class="math inline">\(\epsilon \sim Normal(0, 1)\)</span></p>
+</div>
+<section id="step-1-setup-2" class="level4">
+<h4 class="anchored" data-anchor-id="step-1-setup-2">Step 1: Setup</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>N <span class="ot">=</span> <span class="dv">80</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>b0 <span class="ot">=</span> <span class="dv">0</span>    <span class="co"># intercept, not of interest now</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>b1 <span class="ot">=</span> <span class="fl">0.25</span> <span class="co"># regression coefficient (true effect)</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>sigma <span class="ot">=</span> <span class="dv">1</span> <span class="co"># std.dev. of residuals/epsilon</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>nsim <span class="ot">=</span> <span class="dv">3000</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">=</span> <span class="fl">0.05</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>p_values <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, nsim)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="step-2-simulation-primary-for" class="level4">
+<h4 class="anchored" data-anchor-id="step-2-simulation-primary-for">Step 2: Simulation (Primary: <code>for</code>)</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">0</span>) <span class="co"># set a seed for reproducibility</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nsim) {</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">=</span> <span class="fu">rnorm</span>(N)</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">=</span> b0 <span class="sc">+</span> b1 <span class="sc">*</span> x <span class="sc">+</span> <span class="fu">rnorm</span>(N,<span class="dv">0</span>,sigma)</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  fit <span class="ot">=</span> <span class="fu">lm</span>(y <span class="sc">~</span> x)</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>  p_values[i] <span class="ot">=</span> <span class="fu">summary</span>(fit)<span class="sc">$</span>coefficients[<span class="st">&quot;x&quot;</span>, <span class="st">&quot;Pr(&gt;|t|)&quot;</span>]</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>power_est <span class="ot">=</span> <span class="fu">mean</span>(p_values <span class="sc">&lt;</span> alpha)</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>power_est</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.5876667</code></pre>
+</div>
+</div>
+</section>
+<section id="step-3-optional-same-with-replicate" class="level4">
+<h4 class="anchored" data-anchor-id="step-3-optional-same-with-replicate">Step 3 (Optional): Same with <code>replicate()</code></h4>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>simulate_lm <span class="ot">=</span> <span class="cf">function</span>(N, b1) {</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">=</span> <span class="fu">rnorm</span>(N)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">=</span> b0 <span class="sc">+</span> b1 <span class="sc">*</span> x <span class="sc">+</span> <span class="fu">rnorm</span>(N, <span class="dv">0</span>, sigma)</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  fit <span class="ot">=</span> <span class="fu">lm</span>(y <span class="sc">~</span> x)</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  pval <span class="ot">=</span> <span class="fu">summary</span>(fit)<span class="sc">$</span>coefficients[<span class="st">&quot;x&quot;</span>, <span class="st">&quot;Pr(&gt;|t|)&quot;</span>]</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(pval)</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>p_values <span class="ot">=</span> <span class="fu">replicate</span>(nsim, <span class="fu">simulate_lm</span>(N, b1))</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(p_values <span class="sc">&lt;</span> alpha)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Questions:</strong></p>
+<ul>
+<li>How does increasing <code>b1</code> affect power?</li>
+<li>What if you double the sample size?</li>
+<li>What if you increase or reduce <code>sigma</code>?</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="what-could-you-do-next" class="level2">
+<h2 class="anchored" data-anchor-id="what-could-you-do-next">What Could You Do Next?</h2>
+<div style="font-size:17px;">
+<ul>
+<li>Extend the above <code>t.test</code> simulations to <strong>paired t-tests</strong> or <strong>one-sample t-tests</strong>.</li>
+<li>Explore how power changes with different alpha levels (e.g., 0.01, 0.10) or with various p-value adjustments (<code>p.adjust()</code>) for multiple comparisons.</li>
+<li>Visualize the distribution of <em>p-values</em> or <em>observed effect sizes</em> across all iterations.</li>
+<li>Understand how increasing the number of iterations <code>nsim</code> make your power simulation more precise.</li>
+<li>Try power simulation for <strong>logistic regression</strong> (e.g., <code>plogis()</code> for generating probabilities from a linear term, <code>rbinom()</code> for generating binomial data, and <code>glm(y ~ x, data=df, family=binomial(link=&quot;logit&quot;))</code> for fitting models).</li>
+</ul>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled" title="Simulations can be computationally heavy">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Simulations can be computationally heavy
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Simulations with many iterations or complex models (like generalized mixed-effects models, SEM, computational models) can take a long time to run. If time is very long, start small (e.g., 5-10 iterations) to test your code and then increase to improve precision. Plus, learning how to parallelize computation (e.g., with the <code>parallel()</code> package and its <code>mclapply()</code> function).</p>
 </div>
 </div>
 </section>
