@@ -1,0 +1,224 @@
+---
+title: "Exercises – Monte Carlo Simulation for a Mixed-Effects Logistic Regression"
+subtitle: "*Basics of R for Data Science*"
+include-in-header: ../assets/header.html
+format: 
+  html:
+    self-contained: true
+    toc: true
+    toc-depth: 3
+    toc-expand: 4
+    code-fold: false
+    message: false
+    css: "../assets/custom.css"
+editor: visual
+---
+
+## (Invented) Scenario: Does Smartphone Distraction Reduce Trial-Level Accuracy?
+
+Imagine you are studying **sustained attention** in PhD students during a computerized Go/No-Go task.\
+Each participant completes trials in two conditions:
+
+-   **Control**: no notifications (baseline).
+-   **Distraction**: intermittent smartphone pings while performing the task.
+
+The response is **binary** (1 = correct, 0 = incorrect). Each participant goes through many trials and provides several responses. Therefore, a **mixed-effects logistic regression** is appropriate:
+
+-   *Random intercepts* account for individual differences in general correctness (they can be set in any case in which there is more than one single response per participant);
+-   *Random slopes* account for individual differences in the effect/treatment (some participants are more susceptible to the treatment, other are less; *random slopes* can be set in cases where each participant is observed in more than one condition and provide more than one response in each condition... which is indeed the present case!)
+
+We will:
+
+1.  **Simulate one single dataset** for this scenario (trial-level, repeated within participants) to understand how it works;
+2.  **Estimate power by simulation** for a *single design* (a given N, a given effect size) using the traditional significance rule (p \< .05);
+3.  **Repeat the power estimate using ΔAIC** (AIC_null – AIC_full) as the decision rule, purely for illustration.
+
+------------------------------------------------------------------------
+
+## Part 1 — Simulate **one** dataset
+
+Assumptions for the data-generating process:
+
+-   Participants: `n_participants = 60`
+-   Trials per condition per participant: `n_trials = 40` (so 80 trials per person)
+-   Baseline accuracy (Control) ≈ 0.73 → `beta0 ≈ logit(0.73) ≈ 1.0`
+-   Distraction reduces accuracy: `beta1 = -0.30` (moderate impairment)
+-   Between-participant variability in baseline accuracy: `sd_participant = 0.8` (random intercept SD)
+
+```{r, cache=T}
+# install.packages("lme4") # if needed
+library(lme4)
+
+set.seed(20251029)
+
+# Design and true parameters
+n_participants  = 60
+n_trials        = 40
+beta0           = 1.0    # baseline log-odds in Control
+beta1           = -0.30   # effect of Distraction (negative -> lower accuracy)
+sd_participant  = 0.8    # random intercept SD
+alpha           = 0.05   # significance threshold
+
+# Build one dataset
+df = expand.grid(
+  participant = factor(1:n_participants),
+  condition   = c("Control", "Distraction"),
+  trial       = 1:n_trials
+)
+
+# Random intercept per participant
+rand_int = rnorm(n_participants, 0, sd_participant)
+rand_slo = rnorm(n_participants, 0, sd_participant)
+df$randInt_i    = rand_int[df$participant]
+df$randSlo_i    = rand_slo[df$participant]
+
+# Dummy coding for simulation
+df$cond_dummy = ifelse(df$condition == "Distraction", 1, 0)
+
+# Log-odds and probabilities
+df$logit_prob = beta0 + beta1*df$cond_dummy + 
+                df$randInt_i + df$randSlo_i*df$cond_dummy
+df$prob       = plogis(df$logit_prob)
+
+# Simulate binary responses
+df$response = rbinom(nrow(df), size = 1, prob = df$prob)
+
+# Fit the planned analysis model
+fit_full = glmer(response ~ condition + (condition | participant),
+                  data = df, family = binomial,
+                  control = glmerControl(optimizer = "bobyqa",
+                                         optCtrl = list(maxfun = 1e5)))
+summary(fit_full)
+```
+
+**Interpretation tip.** The coefficient for `cond_dummy` estimates how much Distraction changes the log-odds of a correct response relative to Control. A negative, significant estimate supports the “distraction impairs accuracy” hypothesis.
+
+------------------------------------------------------------------------
+
+## Part 2 — **Power** by Monte Carlo (with `replicate`)
+
+We keep the same design and true parameters as above. We repeatedly:
+
+1.  Simulate a new dataset;
+2.  Fit the same `glmer(...)` model;
+3.  Record the p-value for the (fixed) effect of interest.
+
+First of all, let's write a custom function that simulates one datasets, runs the analysis fitting the appropriate mixed-effects logistic regression model, and extracts and returns the p-value of interest (i.e., the p-value associated with the `condition` main effect.
+
+```{r}
+simulate_once = function(n_participants = 60,
+                         n_trials = 40,
+                         beta0 = 1,
+                         beta1 = -0.30,
+                         sd_participants = 0.8) {
+  
+  # Random intercept per participant (new draw each experiment)
+  rand_int = rnorm(n_participants, 0, sd_participant)
+  rand_slo = rnorm(n_participants, 0, sd_participant)
+
+  # Build the design
+  df = expand.grid(
+    participant = factor(1:n_participants),
+    condition   = c("Control", "Distraction"),
+    trial       = 1:n_trials
+  )
+  df$cond_dummy = ifelse(df$condition == "Distraction", 1, 0)
+  df$randInt_i    = rand_int[df$participant]
+  df$randSlo_i    = rand_slo[df$participant]
+  
+  df$logit_prob = beta0 + beta1*df$cond_dummy + 
+                df$randInt_i + df$randSlo_i*df$cond_dummy
+  
+  df$prob        = plogis(df$logit_prob)
+  df$response = rbinom(nrow(df), 1, df$prob)
+  
+  # Fit model; use try() to handle possible non-convergences
+  fit = try(glmer(response ~ condition + (condition | participant),
+                   data = df, family = binomial,
+                   control = glmerControl(optimizer = "bobyqa",
+                                          optCtrl = list(maxfun = 1e5))),
+             silent = TRUE)
+  if (inherits(fit, "try-error")) return(NA)
+  coefs = summary(fit)$coefficients
+  pval = coefs["conditionDistraction", "Pr(>|z|)"]
+
+  return(pval)
+}
+```
+
+Ok, now let's run with `replicate()` times `nsim` and get all the p-values we want!
+
+We define power as the proportion of times where $p < 0.05$. Now we run "only" 200 iterations to avoid too long computations... but in real life you will probably need many more iterations for precision.
+
+```{r, cache=T}
+set.seed(20251029) # set seed for reproducibility
+nsim = 10 # define number of iterations
+pvals = rep(NA, nsim) # initialize vector of results (best practice)
+
+# RUN!!!
+pvals = replicate(nsim,simulate_once())
+
+# Remove NAs if any (non-converged runs)
+pvals_clean = pvals[is.finite(pvals)]
+prop_converged = length(pvals_clean) / nsim
+power_pvalue   = mean(pvals_clean < alpha)
+
+# See results
+list(
+  simulations_requested = nsim,
+  simulations_converged = length(pvals_clean),
+  convergence_rate      = round(prop_converged, 3),
+  power_p_less_0_05     = round(power_pvalue, 3)
+)
+```
+
+> **Note.** Mixed-effects models can occasionally fail to converge under certain parameterizations. We track and report the proportion of successful fits.
+
+------------------------------------------------------------------------
+
+## Part 3 — Speeding up with parallel computing
+
+We keep the **same** `simulate_once()` and parameters as in Part 2.
+
+To parallelize in a way that should work on **Windows, macOS, and Linux**, we use the `future.apply` package with a **multisession** plan (each worker is its own R session)
+
+⚠️ The below code was actually run on Windows... it needs to be actually checked on other operating systems.
+
+```{r, cache=T}
+#| warning: false
+# Cross-platform parallel power simulation with future.apply
+
+# preliminarily install packages if needed
+library(future)
+library(future.apply)
+library(parallel)   # for detectCores()
+
+# Choose workers (leave one core free)
+workers = max(1, detectCores(logical = TRUE) - 1)
+
+# Cross-platform backend: *multisession* works on Windows/macOS/Linux
+plan(multisession, workers = workers)
+
+nsim = 10          # same as Part 2
+
+# Run the same simulation many times, in parallel
+pvals_parallel = future_sapply(
+  1:nsim,
+  function(i) simulate_once(),   # uses objects defined above (e.g., beta0, beta1, etc.)
+  future.seed = 20251029        # reproducible, independent RNG streams per worker
+)
+
+# Post-processing identical to Part 2
+pvals_clean     = pvals_parallel[is.finite(pvals_parallel)]
+prop_converged  = length(pvals_clean) / nsim
+power_pvalue    = mean(pvals_clean < alpha)
+
+# See results
+list(
+  backend               = sprintf("future.apply::multisession (%d workers)", workers),
+  simulations_requested = nsim,
+  simulations_converged = length(pvals_clean),
+  convergence_rate      = round(prop_converged, 3),
+  power_p_less_0_05     = round(power_pvalue, 3)
+)
+```

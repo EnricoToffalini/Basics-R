@@ -16,20 +16,20 @@ editor: visual
 
 ## Scenario
 
-Performing **Monte Carlo simulations for statistical power is much more than just computing power**. It is about building a complete *research scenario*, clarifying all sources of variability, defining the key parameters, and writing explicit code for the intended analysis. It gives you an insight that <em>G*Power</em> and other similar point-and-click software will never give you. 
+Performing **Monte Carlo simulations for statistical power is much more than just computing power**. It is about building a complete *research scenario*, clarifying all sources of variability, defining the key parameters, and writing explicit code for the intended analysis. It gives you an insight that <em>G\*Power</em> and other similar point-and-click software will never give you.
 
 Simulating helps you:
 
-- Understand the data-generating process (*super important!* especially when fitting models),
-- Understand the general logic behind power analysis,
-- Write pre-registered, transparent analyses for fully reproducible research.
+-   Understand the data-generating process (*super important!* especially when fitting models),
+-   Understand the general logic behind power analysis,
+-   Write pre-registered, transparent analyses for fully reproducible research.
 
 We will start from the simplest scenario: a t-test (actually **not** something for which you actually need a simulation, and **not** something you would normally choose for a pre-registration, but that's for learning), and then move toward correlation and regression models.
 
-> We will use **`for` loops** as the *primary method* because they are explicit and easy to read  
+> We will use **`for` loops** as the *primary method* because they are explicit and easy to read\
 > However, we will also show a **compact alternative using the `replicate()` function**, a member of the *apply family*, that performs the same task more concisely once you’re comfortable with functional programming.
 
----
+------------------------------------------------------------------------
 
 ## Part 1 – Power of a *t-Test* via Monte Carlo Simulation
 
@@ -67,7 +67,7 @@ for (i in 1:nsim) {
 
 #### Step 3: Estimate Power
 
-Power is simply the proportion of simulations where the null hypothesis is rejected (p < α).
+Power is simply the proportion of simulations where the null hypothesis is rejected (p \< α).
 
 ```{r}
 simulated_power = mean(p_values < alpha)
@@ -84,14 +84,14 @@ analytic_power = pwr.t.test(d = d, n = N, sig.level = alpha, type = "two.sample"
 analytic_power
 ```
 
-**Question:** Are the two power estimates close?  
+**Question:** Are the two power estimates close?\
 Try increasing `nsim` to improve precision.
 
----
+------------------------------------------------------------------------
 
 #### Step 5 (Optional): Rewriting with `replicate()`
 
-The same simulation can be written more compactly using **`replicate`()`**, which repeatedly applies a function to a sequence (here, 1 to `nsim`).
+The same simulation can be written more compactly using \*\*`replicate`()`**, which repeatedly applies a function to a sequence (here, 1 to`nsim\`).
 
 ```{r}
 set.seed(0) # set a seed for reproducibility
@@ -107,10 +107,9 @@ p_values_replicate = replicate(nsim, simulate_t_p(N, d))
 mean(p_values_replicate < alpha)
 ```
 
-> `replicate()` performs the same job as the `for` loop but is designed specifically for repeated simulations;
-> `replicate()` is actually just a wrapper of `sapply()` for repeating the exact same expression (usually with just different random numbers, like in our case).
+> `replicate()` performs the same job as the `for` loop but is designed specifically for repeated simulations; `replicate()` is actually just a wrapper of `sapply()` for repeating the exact same expression (usually with just different random numbers, like in our case).
 
----
+------------------------------------------------------------------------
 
 ## Part 2 – Power Curve for Different Effect Sizes and Sample Sizes
 
@@ -174,13 +173,13 @@ ggplot(results, aes(x = N, y = power, color = factor(d))) +
 
 **Question:** For what combination of `N` and `d` does power exceed 0.80?
 
----
+------------------------------------------------------------------------
 
 ### Step 4 (Optional): Using `replicate()` (and `mapply()`) Instead of Loops
 
 You can achieve the same results using functions of the `*apply()` family and the support of a custom function... This might look less readable if you are not used to it, but an approach like this will become more convenient and efficient if you need to run computationally heavy simulations, and especially if you want to parallelize.
 
-```r
+``` r
 power_once = function(N, d, nsim = 1000, alpha = 0.05) {
   pvals = replicate(nsim, {
     g1 = rnorm(N, 0, 1)
@@ -198,11 +197,11 @@ results = data.frame(
 )
 ```
 
----
+------------------------------------------------------------------------
 
 ## Part 3 – Type M Error for Correlation Tests
 
-When power is low, statistically significant correlations tend to overestimate the *true* effect size.  
+When power is low, statistically significant correlations tend to overestimate the *true* effect size.\
 This phenomenon is called the **Type M (Magnitude) Error**.
 
 We will simulate correlations and assess how much the significant results overestimate the true correlation `r`.
@@ -249,14 +248,14 @@ power_est
 typeM
 ```
 
-**Interpretation:**  
+**Interpretation:**\
 If Type M = 1.5, significant results overestimate the true correlation by 50%.
 
----
+------------------------------------------------------------------------
 
 #### Step 3 (Optional): Using `replicate()` for the Same Simulation
 
-```r
+``` r
 simulate_cor_once = function(N, true_r) {
   Sigma = matrix(c(1, true_r, true_r, 1), nrow = 2)
   XY = MASS::mvrnorm(N, mu = c(0, 0), Sigma = Sigma)
@@ -275,7 +274,7 @@ power_est
 typeM
 ```
 
----
+------------------------------------------------------------------------
 
 ## Part 4 – Power for a Simple Linear Regression
 
@@ -286,9 +285,10 @@ We will simulate data following:
 $$
 y = b0 + b1 \cdot x + \epsilon
 $$
-<div style="text-align:center;">
+
+::: {style="text-align:center;"}
 where $\epsilon \sim Normal(0, 1)$
-</div>
+:::
 
 #### Step 1: Setup
 
@@ -323,7 +323,7 @@ power_est
 
 #### Step 3 (Optional): Same with `replicate()`
 
-```r
+``` r
 simulate_lm = function(N, b1) {
   x = rnorm(N)
   y = b0 + b1 * x + rnorm(N, 0, sigma)
@@ -338,20 +338,20 @@ mean(p_values < alpha)
 
 **Questions:**
 
-- How does increasing `b1` affect power? 
-- What if you double the sample size?
-- What if you increase or reduce `sigma`?
+-   How does increasing `b1` affect power?
+-   What if you double the sample size?
+-   What if you increase or reduce `sigma`?
 
----
+------------------------------------------------------------------------
 
 ## What Could You Do Next?
 
 ::: {style="font-size:17px;"}
-- Extend the above `t.test` simulations to **paired t-tests** or **one-sample t-tests**.
-- Explore how power changes with different alpha levels (e.g., 0.01, 0.10) or with various p-value adjustments (`p.adjust()`) for multiple comparisons.
-- Visualize the distribution of *p-values* or *observed effect sizes* across all iterations.
-- Understand how increasing the number of iterations `nsim` make your power simulation more precise.
-- Try power simulation for **logistic regression** (e.g., `plogis()` for generating probabilities from a linear term, `rbinom()` for generating binomial data, and `glm(y ~ x, data=df, family=binomial(link="logit"))` for fitting models).
+-   Extend the above `t.test` simulations to **paired t-tests** or **one-sample t-tests**.
+-   Explore how power changes with different alpha levels (e.g., 0.01, 0.10) or with various p-value adjustments (`p.adjust()`) for multiple comparisons.
+-   Visualize the distribution of *p-values* or *observed effect sizes* across all iterations.
+-   Understand how increasing the number of iterations `nsim` make your power simulation more precise.
+-   Try power simulation for **logistic regression** (e.g., `plogis()` for generating probabilities from a linear term, `rbinom()` for generating binomial data, and `glm(y ~ x, data=df, family=binomial(link="logit"))` for fitting models).
 :::
 
 ::: {.callout-warning title="Simulations can be computationally heavy"}
