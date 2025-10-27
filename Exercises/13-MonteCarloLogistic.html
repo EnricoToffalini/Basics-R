@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Exercises – Monte Carlo Simulation for a Mixed-Effects Logistic Regression</title>
+<title>Exercises – Monte Carlo Power Simulation for Mixed-Effects Logistic Regression, and Some Parallelization</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -2322,9 +2322,9 @@ window.Quarto = {
    
   <ul>
   <li><a href="#invented-scenario-does-smartphone-distraction-reduce-trial-level-accuracy" id="toc-invented-scenario-does-smartphone-distraction-reduce-trial-level-accuracy" class="nav-link active" data-scroll-target="#invented-scenario-does-smartphone-distraction-reduce-trial-level-accuracy">(Invented) Scenario: Does Smartphone Distraction Reduce Trial-Level Accuracy?</a></li>
-  <li><a href="#part-1-simulate-one-dataset" id="toc-part-1-simulate-one-dataset" class="nav-link" data-scroll-target="#part-1-simulate-one-dataset">Part 1 — Simulate <strong>one</strong> dataset</a></li>
-  <li><a href="#part-2-power-by-monte-carlo-with-replicate" id="toc-part-2-power-by-monte-carlo-with-replicate" class="nav-link" data-scroll-target="#part-2-power-by-monte-carlo-with-replicate">Part 2 — <strong>Power</strong> by Monte Carlo (with <code>replicate</code>)</a></li>
-  <li><a href="#part-3-speeding-up-with-parallel-computing" id="toc-part-3-speeding-up-with-parallel-computing" class="nav-link" data-scroll-target="#part-3-speeding-up-with-parallel-computing">Part 3 — Speeding up with parallel computing</a></li>
+  <li><a href="#part-1-simulate-one-single-dataset" id="toc-part-1-simulate-one-single-dataset" class="nav-link" data-scroll-target="#part-1-simulate-one-single-dataset">Part 1: Simulate <strong>one</strong> single dataset</a></li>
+  <li><a href="#part-2-monte-carlo-power-simulation-with-replicate" id="toc-part-2-monte-carlo-power-simulation-with-replicate" class="nav-link" data-scroll-target="#part-2-monte-carlo-power-simulation-with-replicate">Part 2: Monte Carlo Power Simulation (with <code>replicate</code>)</a></li>
+  <li><a href="#part-3-speeding-up-with-parallel-computing" id="toc-part-3-speeding-up-with-parallel-computing" class="nav-link" data-scroll-target="#part-3-speeding-up-with-parallel-computing">Part 3: Speeding up with parallel computing</a></li>
   </ul>
 </nav>
 </div>
@@ -2332,7 +2332,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Exercises – Monte Carlo Simulation for a Mixed-Effects Logistic Regression</h1>
+<h1 class="title">Exercises – Monte Carlo Power Simulation for Mixed-Effects Logistic Regression, and Some Parallelization</h1>
 <p class="subtitle lead"><em>Basics of R for Data Science</em></p>
 </div>
 
@@ -2360,19 +2360,19 @@ Each participant completes trials in two conditions:</p>
 </ul>
 <p>The response is <strong>binary</strong> (1 = correct, 0 = incorrect). Each participant goes through many trials and provides several responses. Therefore, a <strong>mixed-effects logistic regression</strong> is appropriate:</p>
 <ul>
-<li><em>Random intercepts</em> account for individual differences in general correctness (they can be set in any case in which there is more than one single response per participant);</li>
-<li><em>Random slopes</em> account for individual differences in the effect/treatment (some participants are more susceptible to the treatment, other are less; <em>random slopes</em> can be set in cases where each participant is observed in more than one condition and provide more than one response in each condition… which is indeed the present case!)</li>
+<li><strong><em>Random intercepts</em></strong> account for individual differences in general correctness (they can be set in any case in which there is more than one single response per participant);</li>
+<li><strong><em>Random slopes</em></strong> account for individual differences in the effect/treatment (some participants are more susceptible to the treatment, other are less; <em>random slopes</em> can be set in cases where each participant is observed in more than one condition and provide more than one response in each condition… which is indeed the present case!)</li>
 </ul>
 <p>We will:</p>
-<ol type="1">
-<li><strong>Simulate one single dataset</strong> for this scenario (trial-level, repeated within participants) to understand how it works;</li>
-<li><strong>Estimate power by simulation</strong> for a <em>single design</em> (a given N, a given effect size) using the traditional significance rule (p &lt; .05);</li>
-<li><strong>Repeat the power estimate using ΔAIC</strong> (AIC_null – AIC_full) as the decision rule, purely for illustration.</li>
-</ol>
+<ul>
+<li><a href="#part-1-simulate-one-single-dataset">Part 1</a>: <strong>Simulate one single dataset</strong> for this scenario (trial-level, repeated within participants) to understand how it works;</li>
+<li><a href="#part-2-monte-carlo-power-simulation-with-replicate">Part 2</a>: <strong>Estimate power by simulation</strong> for a <em>single design</em> (a given N, a given effect size) using the traditional significance rule (p &lt; .05);</li>
+<li><a href="#part-3-speeding-up-with-parallel-computing">Part 3</a>: <strong>Repeat the power estimate</strong> using parallelized iterations with the <code>future.apply</code> package.</li>
+</ul>
 <hr>
 </section>
-<section id="part-1-simulate-one-dataset" class="level2">
-<h2 class="anchored" data-anchor-id="part-1-simulate-one-dataset">Part 1 — Simulate <strong>one</strong> dataset</h2>
+<section id="part-1-simulate-one-single-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="part-1-simulate-one-single-dataset">Part 1: Simulate <strong>one</strong> single dataset</h2>
 <p>Assumptions for the data-generating process:</p>
 <ul>
 <li>Participants: <code>n_participants = 60</code></li>
@@ -2381,52 +2381,78 @@ Each participant completes trials in two conditions:</p>
 <li>Distraction reduces accuracy: <code>beta1 = -0.30</code> (moderate impairment)</li>
 <li>Between-participant variability in baseline accuracy: <code>sd_participant = 0.8</code> (random intercept SD)</li>
 </ul>
+<p>First of all, install (if needed) and load the <code>lme4</code> package for fitting mixed-effects models:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;lme4&quot;) # if needed</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: Matrix</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">20251029</span>)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Design and true parameters</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>n_participants  <span class="ot">=</span> <span class="dv">60</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>n_trials        <span class="ot">=</span> <span class="dv">40</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>beta0           <span class="ot">=</span> <span class="fl">1.0</span>    <span class="co"># baseline log-odds in Control</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>beta1           <span class="ot">=</span> <span class="sc">-</span><span class="fl">0.30</span>   <span class="co"># effect of Distraction (negative -&gt; lower accuracy)</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>sd_participant  <span class="ot">=</span> <span class="fl">0.8</span>    <span class="co"># random intercept SD</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>alpha           <span class="ot">=</span> <span class="fl">0.05</span>   <span class="co"># significance threshold</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Build one dataset</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> <span class="fu">expand.grid</span>(</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">participant =</span> <span class="fu">factor</span>(<span class="dv">1</span><span class="sc">:</span>n_participants),</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">condition   =</span> <span class="fu">c</span>(<span class="st">&quot;Control&quot;</span>, <span class="st">&quot;Distraction&quot;</span>),</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">trial       =</span> <span class="dv">1</span><span class="sc">:</span>n_trials</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Random intercept per participant</span></span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>rand_int <span class="ot">=</span> <span class="fu">rnorm</span>(n_participants, <span class="dv">0</span>, sd_participant)</span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>rand_slo <span class="ot">=</span> <span class="fu">rnorm</span>(n_participants, <span class="dv">0</span>, sd_participant)</span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>randInt_i    <span class="ot">=</span> rand_int[df<span class="sc">$</span>participant]</span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>randSlo_i    <span class="ot">=</span> rand_slo[df<span class="sc">$</span>participant]</span>
+<p>Second, let’s define all design parameters:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>n_participants  <span class="ot">=</span> <span class="dv">60</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>n_trials        <span class="ot">=</span> <span class="dv">40</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>beta0           <span class="ot">=</span> <span class="fl">1.0</span>    <span class="co"># baseline log-odds in Control</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>beta1           <span class="ot">=</span> <span class="sc">-</span><span class="fl">0.30</span>   <span class="co"># effect of Distraction (negative -&gt; lower accuracy)</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>sd_participant  <span class="ot">=</span> <span class="fl">0.8</span>    <span class="co"># random intercept SD</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>alpha           <span class="ot">=</span> <span class="fl">0.05</span>   <span class="co"># significance threshold</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Third, let’s build one dataset:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize empty dataset, one row per participant per condition</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> <span class="fu">expand.grid</span>(</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">participant =</span> <span class="fu">factor</span>(<span class="dv">1</span><span class="sc">:</span>n_participants),</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">condition   =</span> <span class="fu">c</span>(<span class="st">&quot;Control&quot;</span>, <span class="st">&quot;Distraction&quot;</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Repeat each row times trials</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> df[<span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(df),<span class="at">each=</span>n_trials) , ]</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>trial <span class="ot">=</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span>n_trials, <span class="at">times=</span>n_participants<span class="sc">*</span><span class="dv">2</span>)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate random intercept per participant</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>rand_int <span class="ot">=</span> <span class="fu">rnorm</span>(n_participants, <span class="dv">0</span>, sd_participant)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>rand_slo <span class="ot">=</span> <span class="fu">rnorm</span>(n_participants, <span class="dv">0</span>, sd_participant)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>randInt_i    <span class="ot">=</span> rand_int[df<span class="sc">$</span>participant]</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>randSlo_i    <span class="ot">=</span> rand_slo[df<span class="sc">$</span>participant]</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Dummy coding for simulation</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>cond_dummy <span class="ot">=</span> <span class="fu">ifelse</span>(df<span class="sc">$</span>condition <span class="sc">==</span> <span class="st">&quot;Distraction&quot;</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Log-odds and probabilities</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>logit     <span class="ot">=</span> beta0 <span class="sc">+</span> beta1<span class="sc">*</span>df<span class="sc">$</span>cond_dummy <span class="sc">+</span> </span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>                df<span class="sc">$</span>randInt_i <span class="sc">+</span> df<span class="sc">$</span>randSlo_i<span class="sc">*</span>df<span class="sc">$</span>cond_dummy</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>prob       <span class="ot">=</span> <span class="fu">plogis</span>(df<span class="sc">$</span>logit)</span>
 <span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Dummy coding for simulation</span></span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>cond_dummy <span class="ot">=</span> <span class="fu">ifelse</span>(df<span class="sc">$</span>condition <span class="sc">==</span> <span class="st">&quot;Distraction&quot;</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Log-odds and probabilities</span></span>
-<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>logit_prob <span class="ot">=</span> beta0 <span class="sc">+</span> beta1<span class="sc">*</span>df<span class="sc">$</span>cond_dummy <span class="sc">+</span> </span>
-<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>                df<span class="sc">$</span>randInt_i <span class="sc">+</span> df<span class="sc">$</span>randSlo_i<span class="sc">*</span>df<span class="sc">$</span>cond_dummy</span>
-<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>prob       <span class="ot">=</span> <span class="fu">plogis</span>(df<span class="sc">$</span>logit_prob)</span>
-<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate binary responses</span></span>
-<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>response <span class="ot">=</span> <span class="fu">rbinom</span>(<span class="fu">nrow</span>(df), <span class="at">size =</span> <span class="dv">1</span>, <span class="at">prob =</span> df<span class="sc">$</span>prob)</span>
-<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the planned analysis model</span></span>
-<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>fit_full <span class="ot">=</span> <span class="fu">glmer</span>(response <span class="sc">~</span> condition <span class="sc">+</span> (condition <span class="sc">|</span> participant),</span>
-<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>                  <span class="at">data =</span> df, <span class="at">family =</span> binomial,</span>
-<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>                  <span class="at">control =</span> <span class="fu">glmerControl</span>(<span class="at">optimizer =</span> <span class="st">&quot;bobyqa&quot;</span>,</span>
-<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>                                         <span class="at">optCtrl =</span> <span class="fu">list</span>(<span class="at">maxfun =</span> <span class="fl">1e5</span>)))</span>
-<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_full)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate binary responses</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>response <span class="ot">=</span> <span class="fu">rbinom</span>(<span class="fu">nrow</span>(df), <span class="at">size =</span> <span class="dv">1</span>, <span class="at">prob =</span> df<span class="sc">$</span>prob)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Inspect the first few rows of the dataset:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  participant condition trial randInt_i randSlo_i cond_dummy logit  prob
+1           1   Control     1      1.01     0.287          0  2.01 0.882
+2           1   Control     2      1.01     0.287          0  2.01 0.882
+3           1   Control     3      1.01     0.287          0  2.01 0.882
+4           1   Control     4      1.01     0.287          0  2.01 0.882
+5           1   Control     5      1.01     0.287          0  2.01 0.882
+6           1   Control     6      1.01     0.287          0  2.01 0.882
+  response
+1        1
+2        1
+3        1
+4        0
+5        1
+6        1</code></pre>
+</div>
+</div>
+<p>Fit the planned analysis model:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">=</span> <span class="fu">glmer</span>(response <span class="sc">~</span> condition <span class="sc">+</span> (condition <span class="sc">|</span> participant),</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">data =</span> df, <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link=</span><span class="st">&quot;logit&quot;</span>),</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">control =</span> <span class="fu">glmerControl</span>(<span class="at">optimizer =</span> <span class="st">&quot;bobyqa&quot;</span>,</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>                                         <span class="at">optCtrl =</span> <span class="fu">list</span>(<span class="at">maxfun =</span> <span class="fl">1e5</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>See model summary:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Generalized linear mixed model fit by maximum likelihood (Laplace
   Approximation) [glmerMod]
@@ -2436,104 +2462,114 @@ Formula: response ~ condition + (condition | participant)
 Control: glmerControl(optimizer = &quot;bobyqa&quot;, optCtrl = list(maxfun = 1e+05))
 
      AIC      BIC   logLik deviance df.resid 
-  5604.4   5636.8  -2797.2   5594.4     4795 
+  5574.9   5607.2  -2782.4   5564.9     4795 
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
--3.6900 -0.8731  0.4862  0.6580  1.6279 
+-3.5079 -0.9407  0.4845  0.6603  1.8236 
 
 Random effects:
  Groups      Name                 Variance Std.Dev. Corr
- participant (Intercept)          0.4371   0.6611       
-             conditionDistraction 0.5375   0.7332   0.08
+ participant (Intercept)          0.4710   0.6863       
+             conditionDistraction 0.2374   0.4872   0.50
 Number of obs: 4800, groups:  participant, 60
 
 Fixed effects:
                      Estimate Std. Error z value Pr(&gt;|z|)    
-(Intercept)           0.98229    0.09824   9.998   &lt;2e-16 ***
-conditionDistraction -0.29930    0.11731  -2.551   0.0107 *  
+(Intercept)           0.96864    0.10122   9.570  &lt; 2e-16 ***
+conditionDistraction -0.24201    0.09359  -2.586  0.00971 ** 
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 
 Correlation of Fixed Effects:
             (Intr)
-cndtnDstrct -0.147</code></pre>
+cndtnDstrct 0.041 </code></pre>
 </div>
 </div>
-<p><strong>Interpretation tip.</strong> The coefficient for <code>cond_dummy</code> estimates how much Distraction changes the log-odds of a correct response relative to Control. A negative, significant estimate supports the “distraction impairs accuracy” hypothesis.</p>
+<blockquote class="blockquote">
+<p><strong>Interpretation</strong>: The coefficient for <code>condition</code> estimates how much <code>&quot;Distraction&quot;</code> affects the response accuracy relative to <code>&quot;Control&quot;</code> on the logit scale. A negative, significant estimate supports the “distraction impairs accuracy” hypothesis.</p>
+</blockquote>
 <hr>
 </section>
-<section id="part-2-power-by-monte-carlo-with-replicate" class="level2">
-<h2 class="anchored" data-anchor-id="part-2-power-by-monte-carlo-with-replicate">Part 2 — <strong>Power</strong> by Monte Carlo (with <code>replicate</code>)</h2>
+<section id="part-2-monte-carlo-power-simulation-with-replicate" class="level2">
+<h2 class="anchored" data-anchor-id="part-2-monte-carlo-power-simulation-with-replicate">Part 2: Monte Carlo Power Simulation (with <code>replicate</code>)</h2>
 <p>We keep the same design and true parameters as above. We repeatedly:</p>
 <ol type="1">
 <li>Simulate a new dataset;</li>
 <li>Fit the same <code>glmer(...)</code> model;</li>
 <li>Record the p-value for the (fixed) effect of interest.</li>
 </ol>
-<p>First of all, let’s write a custom function that simulates one datasets, runs the analysis fitting the appropriate mixed-effects logistic regression model, and extracts and returns the p-value of interest (i.e., the p-value associated with the <code>condition</code> main effect.</p>
+<p>Below we will run only <span class="math inline">\(10\)</span> iterations to avoid too long computations… But in real life you will certainly need many more iterations for precision.</p>
+<p>First of all, let’s wrap the whole simulation of one dataset inside a custom function, which returns the p-value associated with the effect of interest, which is <code>condition</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>simulate_once <span class="ot">=</span> <span class="cf">function</span>(<span class="at">n_participants =</span> <span class="dv">60</span>,</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">n_trials =</span> <span class="dv">40</span>,</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">beta0 =</span> <span class="dv">1</span>,</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">beta1 =</span> <span class="sc">-</span><span class="fl">0.30</span>,</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>                         <span class="at">sd_participants =</span> <span class="fl">0.8</span>) {</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Random intercept per participant (new draw each experiment)</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  rand_int <span class="ot">=</span> <span class="fu">rnorm</span>(n_participants, <span class="dv">0</span>, sd_participant)</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  rand_slo <span class="ot">=</span> <span class="fu">rnorm</span>(n_participants, <span class="dv">0</span>, sd_participant)</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Build the design</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  df <span class="ot">=</span> <span class="fu">expand.grid</span>(</span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">participant =</span> <span class="fu">factor</span>(<span class="dv">1</span><span class="sc">:</span>n_participants),</span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">condition   =</span> <span class="fu">c</span>(<span class="st">&quot;Control&quot;</span>, <span class="st">&quot;Distraction&quot;</span>),</span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">trial       =</span> <span class="dv">1</span><span class="sc">:</span>n_trials</span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>  df<span class="sc">$</span>cond_dummy <span class="ot">=</span> <span class="fu">ifelse</span>(df<span class="sc">$</span>condition <span class="sc">==</span> <span class="st">&quot;Distraction&quot;</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>  df<span class="sc">$</span>randInt_i    <span class="ot">=</span> rand_int[df<span class="sc">$</span>participant]</span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>  df<span class="sc">$</span>randSlo_i    <span class="ot">=</span> rand_slo[df<span class="sc">$</span>participant]</span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>  df<span class="sc">$</span>logit_prob <span class="ot">=</span> beta0 <span class="sc">+</span> beta1<span class="sc">*</span>df<span class="sc">$</span>cond_dummy <span class="sc">+</span> </span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>                df<span class="sc">$</span>randInt_i <span class="sc">+</span> df<span class="sc">$</span>randSlo_i<span class="sc">*</span>df<span class="sc">$</span>cond_dummy</span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>  df<span class="sc">$</span>prob        <span class="ot">=</span> <span class="fu">plogis</span>(df<span class="sc">$</span>logit_prob)</span>
-<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>  df<span class="sc">$</span>response <span class="ot">=</span> <span class="fu">rbinom</span>(<span class="fu">nrow</span>(df), <span class="dv">1</span>, df<span class="sc">$</span>prob)</span>
-<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Fit model; use try() to handle possible non-convergences</span></span>
-<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>  fit <span class="ot">=</span> <span class="fu">try</span>(<span class="fu">glmer</span>(response <span class="sc">~</span> condition <span class="sc">+</span> (condition <span class="sc">|</span> participant),</span>
-<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>                   <span class="at">data =</span> df, <span class="at">family =</span> binomial,</span>
-<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>                   <span class="at">control =</span> <span class="fu">glmerControl</span>(<span class="at">optimizer =</span> <span class="st">&quot;bobyqa&quot;</span>,</span>
-<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">optCtrl =</span> <span class="fu">list</span>(<span class="at">maxfun =</span> <span class="fl">1e5</span>))),</span>
-<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>             <span class="at">silent =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">inherits</span>(fit, <span class="st">&quot;try-error&quot;</span>)) <span class="fu">return</span>(<span class="cn">NA</span>)</span>
-<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>  coefs <span class="ot">=</span> <span class="fu">summary</span>(fit)<span class="sc">$</span>coefficients</span>
-<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>  pval <span class="ot">=</span> coefs[<span class="st">&quot;conditionDistraction&quot;</span>, <span class="st">&quot;Pr(&gt;|z|)&quot;</span>]</span>
-<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(pval)</span>
-<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>simulate_once <span class="ot">=</span> <span class="cf">function</span>(<span class="at">n_participants =</span> <span class="dv">60</span>,</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">n_trials =</span> <span class="dv">40</span>,</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">beta0 =</span> <span class="dv">1</span>,</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">beta1 =</span> <span class="sc">-</span><span class="fl">0.30</span>,</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>                         <span class="at">sd_participants =</span> <span class="fl">0.8</span>) {</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Random intercept per participant (new draw each experiment)</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  rand_int <span class="ot">=</span> <span class="fu">rnorm</span>(n_participants, <span class="dv">0</span>, sd_participant)</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  rand_slo <span class="ot">=</span> <span class="fu">rnorm</span>(n_participants, <span class="dv">0</span>, sd_participant)</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Build the design</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  df <span class="ot">=</span> <span class="fu">expand.grid</span>(</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">participant =</span> <span class="fu">factor</span>(<span class="dv">1</span><span class="sc">:</span>n_participants),</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">condition   =</span> <span class="fu">c</span>(<span class="st">&quot;Control&quot;</span>, <span class="st">&quot;Distraction&quot;</span>),</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">trial       =</span> <span class="dv">1</span><span class="sc">:</span>n_trials</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>  df<span class="sc">$</span>cond_dummy <span class="ot">=</span> <span class="fu">ifelse</span>(df<span class="sc">$</span>condition <span class="sc">==</span> <span class="st">&quot;Distraction&quot;</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>  df<span class="sc">$</span>randInt_i    <span class="ot">=</span> rand_int[df<span class="sc">$</span>participant]</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>  df<span class="sc">$</span>randSlo_i    <span class="ot">=</span> rand_slo[df<span class="sc">$</span>participant]</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>  df<span class="sc">$</span>logit   <span class="ot">=</span> beta0 <span class="sc">+</span> beta1<span class="sc">*</span>df<span class="sc">$</span>cond_dummy <span class="sc">+</span> </span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>                df<span class="sc">$</span>randInt_i <span class="sc">+</span> df<span class="sc">$</span>randSlo_i<span class="sc">*</span>df<span class="sc">$</span>cond_dummy</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>  df<span class="sc">$</span>prob        <span class="ot">=</span> <span class="fu">plogis</span>(df<span class="sc">$</span>logit)</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>  df<span class="sc">$</span>response <span class="ot">=</span> <span class="fu">rbinom</span>(<span class="fu">nrow</span>(df), <span class="dv">1</span>, df<span class="sc">$</span>prob)</span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Fit model; use try() to handle possible non-convergences</span></span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>  fit <span class="ot">=</span> <span class="fu">try</span>(<span class="fu">glmer</span>(response <span class="sc">~</span> condition <span class="sc">+</span> (condition <span class="sc">|</span> participant),</span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>                   <span class="at">data =</span> df, <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link=</span><span class="st">&quot;logit&quot;</span>),</span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>                   <span class="at">control =</span> <span class="fu">glmerControl</span>(<span class="at">optimizer =</span> <span class="st">&quot;bobyqa&quot;</span>,</span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">optCtrl =</span> <span class="fu">list</span>(<span class="at">maxfun =</span> <span class="fl">1e5</span>))),</span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>             <span class="at">silent =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">inherits</span>(fit, <span class="st">&quot;try-error&quot;</span>)) <span class="fu">return</span>(<span class="cn">NA</span>)</span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>  coefs <span class="ot">=</span> <span class="fu">summary</span>(fit)<span class="sc">$</span>coefficients</span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a>  pval <span class="ot">=</span> coefs[<span class="st">&quot;conditionDistraction&quot;</span>, <span class="st">&quot;Pr(&gt;|z|)&quot;</span>]</span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(pval)</span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Ok, now let’s run with <code>replicate()</code> times <code>nsim</code> and get all the p-values we want!</p>
-<p>We define power as the proportion of times where <span class="math inline">\(p &lt; 0.05\)</span>. Now we run “only” 200 iterations to avoid too long computations… but in real life you will probably need many more iterations for precision.</p>
+<p>Before we run the Monte Carlo simulation, some best practices:</p>
+<ul>
+<li>set a random seed for reproducibility;</li>
+<li>define and store the number of iterations;</li>
+<li>initialize vectors of results.</li>
+</ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">20251029</span>) <span class="co"># set seed for reproducibility</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>nsim <span class="ot">=</span> <span class="dv">10</span> <span class="co"># define number of iterations</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>pvals <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, nsim) <span class="co"># initialize vector of results (best practice)</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># RUN!!!</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>pvals <span class="ot">=</span> <span class="fu">replicate</span>(nsim,<span class="fu">simulate_once</span>())</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove NAs if any (non-converged runs)</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>pvals_clean <span class="ot">=</span> pvals[<span class="fu">is.finite</span>(pvals)]</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>prop_converged <span class="ot">=</span> <span class="fu">length</span>(pvals_clean) <span class="sc">/</span> nsim</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>power_pvalue   <span class="ot">=</span> <span class="fu">mean</span>(pvals_clean <span class="sc">&lt;</span> alpha)</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co"># See results</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="fu">list</span>(</span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">simulations_requested =</span> nsim,</span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">simulations_converged =</span> <span class="fu">length</span>(pvals_clean),</span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">convergence_rate      =</span> <span class="fu">round</span>(prop_converged, <span class="dv">3</span>),</span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">power_p_less_0_05     =</span> <span class="fu">round</span>(power_pvalue, <span class="dv">3</span>)</span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">0</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>nsim <span class="ot">=</span> <span class="dv">10</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>pvals <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, nsim)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>RUN!!!</strong> let’s launch <code>replicate()</code> times <code>nsim</code> and get all the p-values we want!</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>pvals <span class="ot">=</span> <span class="fu">replicate</span>(nsim,<span class="fu">simulate_once</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Finally, some post-processing: remove <code>NA</code>s if any (non-converged runs), and see results.</p>
+<p>We define power as the proportion of times where <span class="math inline">\(p &lt; 0.05\)</span>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>pvals_clean <span class="ot">=</span> pvals[<span class="fu">is.finite</span>(pvals)]</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>prop_converged <span class="ot">=</span> <span class="fu">length</span>(pvals_clean) <span class="sc">/</span> nsim</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>power_pvalue   <span class="ot">=</span> <span class="fu">mean</span>(pvals_clean <span class="sc">&lt;</span> <span class="fl">0.05</span>)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="fu">list</span>(</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">simulations_requested =</span> nsim,</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">simulations_converged =</span> <span class="fu">length</span>(pvals_clean),</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">convergence_rate      =</span> <span class="fu">round</span>(prop_converged, <span class="dv">3</span>),</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">power_p_less_0_05     =</span> <span class="fu">round</span>(power_pvalue, <span class="dv">3</span>)</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$simulations_requested
 [1] 10
@@ -2549,51 +2585,52 @@ $power_p_less_0_05
 </div>
 </div>
 <blockquote class="blockquote">
-<p><strong>Note.</strong> Mixed-effects models can occasionally fail to converge under certain parameterizations. We track and report the proportion of successful fits.</p>
+<p><strong>Note.</strong> Mixed-effects models can occasionally fail to converge under certain parameterizations, that’s why the use the <strong><code>try()</code></strong> function, and also track and report the proportion of successful fits. <em>Not</em> using <strong><code>try()</code></strong> is dangerous: Think what happens if after <span class="math inline">\(1,000\)</span> iterations and a full day of computation the whole script breaks because of one single error due to non-convergence!</p>
 </blockquote>
 <hr>
 </section>
 <section id="part-3-speeding-up-with-parallel-computing" class="level2">
-<h2 class="anchored" data-anchor-id="part-3-speeding-up-with-parallel-computing">Part 3 — Speeding up with parallel computing</h2>
-<p>We keep the <strong>same</strong> <code>simulate_once()</code> and parameters as in Part 2.</p>
-<p>To parallelize in a way that should work on <strong>Windows, macOS, and Linux</strong>, we use the <code>future.apply</code> package with a <strong>multisession</strong> plan (each worker is its own R session)</p>
+<h2 class="anchored" data-anchor-id="part-3-speeding-up-with-parallel-computing">Part 3: Speeding up with parallel computing</h2>
+<p>We keep the same <code>simulate_once()</code> and parameters as in Part 2.</p>
+<p>To parallelize in a way that should work on <strong>Windows, macOS, and Linux</strong>, we use the <strong><code>future.apply</code></strong> package with a <strong>multisession</strong> plan (each worker is its own R session)</p>
 <p>⚠️ The below code was actually run on Windows… it needs to be actually checked on other operating systems.</p>
+<p>First, some setup for parallel power simulations using <strong><code>future.apply</code></strong>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cross-platform parallel power simulation with future.apply</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># preliminarily install packages if needed</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(future)</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(future.apply)</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(parallel)   <span class="co"># for detectCores()</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Choose workers (leave one core free)</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>workers <span class="ot">=</span> <span class="fu">max</span>(<span class="dv">1</span>, <span class="fu">detectCores</span>(<span class="at">logical =</span> <span class="cn">TRUE</span>) <span class="sc">-</span> <span class="dv">1</span>)</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Cross-platform backend: *multisession* works on Windows/macOS/Linux</span></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="fu">plan</span>(multisession, <span class="at">workers =</span> workers)</span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>nsim <span class="ot">=</span> <span class="dv">10</span>          <span class="co"># same as Part 2</span></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the same simulation many times, in parallel</span></span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>pvals_parallel <span class="ot">=</span> <span class="fu">future_sapply</span>(</span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>  <span class="dv">1</span><span class="sc">:</span>nsim,</span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>  <span class="cf">function</span>(i) <span class="fu">simulate_once</span>(),   <span class="co"># uses objects defined above (e.g., beta0, beta1, etc.)</span></span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">future.seed =</span> <span class="dv">20251029</span>        <span class="co"># reproducible, independent RNG streams per worker</span></span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Post-processing identical to Part 2</span></span>
-<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>pvals_clean     <span class="ot">=</span> pvals_parallel[<span class="fu">is.finite</span>(pvals_parallel)]</span>
-<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>prop_converged  <span class="ot">=</span> <span class="fu">length</span>(pvals_clean) <span class="sc">/</span> nsim</span>
-<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>power_pvalue    <span class="ot">=</span> <span class="fu">mean</span>(pvals_clean <span class="sc">&lt;</span> alpha)</span>
-<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a><span class="co"># See results</span></span>
-<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a><span class="fu">list</span>(</span>
-<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>  <span class="at">backend               =</span> <span class="fu">sprintf</span>(<span class="st">&quot;future.apply::multisession (%d workers)&quot;</span>, workers),</span>
-<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>  <span class="at">simulations_requested =</span> nsim,</span>
-<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>  <span class="at">simulations_converged =</span> <span class="fu">length</span>(pvals_clean),</span>
-<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>  <span class="at">convergence_rate      =</span> <span class="fu">round</span>(prop_converged, <span class="dv">3</span>),</span>
-<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>  <span class="at">power_p_less_0_05     =</span> <span class="fu">round</span>(power_pvalue, <span class="dv">3</span>)</span>
-<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># preliminarily install packages if needed</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(future)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(future.apply)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(parallel)   <span class="co"># for detectCores()</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Choose workers, leave one core free for safety 🙂</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>workers <span class="ot">=</span> <span class="fu">max</span>(<span class="dv">1</span>, <span class="fu">detectCores</span>(<span class="at">logical =</span> <span class="cn">TRUE</span>) <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Cross-platform backend: multisession should work on Windows+macOS+Linux</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="fu">plan</span>(multisession, <span class="at">workers =</span> workers)</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Define a number of iterations</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>nsim <span class="ot">=</span> <span class="dv">10</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>RUN!!!</strong> in parallel 🙂</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>pvals_parallel <span class="ot">=</span> <span class="fu">future_sapply</span>(</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="dv">1</span><span class="sc">:</span>nsim,</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">function</span>(i) <span class="fu">simulate_once</span>(),   <span class="co"># uses objects defined above (e.g., beta0, beta1, etc.)</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">future.seed =</span> <span class="dv">0</span>        <span class="co"># reproducible, independent RNG streams per worker</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Finally, some post-processing identical and see results, just like in Part 2:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>pvals_clean     <span class="ot">=</span> pvals_parallel[<span class="fu">is.finite</span>(pvals_parallel)]</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>prop_converged  <span class="ot">=</span> <span class="fu">length</span>(pvals_clean) <span class="sc">/</span> nsim</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>power_pvalue    <span class="ot">=</span> <span class="fu">mean</span>(pvals_clean <span class="sc">&lt;</span> <span class="fl">0.05</span>)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="fu">list</span>(</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">backend               =</span> <span class="fu">sprintf</span>(<span class="st">&quot;future.apply::multisession (%d workers)&quot;</span>, workers),</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">simulations_requested =</span> nsim,</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">simulations_converged =</span> <span class="fu">length</span>(pvals_clean),</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">convergence_rate      =</span> <span class="fu">round</span>(prop_converged, <span class="dv">3</span>),</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">power_p_less_0_05     =</span> <span class="fu">round</span>(power_pvalue, <span class="dv">3</span>)</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$backend
 [1] &quot;future.apply::multisession (11 workers)&quot;
