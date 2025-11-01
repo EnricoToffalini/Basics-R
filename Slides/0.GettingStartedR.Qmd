@@ -125,16 +125,18 @@ examples of other resources that can be **created within the R ecosystem**, inte
 - [this book](https://lakens.github.io/statistical_inferences/){target="_blank"} by Daniël Lakens explaining Statistical Inference
 
 
-## install R and Rstudio
+## R and its *Integrated Development Environment*(s)
 
-\
-\
-first of all, for getting started, follow the instructions in [*Chapter 1*](https://psicostat.github.io/Introduction2R_EN/install.html){target="_blank"} of *Introduction2R* to ensure that both 
+Make sure you install:
 
-- **R** (the basic software itself to run the programming language) and 
-- **RStudio** (as the IDE of election)
+- <a href="https://cran.r-project.org/" target="_blank">**R**</a> as the programming language interpreter and the basic environment and packages
+- <a href="https://posit.co/download/rstudio-desktop/" target="_blank">**RStudio**</a> is the IDE of election to make writing R code easy
 
-are installed
+Interesting alternatives to installing RStudio:
+
+- <a href="https://positron.posit.co/" target="_blank">**Positron**</a> (based on MS Visual Studio)
+- <a href="https://posit.cloud/" target="_blank">**Posit.cloud**</a> (fully online, actually RStudio)
+- <a href="https://colab.research.google.com/" target="_blank">**Google Colab**</a> (fully online, make sure to set *R runtime type*; actually a Jupyter notebook)
 
 ## R Console (just base R)
 
