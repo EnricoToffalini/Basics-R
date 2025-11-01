@@ -20,7 +20,7 @@ Simulation helps you **understand data and data-generating processes**. Unlike i
 
 -   see whether you actually understood the hypothesized data-generating process;
 -   see whether statistical methods work appropriately to recover parameters;
--   infer non-obvious characteristics of the data implied in the ground truth (e.g., how small misspecifications of models impact estimates).
+-   infer non-obvious characteristics of the data implied in the ground truth (e.g., how minor misspecifications of models impact results).
 
 This small tutorial/exercise guides you through basic simulation scenarios that might be useful as a basis towards more complex but common psychological designs.
 
@@ -30,7 +30,7 @@ This small tutorial/exercise guides you through basic simulation scenarios that 
 3.  <a href="#part-3---correlated-variables">**Correlated variables**</a>.
 4.  <a href="#part-4---latent-variable-with-continuous-indicators">**Latent variable with continuous indicators**</a>.
 5.  <a href="#part-5---latent-variable-with-ordinal-items">**Latent variable with ordinal items**</a>.
-7.  <a href="#part-6---binary-outcome-and-logistic-regression">**Binary outcome and logistic regression**</a>.
+6.  <a href="#part-6---binary-outcome-and-logistic-regression">**Binary outcome and logistic regression**</a>.
 
 > Keep `set.seed(...)` for exact reproducibility.
 
@@ -53,17 +53,17 @@ library(ggplot2) # beautiful data visualization
 
 # Part 1 - Two groups mean difference
 
-Imagine you assess attention scores in a population with a neurodevelopmental condition vs a typically-developing population. You expect a medium-sized effect (-0.5 *SD*)
+Imagine you assess attention scores in a population with a neurodevelopmental condition (`NC`) and compare *vs* typically-developing (`TD`) population. Let's assume a medium-sized effect (-0.5 *SD*)
 
 #### Define design parameters
 
 ```{r}
-mu_TD  = 80
-mu_NC  = 72.5
-sd_common = 15
-
 n_TD = 250
 n_NC = 70
+
+mu_TD  = 80
+mu_NC  = 75.5
+sd_common = 9
 ```
 
 #### Generate data, simple way
@@ -93,6 +93,7 @@ head(df)
 #### Visualize
 
 ```{r}
+#| code-fold: TRUE
 ggplot(df, aes(x = group, y = score)) +
   geom_boxplot(size=1, outliers=F)+
   geom_point(alpha=.4, size=2, position=position_jitter(width=.05,height=0))+
@@ -110,7 +111,7 @@ cohens_d(score ~ group, data = df)
 
 # Part 2 - Simple linear regression
 
-Does weekly study hours predict exam score? Let's assume a positive linear relationship with some noise.
+Does weekly study hours predict exam score in the student population? Let's assume a positive linear relationship.
 
 #### Parameters
 
