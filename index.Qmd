@@ -97,10 +97,11 @@ Some materials in the *Exercises section* below will provide more stimulating ch
 
 *— These other exercises are beyond the scope of this introductory course, but they could be stimulating and useful for more advanced R users:*
 
--   [**Creating a word cloud**](Exercises/11-WordCloud.html){target="_blank"}
+-   [**Creating a word cloud**](Exercises/10-WordCloud.html){target="_blank"}
     -   ::: {style="font-size:14px;"}
         **see additional material on [Working With Strings](Examples-Tutorials/ExampleStrings.html){target="_blank"}**
         :::
+-   [**Basics of Statistical Data Simulation in R**](Exercises/11-BasicsSimulations.html){target="_blank"}
 -   [**Basics of Monte Carlo simulations for Power analysis**](Exercises/12-MonteCarloSim.html){target="_blank"}
 -   [**Monte Carlo Power Simulation: Mixed-Effects Logistic Regression and Some Parallelization**](Exercises/13-MonteCarloLogistic.html){target="_blank"}
 

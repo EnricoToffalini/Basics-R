@@ -1,0 +1,411 @@
+---
+title: "Exercises – Basics of Statistical Data Simulation in R"
+subtitle: "*Basics of R for Data Science*"
+include-in-header: ../assets/header.html
+format: 
+  html:
+    self-contained: true
+    toc: true
+    toc-depth: 3
+    toc-expand: 4
+    code-fold: false
+    message: false
+    css: "../assets/custom.css"
+editor: visual
+---
+
+# Why simulate?
+
+Simulation helps you **understand data and data-generating processes**. Unlike in real world, in simulations you precisely know the ground truth (true effect sizes, correlations, reliability), which helps you:
+
+-   see whether you actually understood the hypothesized data-generating process;
+-   see whether statistical methods work appropriately to recover parameters;
+-   infer non-obvious characteristics of the data implied in the ground truth (e.g., how small misspecifications of models impact estimates).
+
+This small tutorial/exercise guides you through basic simulation scenarios that might be useful as a basis towards more complex but common psychological designs.
+
+0.  <a href="#part-0---some-useful-packages">**Some useful packages**</a>.
+1.  <a href="#part-1---two-groups-mean-difference">**Two groups mean difference**</a>.
+2.  <a href="#part-2---simple-linear-regression">**Simple linear regression**</a>.
+3.  <a href="#part-3---correlated-variables">**Correlated variables**</a>.
+4.  <a href="#part-4---latent-variable-with-continuous-indicators">**Latent variable with continuous indicators**</a>.
+5.  <a href="#part-5---latent-variable-with-ordinal-items">**Latent variable with ordinal items**</a>.
+7.  <a href="#part-6---binary-outcome-and-logistic-regression">**Binary outcome and logistic regression**</a>.
+
+> Keep `set.seed(...)` for exact reproducibility.
+
+------------------------------------------------------------------------
+
+# Part 0 - Some useful packages
+
+```{r, message=F, warning=F}
+# first install packages with install.packages() if needed
+
+library(effectsize) # useful for functions like cohens
+library(MASS) # useful for mvrnorm(), multivariate correlations
+library(semTools) # useful for mvrnonnorm(), non-normal multivariate correlations
+library(lavaan) # useful for latent variable estimation
+library(lme4) # useful for mixed-effects models
+library(ggplot2) # beautiful data visualization
+```
+
+------------------------------------------------------------------------
+
+# Part 1 - Two groups mean difference
+
+Imagine you assess attention scores in a population with a neurodevelopmental condition vs a typically-developing population. You expect a medium-sized effect (-0.5 *SD*)
+
+#### Define design parameters
+
+```{r}
+mu_TD  = 80
+mu_NC  = 72.5
+sd_common = 15
+
+n_TD = 250
+n_NC = 70
+```
+
+#### Generate data, simple way
+
+```{r}
+set.seed(0)
+
+# sample TD participants
+df_TD = data.frame(
+  group = "TD",
+  score = round(rnorm(n=n_TD, mean=mu_TD, sd=sd_common))
+  )
+
+# sample NC participants
+df_NC = data.frame(
+  group = "NC",
+  score = round(rnorm(n=n_NC, mean=mu_NC, sd=sd_common))
+  )
+
+# combine dataframes
+df = rbind(df_TD, df_NC)
+head(df)
+```
+
+> Exercise: try to redo the above but generate the whole data.frame at once
+
+#### Visualize
+
+```{r}
+ggplot(df, aes(x = group, y = score)) +
+  geom_boxplot(size=1, outliers=F)+
+  geom_point(alpha=.4, size=2, position=position_jitter(width=.05,height=0))+
+  theme(text = element_text(size=20))
+```
+
+#### Analyze
+
+```{r}
+t.test(score ~ group, data = df, var.equal = TRUE)
+cohens_d(score ~ group, data = df)
+```
+
+------------------------------------------------------------------------
+
+# Part 2 - Simple linear regression
+
+Does weekly study hours predict exam score? Let's assume a positive linear relationship with some noise.
+
+#### Parameters
+
+```{r}
+n   = 230
+beta0 = 7    # intercept (score at 0 hours)
+beta1 = 1.8   # points per extra study hour
+sigma = 5     # residual SD
+```
+
+#### Generate predictor and outcome
+
+```{r}
+set.seed(0)
+
+hours = runif(n, 4, 12) # 4–12 hours/week, uniformly distributed
+grade  = beta0 + beta1*hours + rnorm(n, 0, sigma)
+df   = data.frame(hours = round(hours,2), 
+                  grade = round(grade))
+# censored scores
+df$grade[df$grade > 30] = 30
+df$grade[df$grade < 0] = 0
+
+head(df)
+```
+
+#### Visualize + fit model
+
+```{r}
+ggplot(df, aes(hours, grade)) +
+  geom_point(alpha = .5, size=2) +
+  geom_smooth(method = "lm", se = TRUE) +
+  labs(title = "Study hours → Exam grade", x = "Hours/week", y = "Exam score (0–30)")+
+  theme(text = element_text(size=20))
+```
+
+```{r}
+fit = lm(grade ~ hours, data = df)
+summary(fit)
+```
+
+> Exercise: increase `n` to very large numbers to see how censoring scores (in 0-30) affects the correct recovery of true parameters. Then try to further increase the intercept (`b0`) to understand how easy exams damp the effect of studying on grades.
+
+------------------------------------------------------------------------
+
+# Part 3 - Correlated variables
+
+You measure Reading Comprehension (*Reading*), Working Memory (*WM*), Processing Speed (*PS*), and general intelligence (*IQ*), all on standardized (z-score) scales. You expect a positive manifold
+
+#### Parameters
+
+```{r}
+n  = 500
+
+mu = c(0, 0, 0, 0)
+S = lav_matrix_lower2full(c(
+  1, 
+  .35, 1, 
+  .20, .30, 1, 
+  .15, .50, .40, 1
+))
+colnames(S) = rownames(S) = c("Reading","WM","PS","IQ")
+S
+```
+
+#### Generate multivariate normal data
+
+```{r}
+set.seed(0)
+
+df = data.frame(
+  mvrnorm(n = n, mu = mu, Sigma = S, empirical = FALSE)
+)
+df[1:10,]
+```
+
+#### Inspect correlations
+
+```{r}
+round(cor(df), 2)
+```
+
+#### Addendum: Linear model (implied by correlation matrix)
+
+```{r}
+fit = lm(Reading ~ WM + PS + IQ, data=df)
+summary(fit)
+```
+
+------------------------------------------------------------------------
+
+# Part 4 - Latent variable with continuous indicators
+
+Imagine you want to fit a general intelligence latent variable model (only strata II and III), where "g" (General Mental Ability) is the latent variable
+
+```{r, echo=F, message=F, warning=F}
+library(semPlot)
+model = "g =~ VCI + VSI + FRI + WMI + LMI + PSI"
+covM = diag(6)
+colnames(covM) = rownames(covM) = c("VCI", "VSI", "FRI", "WMI", "LMI", "PSI")
+fit_skeleton = cfa(
+  model,
+  std.lv = T,
+  do.fit = FALSE,             
+  sample.cov = covM, 
+  sample.nobs = 100
+)
+semPaths(
+  fit_skeleton,
+  what = "paths",      
+  whatLabels = "name", 
+  layout = "tree",
+  residuals = FALSE,
+  intercepts = FALSE,
+  nCharNodes = 0,
+  curvePivot = TRUE,
+  sizeMan = 15, 
+  sizeLat = 20,  
+  edge.width = 3,
+  edge.label.cex = 1.2,
+  node.label.cex = 1.2
+)
+```
+
+#### Generate data
+
+*Tactic*: you simulate the latent factor (g) as if you could observe it, then you pretend you had never actually observed it.
+
+```{r}
+set.seed(0)
+
+n = 1200
+g = rnorm(n, 0, 1)
+VCI = 0.75*g + rnorm(n,0,.66)
+VSI = 0.80*g + rnorm(n,0,.60)
+FRI = 0.95*g + rnorm(n,0,.31)
+WMI = 0.70*g + rnorm(n,0,.71)
+LMI = 0.45*g + rnorm(n,0,.89)
+PSI = 0.50*g + rnorm(n,0,.87)
+
+df = data.frame(VCI, VSI, FRI, WMI, LMI, PSI)
+
+for(i in 1:ncol(df)) df[,i] = round(scale(df[,i])*15+100)
+
+df[1:10,]
+```
+
+#### Fit latent variable model
+
+```{r}
+model = "
+  g =~ VCI + VSI + FRI + WMI + LMI + PSI 
+"
+fit = cfa(model=model, data=df, std.lv=T)
+summary(fit, standardized=T)
+```
+
+------------------------------------------------------------------------
+
+# Part 5 - Latent variable with ordinal items
+
+Questionnaires often present items with Likert-scale response format, so it's ideal (and often neglected) simulate ordinal data. Here's how you can do it: "ordinal" can be understood as not other than a continuum "cut" on some breaks.
+
+#### Generate data
+
+```{r}
+set.seed(0)
+
+n = 800
+Anxiety_Latent = rnorm(n,0,1) # true latent score
+Anx_1 = 0.5*Anxiety_Latent + rnorm(n)
+Anx_2 = 0.9*Anxiety_Latent + rnorm(n)
+Anx_3 = 0.6*Anxiety_Latent + rnorm(n)
+Anx_4 = 0.7*Anxiety_Latent + rnorm(n)
+Anx_5 = 0.8*Anxiety_Latent + rnorm(n)
+
+# inspect underlying continua of items
+cbind(Anx_1, Anx_2, Anx_3, Anx_4, Anx_5)[1:10,]
+
+# make ordinal with 4 categories (using "cut")
+df = data.frame(
+  anx_1 = cut(Anx_1, c(-Inf, runif(3,-2,2), +Inf)),
+  anx_2 = cut(Anx_2, c(-Inf, runif(3,-2,2), +Inf)),
+  anx_3 = cut(Anx_3, c(-Inf, runif(3,-2,2), +Inf)),
+  anx_4 = cut(Anx_4, c(-Inf, runif(3,-2,2), +Inf)),
+  anx_5 = cut(Anx_5, c(-Inf, runif(3,-2,2), +Inf))
+)
+
+# inspect dataset
+df[1:10, ]
+levels(df$anx_1)
+
+# transform responses to regular ordinal labels 1-4
+for(i in 1:ncol(df)) df[,i] = ordered(as.numeric(df[,i]))
+
+# (again) inspect dataset
+df[1:10, ]
+```
+
+```{r, echo=F, warning=F, message=F}
+ggplot(df) +
+  geom_bar(aes(x = factor(anx_1), fill = factor(anx_1)),
+           color="black",size=1) +
+  labs(x = "anx_1 responses", fill="anx_1 \n responses")+
+  theme(text=element_text(size=22))
+```
+
+#### Fitting model
+
+> Model below was not fitted. Reproduce the above and inspect step-by-step, then try to fit it! Also, try to introduce some secondary latent factor that makes residuals correlate, and see how this misfit impacts fit measures and more.
+
+``` r
+model = "
+  ANX =~ anx_1 + anx_2 + anx_3 + anx_4 + anx_5 
+"
+fit = cfa(model=model, data=df, std.lv=T, ordered=T)
+
+summary(fit, standardized=T)
+fitMeasures(fit, fit.measures=c("chisq","df","pvalue","rmsea.robust","cfi.robust"))
+standardizedSolution(fit)
+modificationIndices(fit, sort.=T)[1:10,]
+```
+
+------------------------------------------------------------------------
+
+# Part 6 - Binary outcome and logistic regression
+
+Let's imagine a task (30 items) where accuracy grows with age (in N = 200 children, 5-12 years), but there is also some individual random variability (*random intercept* / `randInt`).
+
+#### Generate data
+
+First of all, set design parameters and simulate data that will allow you to compute probabilities of accuracy... and thus task scores (i.e., `randInt` and `age`).
+
+```{r}
+set.seed(0)
+
+k = 30
+n = 500
+ID = 1:n
+randInt = rnorm(n, 0, 1.2)
+age = round(runif(n, 5, 12), 2)
+
+# inspect first few cases
+cbind(ID, randInt, age)[1:10, ]
+```
+
+Since probability is constrained in (0, 1), probabilities of correct answer cannot be a linear function of predictors. *Logit* transformation provides a good tool for constraining probability within its bounds whatever values the predictor might have.
+
+```{r}
+logitScores = -2.9 + 0.50*age + randInt
+probabilities = plogis(logitScores)
+taskScores = rbinom(n, k, probabilities)
+
+# inspect first few cases
+cbind(ID, randInt, age, logitScores, probabilities, taskScores)[1:10,]
+```
+
+Task scores distribution is quite skewed, but don't worry: we will use logistic regression, which respects the (non-normal) nature of the response variable.
+
+```{r}
+hist(taskScores, breaks=20)
+```
+
+#### Fitting model
+
+```{r}
+df = data.frame(ID, age, taskScores)
+
+fit = glmer(cbind(taskScores, k-taskScores) ~ age + (1|ID), data=df,
+                                    family = binomial(link="logit"))
+summary(fit)
+```
+
+```{r, warning=F, message=F}
+#| code-fold: TRUE
+library(effects)
+eff = data.frame(allEffects(fit,xlevels=list(age=seq(5,12,.1)))$"age")
+eff$fit = eff$fit*k
+eff$lower = eff$lower*k
+eff$upper = eff$upper*k
+ggplot(eff,aes(x=age,y=fit))+
+  geom_ribbon(aes(ymin=lower,ymax=upper),alpha=.2)+
+  geom_line(size=1)+
+  theme(text=element_text(size=20))+
+  scale_y_continuous(breaks=seq(0,k,5))+
+  scale_x_continuous(breaks=seq(0,100,1))+
+  geom_point(data=df,aes(x=age,y=taskScores),alpha=.35,size=2)+
+  xlab("age") + ylab("predicted score")
+```
+
+------------------------------------------------------------------------
+
+# What you can do next
+
+-   Change sample size or variability in all cases.\
+-   Introduce a moderator variables (i.e., with multiplicative effects).\
+-   Simulate all observed data in logistic regression (`0`/`1` instead of `taskScores`).
+-   Understand conditions under which you might add random slopes.

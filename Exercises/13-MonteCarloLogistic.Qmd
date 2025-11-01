@@ -29,9 +29,9 @@ The response is **binary** (1 = correct, 0 = incorrect). Each participant goes t
 
 We will:
 
-- <a href="#part-1-simulate-one-single-dataset">Part 1</a>: **Simulate one single dataset** for this scenario (trial-level, repeated within participants) to understand how it works;
-- <a href="#part-2-monte-carlo-power-simulation-with-replicate">Part 2</a>: **Estimate power by simulation** for a *single design* (a given N, a given effect size) using the traditional significance rule (p \< .05);
-- <a href="#part-3-speeding-up-with-parallel-computing">Part 3</a>: **Repeat the power estimate** using parallelized iterations with the `future.apply` package.
+-   <a href="#part-1-simulate-one-single-dataset">Part 1</a>: **Simulate one single dataset** for this scenario (trial-level, repeated within participants) to understand how it works;
+-   <a href="#part-2-monte-carlo-power-simulation-with-replicate">Part 2</a>: **Estimate power by simulation** for a *single design* (a given N, a given effect size) using the traditional significance rule (p \< .05);
+-   <a href="#part-3-speeding-up-with-parallel-computing">Part 3</a>: **Repeat the power estimate** using parallelized iterations with the `future.apply` package.
 
 ------------------------------------------------------------------------
 
@@ -184,11 +184,11 @@ simulate_once = function(n_participants = 60,
 }
 ```
 
-Before we run the Monte Carlo simulation, some best practices: 
+Before we run the Monte Carlo simulation, some best practices:
 
-- set a random seed for reproducibility;
-- define and store the number of iterations;
-- initialize vectors of results.
+-   set a random seed for reproducibility;
+-   define and store the number of iterations;
+-   initialize vectors of results.
 
 ```{r, cache=T}
 set.seed(0)
@@ -202,7 +202,7 @@ pvals = rep(NA, nsim)
 pvals = replicate(nsim,simulate_once())
 ```
 
-Finally, some post-processing: remove `NA`s if any (non-converged runs), and see results. 
+Finally, some post-processing: remove `NA`s if any (non-converged runs), and see results.
 
 We define power as the proportion of times where $p < 0.05$:
 
