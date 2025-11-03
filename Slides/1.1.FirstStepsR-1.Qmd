@@ -45,7 +45,7 @@ str(age)
 ## Create, name objects
 ### Assignment operators
 
-In R, both the assignment operator "**`=`**" and "**`<-`**" can be used to assign values to objects. In fact, "**`<-`**" is considered more traditional in R. and preferred for clarity, also because it allows differentiating assignment from other uses of "**`=`**". 
+In R, both the assignment operator "**`=`**" and "**`<-`**" (and actually even "**`->`**") can be used to assign values to objects. In fact, "**`<-`**" is considered more traditional in R and often preferred for clarity, also because it allows differentiating assignment from other uses of "**`=`**". 
 
 ```{r}
 # these two commands do the same thing 
@@ -65,7 +65,7 @@ However, unlike many other teachers, I will generally favor "**`=`**" as the ass
 
 - Include only letters, numbers, dots, underscores;
 
-- No reserved words (e.g., "`if`", "`for`", "`NA`", "`function`").
+- No reserved words (e.g., `if`, `for`, `NA`, `function`; unless placed inside backticks, e.g., \`if\`, but this is strongly adviced against).
 
 ***Recommendations:***
 
@@ -73,7 +73,7 @@ However, unlike many other teachers, I will generally favor "**`=`**" as the ass
 
 - Be concise: no length limit, but long names are difficult to read and type.
 
-*WARNING!* R is Case sensitive: `age` and `Age` will be treated as two **different** objects!
+⚠️ *WARNING!* R is Case sensitive: `age` and `Age` will be treated as **two objects**!
 
 ## Create, name objects
 ### Rules for naming objects in R
@@ -84,7 +84,7 @@ However, unlike many other teachers, I will generally favor "**`=`**" as the ass
 
 - **NOT** allowed: "`0age`", "`_age`", "`.0myData`", "`my data`", "`my-data`", "`my,data`", "`for`", "`NA`"
 
-*WARNING!*  Use of "`.`" in object names (e.g., "`my.data`") is fine in **R** but not allowed in **Python**, where "`.`" is part of the language syntax. 
+⚠️ *WARNING!*  Use of "`.`" in object names (e.g., "`my.data`") is fine in **R** but not allowed in **Python**, where "`.`" is part of the language syntax. 
 
 Across different languages, *naming conventions* for longer, multi-word variable names favor **`snake_case`** (e.g., "`my_data`") or **`camelCase`** (e.g., "`myData`"), and **abbreviations** where appropriate (e.g., "`unipdData`" better than "`university_of_padova_dataset`")... preferably used in a consistent way!
 
@@ -161,29 +161,37 @@ Once again, let's say that we defined `age = 20`, now let's make a few examples:
 | `|` | OR | `age<25 | age>60`   |`TRUE` |
 | `!` | NOT | `!(age<18)`   |`TRUE` |
 
+🙂 note that logical values are internally treated as integers:
+
+```{r}
+TRUE / 4
+```
+
+```{r}
+15 * FALSE
+```
+
 
 <!-- --------------------------------------------------------------------- -->
 
 ## Basic types of data
 ### numeric and logical
 
-So far, we have already encountered at least two types of data: 
+So far, we have encountered at least two types of data: 
 
-- **numeric** (e.g., `20`, `11.5`, `13.28157`);
+- **numeric** (`20`, `11.5`, `0`, `13.28157`, ...);
 
-- **logical/Boolean** (i.e., `TRUE`, `FALSE`).
+- **logical/Boolean** (`TRUE`, `FALSE`).
 
 Actually, **numeric** data could actually be of two types: ***double*** (i.e., "*double-precision floating-point*") that is with decimals like `11.5`, and ***integer*** like `20`.
 
-In fact, by default, numeric values are always treated as *double* ( even if without decimals). To specify a number explicitly as integer, add an `L` after the number, like `age = 20L` (you likely **will not** need this, unless you explicitly need integers for some purposes, such as saving memory).
+In fact, R treats numeric values as *double* by default (even if without decimals). To specify numbers as integer, explicitly add an **`L`** after the number, like `age = 20L` (you likely **will not** need this, unless you explicitly need integers for some purposes, such as saving memory).
 
 
 ## Basic types of data
 ### characters 
 
-Another very important type of data is:
-
-- **character** (often called *strings*). This is used to store any text, and must be enclosed in quotes (**`' '`**, or **`" "`**), like this: 
+Another extremely important type of data is **character** (often called ***strings***). This is used to store any text, and must be enclosed in quotes (**`' '`** or **`" "`**) like this: 
 
 ```{r}
 myName = "Enrico"
@@ -192,9 +200,9 @@ myName = "Enrico"
 You may perform many operations with strings like:
 
 ```{r}
-myName == "Bob" # is my name equal to Bob?
-myName != "Bob" # is my name NOT equal to Bob?
-myName > "Bob" # is my name larger than Bob? (??? alphabetically!)
+myName == "Alexander" # is my name equal to Alexander?
+myName != "Alexander" # is my name NOT equal to Alexander?
+myName > "Alexander" # is my name larger than Alexander? (really?!)
 ```
 
 ## Basic types of data
@@ -205,7 +213,7 @@ The **`typeof()`** function tells you what type of data you are handling:
 myName = "Enrico"
 prof = TRUE
 coursesTaught = 4L
-age = 36
+age = 37
 
 # see data types
 typeof(myName)
@@ -216,15 +224,15 @@ typeof(age)
 
 
 ## Basic types of data
-### know the type of a variable
 
 You may also inquire data type directly with functions `is.*`:
 ```{r}
-is.logical(prof)
-is.logical(age)
 is.numeric(age)
-is.infinite(age)
-is.character(myName)
+is.character(age)
+is.infinite(age/0)
+is.logical(prof)
+is.integer(coursesTaught)
+is.integer(age)
 is.na(myName) # checks if a value is missing (i.e., NA) 
 ```
 

@@ -1095,7 +1095,7 @@ Enrico Toffalini
 <section id="create-name-objects-1" class="slide level2">
 <h2>Create, name objects</h2>
 <h3 id="assignment-operators">Assignment operators</h3>
-<p>In R, both the assignment operator “<strong><code>=</code></strong>” and “<strong><code>&lt;-</code></strong>” can be used to assign values to objects. In fact, “<strong><code>&lt;-</code></strong>” is considered more traditional in R. and preferred for clarity, also because it allows differentiating assignment from other uses of “<strong><code>=</code></strong>”.</p>
+<p>In R, both the assignment operator “<strong><code>=</code></strong>” and “<strong><code>&lt;-</code></strong>” (and actually even “<strong><code>-&gt;</code></strong>”) can be used to assign values to objects. In fact, “<strong><code>&lt;-</code></strong>” is considered more traditional in R and often preferred for clarity, also because it allows differentiating assignment from other uses of “<strong><code>=</code></strong>”.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href aria-hidden="true" tabindex="-1"></a><span class="co"># these two commands do the same thing </span></span>
 <span id="cb8-2"><a href aria-hidden="true" tabindex="-1"></a>age <span class="ot">&lt;-</span> <span class="dv">20</span></span>
@@ -1110,14 +1110,14 @@ Enrico Toffalini
 <ul>
 <li><p>Start with a letter or dot (if dot, must <strong>not</strong> be followed by a number);</p></li>
 <li><p>Include only letters, numbers, dots, underscores;</p></li>
-<li><p>No reserved words (e.g., “<code>if</code>”, “<code>for</code>”, “<code>NA</code>”, “<code>function</code>”).</p></li>
+<li><p>No reserved words (e.g., <code>if</code>, <code>for</code>, <code>NA</code>, <code>function</code>; unless placed inside backticks, e.g., `if`, but this is strongly adviced against).</p></li>
 </ul>
 <p><strong><em>Recommendations:</em></strong></p>
 <ul>
 <li><p>Avoid names that conflict with common functions (e.g., “<code>mean</code>”, “<code>sum</code>”, “<code>c</code>”);</p></li>
 <li><p>Be concise: no length limit, but long names are difficult to read and type.</p></li>
 </ul>
-<p><em>WARNING!</em> R is Case sensitive: <code>age</code> and <code>Age</code> will be treated as two <strong>different</strong> objects!</p>
+<p>⚠️ <em>WARNING!</em> R is Case sensitive: <code>age</code> and <code>Age</code> will be treated as <strong>two objects</strong>!</p>
 </section>
 <section id="create-name-objects-3" class="slide level2">
 <h2>Create, name objects</h2>
@@ -1127,7 +1127,7 @@ Enrico Toffalini
 <li><p>Allowed: “<code>age</code>”, “<code>age0</code>”, “<code>age1</code>”, “<code>total_score</code>”, “<code>.myData</code>”, “<code>my.data</code>”,</p></li>
 <li><p><strong>NOT</strong> allowed: “<code>0age</code>”, “<code>_age</code>”, “<code>.0myData</code>”, “<code>my data</code>”, “<code>my-data</code>”, “<code>my,data</code>”, “<code>for</code>”, “<code>NA</code>”</p></li>
 </ul>
-<p><em>WARNING!</em> Use of “<code>.</code>” in object names (e.g., “<code>my.data</code>”) is fine in <strong>R</strong> but not allowed in <strong>Python</strong>, where “<code>.</code>” is part of the language syntax.</p>
+<p>⚠️ <em>WARNING!</em> Use of “<code>.</code>” in object names (e.g., “<code>my.data</code>”) is fine in <strong>R</strong> but not allowed in <strong>Python</strong>, where “<code>.</code>” is part of the language syntax.</p>
 <p>Across different languages, <em>naming conventions</em> for longer, multi-word variable names favor <strong><code>snake_case</code></strong> (e.g., “<code>my_data</code>”) or <strong><code>camelCase</code></strong> (e.g., “<code>myData</code>”), and <strong>abbreviations</strong> where appropriate (e.g., “<code>unipdData</code>” better than “<code>university_of_padova_dataset</code>”)… preferably used in a consistent way!</p>
 <!-- --------------------------------------------------------------------- -->
 </section>
@@ -1363,40 +1363,50 @@ Enrico Toffalini
 </tr>
 </tbody>
 </table>
+<p>🙂 note that logical values are internally treated as integers:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href aria-hidden="true" tabindex="-1"></a><span class="cn">TRUE</span> <span class="sc">/</span> <span class="dv">4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.25</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href aria-hidden="true" tabindex="-1"></a><span class="dv">15</span> <span class="sc">*</span> <span class="cn">FALSE</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0</code></pre>
+</div>
+</div>
 <!-- --------------------------------------------------------------------- -->
 </section>
 <section id="basic-types-of-data" class="slide level2">
 <h2>Basic types of data</h2>
 <h3 id="numeric-and-logical">numeric and logical</h3>
-<p>So far, we have already encountered at least two types of data:</p>
+<p>So far, we have encountered at least two types of data:</p>
 <ul>
-<li><p><strong>numeric</strong> (e.g., <code>20</code>, <code>11.5</code>, <code>13.28157</code>);</p></li>
-<li><p><strong>logical/Boolean</strong> (i.e., <code>TRUE</code>, <code>FALSE</code>).</p></li>
+<li><p><strong>numeric</strong> (<code>20</code>, <code>11.5</code>, <code>0</code>, <code>13.28157</code>, …);</p></li>
+<li><p><strong>logical/Boolean</strong> (<code>TRUE</code>, <code>FALSE</code>).</p></li>
 </ul>
 <p>Actually, <strong>numeric</strong> data could actually be of two types: <strong><em>double</em></strong> (i.e., “<em>double-precision floating-point</em>”) that is with decimals like <code>11.5</code>, and <strong><em>integer</em></strong> like <code>20</code>.</p>
-<p>In fact, by default, numeric values are always treated as <em>double</em> ( even if without decimals). To specify a number explicitly as integer, add an <code>L</code> after the number, like <code>age = 20L</code> (you likely <strong>will not</strong> need this, unless you explicitly need integers for some purposes, such as saving memory).</p>
+<p>In fact, R treats numeric values as <em>double</em> by default (even if without decimals). To specify numbers as integer, explicitly add an <strong><code>L</code></strong> after the number, like <code>age = 20L</code> (you likely <strong>will not</strong> need this, unless you explicitly need integers for some purposes, such as saving memory).</p>
 </section>
 <section id="basic-types-of-data-1" class="slide level2">
 <h2>Basic types of data</h2>
 <h3 id="characters">characters</h3>
-<p>Another very important type of data is:</p>
-<ul>
-<li><strong>character</strong> (often called <em>strings</em>). This is used to store any text, and must be enclosed in quotes (<strong><code>&#39; &#39;</code></strong>, or <strong><code>&quot; &quot;</code></strong>), like this:</li>
-</ul>
+<p>Another extremely important type of data is <strong>character</strong> (often called <strong><em>strings</em></strong>). This is used to store any text, and must be enclosed in quotes (<strong><code>&#39; &#39;</code></strong> or <strong><code>&quot; &quot;</code></strong>) like this:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href aria-hidden="true" tabindex="-1"></a>myName <span class="ot">=</span> <span class="st">&quot;Enrico&quot;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href aria-hidden="true" tabindex="-1"></a>myName <span class="ot">=</span> <span class="st">&quot;Enrico&quot;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>You may perform many operations with strings like:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href aria-hidden="true" tabindex="-1"></a>myName <span class="sc">==</span> <span class="st">&quot;Bob&quot;</span> <span class="co"># is my name equal to Bob?</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href aria-hidden="true" tabindex="-1"></a>myName <span class="sc">==</span> <span class="st">&quot;Alexander&quot;</span> <span class="co"># is my name equal to Alexander?</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href aria-hidden="true" tabindex="-1"></a>myName <span class="sc">!=</span> <span class="st">&quot;Bob&quot;</span> <span class="co"># is my name NOT equal to Bob?</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href aria-hidden="true" tabindex="-1"></a>myName <span class="sc">!=</span> <span class="st">&quot;Alexander&quot;</span> <span class="co"># is my name NOT equal to Alexander?</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href aria-hidden="true" tabindex="-1"></a>myName <span class="sc">&gt;</span> <span class="st">&quot;Bob&quot;</span> <span class="co"># is my name larger than Bob? (??? alphabetically!)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href aria-hidden="true" tabindex="-1"></a>myName <span class="sc">&gt;</span> <span class="st">&quot;Alexander&quot;</span> <span class="co"># is my name larger than Alexander? (really?!)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
@@ -1407,25 +1417,25 @@ Enrico Toffalini
 <h3 id="know-the-type-of-a-variable">know the type of a variable</h3>
 <p>The <strong><code>typeof()</code></strong> function tells you what type of data you are handling:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href aria-hidden="true" tabindex="-1"></a>myName <span class="ot">=</span> <span class="st">&quot;Enrico&quot;</span></span>
-<span id="cb22-2"><a href aria-hidden="true" tabindex="-1"></a>prof <span class="ot">=</span> <span class="cn">TRUE</span></span>
-<span id="cb22-3"><a href aria-hidden="true" tabindex="-1"></a>coursesTaught <span class="ot">=</span> <span class="dv">4</span>L</span>
-<span id="cb22-4"><a href aria-hidden="true" tabindex="-1"></a>age <span class="ot">=</span> <span class="dv">36</span></span>
-<span id="cb22-5"><a href aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-6"><a href aria-hidden="true" tabindex="-1"></a><span class="co"># see data types</span></span>
-<span id="cb22-7"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(myName)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href aria-hidden="true" tabindex="-1"></a>myName <span class="ot">=</span> <span class="st">&quot;Enrico&quot;</span></span>
+<span id="cb26-2"><a href aria-hidden="true" tabindex="-1"></a>prof <span class="ot">=</span> <span class="cn">TRUE</span></span>
+<span id="cb26-3"><a href aria-hidden="true" tabindex="-1"></a>coursesTaught <span class="ot">=</span> <span class="dv">4</span>L</span>
+<span id="cb26-4"><a href aria-hidden="true" tabindex="-1"></a>age <span class="ot">=</span> <span class="dv">37</span></span>
+<span id="cb26-5"><a href aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-6"><a href aria-hidden="true" tabindex="-1"></a><span class="co"># see data types</span></span>
+<span id="cb26-7"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(myName)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] &quot;character&quot;</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(prof)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(prof)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] &quot;logical&quot;</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(coursesTaught)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(coursesTaught)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] &quot;integer&quot;</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(age)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(age)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] &quot;double&quot;</code></pre>
 </div>
@@ -1433,30 +1443,33 @@ Enrico Toffalini
 </section>
 <section id="basic-types-of-data-3" class="slide level2">
 <h2>Basic types of data</h2>
-<h3 id="know-the-type-of-a-variable-1">know the type of a variable</h3>
 <p>You may also inquire data type directly with functions <code>is.*</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">is.logical</span>(prof)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] TRUE</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">is.logical</span>(age)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] FALSE</code></pre>
-</div>
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">is.numeric</span>(age)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">is.infinite</span>(age)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">is.character</span>(age)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">is.character</span>(myName)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">is.infinite</span>(age<span class="sc">/</span><span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">is.na</span>(myName) <span class="co"># checks if a value is missing (i.e., NA) </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">is.logical</span>(prof)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">is.integer</span>(coursesTaught)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">is.integer</span>(age)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">is.na</span>(myName) <span class="co"># checks if a value is missing (i.e., NA) </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE</code></pre>
 </div>
