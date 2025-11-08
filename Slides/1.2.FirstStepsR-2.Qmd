@@ -106,6 +106,22 @@ psych::fisherz(rho=0.5)
 | `brms` | Fitting practically any Bayesian model via MCMC with STAN | `brm`, `set_prior`
 | `blavaan` | Fitting Bayesian SEMs | `bcfa`, `bsem`
 
+## Reproducibility tip: `sessionInfo()`
+
+When sharing your full R project, also share info on your **R version, OS, and loaded package versions** for reproducibility
+
+```{r,echo=F}
+library(lavaan)
+library(lme4)
+library(semTools)
+library(ggplot2)
+```
+
+```{r}
+sessionInfo()
+```
+
+
 <!-- --------------------------------------------------------------------- -->
 
 ## Functions and arguments
