@@ -17,9 +17,9 @@ editor: visual
 
 ## About This Course
 
-This is a short (10 hours) introductory course on [**R**](https://www.r-project.org/){target="_blank"} that is offered within the [*PhD program in Psychological Sciences*](https://dottorato.psy.unipd.it/en){target="_blank"} *(University of Padova)*. The course is aimed to prepare students for many future methodological courses in this program, where R is used extensively. [**R**](https://www.r-project.org/){target="_blank"} is a high-level open-source programming language that is widely used in academic research, but also increasingly adopted in business for data science. It has a large ecosystem of libraries and tools that allow you to perform flexible and powerful data analysis. [**RStudio**](https://posit.co/download/rstudio-desktop/){target="_blank"} is a popular IDE *(Integrated Development Environment)* which provides an excellent environment for coding, visualization, and report generation when programming in R (and in other languages).
+This is a short (10 hours) introductory course on [**R**](https://www.r-project.org/){target="_blank"} that is offered within the [*PhD program in Psychological Sciences*](https://phd.psy.unipd.it/){target="_blank"} *(University of Padova)*. The course is aimed to prepare students for many future methodological courses in this program, where R is used extensively. [**R**](https://www.r-project.org/){target="_blank"} is a high-level open-source programming language that is widely used in academic research, but also increasingly adopted in business for data science. It has a large ecosystem of libraries and tools that allow you to perform flexible and powerful data analysis. [**RStudio**](https://posit.co/download/rstudio-desktop/){target="_blank"} is a popular IDE *(Integrated Development Environment)* which provides an excellent environment for coding, visualization, and report generation when programming in R (and in other languages).
 
-The primary resource for the course is the online book available on GitHub: [***Introduction2R***](https://psicostat.github.io/Introduction2R_EN/){target="_blank"}
+This online book is a useful additional resource for the present course: [***Introduction2R***](https://psicostat.github.io/Introduction2R_EN/){target="_blank"}
 
 ## Dates and Rooms
 
@@ -40,7 +40,6 @@ The primary resource for the course is the online book available on GitHub: [***
 ``` r
 pkgs = c("readxl", "psych", "ggplot2")
 install.packages(pkgs)
-
 psych::fisherz(0.5)
 rnorm(10)
 ```
@@ -107,14 +106,11 @@ Some materials in the *Exercises section* below will provide more stimulating ch
 
 ------------------------------------------------------------------------
 
-:::: {style="font-size:11px; color:#555555"}
-GitHub repository associated to the present course website: [https://github.com/EnricoToffalini/Basics-R](https://github.com/EnricoToffalini/Basics-R){target="_blank"}
+<div style="font-size:13px;">Other links:</div>
 
-Access <b><a href="https://padlet.com/enricotoffalini/basicsr-1msunv8lba3mqf5k" target="_blank">padlet</a></b>
-
-Thousands of thanks to <a href="https://filippogambarota.github.io/" target="_blank">Filippo Gambarota</a> for sharing his expertise in using GitHub and Quarto.
-
-::: {style="display: flex; align-items: center; gap: 25px; white-space: nowrap"}
-[Read a modest proposal for <a href="https://docs.google.com/document/d/1-2Ty2Sd1QQzCCFt3SZpz3hhRkM3XEdvf/" target="_blank">open source software in the PhD program in Psychological Sciences]{style="font-size: 11px;"} <br/><img src="figures/qrcode_manifesto_opensource.png" style="height: 50px;"/>
+::: {.arrow-list style="font-size:11px; color:#555555"}
+-   GitHub repo associated to the present course website: [https://github.com/EnricoToffalini/Basics-R](https://github.com/EnricoToffalini/Basics-R){target="_blank"}
+-   Access <b><a href="https://padlet.com/enricotoffalini/basicsr-1msunv8lba3mqf5k" target="_blank">padlet</a></b> for questions of additional materials
+-   Read a modest proposal for <a href="https://docs.google.com/document/d/1-2Ty2Sd1QQzCCFt3SZpz3hhRkM3XEdvf/" target="_blank">open source software in the PhD program in Psychological Sciences</a>
+-   Thousands of thanks to <a href="https://filippogambarota.github.io/" target="_blank">Filippo Gambarota</a> for sharing his expertise in using GitHub and Quarto.
 :::
-::::
