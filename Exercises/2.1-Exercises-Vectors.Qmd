@@ -62,4 +62,4 @@ editor: visual
 
 -   Use the `cor()` function to verify that the previously created vectors `x0` and `x1` (being linear transformations of each other), have a correlation of $r = 1$
 
-- Repeat the previous two points, but now add a random "error term" to `x1`, e.g., compute `x1 = 2*x0 + 0.5 + rnorm(n = length(x0), mean = 0, sd = 0.3)`, and check that the correlation between `x0` and `x1` is now smaller than 1. Also, see how increasing the `sd` of the "error term" decreases the correlation between `x1` and `x0`
+-   Repeat the previous two points, but now add a random "error term" to `x1`, e.g., compute `x1 = 2*x0 + 0.5 + rnorm(n = length(x0), mean = 0, sd = 0.3)`, and check that the correlation between `x0` and `x1` is now smaller than 1. Also, see how increasing the `sd` of the "error term" decreases the correlation between `x1` and `x0`

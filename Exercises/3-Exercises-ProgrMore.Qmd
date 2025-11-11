@@ -33,7 +33,7 @@ editor: visual
     -   take two numeric arguments as input: `N` and `n_sim`;
     -   initializes a vector that has `n_sim` elements, all filled with `NA`;
     -   runs a `for` loop `n_sim` times;
-    -   inside the loop, at each iteration it generates two independent normally distributed variables each with `N` observations, computes the correlation coefficient between them, and stores it in the appropriate position of the previously initialized vector; 
+    -   inside the loop, at each iteration it generates two independent normally distributed variables each with `N` observations, computes the correlation coefficient between them, and stores it in the appropriate position of the previously initialized vector;
     -   returns the vector filled with simulated correlation coefficients
 
 -   *Extra for advanced users:* Repeat one of the previous exercise that used the `for` loop, but without using the `for` loop (i.e., employing an alternative iterative method)
