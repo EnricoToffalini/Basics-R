@@ -438,7 +438,7 @@ You have processed data with R, now... how to **export** it?
 
 When collaborating with someone also using R, you may choose to exchange data directly by exporting the object or the entire workspace as a `.RData` file, using the `save()` or `save.image()` function respectively.
 
-However, if you need to export a dataframe in a more universally readable tabular format, such as `.csv`, you may use `write.table()`:
+However, if you need to export a dataframe in a more universally readable tabular format, such as `.csv`, you may use **`write.csv()`**:
 
 ```{r, eval=F}
 # specify the dataframe to export (here named "df")

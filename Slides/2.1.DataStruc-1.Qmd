@@ -20,12 +20,14 @@ execute:
   echo: true
   output: true
 ---
-## What Are Data Structures
+## Data Structures
 
-<div style="font-size:46px;">
-Data structures, like **vectors**, **matrices**, **dataframes**, **lists**, are fundamental tools that allow you to **organize and store complex information**, so that they can be easily **processes by functions** (e.g., `lm()` function may fit a linear model on variables stored in a dataframe)
+<div style="font-size:43px;">
+- Most often you don't work with single scalar variables (e.g., `age = 20`), but with more complex data structures like **vectors**, **matrices**, **dataframes**, **lists**, that allow you to **organize and store complex information**
 
-Most operations you will perform in R (e.g., *processing data*, *fitting models*, *plotting outputs*) are performed on these data structures 
+- Many **functions** are created for handling such structures (e.g., `lm()` takes vectors or dataframe for input)
+
+- When you *process data*, *fit models*, *plot outputs*, you generally work with these data structures 
 </div>
 
 <!-- --------------------------------------------------------------------- -->
