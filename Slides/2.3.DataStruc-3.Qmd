@@ -60,11 +60,12 @@ df$TypeOfCourse = as.factor(df$TypeOfCourse)
 
 Internally, a factor is stored as **integer**, with associated **labels** for levels: 
 ```{r}
+typeof(df$TypeOfCourse)
 as.integer(df$TypeOfCourse)
 levels(df$TypeOfCourse)
 ```
 
-*Warning!* Despite storing integers, factors are **not** numeric: 
+⚠️ *Warning!* Despite the above, factors **don't** support numerical operations: 
 ```{r}
 df$TypeOfCourse * 2
 ```

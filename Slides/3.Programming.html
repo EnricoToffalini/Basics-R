@@ -1196,8 +1196,7 @@ When you need to evaluate more than just two alternative conditions, you can use
 <div class="large-code">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href aria-hidden="true" tabindex="-1"></a>age <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">28</span>, <span class="dv">15</span>, <span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">67</span>, <span class="dv">42</span>, <span class="dv">14</span>, <span class="dv">7</span>)</span>
-<span id="cb13-2"><a href aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-3"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">ifelse</span>(age <span class="sc">&gt;=</span> <span class="dv">18</span>, <span class="st">&quot;Adult&quot;</span>, <span class="st">&quot;Minor&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-2"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">ifelse</span>(age <span class="sc">&gt;=</span> <span class="dv">18</span>, <span class="st">&quot;Adult&quot;</span>, <span class="st">&quot;Minor&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] &quot;Minor&quot; &quot;Adult&quot; &quot;Minor&quot; &quot;Minor&quot; &quot;Minor&quot; &quot;Adult&quot; &quot;Adult&quot; &quot;Minor&quot; &quot;Minor&quot;</code></pre>
 </div>
@@ -1605,7 +1604,6 @@ Let’s extend the previous example with … a few more iterations!
 </section>
 <section id="apply-family-4" class="slide level2">
 <h2><code>apply</code> family</h2>
-FYI, other functions within the <strong><code>apply</code> family</strong>:
 <div style="font-size:26px;">
 <ul>
 <li><p><strong><code>tapply()</code></strong>: applies a function to subsets of a vector grouped by a factor, example <code>tapply(df$values, df$group, FUN=mean)</code> (know that the function <code>aggregate()</code> might be more convenient in some cases)</p></li>
@@ -1628,17 +1626,16 @@ FYI, other functions within the <strong><code>apply</code> family</strong>:
 </div>
 </div>
 </section>
-<section id="sapply" class="slide level2">
-<h2><code>sapply</code></h2>
-<p>Here’s how <strong><code>sapply()</code></strong> can be used to help compute the <em>standard error of the mean</em> via <em>Monte Carlo simulation</em></p>
+<section id="apply-family-5" class="slide level2">
+<h2><code>apply</code> family</h2>
+<p>Here’s how <strong><code>apply</code></strong> family functions can be used to compactly compute the <em>standard error of the mean</em> via <em>Monte Carlo simulation</em></p>
 <div class="large-code">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href aria-hidden="true" tabindex="-1"></a>myList <span class="ot">=</span> <span class="fu">list</span>()</span>
-<span id="cb62-2"><a href aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10000</span>) myList[[i]] <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">30</span>)</span>
-<span id="cb62-3"><a href aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb62-4"><a href aria-hidden="true" tabindex="-1"></a>ms <span class="ot">=</span> <span class="fu">sapply</span>(myList, mean)</span>
-<span id="cb62-5"><a href aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb62-6"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(ms)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href aria-hidden="true" tabindex="-1"></a>myVectorsList <span class="ot">=</span> <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10000</span>, <span class="cf">function</span>(i) <span class="fu">rnorm</span>(<span class="dv">30</span>))</span>
+<span id="cb62-2"><a href aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-3"><a href aria-hidden="true" tabindex="-1"></a>allMeans <span class="ot">=</span> <span class="fu">sapply</span>(myVectorsList, mean)</span>
+<span id="cb62-4"><a href aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-5"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(allMeans)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.1851159</code></pre>
 </div>
@@ -1646,33 +1643,13 @@ FYI, other functions within the <strong><code>apply</code> family</strong>:
 </div>
 <div style="font-size:22px; font-style:italic;">
 <ol type="1">
-<li>an empty list is initialized;</li>
-<li>a <code>for</code> loop is used to fill each slot in the list with a vector of 30 randomly generated numbers;</li>
-<li><b><code>sapply</code> is used to compute the <code>mean</code> of each vector in the list; </b></li>
+<li><code>lapply</code> is used to populate a long list of vectors each including 30 randomly generated numbers;</li>
+<li><b><code>sapply</code> is then used to compute the <code>mean</code> of each vector in the list; </b></li>
 <li><em>standard error of the mean</em> is computed as the <code>sd</code> on the vector of the <em>means</em></li>
 </ol>
 </div>
-<p>Saving all generated data allows for more flexibility in analysis, although it uses more memory</p>
-</section>
-<section id="lapply-and-sapply" class="slide level2">
-<h2><code>lapply</code> and <code>sapply</code></h2>
-<p>Here’s another, even more compact way of doing the same, without using any <code>for</code> loop, but this requires defining a small custom function:</p>
-<div class="large-code">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href aria-hidden="true" tabindex="-1"></a>results <span class="ot">=</span> <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10000</span>, <span class="cf">function</span>(i) <span class="fu">rnorm</span>(<span class="dv">30</span>) )</span>
-<span id="cb64-2"><a href aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb64-3"><a href aria-hidden="true" tabindex="-1"></a>ms <span class="ot">=</span> <span class="fu">sapply</span>(results, mean)</span>
-<span id="cb64-4"><a href aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb64-5"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(ms)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.1836006</code></pre>
-</div>
-</div>
-</div>
-<p><br>
-</p>
-<div style="font-size:22px; font-style:italic;">
-Note: <code>&quot;i&quot;</code> represents the current element of <code>1:10000</code> over which <code>lapply</code> iterates. Even though it is practically useless here, because only random numbers are generated at each iteration, it must be included because <code>sapply</code> must pass an alement as the argument to the function by default
+<div style="font-size:24px; font-style:italic;">
+Note: <code>&quot;i&quot;</code> represents the current element of <code>1:10000</code> over which <code>lapply</code> iterates. Even though it is practically useless here, because only random numbers are generated at each iteration, it must be included because <code>lapply</code> must pass an element as the argument to the function by default
 </div>
 <!-- --------------------------------------------------------------------- -->
 </section>
@@ -1682,17 +1659,17 @@ Note: <code>&quot;i&quot;</code> represents the current element of <code>1:10000
 <p>Here is the schema for defining custom functions with input (argument[s]), body, and output (return):</p>
 <div class="large-code">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href aria-hidden="true" tabindex="-1"></a><span class="co"># define new function with some argument(s) as input</span></span>
-<span id="cb66-2"><a href aria-hidden="true" tabindex="-1"></a>myFunctName <span class="ot">=</span> <span class="cf">function</span>(<span class="at">arg1 =</span> <span class="cn">NA</span>, <span class="at">arg2 =</span> <span class="cn">NA</span>, <span class="at">arg3 =</span> <span class="cn">TRUE</span>){ </span>
-<span id="cb66-3"><a href aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb66-4"><a href aria-hidden="true" tabindex="-1"></a>  <span class="co"># body, series of operations</span></span>
-<span id="cb66-5"><a href aria-hidden="true" tabindex="-1"></a>    computes several operations </span>
-<span id="cb66-6"><a href aria-hidden="true" tabindex="-1"></a>    variously uses arg1, arg2, arg3 </span>
-<span id="cb66-7"><a href aria-hidden="true" tabindex="-1"></a>    get an object named <span class="st">&quot;res&quot;</span> as final result </span>
-<span id="cb66-8"><a href aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb66-9"><a href aria-hidden="true" tabindex="-1"></a>  <span class="co"># gives an output</span></span>
-<span id="cb66-10"><a href aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(res)</span>
-<span id="cb66-11"><a href aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href aria-hidden="true" tabindex="-1"></a><span class="co"># define new function with some argument(s) as input</span></span>
+<span id="cb64-2"><a href aria-hidden="true" tabindex="-1"></a>myFunctName <span class="ot">=</span> <span class="cf">function</span>(<span class="at">arg1 =</span> <span class="cn">NA</span>, <span class="at">arg2 =</span> <span class="cn">NA</span>, <span class="at">arg3 =</span> <span class="cn">TRUE</span>){ </span>
+<span id="cb64-3"><a href aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb64-4"><a href aria-hidden="true" tabindex="-1"></a>  <span class="co"># body, series of operations</span></span>
+<span id="cb64-5"><a href aria-hidden="true" tabindex="-1"></a>    computes several operations </span>
+<span id="cb64-6"><a href aria-hidden="true" tabindex="-1"></a>    variously uses arg1, arg2, arg3 </span>
+<span id="cb64-7"><a href aria-hidden="true" tabindex="-1"></a>    res <span class="ot">=</span> ... get an object named <span class="st">&quot;res&quot;</span> as final result </span>
+<span id="cb64-8"><a href aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb64-9"><a href aria-hidden="true" tabindex="-1"></a>  <span class="co"># gives an output</span></span>
+<span id="cb64-10"><a href aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(res)</span>
+<span id="cb64-11"><a href aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </section>
@@ -1700,19 +1677,19 @@ Note: <code>&quot;i&quot;</code> represents the current element of <code>1:10000
 <h2>Define Custom Functions with <code>function()</code></h2>
 <p>Here’s a full example:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href aria-hidden="true" tabindex="-1"></a>z_score <span class="ot">=</span> <span class="cf">function</span>(<span class="at">vect =</span> <span class="cn">NA</span>){</span>
-<span id="cb67-2"><a href aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb67-3"><a href aria-hidden="true" tabindex="-1"></a>  vectM <span class="ot">=</span> <span class="fu">mean</span>(vect, <span class="at">na.rm=</span>T)</span>
-<span id="cb67-4"><a href aria-hidden="true" tabindex="-1"></a>  vectSD <span class="ot">=</span> <span class="fu">sd</span>(vect, <span class="at">na.rm=</span>T)</span>
-<span id="cb67-5"><a href aria-hidden="true" tabindex="-1"></a>  z <span class="ot">=</span> (vect <span class="sc">-</span> vectM) <span class="sc">/</span> vectSD</span>
-<span id="cb67-6"><a href aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb67-7"><a href aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(z)</span>
-<span id="cb67-8"><a href aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href aria-hidden="true" tabindex="-1"></a>z_score <span class="ot">=</span> <span class="cf">function</span>(<span class="at">vect =</span> <span class="cn">NA</span>){</span>
+<span id="cb65-2"><a href aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb65-3"><a href aria-hidden="true" tabindex="-1"></a>  vectM <span class="ot">=</span> <span class="fu">mean</span>(vect, <span class="at">na.rm=</span>T)</span>
+<span id="cb65-4"><a href aria-hidden="true" tabindex="-1"></a>  vectSD <span class="ot">=</span> <span class="fu">sd</span>(vect, <span class="at">na.rm=</span>T)</span>
+<span id="cb65-5"><a href aria-hidden="true" tabindex="-1"></a>  z <span class="ot">=</span> (vect <span class="sc">-</span> vectM) <span class="sc">/</span> vectSD</span>
+<span id="cb65-6"><a href aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb65-7"><a href aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(z)</span>
+<span id="cb65-8"><a href aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>After creating it, a custom function can be used like any other function:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">101</span>, <span class="dv">90</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="dv">114</span>, <span class="dv">87</span>, <span class="dv">106</span>, <span class="dv">98</span>, <span class="dv">93</span>)</span>
-<span id="cb68-2"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">z_score</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">101</span>, <span class="dv">90</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="dv">114</span>, <span class="dv">87</span>, <span class="dv">106</span>, <span class="dv">98</span>, <span class="dv">93</span>)</span>
+<span id="cb66-2"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">z_score</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1]  0.27162785 -0.89033574          NA          NA  1.64485756 -1.20723491
 [7]  0.79979313 -0.04527131 -0.57343658</code></pre>
@@ -1723,23 +1700,23 @@ Note: <code>&quot;i&quot;</code> represents the current element of <code>1:10000
 <h2>Define Custom Functions with <code>function()</code></h2>
 <p>Here’s a slightly more sophisticated example:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href aria-hidden="true" tabindex="-1"></a>z_score <span class="ot">=</span> <span class="cf">function</span>(<span class="at">vect =</span> <span class="cn">NA</span>, <span class="at">naRemove =</span> <span class="cn">FALSE</span>){</span>
-<span id="cb70-2"><a href aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb70-3"><a href aria-hidden="true" tabindex="-1"></a>  vectM <span class="ot">=</span> <span class="fu">mean</span>(vect, <span class="at">na.rm=</span>naRemove)</span>
-<span id="cb70-4"><a href aria-hidden="true" tabindex="-1"></a>  vectSD <span class="ot">=</span> <span class="fu">sd</span>(vect, <span class="at">na.rm=</span>naRemove)</span>
-<span id="cb70-5"><a href aria-hidden="true" tabindex="-1"></a>  z <span class="ot">=</span> (vect <span class="sc">-</span> vectM) <span class="sc">/</span> vectSD</span>
-<span id="cb70-6"><a href aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb70-7"><a href aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(z)</span>
-<span id="cb70-8"><a href aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href aria-hidden="true" tabindex="-1"></a>z_score <span class="ot">=</span> <span class="cf">function</span>(<span class="at">vect =</span> <span class="cn">NA</span>, <span class="at">naRemove =</span> <span class="cn">FALSE</span>){</span>
+<span id="cb68-2"><a href aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb68-3"><a href aria-hidden="true" tabindex="-1"></a>  vectM <span class="ot">=</span> <span class="fu">mean</span>(vect, <span class="at">na.rm=</span>naRemove)</span>
+<span id="cb68-4"><a href aria-hidden="true" tabindex="-1"></a>  vectSD <span class="ot">=</span> <span class="fu">sd</span>(vect, <span class="at">na.rm=</span>naRemove)</span>
+<span id="cb68-5"><a href aria-hidden="true" tabindex="-1"></a>  z <span class="ot">=</span> (vect <span class="sc">-</span> vectM) <span class="sc">/</span> vectSD</span>
+<span id="cb68-6"><a href aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb68-7"><a href aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(z)</span>
+<span id="cb68-8"><a href aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Let’s use it:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">101</span>, <span class="dv">90</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="dv">114</span>, <span class="dv">87</span>, <span class="dv">106</span>, <span class="dv">98</span>, <span class="dv">93</span>)</span>
-<span id="cb71-2"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">z_score</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">101</span>, <span class="dv">90</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="dv">114</span>, <span class="dv">87</span>, <span class="dv">106</span>, <span class="dv">98</span>, <span class="dv">93</span>)</span>
+<span id="cb69-2"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">z_score</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] NA NA NA NA NA NA NA NA NA</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">z_score</span>(x, <span class="at">naRemove=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">z_score</span>(x, <span class="at">naRemove=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1]  0.27162785 -0.89033574          NA          NA  1.64485756 -1.20723491
 [7]  0.79979313 -0.04527131 -0.57343658</code></pre>
@@ -1760,23 +1737,23 @@ Note: <code>&quot;i&quot;</code> represents the current element of <code>1:10000
 <h2>Define Custom Functions with <code>function()</code></h2>
 <p>To clarify the previous slide, these are <strong>four alternative and increasingly compact ways</strong> of writing the same function:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href aria-hidden="true" tabindex="-1"></a>naCount <span class="ot">=</span> <span class="cf">function</span>(vect){</span>
-<span id="cb75-2"><a href aria-hidden="true" tabindex="-1"></a>  whereNAs <span class="ot">=</span> <span class="fu">is.na</span>(vect)</span>
-<span id="cb75-3"><a href aria-hidden="true" tabindex="-1"></a>  totalNAs <span class="ot">=</span> <span class="fu">sum</span>(whereNAs)</span>
-<span id="cb75-4"><a href aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(totalNAs)</span>
-<span id="cb75-5"><a href aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb75-6"><a href aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-7"><a href aria-hidden="true" tabindex="-1"></a>naCount <span class="ot">=</span> <span class="cf">function</span>(vect){</span>
-<span id="cb75-8"><a href aria-hidden="true" tabindex="-1"></a>  whereNAs <span class="ot">=</span> <span class="fu">is.na</span>(vect)</span>
-<span id="cb75-9"><a href aria-hidden="true" tabindex="-1"></a>  totalNAs <span class="ot">=</span> <span class="fu">sum</span>(whereNAs)</span>
-<span id="cb75-10"><a href aria-hidden="true" tabindex="-1"></a>  totalNAs</span>
-<span id="cb75-11"><a href aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb75-12"><a href aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-13"><a href aria-hidden="true" tabindex="-1"></a>naCount <span class="ot">=</span> <span class="cf">function</span>(vect){</span>
-<span id="cb75-14"><a href aria-hidden="true" tabindex="-1"></a>  <span class="fu">sum</span>(<span class="fu">is.na</span>(vect))</span>
-<span id="cb75-15"><a href aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb75-16"><a href aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-17"><a href aria-hidden="true" tabindex="-1"></a>naCount <span class="ot">=</span> <span class="cf">function</span>(vect) <span class="fu">sum</span>(<span class="fu">is.na</span>(vect))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href aria-hidden="true" tabindex="-1"></a>naCount <span class="ot">=</span> <span class="cf">function</span>(vect){</span>
+<span id="cb73-2"><a href aria-hidden="true" tabindex="-1"></a>  whereNAs <span class="ot">=</span> <span class="fu">is.na</span>(vect)</span>
+<span id="cb73-3"><a href aria-hidden="true" tabindex="-1"></a>  totalNAs <span class="ot">=</span> <span class="fu">sum</span>(whereNAs)</span>
+<span id="cb73-4"><a href aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(totalNAs)</span>
+<span id="cb73-5"><a href aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb73-6"><a href aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-7"><a href aria-hidden="true" tabindex="-1"></a>naCount <span class="ot">=</span> <span class="cf">function</span>(vect){</span>
+<span id="cb73-8"><a href aria-hidden="true" tabindex="-1"></a>  whereNAs <span class="ot">=</span> <span class="fu">is.na</span>(vect)</span>
+<span id="cb73-9"><a href aria-hidden="true" tabindex="-1"></a>  totalNAs <span class="ot">=</span> <span class="fu">sum</span>(whereNAs)</span>
+<span id="cb73-10"><a href aria-hidden="true" tabindex="-1"></a>  totalNAs</span>
+<span id="cb73-11"><a href aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb73-12"><a href aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-13"><a href aria-hidden="true" tabindex="-1"></a>naCount <span class="ot">=</span> <span class="cf">function</span>(vect){</span>
+<span id="cb73-14"><a href aria-hidden="true" tabindex="-1"></a>  <span class="fu">sum</span>(<span class="fu">is.na</span>(vect))</span>
+<span id="cb73-15"><a href aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb73-16"><a href aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-17"><a href aria-hidden="true" tabindex="-1"></a>naCount <span class="ot">=</span> <span class="cf">function</span>(vect) <span class="fu">sum</span>(<span class="fu">is.na</span>(vect))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <!-- --------------------------------------------------------------------- -->
 

@@ -151,7 +151,6 @@ To handle such cases you can use the base **`ifelse()`** function, that evaluate
 <div class="large-code">
 ```{r}
 age = c(2, 28, 15, 1, 4, 67, 42, 14, 7)
-
 ifelse(age >= 18, "Adult", "Minor")
 ```
 </div>
@@ -448,7 +447,6 @@ results
 
 ## `apply` family
 
-FYI, other functions within the **`apply` family**: 
 <div style="font-size:26px;">
 - **`tapply()`**: applies a function to subsets of a vector grouped by a factor, example `tapply(df$values, df$group, FUN=mean)` (know that the function `aggregate()` might be more convenient in some cases)
 
@@ -462,46 +460,26 @@ mapply(rnorm, n=c(2, 6, 4), mean=c(0, 100, 200), sd=c(1, 15, 30))
 ```
 </div>
 
-## `sapply`
+## `apply` family
 
-Here's how **`sapply()`** can be used to help compute the *standard error of the mean* via *Monte Carlo simulation*
+Here's how **`apply`** family functions can be used to compactly compute the *standard error of the mean* via *Monte Carlo simulation*
 
 <div class="large-code">
 ```{r}
-myList = list()
-for(i in 1:10000) myList[[i]] = rnorm(30)
+myVectorsList = lapply(1:10000, function(i) rnorm(30))
 
-ms = sapply(myList, mean)
+allMeans = sapply(myVectorsList, mean)
 
-sd(ms)
+sd(allMeans)
 ```
 </div>
 <div style="font-size:22px; font-style:italic;"> 
-1) an empty list is initialized; 
-2) a `for` loop is used to fill each slot in the list with a vector of 30 randomly generated numbers; 
-3) <b>`sapply` is  used to compute the `mean` of each vector in the list; </b>
-4) *standard error of the mean* is computed as the `sd` on the vector of the *means*
+1) `lapply` is used to populate a long list of vectors each including 30 randomly generated numbers; 
+2) <b>`sapply` is then used to compute the `mean` of each vector in the list; </b>
+3) *standard error of the mean* is computed as the `sd` on the vector of the *means*
 </div>
 
-Saving all generated data allows for more flexibility in analysis, although it uses more memory
-
-## `lapply` and `sapply`
-
-Here's another, even more compact way of doing the same, without using any `for` loop, but this requires defining a small custom function:
-
-<div class="large-code">
-```{r}
-results = lapply(1:10000, function(i) rnorm(30) )
-
-ms = sapply(results, mean)
-
-sd(ms)
-```
-</div>
-
-\
-
-<div style="font-size:22px; font-style:italic;"> Note: `"i"` represents the current element of `1:10000` over which `lapply` iterates. Even though it is practically useless here, because only random numbers are generated at each iteration, it must be included because `sapply` must pass an alement as the argument to the function by default</div>
+<div style="font-size:24px; font-style:italic;"> Note: `"i"` represents the current element of `1:10000` over which `lapply` iterates. Even though it is practically useless here, because only random numbers are generated at each iteration, it must be included because `lapply` must pass an element as the argument to the function by default</div>
 
 
 <!-- --------------------------------------------------------------------- -->
@@ -520,7 +498,7 @@ myFunctName = function(arg1 = NA, arg2 = NA, arg3 = TRUE){
   # body, series of operations
     computes several operations 
     variously uses arg1, arg2, arg3 
-    get an object named "res" as final result 
+    res = ... get an object named "res" as final result 
  
   # gives an output
   return(res)
