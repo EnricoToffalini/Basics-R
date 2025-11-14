@@ -134,7 +134,7 @@ Make sure you install:
 
 Interesting alternatives to installing RStudio:
 
-- <a href="https://positron.posit.co/" target="_blank">**Positron**</a> (based on MS Visual Studio)
+- <a href="https://positron.posit.co/" target="_blank">**Positron**</a> (based on MS Visual Studio Code)
 - <a href="https://posit.cloud/" target="_blank">**Posit.cloud**</a> (fully online, actually RStudio)
 - <a href="https://colab.research.google.com/" target="_blank">**Google Colab**</a> (fully online, make sure to set *R runtime type*; actually a Jupyter notebook)
 
