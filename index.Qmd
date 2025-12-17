@@ -1,7 +1,7 @@
 ---
 title: "Basics of R for Data Science"
 subtitle: "PhD Course in Psychological Sciences - University of Padova"
-author: "Enrico Toffalini"
+author: "<a href='https://enricotoffalini.github.io/' target='blank'>Enrico Toffalini</a>"
 include-in-header: assets/header.html
 format: 
   html:
@@ -106,7 +106,9 @@ Some materials in the *Exercises section* below will provide more stimulating ch
 
 ------------------------------------------------------------------------
 
-<div style="font-size:13px;">Other links:</div>
+::: {style="font-size:13px;"}
+Other links:
+:::
 
 ::: {.arrow-list style="font-size:11px; color:#555555"}
 -   GitHub repo associated to the present course website: [https://github.com/EnricoToffalini/Basics-R](https://github.com/EnricoToffalini/Basics-R){target="_blank"}
