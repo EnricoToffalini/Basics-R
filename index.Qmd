@@ -25,10 +25,10 @@ This online book is a useful additional resource for the present course: [***Int
 
 | Day                             | Time        | Room |
 |---------------------------------|-------------|------|
-| Monday, 10^th^ November 2025    | 10:30-12:30 | 4M   |
-| Tuesday, 11^th^ November 2025   | 9:30-12:30  | 4M   |
-| Wednesday, 12^th^ November 2025 | 9:30-12:30  | 4M   |
-| Thursday, 13^th^ November 2025  | 8:30-10:30  | 4M   |
+| Tuesday, 17^th^ November 2026   | 14:30-16:30 | 4T   |
+| Wednesday, 18^th^ November 2026 | 14:30-16:30 | 4T   |
+| Thursday, 19^th^ November 2026  | 9:00-12:00  | 4M   |
+| Monday, 23^rd^ November 2026    | 10:00-13:00 | 4T   |
 
 ## Getting Started
 
