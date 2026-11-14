@@ -24,8 +24,8 @@ Each participant completes trials in two conditions:
 
 The response is **binary** (1 = correct, 0 = incorrect). Each participant goes through many trials and provides several responses. Therefore, a **mixed-effects logistic regression** is appropriate:
 
--   ***Random intercepts*** account for individual differences in general correctness (they can be set in any case in which there is more than one single response per participant);
--   ***Random slopes*** account for individual differences in the effect/treatment (some participants are more susceptible to the treatment, other are less; *random slopes* can be set in cases where each participant is observed in more than one condition and provide more than one response in each condition... which is indeed the present case!)
+-   ***Random intercepts*** account for individual differences in general correctness (they can be set in any case in which there is more than one response per participant);
+-   ***Random slopes*** account for individual differences in the effect/treatment (some participants are more susceptible to the treatment, others less; *random slopes* can be set in cases where each participant is observed in more than one condition and provides more than one response in each condition... which is indeed the present case!)
 
 We will:
 
@@ -75,11 +75,11 @@ df = expand.grid(
   participant = factor(1:n_participants),
   condition   = c("Control", "Distraction")
 )
-# Repeat each row times trials
+# Repeat each row n_trials times
 df = df[rep(1:nrow(df),each=n_trials) , ]
 df$trial = rep(1:n_trials, times=n_participants*2)
 
-# Generate random intercept per participant
+# Generate random intercepts and slopes per participant
 rand_int = rnorm(n_participants, 0, sd_participant)
 rand_slo = rnorm(n_participants, 0, sd_participant)
 df$randInt_i    = rand_int[df$participant]
@@ -138,7 +138,7 @@ We keep the same design and true parameters as above. We repeatedly:
 2.  Fit the same `glmer(...)` model;
 3.  Record the p-value for the (fixed) effect of interest.
 
-Below we will run only $10$ iterations to avoid too long computations... But in real life you will certainly need many more iterations for precision.
+Below we will run only $10$ iterations to avoid overly long computations... But in real life you will certainly need many more iterations for precision.
 
 First of all, let's wrap the whole simulation of one dataset inside a custom function, which returns the p-value associated with the effect of interest, which is `condition`:
 
@@ -147,7 +147,7 @@ simulate_once = function(n_participants = 60,
                          n_trials = 40,
                          beta0 = 1,
                          beta1 = -0.30,
-                         sd_participants = 0.8) {
+                         sd_participant = 0.8) {
   
   # Random intercept per participant (new draw each experiment)
   rand_int = rnorm(n_participants, 0, sd_participant)
@@ -196,7 +196,7 @@ nsim = 10
 pvals = rep(NA, nsim)
 ```
 
-**RUN!!!** let's launch `replicate()` times `nsim` and get all the p-values we want!
+**RUN!!!** let's launch `replicate()` `nsim` times and get all the p-values we want!
 
 ```{r, cache=T}
 pvals = replicate(nsim,simulate_once())
@@ -219,7 +219,7 @@ list(
 )
 ```
 
-> **Note.** Mixed-effects models can occasionally fail to converge under certain parameterizations, that's why the use the **`try()`** function, and also track and report the proportion of successful fits. *Not* using **`try()`** is dangerous: Think what happens if after $1,000$ iterations and a full day of computation the whole script breaks because of one single error due to non-convergence!
+> **Note.** Mixed-effects models can occasionally fail to converge under certain parameterizations; that's why we use the **`try()`** function, and also track and report the proportion of successful fits. *Not* using **`try()`** is dangerous: think what happens if after $1,000$ iterations and a full day of computation the whole script breaks because of one single error due to non-convergence!
 
 ------------------------------------------------------------------------
 
@@ -227,9 +227,9 @@ list(
 
 We keep the same `simulate_once()` and parameters as in Part 2.
 
-To parallelize in a way that should work on **Windows, macOS, and Linux**, we use the **`future.apply`** package with a **multisession** plan (each worker is its own R session)
+To parallelize in a way that should work on **Windows, macOS, and Linux**, we use the **`future.apply`** package with a **multisession** plan (each worker is its own R session).
 
-⚠️ The below code was actually run on Windows... it needs to be actually checked on other operating systems.
+⚠️ The code below was run on Windows... it still needs to be checked on other operating systems.
 
 First, some setup for parallel power simulations using **`future.apply`**:
 
@@ -262,7 +262,7 @@ pvals_parallel = future_sapply(
 )
 ```
 
-Finally, some post-processing identical and see results, just like in Part 2:
+Finally, the same post-processing as in Part 2, and the results:
 
 ```{r, cache=T}
 pvals_clean     = pvals_parallel[is.finite(pvals_parallel)]

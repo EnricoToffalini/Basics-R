@@ -2298,7 +2298,7 @@ vertical-align: -.125em;
 </section>
 <section id="clean-and-normalize-the-text" class="level2">
 <h2 class="anchored" data-anchor-id="clean-and-normalize-the-text">Clean and Normalize the Text</h2>
-<p>We apply a series of base R transformations: lowercase conversion, removal of punctuation and digits, trimming extra spaces, and accent normalization (accents are coded quite inconsistently on international datasets: better remove them all).</p>
+<p>We apply a series of base R transformations: lowercase conversion, removal of punctuation and digits, trimming extra spaces, and accent normalization (accents are coded quite inconsistently in international datasets: better to remove them all).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># to lowercase</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>corpus <span class="ot">=</span> <span class="fu">tolower</span>(corpus)</span>
@@ -2317,7 +2317,7 @@ vertical-align: -.125em;
 </section>
 <section id="tokenize-and-remove-stopwords" class="level2">
 <h2 class="anchored" data-anchor-id="tokenize-and-remove-stopwords">Tokenize and Remove Stopwords</h2>
-<p>We split the text into words/tokens, remove common stopwords and very short tokens that add little information. You can adjust the stopword list to fit your needs.</p>
+<p>We split the text into words/tokens, and remove common stopwords and very short tokens that add little information. You can adjust the stopword list to fit your needs.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># split into tokens (vector of words)</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>tokens_list <span class="ot">=</span> <span class="fu">strsplit</span>(corpus, <span class="st">&quot; &quot;</span>, <span class="at">fixed =</span> <span class="cn">TRUE</span>)</span>
@@ -2388,12 +2388,16 @@ vertical-align: -.125em;
 </div>
 </div>
 </div>
-<p><strong>Question:</strong> do the most frequent terms match your expectation of the author’s main research themes?</p>
+<p><strong>Question:</strong> do the most frequent terms match your expectations of the author’s main research themes?</p>
 </section>
 </section>
 <section id="build-the-word-cloud" class="level2">
 <h2 class="anchored" data-anchor-id="build-the-word-cloud">Build the Word Cloud</h2>
-<p>The <code>wordcloud()</code> function requires: 1. a vector of <strong>unique words</strong>, 2. a vector of their <strong>frequencies</strong>.</p>
+<p>The <code>wordcloud()</code> function requires:</p>
+<ol type="1">
+<li>a vector of <strong>unique words</strong>,</li>
+<li>a vector of their <strong>frequencies</strong>.</li>
+</ol>
 <p>We will provide a palette and set a reproducible seed.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>

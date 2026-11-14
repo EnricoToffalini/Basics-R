@@ -1073,7 +1073,7 @@ Enrico Toffalini
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href aria-hidden="true" tabindex="-1"></a>age <span class="ot">=</span> <span class="dv">20</span> <span class="co"># assign number 20 to variable named &quot;age&quot;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Now let’s simply inspect its content</p>
+<p>Now let’s simply inspect its content:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href aria-hidden="true" tabindex="-1"></a>age</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1095,13 +1095,13 @@ Enrico Toffalini
 <section id="create-name-objects-1" class="slide level2">
 <h2>Create, name objects</h2>
 <h3 id="assignment-operators">Assignment operators</h3>
-<p>In R, both the assignment operator “<strong><code>=</code></strong>” and “<strong><code>&lt;-</code></strong>” (and actually even “<strong><code>-&gt;</code></strong>”) can be used to assign values to objects. In fact, “<strong><code>&lt;-</code></strong>” is considered more traditional in R and often preferred for clarity, also because it allows differentiating assignment from other uses of “<strong><code>=</code></strong>”.</p>
+<p>In R, both the assignment operators “<strong><code>=</code></strong>” and “<strong><code>&lt;-</code></strong>” (and actually even “<strong><code>-&gt;</code></strong>”) can be used to assign values to objects. That said, “<strong><code>&lt;-</code></strong>” is considered more traditional in R and often preferred for clarity, also because it allows differentiating assignment from other uses of “<strong><code>=</code></strong>”.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href aria-hidden="true" tabindex="-1"></a><span class="co"># these two commands do the same thing </span></span>
 <span id="cb8-2"><a href aria-hidden="true" tabindex="-1"></a>age <span class="ot">&lt;-</span> <span class="dv">20</span></span>
 <span id="cb8-3"><a href aria-hidden="true" tabindex="-1"></a>age <span class="ot">=</span> <span class="dv">20</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>However, unlike many other teachers, I will generally favor “<strong><code>=</code></strong>” as the assignment operator in order to maintain consistency with the convention in most other programming languages</p>
+<p>However, unlike many other teachers, I will generally favor “<strong><code>=</code></strong>” as the assignment operator in order to maintain consistency with the convention in most other programming languages.</p>
 </section>
 <section id="create-name-objects-2" class="slide level2">
 <h2>Create, name objects</h2>
@@ -1110,25 +1110,25 @@ Enrico Toffalini
 <ul>
 <li><p>Start with a letter or dot (if dot, must <strong>not</strong> be followed by a number);</p></li>
 <li><p>Include only letters, numbers, dots, underscores;</p></li>
-<li><p>No reserved words (e.g., <code>if</code>, <code>for</code>, <code>NA</code>, <code>function</code>; unless placed inside backticks, e.g., `if`, but this is strongly adviced against).</p></li>
+<li><p>No reserved words (e.g., <code>if</code>, <code>for</code>, <code>NA</code>, <code>function</code>; unless placed inside backticks, e.g., `if`, but this is strongly advised against).</p></li>
 </ul>
 <p><strong><em>Recommendations:</em></strong></p>
 <ul>
 <li><p>Avoid names that conflict with common functions (e.g., “<code>mean</code>”, “<code>sum</code>”, “<code>c</code>”);</p></li>
 <li><p>Be concise: no length limit, but long names are difficult to read and type.</p></li>
 </ul>
-<p>⚠️ <em>WARNING!</em> R is Case sensitive: <code>age</code> and <code>Age</code> will be treated as <strong>two objects</strong>!</p>
+<p>⚠️ <em>WARNING!</em> R is case-sensitive: <code>age</code> and <code>Age</code> will be treated as <strong>two objects</strong>!</p>
 </section>
 <section id="create-name-objects-3" class="slide level2">
 <h2>Create, name objects</h2>
 <h3 id="rules-for-naming-objects-in-r-1">Rules for naming objects in R</h3>
 <p><em>Examples:</em></p>
 <ul>
-<li><p>Allowed: “<code>age</code>”, “<code>age0</code>”, “<code>age1</code>”, “<code>total_score</code>”, “<code>.myData</code>”, “<code>my.data</code>”,</p></li>
+<li><p>Allowed: “<code>age</code>”, “<code>age0</code>”, “<code>age1</code>”, “<code>total_score</code>”, “<code>.myData</code>”, “<code>my.data</code>”</p></li>
 <li><p><strong>NOT</strong> allowed: “<code>0age</code>”, “<code>_age</code>”, “<code>.0myData</code>”, “<code>my data</code>”, “<code>my-data</code>”, “<code>my,data</code>”, “<code>for</code>”, “<code>NA</code>”</p></li>
 </ul>
-<p>⚠️ <em>WARNING!</em> Use of “<code>.</code>” in object names (e.g., “<code>my.data</code>”) is fine in <strong>R</strong> but not allowed in <strong>Python</strong>, where “<code>.</code>” is part of the language syntax.</p>
-<p>Across different languages, <em>naming conventions</em> for longer, multi-word variable names favor <strong><code>snake_case</code></strong> (e.g., “<code>my_data</code>”) or <strong><code>camelCase</code></strong> (e.g., “<code>myData</code>”), and <strong>abbreviations</strong> where appropriate (e.g., “<code>unipdData</code>” better than “<code>university_of_padova_dataset</code>”)… preferably used in a consistent way!</p>
+<p>⚠️ <em>WARNING!</em> The use of “<code>.</code>” in object names (e.g., “<code>my.data</code>”) is fine in <strong>R</strong> but not allowed in <strong>Python</strong>, where “<code>.</code>” is part of the language syntax.</p>
+<p>Across different languages, <em>naming conventions</em> for longer, multi-word variable names favor <strong><code>snake_case</code></strong> (e.g., “<code>my_data</code>”) or <strong><code>camelCase</code></strong> (e.g., “<code>myData</code>”), and <strong>abbreviations</strong> where appropriate (e.g., “<code>unipdData</code>” is better than “<code>university_of_padova_dataset</code>”)… preferably used in a consistent way!</p>
 <!-- --------------------------------------------------------------------- -->
 </section>
 <section id="use-basic-operations" class="slide level2">
@@ -1257,7 +1257,7 @@ Enrico Toffalini
 <section id="use-basic-operations-2" class="slide level2">
 <h2>Use basic operations</h2>
 <h3 id="r-as-calculator-use-of-parentheses">R as calculator: use of parentheses</h3>
-<p>The order of operations in R follows standard algebraic rules, unless you specify a different order using parentheses. In R, only round parentheses <strong><code>( )</code></strong> are used for grouping in algebraic expressions, <strong>NOT</strong> square <strong><code>[ ]</code></strong> and curly <strong><code>{ }</code></strong> brackets, because they have other specific syntactic purposes.</p>
+<p>The order of operations in R follows standard algebraic rules, unless you specify a different order using parentheses. In R, only round parentheses <strong><code>( )</code></strong> are used for grouping in algebraic expressions, <strong>NOT</strong> square <strong><code>[ ]</code></strong> or curly <strong><code>{ }</code></strong> brackets, because they have other specific syntactic purposes.</p>
 <p><em>Examples:</em></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">*</span> <span class="dv">3</span> <span class="sc">+</span> <span class="dv">3</span><span class="sc">^</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1278,7 +1278,7 @@ Enrico Toffalini
 <h2>Use basic operations</h2>
 <h3 id="relational-operators">Relational operators</h3>
 <p>They are used to compare values and return logical values (<code>TRUE</code>, <code>FALSE</code>).</p>
-<p>Let’s say that we defined <code>age = 20</code>, now let’s make a few examples:</p>
+<p>Let’s say that we have defined <code>age = 20</code>; now let’s look at a few examples:</p>
 <table class="caption-top">
 <thead>
 <tr class="header">
@@ -1332,7 +1332,7 @@ Enrico Toffalini
 <h2>Use basic operations</h2>
 <h3 id="basic-logical-operators">Basic logical operators</h3>
 <p>They are used to combine logical values (<code>TRUE</code>, <code>FALSE</code>).</p>
-<p>Once again, let’s say that we defined <code>age = 20</code>, now let’s make a few examples:</p>
+<p>Once again, with <code>age = 20</code>, let’s look at a few examples:</p>
 <table class="caption-top">
 <thead>
 <tr class="header">
@@ -1386,17 +1386,17 @@ Enrico Toffalini
 <li><p><strong>numeric</strong> (<code>20</code>, <code>11.5</code>, <code>0</code>, <code>13.28157</code>, …);</p></li>
 <li><p><strong>logical/Boolean</strong> (<code>TRUE</code>, <code>FALSE</code>).</p></li>
 </ul>
-<p>Actually, <strong>numeric</strong> data could actually be of two types: <strong><em>double</em></strong> (i.e., “<em>double-precision floating-point</em>”) that is with decimals like <code>11.5</code>, and <strong><em>integer</em></strong> like <code>20</code>.</p>
-<p>In fact, R treats numeric values as <em>double</em> by default (even if without decimals). To specify numbers as integer, explicitly add an <strong><code>L</code></strong> after the number, like <code>age = 20L</code> (you likely <strong>will not</strong> need this, unless you explicitly need integers for some purposes, such as saving memory).</p>
+<p><strong>Numeric</strong> data can actually be of two types: <strong><em>double</em></strong> (i.e., “<em>double-precision floating-point</em>”), that is, with decimals like <code>11.5</code>, and <strong><em>integer</em></strong>, like <code>20</code>.</p>
+<p>In fact, R treats numeric values as <em>double</em> by default (even if without decimals). To specify numbers as integers, explicitly add an <strong><code>L</code></strong> after the number, like <code>age = 20L</code> (you likely <strong>will not</strong> need this, unless you explicitly need integers for specific purposes, such as saving memory).</p>
 </section>
 <section id="basic-types-of-data-1" class="slide level2">
 <h2>Basic types of data</h2>
 <h3 id="characters">characters</h3>
-<p>Another extremely important type of data is <strong>character</strong> (often called <strong><em>strings</em></strong>). This is used to store any text, and must be enclosed in quotes (<strong><code>&#39; &#39;</code></strong> or <strong><code>&quot; &quot;</code></strong>) like this:</p>
+<p>Another extremely important type of data is <strong>character</strong> (often called <strong><em>strings</em></strong>). It is used to store any text and must be enclosed in quotes (<strong><code>&#39; &#39;</code></strong> or <strong><code>&quot; &quot;</code></strong>) like this:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href aria-hidden="true" tabindex="-1"></a>myName <span class="ot">=</span> <span class="st">&quot;Enrico&quot;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>You may perform many operations with strings like:</p>
+<p>You may perform many operations with strings, like:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href aria-hidden="true" tabindex="-1"></a>myName <span class="sc">==</span> <span class="st">&quot;Alexander&quot;</span> <span class="co"># is my name equal to Alexander?</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1443,7 +1443,7 @@ Enrico Toffalini
 </section>
 <section id="basic-types-of-data-3" class="slide level2">
 <h2>Basic types of data</h2>
-<p>You may also inquire data type directly with functions <code>is.*</code>:</p>
+<p>You may also check the data type directly with the <code>is.*</code> functions:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">is.numeric</span>(age)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">

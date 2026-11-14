@@ -24,7 +24,7 @@ Simulating helps you:
 -   Understand the general logic behind power analysis,
 -   Write pre-registered, transparent analyses for fully reproducible research.
 
-We will start from the simplest scenario: a t-test (actually **not** something for which you actually need a simulation, and **not** something you would normally choose for a pre-registration, but that's for learning), and then move toward correlation and regression models.
+We will start from the simplest scenario: a t-test (**not** something for which you actually need a simulation, and **not** something you would normally choose for a pre-registration, but that's for learning), and then move toward correlation and regression models.
 
 > We will use **`for` loops** as the *primary method* because they are explicit and easy to read\
 > However, we will also show a **compact alternative using the `replicate()` function**, a member of the *apply family*, that performs the same task more concisely once you’re comfortable with functional programming.
@@ -91,7 +91,7 @@ Try increasing `nsim` to improve precision.
 
 #### Step 5 (Optional): Rewriting with `replicate()`
 
-The same simulation can be written more compactly using \*\*`replicate`()`**, which repeatedly applies a function to a sequence (here, 1 to`nsim\`).
+The same simulation can be written more compactly using **`replicate()`**, which repeatedly evaluates an expression (here, `nsim` times).
 
 ```{r}
 set.seed(0) # set a seed for reproducibility
@@ -107,7 +107,7 @@ p_values_replicate = replicate(nsim, simulate_t_p(N, d))
 mean(p_values_replicate < alpha)
 ```
 
-> `replicate()` performs the same job as the `for` loop but is designed specifically for repeated simulations; `replicate()` is actually just a wrapper of `sapply()` for repeating the exact same expression (usually with just different random numbers, like in our case).
+> `replicate()` performs the same job as the `for` loop but is designed specifically for repeated simulations; `replicate()` is actually just a wrapper around `sapply()` for repeating the exact same expression (usually with just different random numbers, like in our case).
 
 ------------------------------------------------------------------------
 
@@ -177,7 +177,7 @@ ggplot(results, aes(x = N, y = power, color = factor(d))) +
 
 ### Step 4 (Optional): Using `replicate()` (and `mapply()`) Instead of Loops
 
-You can achieve the same results using functions of the `*apply()` family and the support of a custom function... This might look less readable if you are not used to it, but an approach like this will become more convenient and efficient if you need to run computationally heavy simulations, and especially if you want to parallelize.
+You can achieve the same results using functions of the `*apply()` family with the support of a custom function... This might look less readable if you are not used to it, but an approach like this will become more convenient and efficient if you need to run computationally heavy simulations, and especially if you want to parallelize.
 
 ``` r
 power_once = function(N, d, nsim = 1000, alpha = 0.05) {
@@ -350,10 +350,10 @@ mean(p_values < alpha)
 -   Extend the above `t.test` simulations to **paired t-tests** or **one-sample t-tests**.
 -   Explore how power changes with different alpha levels (e.g., 0.01, 0.10) or with various p-value adjustments (`p.adjust()`) for multiple comparisons.
 -   Visualize the distribution of *p-values* or *observed effect sizes* across all iterations.
--   Understand how increasing the number of iterations `nsim` make your power simulation more precise.
+-   Understand how increasing the number of iterations `nsim` makes your power simulation more precise.
 -   Try power simulation for **logistic regression** (e.g., `plogis()` for generating probabilities from a linear term, `rbinom()` for generating binomial data, and `glm(y ~ x, data=df, family=binomial(link="logit"))` for fitting models).
 :::
 
 ::: {.callout-warning title="Simulations can be computationally heavy"}
-Simulations with many iterations or complex models (like generalized mixed-effects models, SEM, computational models) can take a long time to run. If time is very long, start small (e.g., 5-10 iterations) to test your code and then increase to improve precision. Plus, learning how to parallelize computation (e.g., with the `parallel()` package and its `mclapply()` function).
+Simulations with many iterations or complex models (like generalized mixed-effects models, SEM, computational models) can take a long time to run. If running time is very long, start small (e.g., 5-10 iterations) to test your code and then increase to improve precision. Also, consider learning how to parallelize computation (e.g., with the `parallel` package and its `mclapply()` function).
 :::

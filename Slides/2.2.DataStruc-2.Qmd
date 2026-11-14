@@ -30,7 +30,7 @@ execute:
 ##
 ### A type of data structure you are already familiar with
 
-here is how I would import it in R (<a href="data/Courses40Cycle.xlsx" download>download here</a>), and display the first few rows:
+Here is how I would import it into R (<a href="data/Courses40Cycle.xlsx" download>download here</a>), and display the first few rows:
 
 ```{r}
 library(readxl)
@@ -71,7 +71,7 @@ ncol(df) # number of columns
 ## 
 ### Basic Functions on Dataframes
 
-The **`str()`** function provides a quick overview of the structure of a dataframe, including its dimensions, variables, their data types, and first few observations: 
+The **`str()`** function provides a quick overview of the structure of a dataframe, including its dimensions, variables, their data types, and the first few observations: 
 ```{r}
 str(df)
 ```
@@ -88,7 +88,7 @@ The "**`$`**" (dollar) operator is essential to access variables in a dataframe:
 ## 
 ### Accessing and Working with Elements in Dataframes
 
-As an exercise, let's check whether `ECTS` is actually always `Hours*5`
+As an exercise, let's check whether `Hours` is actually always `ECTS*5`
 
 We may use many different, increasingly sophisticated, strategies: 
 <div class="large-code">
@@ -131,7 +131,7 @@ df[ , "Hours"]
 
 Notice the comma "**`,`**" above.
 
-Unlike vectors, dataframes must be indexed by **both row and column**. In the example above, we’re specifying only the desired column (`"Hours"`), leaving the row index blank before the comma **`,`** This selects all rows for the column named `"Hours"`. Remember that blank index means "all". Importantly, the "**`,`**" must always be there when indexing dataframes! 
+Unlike vectors, dataframes must be indexed by **both row and column**. In the example above, we’re specifying only the desired column (`"Hours"`), leaving the row index blank before the comma **`,`**. This selects all rows for the column named `"Hours"`. Remember that a blank index means "all". Importantly, the "**`,`**" must always be there when indexing dataframes! 
 
 ## 
 ### Indexing Elements in a Dataframe - Examples
@@ -147,7 +147,7 @@ df[ 1 , c(4, 5, 2)]
 ## 
 ### Indexing and Modifying Elements in a Dataframe
 
-Editing/modifying elements in a dataframe is similar to what you do in vectors
+Editing/modifying elements in a dataframe is similar to what you do with vectors
 
 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;"> <div>
 ```{r, echo=F}
@@ -169,7 +169,7 @@ dx
 ## 
 ### Indexing and Modifying Elements in a Dataframe
 
-Editing/modifying elements in a dataframe is similar to what you do in vectors
+Editing/modifying elements in a dataframe is similar to what you do with vectors
 
 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;"> <div>
 ```{r, echo=F}
@@ -182,7 +182,7 @@ dx
 ```
 </div><div>
 ```{r}
-# Multiply all elements times 10
+# Multiply all elements by 10
 dx$score = dx$score * 10
 dx
 ```
@@ -191,7 +191,7 @@ dx
 ## 
 ### Indexing and Modifying Elements in a Dataframe
 
-Editing/modifying elements in a dataframe is similar to what you do in vectors
+Editing/modifying elements in a dataframe is similar to what you do with vectors
 
 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;"> <div>
 ```{r, echo=F}
@@ -237,7 +237,7 @@ dx
 
 Just like for vectors, you can use **logical conditions** for indexing a dataframe.
 
-How do you extract **only the rows** related to `"MASSIMILIANO PASTORE`"?
+How do you extract **only the rows** related to `"MASSIMILIANO PASTORE"`?
 ```{r}
 head(df)
 ```
@@ -269,14 +269,14 @@ df[df$Teacher == "MASSIMILIANO PASTORE" , ] # some rows by condition , all colum
 ## 
 ### Subset
 
-Base function **`subset()`** can also be used as an alternative to indexing
+The base function **`subset()`** can also be used as an alternative to indexing
 
 ```{r}
 subset(df, Teacher == "MASSIMILIANO PASTORE", select=c("Teacher","Hours","TypeOfCourse"))
 df[df$Teacher == "MASSIMILIANO PASTORE" , c("Teacher","Hours","TypeOfCourse")]
 ```
 
-However, indexing with **`[]`** is more "computationally focused", computationally faster (especially if working with large datasets), and more similar to programming in other languages (e.g., **Python**), so should probably be favoured by data scientists!
+However, indexing with **`[]`** is more "computationally focused", computationally faster (especially if working with large datasets), and more similar to programming in other languages (e.g., **Python**), so it should probably be favored by data scientists!
 
 
 ## 
@@ -298,7 +298,7 @@ df1
 df2
 ```
 
-Our goal is to get one single dataset including all participant's data for the final analysis. Of course, you could combined these files manually outside R (e.g., in Excel). However, it's simpler and more efficient to do this directly in R using `rbind()`
+Our goal is to get one single dataset including all participants' data for the final analysis. Of course, you could combine these files manually outside R (e.g., in Excel). However, it's simpler and more efficient to do this directly in R using `rbind()`
 
 
 ## 
@@ -316,7 +316,7 @@ dfTotal
 
 - have the **exact same number of columns**;
 
-- the **column names must be identical** (remember that R is case-sensitive).
+- have **identical column names** (remember that R is case-sensitive).
 
 
 ## 
@@ -352,7 +352,7 @@ dfTotal
 ```
 </div>
 
-**Important**: `merge()` will work even if some or even all values that should be used for merging do not match... but in that case part of or all data will be lost
+**Important**: `merge()` will work even if some or even all values that should be used for merging do not match... but in that case some or all of the data will be lost
 
 
 ## 
@@ -366,7 +366,7 @@ table(df$Hours) # just counts frequencies
 ```
 
 ```{r}
-table(df$TypeOfCourse, df$Hours) # creates contingency table
+table(df$TypeOfCourse, df$Hours) # creates a contingency table
 ```
 </div>
 

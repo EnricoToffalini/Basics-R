@@ -15,7 +15,7 @@ editor: visual
 
 ## Like a ~~data scientist~~ data cleaner
 
-The following set of exercises is a simulation of the challenges **you will actually encounter in real life** as a data scientist. Know that like \>70% of your time as a data scientist will be spent on data management and cleaning! *(Source: experience.)*
+The following set of exercises is a simulation of the challenges **you will actually encounter in real life** as a data scientist. Be aware that \>70% of your time as a data scientist will be spent on data management and cleaning! *(Source: experience.)*
 
 In the following scenario, imagine that you have received messy datasets, full of inconsistencies, obvious errors, varying formats, data scattered across different files, and other issues. Some guidance is provided here, but your goal is to think critically and figure out the most effective solutions. And don’t worry: **the real world out there is more nightmarish!** 🙂
 
@@ -27,8 +27,8 @@ You have received messy datasets from students or colleagues who have been colle
 
 -   INVALSI items data: <a href="datasets/ExerData_Invalsi_1.csv" download="ExerData_Invalsi_1.csv">`ExerData_Invalsi_1.csv`</a> and <a href="datasets/ExerData_Invalsi_2.csv" download="ExerData_Invalsi_2.csv">`ExerData_Invalsi_2.csv`</a>, participant responses to INVALSI tasks split into two datasets (need to be combined first);
 -   Wechsler subtests data: <a href="datasets/ExerData_Wechsler.xlsx" download="ExerData_Wechsler.xlsx">`ExerData_Wechsler.xlsx`</a>;
--   Lab-based trials data on an attentional task, includes accuracies to repeated trials: <a href="datasets/ExerData_LabTrials.csv" download="ExerData_LabTrials.csv">`ExerData_LabTrials.csv`</a>;
--   Personality questionnaires: <a href="datasets/ExerData_Questionnaires.csv" download="ExerData_Questionnaires.csv">`ExerData_Questionnaires.csv`</a>, includes item-by-item scores for Openness and Agreeableness.
+-   Lab-based trials data on an attentional task, including accuracy on repeated trials: <a href="datasets/ExerData_LabTrials.csv" download="ExerData_LabTrials.csv">`ExerData_LabTrials.csv`</a>;
+-   Personality questionnaires: <a href="datasets/ExerData_Questionnaires.csv" download="ExerData_Questionnaires.csv">`ExerData_Questionnaires.csv`</a>, including item-by-item scores for Openness and Agreeableness.
 
 ## Your Final Goals
 
@@ -45,7 +45,7 @@ You have received messy datasets from students or colleagues who have been colle
 | **Task** | **Subtask** | **Function / Method** |
 |------------------|---------------------------|---------------------------|
 | **Data Import** | Load datasets from CSV/Excel | `read.csv(...)` <br/> `readxl::read_excel(...)` |
-| **Data Cleaning** | In a dataframe column, replace character with another (e.g., "," with ".") | `gsub(",", ".", df$colName)` |
+| **Data Cleaning** | In a dataframe column, replace a character with another (e.g., "," with ".") | `gsub(",", ".", df$colName)` |
 |  | Coerce a string column to numbers, handling errors as `NA` | `as.numeric(df$colName)` |
 |  | Remove invalid values (e.g., implausibly large scores) replacing them with missing values | `df$colName[...] = NA` |
 | **Data Wrangling** | Sum repeated observations by participant | `aggregate(. ~ idName, data = df, FUN = sum)` |
@@ -55,14 +55,14 @@ You have received messy datasets from students or colleagues who have been colle
 | **Descriptive Stats** | Quickly compute some summary statistics from a dataframe | `summary(df)` |
 |  | Correlation matrix from a selection of dataframe columns | `cor(df[ , c(...)], use = "pairwise.complete.obs")` |
 |  | Skewness and kurtosis of dataframe column(s) | `moments::skewness(...)`<br/> `moments::kurtosis(...)` |
-| **Inferential Stats** | Compare genders using t-test, dropping missing values | `t.test(y ~ gender, data = df)` |
+| **Inferential Stats** | Compare genders using a t-test (missing values are dropped) | `t.test(y ~ gender, data = df)` |
 | **Visualization** | Histograms, scatterplots, boxplots | `hist(...)`<br/> `plot(...)`<br/> `boxplot(...)` |
 
 ------------------------------------------------------------------------
 
 ### Notes
 
--   *Try to solve all issues* <b>using code</b> rather than manual corrections. Imagine one day you might be working with tens of thousands of rows, manual fixes won’t be feasible!
+-   *Try to solve all issues* <b>using code</b> rather than manual corrections. Imagine one day you might be working with tens of thousands of rows: manual fixes won’t be feasible!
 -   *This exercise mainly focuses on data structures and dataframes, but it may also involve other concepts such as loops or apply-type functions to compute repetitive operations.*
 -   *While brute-force solutions may work, strive for clean, efficient, and concise R code. The goal is to balance correctness, clarity, and minimal redundancy.*
 

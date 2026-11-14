@@ -22,13 +22,13 @@ execute:
 ---
 ## Conditional Programming
 
-Conditional statements like `if`, `if...else`, and `ifelse` in R are essential tools for automating tasks and assisting decision making in data science. What follows are a few simple "toy examples", but focus on the underlying logic. This will be greatly useful in more advanced applications
+Conditional statements like `if`, `if...else`, and `ifelse` in R are essential tools for automating tasks and assisting decision-making in data science. What follows are a few simple "toy examples", but focus on the underlying logic. This will be very useful in more advanced applications
 
 <hr/>
 
 #### **`if`** statement
 
-the `if` statement performs an action *only if* a condition is met
+The `if` statement performs an action *only if* a condition is met
 <div class="large-code">
 ```{r}
 age = 20
@@ -83,7 +83,7 @@ In the above example:
 
 ## `if...else if...else` statement
 
-When you need to evaluate more than just two alternative conditions, you can use **nested conditional statements**, that is you combine multiple `if...else` statements
+When you need to evaluate more than just two alternative conditions, you can use **nested conditional statements**, that is, you combine multiple `if...else` statements
 <div class="large-code">
 ```{r}
 age = 10
@@ -103,7 +103,7 @@ if (age >= 18) {
 
 ## `if...else` statement
 
-Possible, pratical use of **`if...else`** in a preplanned analysis for a hypothetical preregistered study: automate the decision to conduct additional analyses based on the result of a preliminary test. This helps create a reproducible analysis pipeline with a clear set of decisions
+A possible practical use of **`if...else`** in a preplanned analysis for a hypothetical preregistered study: automate the decision to conduct additional analyses based on the result of a preliminary test. This helps create a reproducible analysis pipeline with a clear set of decisions
 
 ```{r, eval=F}
 ## PREPLANNED ANALYSIS
@@ -126,7 +126,7 @@ if (tt1$p.value < 0.05) {
 
 ## `if...else` statement
 
-All previous examples required to evaluate a single particular condition that might be `TRUE` or `FALSE`. However, you often want to apply this type of operation to an entire vector
+All previous examples required evaluating a single particular condition that might be `TRUE` or `FALSE`. However, you often want to apply this type of operation to an entire vector
 
 Using `if` and `if...else` directly on a vector will **NOT** work as intended:
 
@@ -144,9 +144,9 @@ if(age >= 18){
 
 ## `ifelse()`
 
-All previous examples required to evaluate a single particular condition that might be `TRUE` or `FALSE`. However, you often want to apply this type of operation to an entire vector
+All previous examples required evaluating a single particular condition that might be `TRUE` or `FALSE`. However, you often want to apply this type of operation to an entire vector
 
-To handle such cases you can use the base **`ifelse()`** function, that evaluates each element of a vector individually:
+To handle such cases you can use the base **`ifelse()`** function, which evaluates each element of a vector individually:
 
 <div class="large-code">
 ```{r}
@@ -182,9 +182,9 @@ ifelse(age >= 18, "Adult" ,
 
 ## `dplyr::case_when()`
 
-While this works, the nested structure can become cumbersome as the number of conditions increases.
+While this works, the nested structure can become cumbersome and less readable as the number of conditions increases.
 
-The above case may become cumbersome and less readable when you need to combine a large number of conditions. In such cases, the **`case_when()`** function from the `dplyr` package (part of the *tidyverse* collection)
+In such cases, the **`case_when()`** function from the `dplyr` package (part of the *tidyverse* collection) may be more convenient:
 
 ```{r}
 age = c(2, 28, 15, 1, 4, 67, 42, 14, 7)
@@ -205,7 +205,7 @@ case_when(
 
 **Iterative programming** allows you to repeat one or a series of actions automatically, for a predetermined number of times or until a condition is met
 
-Here's the basics of iterative programming with the **`for`** loop:
+Here are the basics of iterative programming with the **`for`** loop:
 
 <div style="text-align: center;">
   <img src="figures/for_loop.png" width="50%"/>
@@ -240,7 +240,7 @@ for(i in 1:5){
 
 ## `for` loop
 
-Here's a more interesting example of iterative **`for`** loop with practical usefulness: we want to repeat a data simulation for a predetermined number of times (5 iterations), each time drawing $n = 30$ values from a *standard normal distribution*, computing and displaying the average ... 
+Here's a more interesting example of an iterative **`for`** loop with practical usefulness: we want to repeat a data simulation a predetermined number of times (5 iterations), each time drawing $n = 30$ values from a *standard normal distribution*, computing and displaying the average ... 
 
 <div class="large-code">
 ```{r}
@@ -260,7 +260,7 @@ for(i in 1:5){
 
 ## `for` loop
 
-in the previous example, the **`for`** loop displayed the results but didn't store it. For more effective use, you can combine the **`for`** loop with indexing with **`[]`** to save each result: 
+In the previous example, the **`for`** loop displayed the results but didn't store them. For more effective use, you can combine the **`for`** loop with indexing with **`[]`** to save each result: 
 
 <div class="large-code">
 ```{r}
@@ -312,7 +312,7 @@ sd(results)
 
 ## `for` loop
 
-You don't necessarily have to iterate over a sequence of integers (e.g., "`i in 1:10000`"; "`j in 1:ncol(df)`"), although this is the most common practice. You could iterate over whatever, for example, directly over the elements of a vector or other data structures
+You don't necessarily have to iterate over a sequence of integers (e.g., "`i in 1:10000`"; "`j in 1:ncol(df)`"), although this is the most common practice. You can iterate over anything, for example directly over the elements of a vector or other data structures
 
 <div class="large-code">
 ```{r}
@@ -348,7 +348,7 @@ month
 
 ## `repeat` loop
 
-The **`repeat`** loop has a logic similar to the `while` loop but 1) it always runs at least one iteration, 2) It explicitly emphasizes repetition until a condition (not necessarily a target) is met, using a `break` statement to terminate
+The **`repeat`** loop has a logic similar to the `while` loop but 1) it always runs at least one iteration, 2) it explicitly emphasizes repetition until a condition (not necessarily a target) is met, using a `break` statement to terminate
 
 ```{r,echo=F}
 set.seed(5)
@@ -388,7 +388,7 @@ round( tt$p.value , 3 )
 
 **`apply`** is a family of base functions that provide **efficient tools** for running iterations on structures like dataframes, vectors, matrices, lists
 
-Traditional loops provide a straghtforward, intuitive way to compute sequences of operations, but the **`apply` family allows you to run faster computations**... this may become particularly important when you need to *parallelize* for computationally intensive tasks
+Traditional loops provide a straightforward, intuitive way to compute sequences of operations, but the **`apply` family allows you to run faster computations**... this may become particularly important when you need to *parallelize* for computationally intensive tasks
 
 The following is *not* a computationally heavy task — but for example, let's say we want to compute the mean value *per column* in <a href="data/wisc.csv" download>this dataframe</a>:
 
@@ -405,14 +405,14 @@ Here is how you could use the base **`apply` function** for computing the *mean*
 apply(df, MARGIN=2, FUN=mean, na.rm=T)
 ```
 
-In fact, for such a simple task, even `colMeans()` could be sufficient: 
+Actually, for such a simple task, even `colMeans()` could be sufficient: 
 
 ```{r}
 colMeans(df, na.rm=T)
 ```
 
 \
-*but let consider slightly more complex cases ...*
+*but let's consider slightly more complex cases ...*
 
 ## `apply` family
 
@@ -432,7 +432,7 @@ apply(df, MARGIN=2, FUN=function(x) sum(is.na(x)) )
 
 ## `apply` family
 
-Although any of such tasks could be done using a `for` loop, the code would be more cumbersome and less efficient. For example, here's how the exact same result as the latter `apply` example could be obtained using a `for` loop:
+Although any of these tasks could be done using a `for` loop, the code would be more cumbersome and less efficient. For example, here's how the exact same result as the latter `apply` example could be obtained using a `for` loop:
 
 ```{r}
 results = rep(NA, ncol(df))
@@ -448,13 +448,13 @@ results
 ## `apply` family
 
 <div style="font-size:26px;">
-- **`tapply()`**: applies a function to subsets of a vector grouped by a factor, example `tapply(df$values, df$group, FUN=mean)` (know that the function `aggregate()` might be more convenient in some cases)
+- **`tapply()`**: applies a function to subsets of a vector grouped by a factor, e.g., `tapply(df$values, df$group, FUN=mean)` (note that the function `aggregate()` might be more convenient in some cases)
 
-- **`lapply()`**: applies a function to each element of a *list*, returning results in a *list* format, example `lapply(my_list, length)`
+- **`lapply()`**: applies a function to each element of a *list*, returning results in a *list* format, e.g., `lapply(my_list, length)`
 
-- **`sapply()`**: the same as the previous one but returns results as a *vector* if possible, example `sapply(my_list, length)`
+- **`sapply()`**: the same as the previous one but returns results as a *vector* if possible, e.g., `sapply(my_list, length)`
 
-- **`mapply()`** multivariate version of `sapply()` that runs across more lists or vectors
+- **`mapply()`**: multivariate version of `sapply()` that runs across more lists or vectors
 ```{r}
 mapply(rnorm, n=c(2, 6, 4), mean=c(0, 100, 200), sd=c(1, 15, 30))
 ```
@@ -476,7 +476,7 @@ sd(allMeans)
 <div style="font-size:22px; font-style:italic;"> 
 1) `lapply` is used to populate a long list of vectors each including 30 randomly generated numbers; 
 2) <b>`sapply` is then used to compute the `mean` of each vector in the list; </b>
-3) *standard error of the mean* is computed as the `sd` on the vector of the *means*
+3) *standard error of the mean* is computed as the `sd` of the vector of the *means*
 </div>
 
 <div style="font-size:24px; font-style:italic;"> Note: `"i"` represents the current element of `1:10000` over which `lapply` iterates. Even though it is practically useless here, because only random numbers are generated at each iteration, it must be included because `lapply` must pass an element as the argument to the function by default</div>

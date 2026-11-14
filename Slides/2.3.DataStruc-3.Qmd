@@ -35,10 +35,10 @@ However, other data structures that you will encounter are:
 
 ## Factors
 
-**Factors** are a special type of data used to represent **categorical data**. They may look similar to simple *character vectors*. In fact, they function differently: 
+**Factors** are a special type of data used to represent **categorical data**. They may look similar to simple *character vectors*. However, they function differently: 
 
 - Internally, they consist of vectors of integers associated with "levels"
-- Levels are unique categories, labelled for readability
+- Levels are unique categories, labeled for readability
 
 ```{r, echo=F}
 library(readxl)
@@ -58,7 +58,7 @@ At any time, you can convert a vector (or a variable in a dataframe) into a fact
 df$TypeOfCourse = as.factor(df$TypeOfCourse)
 ```
 
-Internally, a factor is stored as **integer**, with associated **labels** for levels: 
+Internally, a factor is stored as **integers**, with associated **labels** for levels: 
 ```{r}
 typeof(df$TypeOfCourse)
 as.integer(df$TypeOfCourse)
@@ -72,7 +72,7 @@ df$TypeOfCourse * 2
 
 ## Factors
 
-By default, **factors** in R are **non-ordered**, there is **no** hierarchy between their categories.
+By default, **factors** in R are **unordered**: there is **no** hierarchy between their categories.
 
 To create **ordered factors**, you can use the **`as.ordered()`** function. 
 ```{r}
@@ -80,7 +80,7 @@ as.ordered(df$TypeOfCourse)
 ```
 
 <div style="font-size:26px;">
-Ordered factors include a hierarchical relationship between levels (e.g., `"low"` < `"medium"` < `"high"`; or a Likert scale like `"Strongly disagree"` < `"Disagree"` < `"Neutral"` < `"Agree"` < `"Strongly agree"`). Using ordered factors may be especially important for certain data analysis, e.g., *Structural Equation Modeling (SEM)* with ordinal data (e.g., using the `lavaan` package)
+Ordered factors include a hierarchical relationship between levels (e.g., `"low"` < `"medium"` < `"high"`; or a Likert scale like `"Strongly disagree"` < `"Disagree"` < `"Neutral"` < `"Agree"` < `"Strongly agree"`). Using ordered factors may be especially important for certain data analyses, e.g., *Structural Equation Modeling (SEM)* with ordinal data (e.g., using the `lavaan` package)
 </div>
 
 ## Factors
@@ -103,7 +103,7 @@ In many cases, you might ignore and avoid them. However:
 
 ## Lists
 
-**Lists** are flexible structure that contain **objects of different types and different lengths** (including other lists... potentially creating an infinite *Inception*...)
+**Lists** are flexible structures that can contain **objects of different types and different lengths** (including other lists... potentially creating an infinite *Inception*...)
 
 ```{r}
 myChaos = list(TRUE, 0:5, df$Hours, letters[8:18], "PSICOSTAT")
@@ -140,7 +140,7 @@ myLittleList$hours
 ```
 
 <div style="font-size:28px; font-style:italic;">
-That's not surprising... a dataframe is actually a special kind of list! just two key constraints: 1) all elements are vectors of the same length; 2) vectors are named.
+That's not surprising... a dataframe is actually a special kind of list, with just two key constraints: 1) all elements are vectors of the same length; 2) vectors are named.
 </div>
 
 ## Lists
@@ -151,7 +151,7 @@ That's not surprising... a dataframe is actually a special kind of list! just tw
 
 - **Common in R**: many functions (e.g., `lm()`) return their summaries and results as lists (even dataframes themselves are special cases of lists), so get familiar with them!
 
-- Are used in many context for handling **nested data** (e.g., JSON-formatted data)
+- Are used in many contexts for handling **nested data** (e.g., JSON-formatted data)
 
 ## Lists
 #### example with a power simulation
@@ -198,7 +198,7 @@ myMat[2, 5] # access a single element
 myMat[2:3, 5:7] # access ranges of elements
 ```
 
-Like in vectors, you can perform **appropriate operations** on matrix data: 
+As with vectors, you can perform **appropriate operations** on matrix data: 
 ```{r}
 myMat^2 # element-wise squaring of all values
 ```
@@ -239,7 +239,7 @@ myArr
 ```
 </div><div>
 \
-→ this is kind of a "cubic-structure" (3D structure): 3 rows, 5 columns, 2 slices
+→ this is a kind of "cubic structure" (3D structure): 3 rows, 5 columns, 2 slices
 
 In a similar way, you could create hypercubes and so on (4D+)
 </div></div>
@@ -260,9 +260,9 @@ myArr[1:2 , 1:2 , ] # extract subsets of elements
 <div style="font-size:38px;">
 **Why use (know) arrays?**
 
-- Might be useful for storing, and manipulate efficiently structure of **multi-dimensional data**
+- Useful for efficiently storing and manipulating **multi-dimensional data**
 
-- Generally used in advanced topics and *machine learning* like when working on **image/video processing** and **spatial data**
+- Generally used in advanced topics and *machine learning*, such as **image/video processing** and **spatial data**
 
 - Arrays in R are conceptually similar to **tensors** in Python (e.g., `NumPy`, `TensorFlow`), where they play a fundamental role in <em>**machine learning**</em> and <em>**deep learning**</em>, as they allow researchers to manage large amounts of data with complex structures
 </div>

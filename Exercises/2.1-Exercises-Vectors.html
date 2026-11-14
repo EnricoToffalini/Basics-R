@@ -2317,11 +2317,11 @@ window.Quarto = {
 <section id="fundamentals-of-creating-vectors" class="level4">
 <h4 class="anchored" data-anchor-id="fundamentals-of-creating-vectors">Fundamentals of creating vectors</h4>
 <ul>
-<li><p>Create a vector named <code>v0</code> composed by numbers <span class="math inline">\(9, 15, 2, 121, 4, 8, 7, 11\)</span></p></li>
-<li><p>Create a vector named <code>v1</code> composed by all numbers from <span class="math inline">\(300\)</span> down to <span class="math inline">\(107\)</span>, using both function <code>seq()</code> and the <strong><code>:</code></strong> operator</p></li>
-<li><p>Use function <code>seq()</code> to create a vector named <code>v2</code> composed by all numbers between <span class="math inline">\(4\)</span> and <span class="math inline">\(5\)</span> with an increment of <span class="math inline">\(0.05\)</span> (i.e., <span class="math inline">\(4.05\)</span>, <span class="math inline">\(4.10\)</span>, <span class="math inline">\(4.15\)</span>, and so on…)</p></li>
-<li><p>Use function <code>seq()</code> to create a vector named <code>v3</code> composed by exactly <span class="math inline">\(12\)</span> equally spaced numbers between <span class="math inline">\(4\)</span> and <span class="math inline">\(5\)</span></p></li>
-<li><p>Use function <code>sample()</code> to randomly draw <span class="math inline">\(5\)</span> numbers between <span class="math inline">\(1000\)</span> and <span class="math inline">\(1500\)</span> (before doing this, have a look at the help <code>?sample</code>)</p></li>
+<li><p>Create a vector named <code>v0</code> composed of the numbers <span class="math inline">\(9, 15, 2, 121, 4, 8, 7, 11\)</span></p></li>
+<li><p>Create a vector named <code>v1</code> composed of all numbers from <span class="math inline">\(300\)</span> down to <span class="math inline">\(107\)</span>, using both the <code>seq()</code> function and the <strong><code>:</code></strong> operator</p></li>
+<li><p>Use the <code>seq()</code> function to create a vector named <code>v2</code> composed of all numbers between <span class="math inline">\(4\)</span> and <span class="math inline">\(5\)</span> with an increment of <span class="math inline">\(0.05\)</span> (i.e., <span class="math inline">\(4.05\)</span>, <span class="math inline">\(4.10\)</span>, <span class="math inline">\(4.15\)</span>, and so on…)</p></li>
+<li><p>Use the <code>seq()</code> function to create a vector named <code>v3</code> composed of exactly <span class="math inline">\(12\)</span> equally spaced numbers between <span class="math inline">\(4\)</span> and <span class="math inline">\(5\)</span></p></li>
+<li><p>Use the <code>sample()</code> function to randomly draw <span class="math inline">\(5\)</span> numbers between <span class="math inline">\(1000\)</span> and <span class="math inline">\(1500\)</span> (before doing this, have a look at the help <code>?sample</code>)</p></li>
 <li><p>Use the <code>sample()</code> function to simulate <span class="math inline">\(20\)</span> rolls of a <span class="math inline">\(6\)</span>-sided die (note that, to do this, you must set argument <code>replace=TRUE</code> in the <code>sample()</code> function; understand why this is necessary)</p></li>
 </ul>
 </section>
@@ -2329,7 +2329,7 @@ window.Quarto = {
 <h4 class="anchored" data-anchor-id="indexing-vectors">Indexing vectors</h4>
 <ul>
 <li><p>Select the 2<sup>nd</sup> element from the previously created vector <code>v0</code>, using indexing with <code>[]</code></p></li>
-<li><p>Select the 4<sup>th</sup> and the 6<sup>th</sup> element from the previously created vector <code>v0</code>, using indexing with <code>[]</code></p></li>
+<li><p>Select the 4<sup>th</sup> and the 6<sup>th</sup> elements from the previously created vector <code>v0</code>, using indexing with <code>[]</code></p></li>
 <li><p>Select the <em>last</em> element from the previously created vector <code>v0</code> (assume you don’t know its length in advance, so use the <code>length()</code> function to determine it)</p></li>
 <li><p>Select all numbers <em>greater than</em> <span class="math inline">\(4.40\)</span> from the previously created vector <code>v2</code> (you need to use indexing and relational operators)</p></li>
 <li><p>Select all numbers between <span class="math inline">\(4.40\)</span> <em>and</em> <span class="math inline">\(4.80\)</span> from the previously created vector <code>v2</code> (you need to use indexing, and relational and logical operators)</p></li>
@@ -2339,15 +2339,15 @@ window.Quarto = {
 <section id="like-a-data-scientist" class="level4">
 <h4 class="anchored" data-anchor-id="like-a-data-scientist">Like a data scientist</h4>
 <ul>
-<li><p>Use the <code>rnorm()</code> function to create an <code>y0</code> vector containing <span class="math inline">\(1,000,000\)</span> normally-distributed numbers on an IQ scale (i.e., with <span class="math inline">\(\mu\)</span> = <span class="math inline">\(100\)</span>, <span class="math inline">\(\sigma\)</span> = <span class="math inline">\(15\)</span>) (remember that <span class="math inline">\(1,000,000\)</span> can be written as <code>1e6</code> in R)</p></li>
-<li><p>Display the first few values of the <code>y0</code> vector using both the <code>head()</code> function and the indexing with <code>[]</code></p></li>
+<li><p>Use the <code>rnorm()</code> function to create a <code>y0</code> vector containing <span class="math inline">\(1,000,000\)</span> normally-distributed numbers on an IQ scale (i.e., with <span class="math inline">\(\mu\)</span> = <span class="math inline">\(100\)</span>, <span class="math inline">\(\sigma\)</span> = <span class="math inline">\(15\)</span>) (remember that <span class="math inline">\(1,000,000\)</span> can be written as <code>1e6</code> in R)</p></li>
+<li><p>Display the first few values of the <code>y0</code> vector using both the <code>head()</code> function and indexing with <code>[]</code></p></li>
 <li><p>Round all values of <code>y0</code> to the nearest integer using the <code>round()</code> function, then once again display the first few values to make sure it worked</p></li>
 <li><p>Index on the vector <code>y0</code> with <code>[ ]</code> and use the <code>mean()</code> function to calculate the average of the IQ values in the range between +1 SD and +2 SD from the mean (i.e., between <span class="math inline">\(115\)</span> and <span class="math inline">\(130\)</span>)</p></li>
 <li><p>Use the <code>sd()</code> function and indexing on the vector <code>y0</code> to find the standard deviation of IQ values that are below the mean (i.e., where IQ &lt; <span class="math inline">\(100\)</span>)</p></li>
 <li><p>Estimate the standard deviation of a variable created by adding two normally distributed variables <code>z0</code> and <code>z1</code>, both with a standard deviation of <span class="math inline">\(1\)</span> (do this using <code>rnorm()</code> for simulating values, and <code>sd()</code> for computing the standard deviation)</p></li>
-<li><p>Repeat the previous exercise, this time add a large constant value to one variable and subtract another large constant value from the other before adding them. Verify that this does <em>not</em> affect the final standard deviation</p></li>
+<li><p>Repeat the previous exercise, but this time add a large constant value to one variable and subtract another large constant value from the other before adding them. Verify that this does <em>not</em> affect the final standard deviation</p></li>
 <li><p>Use <code>rnorm()</code> to create a vector <code>x0</code> containing a large number of values simulated from a standard normal distribution (i.e., with <span class="math inline">\(\mu\)</span> = <span class="math inline">\(0\)</span>, <span class="math inline">\(\sigma\)</span> = <span class="math inline">\(1\)</span>); then, create a second vector <code>x1</code> by applying a linear transformation to <code>x0</code>, such as <code>(x0 + 6) / 11</code>, and observe how the mean value and standard deviation have changed from <code>x0</code> to <code>x1</code></p></li>
-<li><p>Use the <code>cor()</code> function to verify that the previously created vectors <code>x0</code> and <code>x1</code> (being linear transformations of each other), have a correlation of <span class="math inline">\(r = 1\)</span></p></li>
+<li><p>Use the <code>cor()</code> function to verify that the previously created vectors <code>x0</code> and <code>x1</code> (being linear transformations of each other) have a correlation of <span class="math inline">\(r = 1\)</span></p></li>
 <li><p>Repeat the previous two points, but now add a random “error term” to <code>x1</code>, e.g., compute <code>x1 = 2*x0 + 0.5 + rnorm(n = length(x0), mean = 0, sd = 0.3)</code>, and check that the correlation between <code>x0</code> and <code>x1</code> is now smaller than 1. Also, see how increasing the <code>sd</code> of the “error term” decreases the correlation between <code>x1</code> and <code>x0</code></p></li>
 </ul>
 </section>

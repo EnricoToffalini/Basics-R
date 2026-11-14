@@ -20,18 +20,18 @@ execute:
   echo: true
   output: true
 ---
-## Why becoming an R user?
+## Why become an R user?
 
 <div style="font-size:30px;">
 - **Mainstream in academia** for statistical computing and data science, increasingly used in business. *Job market advantage!*
 
-- **Free & open-source**: wherever you go, R will be with you at no costs (unlike *MATLAB*, *MPLUS*, *SPSS*, etc.)
+- **Free & open-source**: wherever you go, R will be with you at no cost (unlike *MATLAB*, *MPLUS*, *SPSS*, etc.)
 
-- **Real programming language**: difficult at the beginning, but: 1) gives you lots of flexibility; 2) has transfer on other programming languages (e.g., <em>**Python**</em>).
+- **Real programming language**: difficult at the beginning, but: 1) gives you lots of flexibility; 2) transfers to other programming languages (e.g., <em>**Python**</em>).
 
-- **Vast community support** thanks to a large and active community (plus *chatGPT*, *Gemini*, *Lucrez-IA*, etc., know it pretty well!).
+- **Vast community support** thanks to a large and active community (plus *ChatGPT*, *Gemini*, *Lucrez-IA*, etc. know it pretty well!).
 
-- **Huge ecosystem**, >23,000 packages on CRAN, more from other sources (e.g., GitHub), to do amazing stuff with statistical data analysis, machine learning, data visualization, developing webapps [*shiny*], writing reports and even entire books [*bookdown*, *rmarkdown*]); also, can integrate with *Quarto*, *GitHub*.
+- **Huge ecosystem**, >23,000 packages on CRAN, more from other sources (e.g., GitHub), to do amazing stuff with statistical data analysis, machine learning, data visualization, developing webapps [*shiny*], writing reports and even entire books [*bookdown*, *rmarkdown*]; also, it can integrate with *Quarto*, *GitHub*.
 
 - Facilitates **reproducible scientific research** by sharing code and workflows.
 </div>
@@ -49,7 +49,7 @@ execute:
 </div>
 
 ##
-### Over the next two years, following this PhD program, you will or may have the opportunity to use R to perform at least some fundamentals about: 
+### Over the next two years, following this PhD program, you will or may have the opportunity to use R for at least the fundamentals of: 
 
 <div style="font-size:36px;">
 - Core **statistical inference** methods;
@@ -77,19 +77,19 @@ execute:
   <a href="https://github.com/EnricoToffalini/Basics-R/blob/main/Slides/figures/happyBirthday.R" target="_blank"><img src="figures/happyBirthday.png" style="width: 90%;" /></a>
 </div>
 
-## or like fancy infographics
+## or fancy infographics
 
 <div style="text-align: center;">
   <img src="figures/worldInfographic.png" />
 </div>
 
-## or like fancy infographics
+## or fancy infographics
 
 <div style="text-align: center;">
   <img src="figures/ItalyInfographic.png" style="width: 60%"  />
 </div>
 
-## perform fancy moderated meta-analyses
+## or perform fancy moderated meta-analyses
 
 <div style="text-align: center;">
   <img src="figures/colorfulPlot.png" style="width: 85%"/>
@@ -101,9 +101,9 @@ execute:
 see [**Shiny gallery**](https://shiny.posit.co/r/gallery/#feature-demos){target="_blank"}
 
 \
-here's a couple of recent real examples from **Psicostat** members:
+here are a couple of recent real examples from **Psicostat** members:
 
-- this [game-like shiny app](https://psicostat.shinyapps.io/science4allshiny/){target="_blank"} developed for the science4all event in Padova; see [here](https://psicostat.github.io/science4all/){target="_blank"} some explanation in Italian
+- this [game-like shiny app](https://psicostat.shinyapps.io/science4allshiny/){target="_blank"} developed for the science4all event in Padova; see [here](https://psicostat.github.io/science4all/){target="_blank"} for an explanation in Italian
 
 - practical [ad-hoc shiny app](https://enricotoffalini.shinyapps.io/TimeTasks/){target="_blank"} for scoring experimental data collected by students
 
@@ -130,7 +130,7 @@ examples of other resources that can be **created within the R ecosystem**, inte
 Make sure you install:
 
 - <a href="https://cran.r-project.org/" target="_blank">**R**</a> as the programming language interpreter and the basic environment and packages
-- <a href="https://posit.co/download/rstudio-desktop/" target="_blank">**RStudio**</a> is the IDE of election to make writing R code easy
+- <a href="https://posit.co/download/rstudio-desktop/" target="_blank">**RStudio**</a> is the IDE of choice to make writing R code easy
 
 Interesting alternatives to installing RStudio:
 
@@ -144,7 +144,7 @@ Interesting alternatives to installing RStudio:
   <img src="figures/RConsole.png"/>
 </div>
 
-## R Studio (full IDE)
+## RStudio (full IDE)
 
 <div style="text-align: center;">
   <img src="figures/RStudioIDE.png"/>
@@ -159,7 +159,7 @@ Interesting alternatives to installing RStudio:
 
 ## Let's Test the Environment!
 
-Let's run a few commands in RStudio to familiarize with its console and see if the installation works properly
+Let's run a few commands in RStudio to get familiar with its console and see if the installation works properly
 
 ```{r}
 rnorm(10) # draw 10 random values from a Standard Normal distribution

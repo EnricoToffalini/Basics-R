@@ -56,7 +56,7 @@ text = "this is a string"
 unlist(strsplit(text, split=" "))
 ```
 
-*Note:* `strplit()` actually does the job, but it returns a list; if you want a vector for convenience, use `unlist()` on the output list
+*Note:* `strsplit()` actually does the job, but it returns a list; if you want a vector for convenience, use `unlist()` on the output list
 
 #### Removing a few cases from a vector
 

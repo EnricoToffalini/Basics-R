@@ -79,7 +79,7 @@ nchar(corpus)  # total number of characters
 
 ## Clean and Normalize the Text
 
-We apply a series of base R transformations: lowercase conversion, removal of punctuation and digits, trimming extra spaces, and accent normalization (accents are coded quite inconsistently on international datasets: better remove them all).
+We apply a series of base R transformations: lowercase conversion, removal of punctuation and digits, trimming extra spaces, and accent normalization (accents are coded quite inconsistently in international datasets: better to remove them all).
 
 ```{r}
 # to lowercase
@@ -99,7 +99,7 @@ corpus = chartr("àèéìòóù", "aeeioou", corpus)
 
 ## Tokenize and Remove Stopwords
 
-We split the text into words/tokens, remove common stopwords and very short tokens that add little information. You can adjust the stopword list to fit your needs.
+We split the text into words/tokens, and remove common stopwords and very short tokens that add little information. You can adjust the stopword list to fit your needs.
 
 ```{r}
 # split into tokens (vector of words)
@@ -154,11 +154,12 @@ barplot(
 )
 ```
 
-**Question:** do the most frequent terms match your expectation of the author’s main research themes?
+**Question:** do the most frequent terms match your expectations of the author’s main research themes?
 
 ## Build the Word Cloud
 
 The `wordcloud()` function requires:
+
 1. a vector of **unique words**,
 2. a vector of their **frequencies**.
 

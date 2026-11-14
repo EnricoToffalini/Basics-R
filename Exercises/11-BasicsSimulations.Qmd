@@ -16,11 +16,11 @@ editor: visual
 
 # Why simulate?
 
-Simulation helps you **understand data and data-generating processes**. Unlike in real world, in simulations you precisely know the ground truth (true effect sizes, correlations, reliability), which helps you:
+Simulation helps you **understand data and data-generating processes**. Unlike in the real world, in simulations you know the ground truth precisely (true effect sizes, correlations, reliability), which helps you:
 
 -   see whether you actually understood the hypothesized data-generating process;
 -   see whether statistical methods work appropriately to recover parameters;
--   infer non-obvious characteristics of the data implied in the ground truth (e.g., how minor misspecifications of models impact results).
+-   infer non-obvious characteristics of the data implied by the ground truth (e.g., how minor misspecifications of models impact results).
 
 This small tutorial/exercise guides you through basic simulation scenarios that might be useful as a basis towards more complex but common psychological designs.
 
@@ -53,7 +53,7 @@ library(ggplot2) # beautiful data visualization
 
 # Part 1 - Two groups mean difference
 
-Imagine you assess attention scores in a population with a neurodevelopmental condition (`NC`) and compare *vs* typically-developing (`TD`) population. Let's assume a medium-sized effect (-0.5 *SD*)
+Imagine you assess attention scores in a population with a neurodevelopmental condition (`NC`) and compare it with a typically-developing (`TD`) population. Let's assume a medium-sized effect (-0.5 *SD*)
 
 #### Define design parameters
 
@@ -111,7 +111,7 @@ cohens_d(score ~ group, data = df)
 
 # Part 2 - Simple linear regression
 
-Does weekly study hours predict exam score in the student population? Let's assume a positive linear relationship.
+Do weekly study hours predict exam scores in the student population? Let's assume a positive linear relationship.
 
 #### Parameters
 
@@ -153,13 +153,13 @@ fit = lm(grade ~ hours, data = df)
 summary(fit)
 ```
 
-> Exercise: increase `n` to very large numbers to see how censoring scores (in 0-30) affects the correct recovery of true parameters. Then try to further increase the intercept (`b0`) to understand how easy exams damp the effect of studying on grades.
+> Exercise: increase `n` to very large numbers to see how censoring scores (in 0-30) affects the correct recovery of true parameters. Then try to further increase the intercept (`beta0`) to understand how easy exams dampen the effect of studying on grades.
 
 ------------------------------------------------------------------------
 
 # Part 3 - Correlated variables
 
-You measure Reading Comprehension (*Reading*), Working Memory (*WM*), Processing Speed (*PS*), and general intelligence (*IQ*), all on standardized (z-score) scales. You expect a positive manifold
+You measure Reading Comprehension (*Reading*), Working Memory (*WM*), Processing Speed (*PS*), and general intelligence (*IQ*), all on standardized (z-score) scales. You expect a positive manifold.
 
 #### Parameters
 
@@ -205,7 +205,7 @@ summary(fit)
 
 # Part 4 - Latent variable with continuous indicators
 
-Imagine you want to fit a general intelligence latent variable model (only strata II and III), where "g" (General Mental Ability) is the latent variable
+Imagine you want to fit a general intelligence latent variable model (only strata II and III), where "g" (General Mental Ability) is the latent variable.
 
 ```{r, echo=F, message=F, warning=F}
 library(semPlot)
@@ -273,7 +273,7 @@ summary(fit, standardized=T)
 
 # Part 5 - Latent variable with ordinal items
 
-Questionnaires often present items with Likert-scale response format, so it's ideal (and often neglected) simulate ordinal data. Here's how you can do it: "ordinal" can be understood as not other than a continuum "cut" on some breaks.
+Questionnaires often present items with Likert-scale response format, so it's ideal (and often neglected) to simulate ordinal data. Here's how you can do it: "ordinal" can be understood as nothing other than a continuum "cut" at some thresholds.
 
 #### Generate data
 
@@ -321,7 +321,7 @@ ggplot(df) +
 
 #### Fitting model
 
-> Model below was not fitted. Reproduce the above and inspect step-by-step, then try to fit it! Also, try to introduce some secondary latent factor that makes residuals correlate, and see how this misfit impacts fit measures and more.
+> The model below was not fitted. Reproduce the above and inspect step-by-step, then try to fit it! Also, try to introduce some secondary latent factor that makes residuals correlate, and see how this misfit impacts fit measures and more.
 
 ``` r
 model = "
@@ -339,7 +339,7 @@ modificationIndices(fit, sort.=T)[1:10,]
 
 # Part 6 - Binary outcome and logistic regression
 
-Let's imagine a task (30 items) where accuracy grows with age (in N = 200 children, 5-12 years), but there is also some individual random variability (*random intercept* / `randInt`).
+Let's imagine a task (30 items) where accuracy grows with age (in N = 500 children, 5-12 years), but there is also some individual random variability (*random intercept* / `randInt`).
 
 #### Generate data
 
@@ -358,7 +358,7 @@ age = round(runif(n, 5, 12), 2)
 cbind(ID, randInt, age)[1:10, ]
 ```
 
-Since probability is constrained in (0, 1), probabilities of correct answer cannot be a linear function of predictors. *Logit* transformation provides a good tool for constraining probability within its bounds whatever values the predictor might have.
+Since probability is constrained in (0, 1), probabilities of a correct answer cannot be a linear function of predictors. The *logit* transformation provides a good tool for constraining probability within its bounds whatever values the predictor might have.
 
 ```{r}
 logitScores = -2.9 + 0.50*age + randInt
@@ -369,7 +369,7 @@ taskScores = rbinom(n, k, probabilities)
 cbind(ID, randInt, age, logitScores, probabilities, taskScores)[1:10,]
 ```
 
-Task scores distribution is quite skewed, but don't worry: we will use logistic regression, which respects the (non-normal) nature of the response variable.
+The distribution of task scores is quite skewed, but don't worry: we will use logistic regression, which respects the (non-normal) nature of the response variable.
 
 ```{r}
 hist(taskScores, breaks=20)
@@ -407,6 +407,6 @@ ggplot(eff,aes(x=age,y=fit))+
 # What you can do next
 
 -   Change sample size or variability in all cases.\
--   Introduce a moderator variables (i.e., with multiplicative effects).\
+-   Introduce a moderator variable (i.e., with multiplicative effects).\
 -   Simulate all observed data in logistic regression (`0`/`1` instead of `taskScores`).
 -   Understand conditions under which you might add random slopes.

@@ -25,7 +25,7 @@ execute:
 <div style="font-size:43px;">
 - Most often you don't work with single scalar variables (e.g., `age = 20`), but with more complex data structures like **vectors**, **matrices**, **dataframes**, **lists**, that allow you to **organize and store complex information**
 
-- Many **functions** are created for handling such structures (e.g., `lm()` takes vectors or dataframe for input)
+- Many **functions** are created for handling such structures (e.g., `lm()` takes vectors or dataframes as input)
 
 - When you *process data*, *fit models*, *plot outputs*, you generally work with these data structures 
 </div>
@@ -33,7 +33,7 @@ execute:
 <!-- --------------------------------------------------------------------- -->
 ## Vectors
 
-Simple one-dimensional structures that store data of different types
+Simple one-dimensional structures that store elements of a single type
 
 <div style="text-align: center;">
   <img src="figures/vectorBase.png"/>
@@ -63,7 +63,7 @@ Vectors can be of different types. The following example shows a *character* vec
 <div class="large-code">
 ```{r}
 Teachers = c("Pastore", "Kiesner", "Granziol", "Toffalini", 
-             "Calignano", "Epifania", "Bastianelli")
+             "Calignano", "Epifania", "Bastianelli", "Altoe")
 ```
 
 or numeric:
@@ -104,7 +104,7 @@ Hours
 as.numeric(Hours)
 ```
 
-*But be careful!* Elements that cannot be coerced to the target type, will be replace with NA
+*But be careful!* Elements that cannot be coerced to the target type will be replaced with NA
 ```{r, warning=T}
 Hours = c("10", "15,", "20", " 10", "15 ", "tbd", "15.", "5_")
 as.numeric(Hours)
@@ -188,7 +188,7 @@ Hours
 
 ## Operating on Vectors
 
-you can simultaneously apply an operation to a whole vector, like
+You can simultaneously apply an operation to a whole vector, like:
 
 ```{r}
 Hours = c(10, 15, 20, 10, 15, 5, 15, 5)
@@ -263,7 +263,7 @@ Replacing a missing value with the average across valid values is risky, as it m
 Hours = c(10, 15, 20, 10, 15, NA, 15, 5)
 
 # compute the average value ignoring NAs, and put it wherever 
-# there is a NA value in the vector
+# there is an NA value in the vector
 Hours[is.na(Hours)] = mean(Hours, na.rm=TRUE)
 
 # now let's inspect the updated content of the vector
@@ -284,7 +284,7 @@ type = c("METHODOLOGY", "METHODOLOGY", "PROGRAMMING", "SOFT SKILLS", "SOFT SKILL
 table(type)
 ```
 
-*Be careful:* R is case sensitive!
+*Be careful:* R is case-sensitive!
 ```{r}
 type = c("METHODOLOGY", "methodology", "PROGRAMMING", "SOFT SKILLS", "SOFT SKILLS", 
          "METHODOLOGY", "SOFT SKILLS", "METHODOLOGY", "Programming")

@@ -2167,7 +2167,7 @@ vertical-align: -.125em;
 
 <section id="like-a-data-scientist-data-cleaner" class="level2">
 <h2 class="anchored" data-anchor-id="like-a-data-scientist-data-cleaner">Like a <del>data scientist</del> data cleaner</h2>
-<p>The following set of exercises is a simulation of the challenges <strong>you will actually encounter in real life</strong> as a data scientist. Know that like &gt;70% of your time as a data scientist will be spent on data management and cleaning! <em>(Source: experience.)</em></p>
+<p>The following set of exercises is a simulation of the challenges <strong>you will actually encounter in real life</strong> as a data scientist. Be aware that &gt;70% of your time as a data scientist will be spent on data management and cleaning! <em>(Source: experience.)</em></p>
 <p>In the following scenario, imagine that you have received messy datasets, full of inconsistencies, obvious errors, varying formats, data scattered across different files, and other issues. Some guidance is provided here, but your goal is to think critically and figure out the most effective solutions. And don’t worry: <strong>the real world out there is more nightmarish!</strong> 🙂</p>
 </section>
 <section id="scenario" class="level2">
@@ -2178,8 +2178,8 @@ vertical-align: -.125em;
 <ul>
 <li>INVALSI items data: <a href="datasets/ExerData_Invalsi_1.csv" download="ExerData_Invalsi_1.csv"><code>ExerData_Invalsi_1.csv</code></a> and <a href="datasets/ExerData_Invalsi_2.csv" download="ExerData_Invalsi_2.csv"><code>ExerData_Invalsi_2.csv</code></a>, participant responses to INVALSI tasks split into two datasets (need to be combined first);</li>
 <li>Wechsler subtests data: <a href="datasets/ExerData_Wechsler.xlsx" download="ExerData_Wechsler.xlsx"><code>ExerData_Wechsler.xlsx</code></a>;</li>
-<li>Lab-based trials data on an attentional task, includes accuracies to repeated trials: <a href="datasets/ExerData_LabTrials.csv" download="ExerData_LabTrials.csv"><code>ExerData_LabTrials.csv</code></a>;</li>
-<li>Personality questionnaires: <a href="datasets/ExerData_Questionnaires.csv" download="ExerData_Questionnaires.csv"><code>ExerData_Questionnaires.csv</code></a>, includes item-by-item scores for Openness and Agreeableness.</li>
+<li>Lab-based trials data on an attentional task, including accuracy on repeated trials: <a href="datasets/ExerData_LabTrials.csv" download="ExerData_LabTrials.csv"><code>ExerData_LabTrials.csv</code></a>;</li>
+<li>Personality questionnaires: <a href="datasets/ExerData_Questionnaires.csv" download="ExerData_Questionnaires.csv"><code>ExerData_Questionnaires.csv</code></a>, including item-by-item scores for Openness and Agreeableness.</li>
 </ul>
 </section>
 </section>
@@ -2217,7 +2217,7 @@ vertical-align: -.125em;
 </tr>
 <tr class="even">
 <td><strong>Data Cleaning</strong></td>
-<td>In a dataframe column, replace character with another (e.g., “,” with “.”)</td>
+<td>In a dataframe column, replace a character with another (e.g., “,” with “.”)</td>
 <td><code>gsub(&quot;,&quot;, &quot;.&quot;, df$colName)</code></td>
 </tr>
 <tr class="odd">
@@ -2267,7 +2267,7 @@ vertical-align: -.125em;
 </tr>
 <tr class="even">
 <td><strong>Inferential Stats</strong></td>
-<td>Compare genders using t-test, dropping missing values</td>
+<td>Compare genders using a t-test (missing values are dropped)</td>
 <td><code>t.test(y ~ gender, data = df)</code></td>
 </tr>
 <tr class="odd">
@@ -2281,7 +2281,7 @@ vertical-align: -.125em;
 <section id="notes" class="level3">
 <h3 class="anchored" data-anchor-id="notes">Notes</h3>
 <ul>
-<li><em>Try to solve all issues</em> <b>using code</b> rather than manual corrections. Imagine one day you might be working with tens of thousands of rows, manual fixes won’t be feasible!</li>
+<li><em>Try to solve all issues</em> <b>using code</b> rather than manual corrections. Imagine one day you might be working with tens of thousands of rows: manual fixes won’t be feasible!</li>
 <li><em>This exercise mainly focuses on data structures and dataframes, but it may also involve other concepts such as loops or apply-type functions to compute repetitive operations.</em></li>
 <li><em>While brute-force solutions may work, strive for clean, efficient, and concise R code. The goal is to balance correctness, clarity, and minimal redundancy.</em></li>
 </ul>

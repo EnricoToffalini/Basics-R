@@ -2335,7 +2335,7 @@ window.Quarto = {
 <li><span class="math inline">\(\frac{\sqrt{2 \times 5}\ + 6}{4}\)</span></li>
 <li><span class="math inline">\(\log_{2} 50\)</span></li>
 </ul></li>
-<li><p>Round each of the previous results to the third digit, using the appropriate function for rounding</p></li>
+<li><p>Round each of the previous results to three decimal places, using the appropriate function for rounding</p></li>
 <li><p>Use the appropriate relational operator to determine whether each of the previous results is <em>greater than</em> <span class="math inline">\(10\)</span></p></li>
 <li><p>Use the appropriate relational operator to determine whether <span class="math inline">\(3^2 + 4^2\)</span> is <em>equal to</em> <span class="math inline">\(5^2\)</span> (<em>BTW</em>, if this is true, then <span class="math inline">\(3, 4, 5\)</span> is a Pythagorean triple)</p></li>
 </ul>
@@ -2343,9 +2343,9 @@ window.Quarto = {
 <section id="use-functions" class="level3">
 <h3 class="anchored" data-anchor-id="use-functions">Use functions</h3>
 <ul>
-<li><p>Open the help/documentation for the <code>Sys.time()</code> function, then use it to determine the current (system) time and see that it is correct</p></li>
-<li><p>Open the help/documentation for the <code>rep()</code> function and understand what it does, also have a look at the <em>Examples</em> section in the documentation</p></li>
-<li><p>Generate 10 numbers randomly drawn from a standard normal distribution using the <code>rnorm()</code> function, save them in an object named <code>X1</code></p></li>
+<li><p>Open the help/documentation for the <code>Sys.time()</code> function, then use it to determine the current (system) time and check that it is correct</p></li>
+<li><p>Open the help/documentation for the <code>rep()</code> function and understand what it does; also have a look at the <em>Examples</em> section in the documentation</p></li>
+<li><p>Generate 10 numbers randomly drawn from a standard normal distribution using the <code>rnorm()</code> function, and save them in an object named <code>X1</code></p></li>
 <li><p>Use the <code>rep()</code> function to replicate the whole <code>X1</code> vector three <em>times</em>, and store the result in a newly created object named <code>X2</code></p></li>
 <li><p>Use the <code>rep()</code> function to replicate <em>each</em> value of <code>X1</code> thrice, and store the result in a newly created object named <code>X3</code></p></li>
 <li><p>Be proud: the last few steps are actually the starting point for future data simulation 😀</p></li>
@@ -2355,16 +2355,16 @@ window.Quarto = {
 <h3 class="anchored" data-anchor-id="importexport-and-more">Import/export, and more</h3>
 <ul>
 <li><p>Use the appropriate function to know the current working directory</p></li>
-<li><p>Use both the the appropriate panel in RStudio and the <code>ls()</code> function to see all objects currently existing in the workspace (there should be all those from the previous points)</p></li>
+<li><p>Use both the appropriate panel in RStudio and the <code>ls()</code> function to see all objects currently existing in the workspace (all those from the previous points should be there)</p></li>
 <li><p>Export the whole workspace with file name <code>&quot;myWSpace.RData&quot;</code>, then close RStudio</p></li>
-<li><p>Re-open Rstudio, make sure that the workspace is empty after the re-opening (otherwise use <code>rm(list=ls())</code>), then re-import the whole workspace named <code>&quot;myWSpace.RData&quot;</code> that you had previously saved, and make sure that all objects are there</p></li>
-<li><p>Download <a href="datasets/Performance.csv" download>this dataset</a>, then import it in RStudio using an appropriate function, and display it in your console</p></li>
+<li><p>Re-open RStudio, make sure that the workspace is empty after the re-opening (otherwise use <code>rm(list=ls())</code>), then re-import the whole workspace named <code>&quot;myWSpace.RData&quot;</code> that you had previously saved, and make sure that all objects are there</p></li>
+<li><p>Download <a href="datasets/Performance.csv" download>this dataset</a>, then import it into RStudio using an appropriate function, and display it in your console</p></li>
 <li><p>Let’s try to create and export a figure following a few steps:</p>
 <ul>
 <li>create an object named <code>x</code> that includes 10 random numbers generated using <code>rnorm()</code>;</li>
-<li>create another object named <code>y</code> that includes other 10 random numbers generated using <code>rnorm()</code>;</li>
+<li>create another object named <code>y</code> that includes another 10 random numbers generated using <code>rnorm()</code>;</li>
 <li>use the base <code>plot()</code> function for creating a scatter plot (i.e., <code>plot(x, y)</code>);</li>
-<li>now use the <code>pdf()</code> function for exporting the above scatter plot in a <code>.pdf</code> file.</li>
+<li>now use the <code>pdf()</code> function to export the above scatter plot to a <code>.pdf</code> file.</li>
 </ul></li>
 </ul>
 </section>

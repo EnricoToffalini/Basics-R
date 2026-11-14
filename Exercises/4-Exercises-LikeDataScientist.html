@@ -2176,12 +2176,12 @@ vertical-align: -.125em;
 <li>For each column, calculate the percentage of observations that remain valid (i.e., do not become <code>NA</code>) when coerced to numeric using <code>as.numeric()</code>;</li>
 <li>If the percentage exceeds 80%, coerce the column to numeric;</li>
 <li>Keep track of the columns that were coerced to numeric;</li>
-<li>After processing all columns, compute a correlation matrix that includes only the columns that were coerced to numeric (use the <code>cor()</code> function; set argument <code>use=&quot;pairwise.complete&quot;</code> to avoid losing too many observation with listwise-deletion);</li>
+<li>After processing all columns, compute a correlation matrix that includes only the columns that were coerced to numeric (use the <code>cor()</code> function; set argument <code>use=&quot;pairwise.complete&quot;</code> to avoid losing too many observations with listwise deletion);</li>
 <li><em>for fun: use the <code>corrplot()</code> function from the <code>corrplot</code> package to obtain a more colorful correlation matrix</em></li>
 </ul></li>
 <li><p><em>Extra for advanced users:</em> The dataframe <code>dfWide1</code> contains data for treated subjects at three times (<code>&quot;T0&quot;</code>, <code>&quot;T1&quot;</code>, and <code>&quot;T2&quot;</code>) in <em><b>wide format</b></em>, but it needs to be reshaped to <em><b>long format</b></em> for data analysis. Your task is to reshape it to <em>long format</em> using the basic <code>reshape()</code> function (first of all, have a look at the documentation of <code>reshape()</code>).</p></li>
 <li><p><em>Extra for advanced users:</em> Repeat the previous task using the convenient <code>pivot_longer()</code> function from the <code>tidyr</code> package.</p></li>
-<li><p><em>Extra for super advanced users:</em> The dataframe <code>dfWide2</code> is even more complex: as it contains two variables, <code>Acc</code> and <code>RT</code>, measured at three times. Reshape <code>dfWide2</code> to <em>long format</em>, but keeping <code>Acc</code> and <code>RT</code> values in separate columns. Use any approach you like, but try to keep the code compact if possible.</p></li>
+<li><p><em>Extra for super advanced users:</em> The dataframe <code>dfWide2</code> is even more complex, as it contains two variables, <code>Acc</code> and <code>RT</code>, measured at three times. Reshape <code>dfWide2</code> to <em>long format</em>, but keeping <code>Acc</code> and <code>RT</code> values in separate columns. Use any approach you like, but try to keep the code compact if possible.</p></li>
 </ul>
 
 </main>

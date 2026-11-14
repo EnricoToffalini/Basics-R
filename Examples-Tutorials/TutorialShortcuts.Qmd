@@ -11,9 +11,9 @@ format:
 editor: visual
 ---
 
-This short guide introduces the **most useful keyboard shortcuts in RStudio**, i.e., tools that will make your workflow more efficient, smoother and easier. Even small habits (like running code with `Ctrl + Enter` instead of the mouse, or using the up `↑` and down `↓` arrows of the keyboard for moving across past commands) will make your coding incredibly faster and more focused
+This short guide introduces the **most useful keyboard shortcuts in RStudio**, i.e., tools that will make your workflow more efficient, smoother and easier. Even small habits (like running code with `Ctrl + Enter` instead of the mouse, or using the up `↑` and down `↓` arrows of the keyboard for moving across past commands) will make your coding much faster and more focused
 
-⚠️ Not of the below shortcuts may work in your specific case, depending on the version of the operating system, the keyboard language, the RStudio settings, or possible interference with custom shortcuts. Just try and see what happens! Also, some commands may not work if lock keys, such as `Num Lock`, are on
+⚠️ Not all of the shortcuts below may work in your specific case, depending on the version of the operating system, the keyboard language, the RStudio settings, or possible interference with custom shortcuts. Just try and see what happens! Also, some commands may not work if lock keys, such as `Num Lock`, are on
 
 <br/>
 
@@ -47,9 +47,9 @@ This short guide introduces the **most useful keyboard shortcuts in RStudio**, i
 |--------|-------|-------|-----------|
 | **Jump to beginning of line** | `Alt + left` or `↖` | `Cmd + Left` | Quickly move to start of current line. |
 | **Jump to end of line** | `Alt + right` or `End` | `Cmd + Right` | Move to end of current line. |
-| **Comment / uncomment all selected lines** | `Ctrl + Shift + C` | `Cmd + Shift + C` | Turns (or unturns) all selected lines into comments (e.g., in R or Python editor it adds / removes `#` at the beginning of all selected lines). |
+| **Comment / uncomment all selected lines** | `Ctrl + Shift + C` | `Cmd + Shift + C` | Turns all selected lines into comments, or back into code (e.g., in R or Python editor it adds / removes `#` at the beginning of all selected lines). |
 | **Find in current file** | `Ctrl + F` | `Cmd + F` | Search text within the current script. |
-| **Find and replace** | `Ctrl + Shift + F` | `Cmd + Shift + F` | Search text across all files in the project. |
+| **Find in files** | `Ctrl + Shift + F` | `Cmd + Shift + F` | Search text across all files in the project. |
 | **Indent / unindent code** | `Tab` / `Shift + Tab` | same | Clean up indentation. |
 | **Go to matching bracket** | `Ctrl + P` | `Cmd + P` | Jump between matching `(`, `{`, or `[` pairs. |
 
@@ -83,7 +83,7 @@ This short guide introduces the **most useful keyboard shortcuts in RStudio**, i
 | Action | Windows/Linux | macOS | Description |
 |--------|-------|-------|-----------|
 | **Open a new R Script** | `Ctrl + Shift + N` | `Cmd + Shift + N` | Opens a new R script file. |
-| **Open recent file** | `Ctrl + O` | `Cmd + O` | Open an existing file. |
+| **Open file** | `Ctrl + O` | `Cmd + O` | Open an existing file. |
 | **Save current file** | `Ctrl + S` | `Cmd + S` | Save your work. |
 | **Save all open files** | `Ctrl + Shift + S` | `Cmd + Shift + S` | Save everything before running large jobs. |
 | **Close current file** | `Ctrl + W` | `Cmd + W` | Close script tab. |

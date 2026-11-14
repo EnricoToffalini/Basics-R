@@ -1076,7 +1076,7 @@ Enrico Toffalini
 <section id="section-1" class="slide level2">
 <h2></h2>
 <h3 id="a-type-of-data-structure-you-are-already-familiar-with-1">A type of data structure you are already familiar with</h3>
-<p>here is how I would import it in R (<a href="data/Courses40Cycle.xlsx" download>download here</a>), and display the first few rows:</p>
+<p>Here is how I would import it into R (<a href="data/Courses40Cycle.xlsx" download>download here</a>), and display the first few rows:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
 <span id="cb1-2"><a href aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="fu">read_excel</span>(<span class="st">&quot;data/Courses40Cycle.xlsx&quot;</span>))</span>
@@ -1163,7 +1163,7 @@ Enrico Toffalini
 <section id="section-4" class="slide level2">
 <h2></h2>
 <h3 id="basic-functions-on-dataframes-1">Basic Functions on Dataframes</h3>
-<p>The <strong><code>str()</code></strong> function provides a quick overview of the structure of a dataframe, including its dimensions, variables, their data types, and first few observations:</p>
+<p>The <strong><code>str()</code></strong> function provides a quick overview of the structure of a dataframe, including its dimensions, variables, their data types, and the first few observations:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1191,7 +1191,7 @@ Enrico Toffalini
 <section id="section-6" class="slide level2">
 <h2></h2>
 <h3 id="accessing-and-working-with-elements-in-dataframes">Accessing and Working with Elements in Dataframes</h3>
-<p>As an exercise, let’s check whether <code>ECTS</code> is actually always <code>Hours*5</code></p>
+<p>As an exercise, let’s check whether <code>Hours</code> is actually always <code>ECTS*5</code></p>
 We may use many different, increasingly sophisticated, strategies:
 <div class="large-code">
 <div class="cell">
@@ -1263,7 +1263,7 @@ We may use many different, increasingly sophisticated, strategies:
 </div>
 </div>
 <p>Notice the comma “<strong><code>,</code></strong>” above.</p>
-<p>Unlike vectors, dataframes must be indexed by <strong>both row and column</strong>. In the example above, we’re specifying only the desired column (<code>&quot;Hours&quot;</code>), leaving the row index blank before the comma <strong><code>,</code></strong> This selects all rows for the column named <code>&quot;Hours&quot;</code>. Remember that blank index means “all”. Importantly, the “<strong><code>,</code></strong>” must always be there when indexing dataframes!</p>
+<p>Unlike vectors, dataframes must be indexed by <strong>both row and column</strong>. In the example above, we’re specifying only the desired column (<code>&quot;Hours&quot;</code>), leaving the row index blank before the comma <strong><code>,</code></strong>. This selects all rows for the column named <code>&quot;Hours&quot;</code>. Remember that a blank index means “all”. Importantly, the “<strong><code>,</code></strong>” must always be there when indexing dataframes!</p>
 </section>
 <section id="section-9" class="slide level2">
 <h2></h2>
@@ -1301,7 +1301,7 @@ We may use many different, increasingly sophisticated, strategies:
 <section id="section-10" class="slide level2">
 <h2></h2>
 <h3 id="indexing-and-modifying-elements-in-a-dataframe">Indexing and Modifying Elements in a Dataframe</h3>
-<p>Editing/modifying elements in a dataframe is similar to what you do in vectors</p>
+<p>Editing/modifying elements in a dataframe is similar to what you do with vectors</p>
 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
 <div>
 <div class="cell">
@@ -1348,7 +1348,7 @@ We may use many different, increasingly sophisticated, strategies:
 <section id="section-11" class="slide level2">
 <h2></h2>
 <h3 id="indexing-and-modifying-elements-in-a-dataframe-1">Indexing and Modifying Elements in a Dataframe</h3>
-<p>Editing/modifying elements in a dataframe is similar to what you do in vectors</p>
+<p>Editing/modifying elements in a dataframe is similar to what you do with vectors</p>
 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
 <div>
 <div class="cell">
@@ -1372,7 +1372,7 @@ We may use many different, increasingly sophisticated, strategies:
 </div>
 <div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href aria-hidden="true" tabindex="-1"></a><span class="co"># Multiply all elements times 10</span></span>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href aria-hidden="true" tabindex="-1"></a><span class="co"># Multiply all elements by 10</span></span>
 <span id="cb51-2"><a href aria-hidden="true" tabindex="-1"></a>dx<span class="sc">$</span>score <span class="ot">=</span> dx<span class="sc">$</span>score <span class="sc">*</span> <span class="dv">10</span></span>
 <span id="cb51-3"><a href aria-hidden="true" tabindex="-1"></a>dx</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1395,7 +1395,7 @@ We may use many different, increasingly sophisticated, strategies:
 <section id="section-12" class="slide level2">
 <h2></h2>
 <h3 id="indexing-and-modifying-elements-in-a-dataframe-2">Indexing and Modifying Elements in a Dataframe</h3>
-<p>Editing/modifying elements in a dataframe is similar to what you do in vectors</p>
+<p>Editing/modifying elements in a dataframe is similar to what you do with vectors</p>
 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
 <div>
 <div class="cell">
@@ -1490,7 +1490,7 @@ We may use many different, increasingly sophisticated, strategies:
 <h2></h2>
 <h3 id="indexing-dataframes-by-logical-conditions">Indexing Dataframes by Logical Conditions</h3>
 <p>Just like for vectors, you can use <strong>logical conditions</strong> for indexing a dataframe.</p>
-<p>How do you extract <strong>only the rows</strong> related to <code>&quot;MASSIMILIANO PASTORE</code>“?</p>
+<p>How do you extract <strong>only the rows</strong> related to <code>&quot;MASSIMILIANO PASTORE&quot;</code>?</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1560,7 +1560,7 @@ We may use many different, increasingly sophisticated, strategies:
 <section id="section-17" class="slide level2">
 <h2></h2>
 <h3 id="subset">Subset</h3>
-<p>Base function <strong><code>subset()</code></strong> can also be used as an alternative to indexing</p>
+<p>The base function <strong><code>subset()</code></strong> can also be used as an alternative to indexing</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">subset</span>(df, Teacher <span class="sc">==</span> <span class="st">&quot;MASSIMILIANO PASTORE&quot;</span>, <span class="at">select=</span><span class="fu">c</span>(<span class="st">&quot;Teacher&quot;</span>,<span class="st">&quot;Hours&quot;</span>,<span class="st">&quot;TypeOfCourse&quot;</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1577,7 +1577,7 @@ We may use many different, increasingly sophisticated, strategies:
 25 MASSIMILIANO PASTORE    10  METHODOLOGY</code></pre>
 </div>
 </div>
-<p>However, indexing with <strong><code>[]</code></strong> is more “computationally focused”, computationally faster (especially if working with large datasets), and more similar to programming in other languages (e.g., <strong>Python</strong>), so should probably be favoured by data scientists!</p>
+<p>However, indexing with <strong><code>[]</code></strong> is more “computationally focused”, computationally faster (especially if working with large datasets), and more similar to programming in other languages (e.g., <strong>Python</strong>), so it should probably be favored by data scientists!</p>
 </section>
 <section id="section-18" class="slide level2">
 <h2></h2>
@@ -1598,7 +1598,7 @@ We may use many different, increasingly sophisticated, strategies:
 2      Max  13     0.90</code></pre>
 </div>
 </div>
-<p>Our goal is to get one single dataset including all participant’s data for the final analysis. Of course, you could combined these files manually outside R (e.g., in Excel). However, it’s simpler and more efficient to do this directly in R using <code>rbind()</code></p>
+<p>Our goal is to get one single dataset including all participants’ data for the final analysis. Of course, you could combine these files manually outside R (e.g., in Excel). However, it’s simpler and more efficient to do this directly in R using <code>rbind()</code></p>
 </section>
 <section id="section-19" class="slide level2">
 <h2></h2>
@@ -1621,7 +1621,7 @@ We may use many different, increasingly sophisticated, strategies:
 <p><strong>Important</strong>: for <code>rbind()</code> to work, the two to-be-combined dataframes must:</p>
 <ul>
 <li><p>have the <strong>exact same number of columns</strong>;</p></li>
-<li><p>the <strong>column names must be identical</strong> (remember that R is case-sensitive).</p></li>
+<li><p>have <strong>identical column names</strong> (remember that R is case-sensitive).</p></li>
 </ul>
 </section>
 <section id="section-20" class="slide level2">
@@ -1667,7 +1667,7 @@ We may use many different, increasingly sophisticated, strategies:
 </div>
 </div>
 </div>
-<p><strong>Important</strong>: <code>merge()</code> will work even if some or even all values that should be used for merging do not match… but in that case part of or all data will be lost</p>
+<p><strong>Important</strong>: <code>merge()</code> will work even if some or even all values that should be used for merging do not match… but in that case some or all of the data will be lost</p>
 </section>
 <section id="section-22" class="slide level2">
 <h2></h2>
@@ -1683,7 +1683,7 @@ We may use many different, increasingly sophisticated, strategies:
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(df<span class="sc">$</span>TypeOfCourse, df<span class="sc">$</span>Hours) <span class="co"># creates contingency table</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(df<span class="sc">$</span>TypeOfCourse, df<span class="sc">$</span>Hours) <span class="co"># creates a contingency table</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                 
                   5 10 15 20

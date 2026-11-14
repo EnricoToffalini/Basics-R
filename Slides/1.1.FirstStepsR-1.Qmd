@@ -31,7 +31,7 @@ Let's create a variable named "`age`" that contains a single numerical value:
 age = 20 # assign number 20 to variable named "age"
 ```
 
-Now let's simply inspect its content
+Now let's simply inspect its content:
 
 ```{r}
 age
@@ -45,7 +45,7 @@ str(age)
 ## Create, name objects
 ### Assignment operators
 
-In R, both the assignment operator "**`=`**" and "**`<-`**" (and actually even "**`->`**") can be used to assign values to objects. In fact, "**`<-`**" is considered more traditional in R and often preferred for clarity, also because it allows differentiating assignment from other uses of "**`=`**". 
+In R, both the assignment operators "**`=`**" and "**`<-`**" (and actually even "**`->`**") can be used to assign values to objects. That said, "**`<-`**" is considered more traditional in R and often preferred for clarity, also because it allows differentiating assignment from other uses of "**`=`**". 
 
 ```{r}
 # these two commands do the same thing 
@@ -53,7 +53,7 @@ age <- 20
 age = 20
 ```
 
-However, unlike many other teachers, I will generally favor "**`=`**" as the assignment operator in order to maintain consistency with the convention in most other programming languages
+However, unlike many other teachers, I will generally favor "**`=`**" as the assignment operator in order to maintain consistency with the convention in most other programming languages.
 
 
 ## Create, name objects
@@ -65,7 +65,7 @@ However, unlike many other teachers, I will generally favor "**`=`**" as the ass
 
 - Include only letters, numbers, dots, underscores;
 
-- No reserved words (e.g., `if`, `for`, `NA`, `function`; unless placed inside backticks, e.g., \`if\`, but this is strongly adviced against).
+- No reserved words (e.g., `if`, `for`, `NA`, `function`; unless placed inside backticks, e.g., \`if\`, but this is strongly advised against).
 
 ***Recommendations:***
 
@@ -73,20 +73,20 @@ However, unlike many other teachers, I will generally favor "**`=`**" as the ass
 
 - Be concise: no length limit, but long names are difficult to read and type.
 
-⚠️ *WARNING!* R is Case sensitive: `age` and `Age` will be treated as **two objects**!
+⚠️ *WARNING!* R is case-sensitive: `age` and `Age` will be treated as **two objects**!
 
 ## Create, name objects
 ### Rules for naming objects in R
 
 *Examples:*
 
-- Allowed: "`age`", "`age0`", "`age1`", "`total_score`", "`.myData`", "`my.data`",
+- Allowed: "`age`", "`age0`", "`age1`", "`total_score`", "`.myData`", "`my.data`"
 
 - **NOT** allowed: "`0age`", "`_age`", "`.0myData`", "`my data`", "`my-data`", "`my,data`", "`for`", "`NA`"
 
-⚠️ *WARNING!*  Use of "`.`" in object names (e.g., "`my.data`") is fine in **R** but not allowed in **Python**, where "`.`" is part of the language syntax. 
+⚠️ *WARNING!* The use of "`.`" in object names (e.g., "`my.data`") is fine in **R** but not allowed in **Python**, where "`.`" is part of the language syntax. 
 
-Across different languages, *naming conventions* for longer, multi-word variable names favor **`snake_case`** (e.g., "`my_data`") or **`camelCase`** (e.g., "`myData`"), and **abbreviations** where appropriate (e.g., "`unipdData`" better than "`university_of_padova_dataset`")... preferably used in a consistent way!
+Across different languages, *naming conventions* for longer, multi-word variable names favor **`snake_case`** (e.g., "`my_data`") or **`camelCase`** (e.g., "`myData`"), and **abbreviations** where appropriate (e.g., "`unipdData`" is better than "`university_of_padova_dataset`")... preferably used in a consistent way!
 
 <!-- --------------------------------------------------------------------- -->
 
@@ -121,7 +121,7 @@ Across different languages, *naming conventions* for longer, multi-word variable
 ## Use basic operations
 ### R as calculator: use of parentheses
 
-The order of operations in R follows standard algebraic rules, unless you specify a different order using parentheses. In R, only round parentheses **`( )`** are used for grouping in algebraic expressions, **NOT** square **`[ ]`** and curly **`{ }`** brackets, because they have other specific syntactic purposes.
+The order of operations in R follows standard algebraic rules, unless you specify a different order using parentheses. In R, only round parentheses **`( )`** are used for grouping in algebraic expressions, **NOT** square **`[ ]`** or curly **`{ }`** brackets, because they have other specific syntactic purposes.
 
 *Examples:*
 ```{r}
@@ -136,7 +136,7 @@ The order of operations in R follows standard algebraic rules, unless you specif
 
 They are used to compare values and return logical values (`TRUE`, `FALSE`).
 
-Let's say that we defined `age = 20`, now let's make a few examples:
+Let's say that we have defined `age = 20`; now let's look at a few examples:
 
 | Operator  |   What it does  | Example | Result |
 |------------|-------------|------|------|
@@ -153,7 +153,7 @@ Let's say that we defined `age = 20`, now let's make a few examples:
 
 They are used to combine logical values (`TRUE`, `FALSE`). 
 
-Once again, let's say that we defined `age = 20`, now let's make a few examples:
+Once again, with `age = 20`, let's look at a few examples:
 
 | Operator  |   What it does  | Example | Result |
 |------------|-------------|------|------|
@@ -183,21 +183,21 @@ So far, we have encountered at least two types of data:
 
 - **logical/Boolean** (`TRUE`, `FALSE`).
 
-Actually, **numeric** data could actually be of two types: ***double*** (i.e., "*double-precision floating-point*") that is with decimals like `11.5`, and ***integer*** like `20`.
+**Numeric** data can actually be of two types: ***double*** (i.e., "*double-precision floating-point*"), that is, with decimals like `11.5`, and ***integer***, like `20`.
 
-In fact, R treats numeric values as *double* by default (even if without decimals). To specify numbers as integer, explicitly add an **`L`** after the number, like `age = 20L` (you likely **will not** need this, unless you explicitly need integers for some purposes, such as saving memory).
+In fact, R treats numeric values as *double* by default (even if without decimals). To specify numbers as integers, explicitly add an **`L`** after the number, like `age = 20L` (you likely **will not** need this, unless you explicitly need integers for specific purposes, such as saving memory).
 
 
 ## Basic types of data
 ### characters 
 
-Another extremely important type of data is **character** (often called ***strings***). This is used to store any text, and must be enclosed in quotes (**`' '`** or **`" "`**) like this: 
+Another extremely important type of data is **character** (often called ***strings***). It is used to store any text and must be enclosed in quotes (**`' '`** or **`" "`**) like this: 
 
 ```{r}
 myName = "Enrico"
 ```
 
-You may perform many operations with strings like:
+You may perform many operations with strings, like:
 
 ```{r}
 myName == "Alexander" # is my name equal to Alexander?
@@ -225,7 +225,7 @@ typeof(age)
 
 ## Basic types of data
 
-You may also inquire data type directly with functions `is.*`:
+You may also check the data type directly with the `is.*` functions:
 ```{r}
 is.numeric(age)
 is.character(age)

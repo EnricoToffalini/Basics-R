@@ -1080,10 +1080,10 @@ Enrico Toffalini
 </section>
 <section id="factors" class="slide level2">
 <h2>Factors</h2>
-<p><strong>Factors</strong> are a special type of data used to represent <strong>categorical data</strong>. They may look similar to simple <em>character vectors</em>. In fact, they function differently:</p>
+<p><strong>Factors</strong> are a special type of data used to represent <strong>categorical data</strong>. They may look similar to simple <em>character vectors</em>. However, they function differently:</p>
 <ul>
 <li>Internally, they consist of vectors of integers associated with “levels”</li>
-<li>Levels are unique categories, labelled for readability</li>
+<li>Levels are unique categories, labeled for readability</li>
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>TypeOfCourse</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1108,7 +1108,7 @@ Levels: METHODOLOGY PROGRAMMING SOFT SKILLS THEMATIC COURSE</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>TypeOfCourse <span class="ot">=</span> <span class="fu">as.factor</span>(df<span class="sc">$</span>TypeOfCourse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Internally, a factor is stored as <strong>integer</strong>, with associated <strong>labels</strong> for levels:</p>
+<p>Internally, a factor is stored as <strong>integers</strong>, with associated <strong>labels</strong> for levels:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(df<span class="sc">$</span>TypeOfCourse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1134,7 +1134,7 @@ Levels: METHODOLOGY PROGRAMMING SOFT SKILLS THEMATIC COURSE</code></pre>
 </section>
 <section id="factors-2" class="slide level2">
 <h2>Factors</h2>
-<p>By default, <strong>factors</strong> in R are <strong>non-ordered</strong>, there is <strong>no</strong> hierarchy between their categories.</p>
+<p>By default, <strong>factors</strong> in R are <strong>unordered</strong>: there is <strong>no</strong> hierarchy between their categories.</p>
 <p>To create <strong>ordered factors</strong>, you can use the <strong><code>as.ordered()</code></strong> function.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">as.ordered</span>(df<span class="sc">$</span>TypeOfCourse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1150,7 +1150,7 @@ Levels: METHODOLOGY &lt; PROGRAMMING &lt; SOFT SKILLS &lt; THEMATIC COURSE</code
 </div>
 </div>
 <div style="font-size:26px;">
-<p>Ordered factors include a hierarchical relationship between levels (e.g., <code>&quot;low&quot;</code> &lt; <code>&quot;medium&quot;</code> &lt; <code>&quot;high&quot;</code>; or a Likert scale like <code>&quot;Strongly disagree&quot;</code> &lt; <code>&quot;Disagree&quot;</code> &lt; <code>&quot;Neutral&quot;</code> &lt; <code>&quot;Agree&quot;</code> &lt; <code>&quot;Strongly agree&quot;</code>). Using ordered factors may be especially important for certain data analysis, e.g., <em>Structural Equation Modeling (SEM)</em> with ordinal data (e.g., using the <code>lavaan</code> package)</p>
+<p>Ordered factors include a hierarchical relationship between levels (e.g., <code>&quot;low&quot;</code> &lt; <code>&quot;medium&quot;</code> &lt; <code>&quot;high&quot;</code>; or a Likert scale like <code>&quot;Strongly disagree&quot;</code> &lt; <code>&quot;Disagree&quot;</code> &lt; <code>&quot;Neutral&quot;</code> &lt; <code>&quot;Agree&quot;</code> &lt; <code>&quot;Strongly agree&quot;</code>). Using ordered factors may be especially important for certain data analyses, e.g., <em>Structural Equation Modeling (SEM)</em> with ordinal data (e.g., using the <code>lavaan</code> package)</p>
 </div>
 </section>
 <section id="factors-3" class="slide level2">
@@ -1169,7 +1169,7 @@ Levels: METHODOLOGY &lt; PROGRAMMING &lt; SOFT SKILLS &lt; THEMATIC COURSE</code
 </section>
 <section id="lists" class="slide level2">
 <h2>Lists</h2>
-<p><strong>Lists</strong> are flexible structure that contain <strong>objects of different types and different lengths</strong> (including other lists… potentially creating an infinite <em>Inception</em>…)</p>
+<p><strong>Lists</strong> are flexible structures that can contain <strong>objects of different types and different lengths</strong> (including other lists… potentially creating an infinite <em>Inception</em>…)</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href aria-hidden="true" tabindex="-1"></a>myChaos <span class="ot">=</span> <span class="fu">list</span>(<span class="cn">TRUE</span>, <span class="dv">0</span><span class="sc">:</span><span class="dv">5</span>, df<span class="sc">$</span>Hours, letters[<span class="dv">8</span><span class="sc">:</span><span class="dv">18</span>], <span class="st">&quot;PSICOSTAT&quot;</span>)</span>
 <span id="cb14-2"><a href aria-hidden="true" tabindex="-1"></a>myChaos</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1239,7 +1239,7 @@ Levels: METHODOLOGY &lt; PROGRAMMING &lt; SOFT SKILLS &lt; THEMATIC COURSE</code
 </div>
 </div>
 <div style="font-size:28px; font-style:italic;">
-<p>That’s not surprising… a dataframe is actually a special kind of list! just two key constraints: 1) all elements are vectors of the same length; 2) vectors are named.</p>
+<p>That’s not surprising… a dataframe is actually a special kind of list, with just two key constraints: 1) all elements are vectors of the same length; 2) vectors are named.</p>
 </div>
 </section>
 <section id="lists-3" class="slide level2">
@@ -1248,7 +1248,7 @@ Levels: METHODOLOGY &lt; PROGRAMMING &lt; SOFT SKILLS &lt; THEMATIC COURSE</code
 <ul>
 <li><p>Provide <strong>very flexible storage</strong> (for example, in a complex Monte Carlo simulation you might want to store not just a single result from each iteration, but multiple objects, such as each simulated dataframe, or whole model outputs)</p></li>
 <li><p><strong>Common in R</strong>: many functions (e.g., <code>lm()</code>) return their summaries and results as lists (even dataframes themselves are special cases of lists), so get familiar with them!</p></li>
-<li><p>Are used in many context for handling <strong>nested data</strong> (e.g., JSON-formatted data)</p></li>
+<li><p>Are used in many contexts for handling <strong>nested data</strong> (e.g., JSON-formatted data)</p></li>
 </ul>
 </section>
 <section id="lists-4" class="slide level2">
@@ -1310,7 +1310,7 @@ Levels: METHODOLOGY &lt; PROGRAMMING &lt; SOFT SKILLS &lt; THEMATIC COURSE</code
 [2,]   19   20   21</code></pre>
 </div>
 </div>
-<p>Like in vectors, you can perform <strong>appropriate operations</strong> on matrix data:</p>
+<p>As with vectors, you can perform <strong>appropriate operations</strong> on matrix data:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href aria-hidden="true" tabindex="-1"></a>myMat<span class="sc">^</span><span class="dv">2</span> <span class="co"># element-wise squaring of all values</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1406,7 +1406,7 @@ It’s easy to create an array using the <strong><code>array()</code></strong> f
 </div>
 <div>
 <p><br>
-→ this is kind of a “cubic-structure” (3D structure): 3 rows, 5 columns, 2 slices</p>
+→ this is a kind of “cubic structure” (3D structure): 3 rows, 5 columns, 2 slices</p>
 <p>In a similar way, you could create hypercubes and so on (4D+)</p>
 </div>
 </div>
@@ -1441,8 +1441,8 @@ It’s easy to create an array using the <strong><code>array()</code></strong> f
 <div style="font-size:38px;">
 <p><strong>Why use (know) arrays?</strong></p>
 <ul>
-<li><p>Might be useful for storing, and manipulate efficiently structure of <strong>multi-dimensional data</strong></p></li>
-<li><p>Generally used in advanced topics and <em>machine learning</em> like when working on <strong>image/video processing</strong> and <strong>spatial data</strong></p></li>
+<li><p>Useful for efficiently storing and manipulating <strong>multi-dimensional data</strong></p></li>
+<li><p>Generally used in advanced topics and <em>machine learning</em>, such as <strong>image/video processing</strong> and <strong>spatial data</strong></p></li>
 <li><p>Arrays in R are conceptually similar to <strong>tensors</strong> in Python (e.g., <code>NumPy</code>, <code>TensorFlow</code>), where they play a fundamental role in <em><strong>machine learning</strong></em> and <em><strong>deep learning</strong></em>, as they allow researchers to manage large amounts of data with complex structures</p></li>
 </ul>
 </div>

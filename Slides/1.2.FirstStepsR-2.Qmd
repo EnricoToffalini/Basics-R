@@ -23,7 +23,7 @@ execute:
 
 ## Install packages... and more
 
-Most of the data analysis tasks you will perform won’t come from base R: you most often load additional **packages** for specialized functions
+Most of the data analysis tasks you will perform won’t come from base R: you will most often load additional **packages** for specialized functions
 
 ::: {.columns}
 ::: {.column width="39%"}
@@ -49,7 +49,7 @@ devtools::install_github("FilippoGambarota/filor")
 devtools::install_github("EnricoToffalini/toffee")
 ```
 
-After installing, you need to load the packages using function `library`:
+After installing, you need to load the packages using the `library()` function:
 ```{r, eval=FALSE}
 library(effsize)
 library(ggplot2)
@@ -66,7 +66,7 @@ library(psych)
 fisherz(rho=0.5) # use a function from the "psych" package
 ```
 
-you may directly call any function from any installed package, even without loading it, using "**`::`**"; this is especially useful when there is a risk of functions with conflicting names, or if you just don't want to load an entire package for using a single function: 
+You may directly call any function from any installed package, even without loading it, using "**`::`**"; this is especially useful when there is a risk of functions with conflicting names, or if you just don't want to load an entire package to use a single function: 
 
 ```{r}
 psych::fisherz(rho=0.5)
@@ -79,7 +79,7 @@ psych::fisherz(rho=0.5)
 |-----|-------------|-----------|
 | `base` <br/>(base R) | Basic functions | `sum`, `mean`, `sqrt`, `abs`, `c`, `data.frame`, `summary`, `scale`, `plot`, `+`, `-`
 | `stats` <br/>(base R) | Basic statistical calculations and functions | `sd`, `cor`, `cor.test`, `t.test`, `lm`, `glm`, `AIC`, `rnorm`, `rbinom`
-| `graphics` <br/>(base R) | Basic statistical calculations and functions | `plot`, `boxplot`, `hist`, `barplot`
+| `graphics` <br/>(base R) | Basic plotting functions | `plot`, `boxplot`, `hist`, `barplot`
 
 *(You may actually use these "base" packages very often without even realizing that they are packages)*
 
@@ -103,7 +103,7 @@ psych::fisherz(rho=0.5)
 | `lavaan` | Structural Equation Models (SEM) | `sem`, `cfa`
 | `semTools` | Useful tools for SEMs | `compRelSEM`, `measEq.syntax`
 | `metafor` | Perform meta-analysis | `rma`, `rma.mv`, `forest`, `funnel`, `regtest`
-| `brms` | Fitting practically any Bayesian model via MCMC with STAN | `brm`, `set_prior`
+| `brms` | Fitting practically any Bayesian model via MCMC with Stan | `brm`, `set_prior`
 | `blavaan` | Fitting Bayesian SEMs | `bcfa`, `bsem`
 
 ## Reproducibility tip: `sessionInfo()`
@@ -126,7 +126,7 @@ sessionInfo()
 
 ## Functions and arguments
 
-Functions typically take some <b>*input*</b> parameters, known as *arguments*, process that, and yield some <b>*output*</b>/result(s)
+Functions typically take some <b>*input*</b> parameters, known as *arguments*, process them, and yield some <b>*output*</b>/result(s)
 
 <div style="text-align: center;">
   <img src="figures/functionsExamples.png"/>
@@ -162,7 +162,7 @@ seq(from = 3, to = 7, by = 0.6)
 rnorm(n = 5, mean = 100, sd = 15)
 ```
 
-**Positional matching** - arguments names may be omitted if placed in the correct order
+**Positional matching** - argument names may be omitted if placed in the correct order
 ```{r}
 rnorm(5, 100, 15)
 ```
@@ -180,7 +180,7 @@ rnorm(n = 5)
 rnorm(mean = 100, sd = 15)
 ```
 
-<em>**Warnings**</em> - Some inputs may cause the function to produce *Warnings* and bad output, but do **not** stop code execution
+<em>**Warnings**</em> - some inputs may cause the function to produce *Warnings* and bad output, but they do **not** stop code execution
 ```{r, warning=T}
 rnorm(n = 5, mean = 100, sd = -15)
 ```
@@ -204,7 +204,7 @@ help(rnorm) # this does the same
 ## Set up Working Directory
 
 <div style="font-size:40px;">
-The **Working Directory** (WD) is the location of the folder in your computer where R reads and saves files by default. 
+The **Working Directory** (WD) is the location of the folder on your computer where R reads and saves files by default. 
 
 Let's see my own WD using the `getwd()` function:
 
@@ -221,9 +221,9 @@ As a general rule:
 
 - When you open R or the RStudio app, the default WD may be the `documents` folder (in Windows) or the `home directory` (e.g., `/home/username`; in Linux or macOS);
 
-- This default may be reset at any time from inside RStudio on `Tools > Global Options... > General`;
+- This default may be changed at any time from inside RStudio via `Tools > Global Options... > General`;
 
-- If you open a file (e.g., a `.R` script) using RStudio, the WD is set at that file location (unless the RStudio app was already open before);
+- If you open a file (e.g., a `.R` script) using RStudio, the WD is set to that file's location (unless the RStudio app was already open before);
 
 - However, you can set a new WD at any time from within the R code, using the **`setwd()`** function, for example:
 ```{r}
@@ -234,7 +234,7 @@ setwd( "C:/Users/enric/" )
 
 ⚠️ **Windows users**, be careful!
 
-When you copy-and-paste a folder address, Windows will probably take "`\`" as path separator, but "`\`" is the escape character in R, so you incur an error:
+When you copy-and-paste a folder address, Windows will probably take "`\`" as path separator, but "`\`" is the escape character in R, so you will get an error:
 
 ```{r, error=TRUE}
 setwd( "C:\Users\enric\" )
@@ -260,26 +260,26 @@ setwd( "C:/Users/enric/" )
 
 
 - **RELATIVE paths**: indicate the path starting from *(relative to)* the current directory. Most often, you prefer this for import/export, so the same script works on any device; e.g., `"figures/"` or `../figures/`:
-  - `png(filename = "figures/Fig1.png")` saves a file `Fig1.png` into `figures`, which a subfolder **inside** the current WD; 
-  - `png(filename = "../figures/Fig1.png")` saves a file `Fig1.png` into `figures`, which is a folder **outside, one level up** (`"../"`) the current WD
+  - `png(filename = "figures/Fig1.png")` saves a file `Fig1.png` into `figures`, which is a subfolder **inside** the current WD; 
+  - `png(filename = "../figures/Fig1.png")` saves a file `Fig1.png` into `figures`, which is a folder **outside, one level up** (`"../"`) from the current WD
 
 ## RStudio Projects
 
 <div style="font-size:43px;">
-**`.Rproj`** may eliminate the need of using `setwd()` within scripts, so you can use only relative paths
+**`.Rproj`** may eliminate the need to use `setwd()` within scripts, so you can use only relative paths
 </div>
 
 <div style="font-size:39px;">
-- You can create a *new project* in RStudio with `File > New Project...` choose a specific folder
+- You can create a *new project* in RStudio with `File > New Project...`, choosing a specific folder
 
 - Keep all materials of your project in the same folder as the newly created `.Rproj` file
 
-- As you open the `.Rproj`, it will automatically start a new *RStudio* session with the WD set into that folder.
+- As you open the `.Rproj`, it will automatically start a new *RStudio* session with the WD set to that folder.
 </div>
 
 ## RStudio Projects
 
-Opening the `.Rproj` file ensures that RStudio automatically sets the project folder as the working directory, so all files are managed relative to here:
+Opening the `.Rproj` file ensures that RStudio automatically sets the project folder as the working directory, so all files are managed relative to it:
 
 <div style="text-align: center;">
   <img src="figures/rproj.png" style="width:80%; max-width:700px; height:auto;"/>
@@ -294,9 +294,9 @@ Now let's see how to perform **import/export** operations for:
 
 - **The Workspace**: all objects that exist in your current R session, all results and computations stored so far (see them in the *"Environment" panel* or with `ls()`);
 
-- **Data: SUPER IMPORTANT!** we will focus especially on tabular (Excel-like) data, that we treat as dataframes; 
+- **Data: SUPER IMPORTANT!** we will focus especially on tabular (Excel-like) data, which we treat as dataframes; 
 
-- **Figures**: save your plots for reports and more in `.pdf`, `.png`, and more formats.
+- **Figures**: save your plots for reports and more in `.pdf`, `.png`, and other formats.
 </div>
 
 
@@ -364,7 +364,7 @@ Arguably a **fundamental skill** for anyone working in data science!
 
 Most people use *MS Excel* or similar software (e.g., *LibreOffice Calc*) for handling data, which produce their own file formats (e.g., `.xlsx`). That's perfectly fine. However... the **most versatile data format is `.csv` (comma-separated values)**, a simple text (no formatting, no licences required) file format for storing tabular data/dataframes. 
 
-- **Best practice**: Save data in `.csv` format from your software of choice before importing it in R.
+- **Best practice**: Save data in `.csv` format from your software of choice before importing it into R.
 </div>
 
 ## Import/export
@@ -376,20 +376,20 @@ Here's an example of using **`read.csv()`** for **importing** data:
 # IMPORT csv data from a "data" subfolder, and store it in an object named "df"
 df = read.csv("data/Performance.csv")
 
-# OR if you want to be explicit on settings:
+# OR if you want to be explicit about settings:
 df = read.csv("data/Performance.csv", header=TRUE, sep=",", dec=".")
 
 head(df) # have a look at the first few rows
 ```
 
 <div style="font-size:22px;">
-⚠️ in Italian Excel export settings, it is possible that *separator character* (`sep`) be "`;`" and *decimal point character* be "`,`" so be aware of your settings!
+⚠️ in Italian Excel export settings, the *separator character* (`sep`) may be "`;`" and the *decimal point character* (`dec`) "`,`", so be aware of your settings!
 </div>
 
 ## Import/export
 ### Data
 
-If you absolutely want to import your data directly from a **MS Excel** document (`.xlsx`), you may use function **`read_excel()`** from the package `readxl`: 
+If you absolutely want to import your data directly from a **MS Excel** document (`.xlsx`), you may use the function **`read_excel()`** from the package `readxl`: 
 
 ```{r}
 library(readxl)
@@ -428,7 +428,7 @@ Other "tricks" for importing data involve using the functions in the **RStudio m
 
 - File > Import Dataset > From SPSS...
 
-However ... using these functions is not best practice, because they are specific to the RStudio IDE. **It’s better to use code for reproducibility**
+However, using these functions is not best practice, because they are specific to the RStudio IDE. **It’s better to use code for reproducibility**
 
 
 ## Import/export
@@ -436,7 +436,7 @@ However ... using these functions is not best practice, because they are specifi
 
 You have processed data with R, now... how to **export** it? 
 
-When collaborating with someone also using R, you may choose to exchange data directly by exporting the object or the entire workspace as a `.RData` file, using the `save()` or `save.image()` function respectively.
+When collaborating with someone also using R, you may choose to exchange data directly by exporting the object or the entire workspace as a `.RData` file, using the `save()` or `save.image()` functions, respectively.
 
 However, if you need to export a dataframe in a more universally readable tabular format, such as `.csv`, you may use **`write.csv()`**:
 
@@ -454,7 +454,7 @@ write.csv(df, file="myExportedData.csv", row.names=F)
 
 R has a collection of functions for exporting figures in different formats: `pdf()`, `png()`, `jpeg()`, `bmp()`, `tiff()`, `svg()`.
 
-Here is an example using `png()` :
+Here is an example using `png()`:
 
 ```{r, eval=F}
 # set up a graphic output file named "MyFigure.png" with some settings

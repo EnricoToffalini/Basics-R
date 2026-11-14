@@ -35,7 +35,7 @@ editor: visual
     -   $\frac{\sqrt{2 \times 5}\ + 6}{4}$
     -   $\log_{2} 50$
 
--   Round each of the previous results to the third digit, using the appropriate function for rounding
+-   Round each of the previous results to three decimal places, using the appropriate function for rounding
 
 -   Use the appropriate relational operator to determine whether each of the previous results is *greater than* $10$
 
@@ -43,11 +43,11 @@ editor: visual
 
 ### Use functions
 
--   Open the help/documentation for the `Sys.time()` function, then use it to determine the current (system) time and see that it is correct
+-   Open the help/documentation for the `Sys.time()` function, then use it to determine the current (system) time and check that it is correct
 
--   Open the help/documentation for the `rep()` function and understand what it does, also have a look at the *Examples* section in the documentation
+-   Open the help/documentation for the `rep()` function and understand what it does; also have a look at the *Examples* section in the documentation
 
--   Generate 10 numbers randomly drawn from a standard normal distribution using the `rnorm()` function, save them in an object named `X1`
+-   Generate 10 numbers randomly drawn from a standard normal distribution using the `rnorm()` function, and save them in an object named `X1`
 
 -   Use the `rep()` function to replicate the whole `X1` vector three *times*, and store the result in a newly created object named `X2`
 
@@ -59,17 +59,17 @@ editor: visual
 
 -   Use the appropriate function to know the current working directory
 
--   Use both the the appropriate panel in RStudio and the `ls()` function to see all objects currently existing in the workspace (there should be all those from the previous points)
+-   Use both the appropriate panel in RStudio and the `ls()` function to see all objects currently existing in the workspace (all those from the previous points should be there)
 
 -   Export the whole workspace with file name `"myWSpace.RData"`, then close RStudio
 
--   Re-open Rstudio, make sure that the workspace is empty after the re-opening (otherwise use `rm(list=ls())`), then re-import the whole workspace named `"myWSpace.RData"` that you had previously saved, and make sure that all objects are there
+-   Re-open RStudio, make sure that the workspace is empty after the re-opening (otherwise use `rm(list=ls())`), then re-import the whole workspace named `"myWSpace.RData"` that you had previously saved, and make sure that all objects are there
 
--   Download <a href="datasets/Performance.csv" download>this dataset</a>, then import it in RStudio using an appropriate function, and display it in your console
+-   Download <a href="datasets/Performance.csv" download>this dataset</a>, then import it into RStudio using an appropriate function, and display it in your console
 
 -   Let's try to create and export a figure following a few steps:
 
     -   create an object named `x` that includes 10 random numbers generated using `rnorm()`;
-    -   create another object named `y` that includes other 10 random numbers generated using `rnorm()`;
+    -   create another object named `y` that includes another 10 random numbers generated using `rnorm()`;
     -   use the base `plot()` function for creating a scatter plot (i.e., `plot(x, y)`);
-    -   now use the `pdf()` function for exporting the above scatter plot in a `.pdf` file.
+    -   now use the `pdf()` function to export the above scatter plot to a `.pdf` file.
