@@ -1162,34 +1162,54 @@ Enrico Toffalini
 </div>
 </div>
 </section>
+<section id="section" class="slide level2">
+<h2></h2>
+<h3 id="na-and-null-in-vectors">NA and NULL in vectors</h3>
+<p>Recall the special values and objects introduced with basic data types: <strong><code>NA</code></strong> occupies a position in a vector; <strong><code>NULL</code></strong> contributes no element.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(<span class="cn">NULL</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(<span class="cn">NA</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="dv">1</span>, <span class="cn">NULL</span>, <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1 3</code></pre>
+</div>
+</div>
+<p>Use <code>is.na()</code> to identify missing values in a vector.</p>
+</section>
 <section id="indexing-vectors" class="slide level2">
 <h2>Indexing Vectors</h2>
 <p>Select/extract elements with <strong>INDEXING</strong> using square brackets <strong><code>[]</code></strong>:</p>
 <div class="large-code">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href aria-hidden="true" tabindex="-1"></a>Hours <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">20</span>, <span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">5</span>, <span class="dv">15</span>, <span class="dv">5</span>)</span>
-<span id="cb15-2"><a href aria-hidden="true" tabindex="-1"></a>Hours[<span class="dv">4</span>] <span class="co"># a single element</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href aria-hidden="true" tabindex="-1"></a>Hours <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">20</span>, <span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">5</span>, <span class="dv">15</span>, <span class="dv">5</span>)</span>
+<span id="cb21-2"><a href aria-hidden="true" tabindex="-1"></a>Hours[<span class="dv">4</span>] <span class="co"># a single element</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 10</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href aria-hidden="true" tabindex="-1"></a>Hours[<span class="dv">5</span><span class="sc">:</span><span class="dv">7</span>] <span class="co"># a range of elements</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href aria-hidden="true" tabindex="-1"></a>Hours[<span class="dv">5</span><span class="sc">:</span><span class="dv">7</span>] <span class="co"># a range of elements</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 15  5 15</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href aria-hidden="true" tabindex="-1"></a>Hours[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">6</span>)] <span class="co"># specific elements</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href aria-hidden="true" tabindex="-1"></a>Hours[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">6</span>)] <span class="co"># specific elements</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 10 20  5</code></pre>
 </div>
 </div>
 <p>Know the <strong>length</strong> of a vector using the <code>length()</code> function, and use it:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(Hours)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(Hours)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 8</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href aria-hidden="true" tabindex="-1"></a>Hours[<span class="fu">length</span>(Hours)] <span class="co"># use it to extract the last element</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href aria-hidden="true" tabindex="-1"></a>Hours[<span class="fu">length</span>(Hours)] <span class="co"># use it to extract the last element</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 5</code></pre>
 </div>
@@ -1202,20 +1222,20 @@ Enrico Toffalini
 <p>You can use the <em>minus</em> sign <strong><code>-</code></strong> to select <strong>all elements except some</strong> from a vector. (This method is also applicable to dataframes)</p>
 <div class="large-code">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href aria-hidden="true" tabindex="-1"></a>Hours <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">20</span>, <span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">5</span>, <span class="dv">15</span>, <span class="dv">5</span>)</span>
-<span id="cb25-2"><a href aria-hidden="true" tabindex="-1"></a>Hours[<span class="sc">-</span><span class="dv">4</span>] <span class="co"># ALL BUT a single element</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href aria-hidden="true" tabindex="-1"></a>Hours <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">20</span>, <span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">5</span>, <span class="dv">15</span>, <span class="dv">5</span>)</span>
+<span id="cb31-2"><a href aria-hidden="true" tabindex="-1"></a>Hours[<span class="sc">-</span><span class="dv">4</span>] <span class="co"># ALL BUT a single element</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 10 15 20 15  5 15  5</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href aria-hidden="true" tabindex="-1"></a>Hours[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">5</span><span class="sc">:</span><span class="dv">7</span>)] <span class="co"># ALL BUT a range of elements</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href aria-hidden="true" tabindex="-1"></a>Hours[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">5</span><span class="sc">:</span><span class="dv">7</span>)] <span class="co"># ALL BUT a range of elements</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 10 15 20 10  5</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href aria-hidden="true" tabindex="-1"></a>Hours[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">6</span>)] <span class="co"># ALL BUT specific elements</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href aria-hidden="true" tabindex="-1"></a>Hours[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">6</span>)] <span class="co"># ALL BUT specific elements</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 15 10 15 15  5</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href aria-hidden="true" tabindex="-1"></a>Hours[<span class="sc">-</span><span class="fu">length</span>(Hours)] <span class="co"># ALL BUT the last element</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href aria-hidden="true" tabindex="-1"></a>Hours[<span class="sc">-</span><span class="fu">length</span>(Hours)] <span class="co"># ALL BUT the last element</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 10 15 20 10 15  5 15</code></pre>
 </div>
@@ -1226,22 +1246,22 @@ Enrico Toffalini
 <h2>Logical Indexing</h2>
 <p>Often, you’ll need to extract values from a vector based on specific <em><b>logical</b></em> conditions. Here’s an example:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href aria-hidden="true" tabindex="-1"></a>Hours <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">20</span>, <span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">5</span>, <span class="dv">15</span>, <span class="dv">5</span>)</span>
-<span id="cb33-2"><a href aria-hidden="true" tabindex="-1"></a>Hours[Hours <span class="sc">&gt;=</span> <span class="dv">15</span>] <span class="co"># extract only values greater than or equal to 15</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href aria-hidden="true" tabindex="-1"></a>Hours <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">20</span>, <span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">5</span>, <span class="dv">15</span>, <span class="dv">5</span>)</span>
+<span id="cb39-2"><a href aria-hidden="true" tabindex="-1"></a>Hours[Hours <span class="sc">&gt;=</span> <span class="dv">15</span>] <span class="co"># extract only values greater than or equal to 15</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 15 20 15 15</code></pre>
 </div>
 </div>
 <p>This is called <em><b>logical indexing</b></em> because you are selecting elements based on a logical vector (i.e., a sequence of <code>TRUE</code>, <code>FALSE</code>):</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href aria-hidden="true" tabindex="-1"></a>Hours <span class="sc">&gt;=</span> <span class="dv">15</span> <span class="co"># the logical vector actually inside the square brackets</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href aria-hidden="true" tabindex="-1"></a>Hours <span class="sc">&gt;=</span> <span class="dv">15</span> <span class="co"># the logical vector actually inside the square brackets</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE  TRUE  TRUE FALSE  TRUE FALSE  TRUE FALSE</code></pre>
 </div>
 </div>
 <p>Also, you can use a vector to extract values <strong>from another vector</strong>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href aria-hidden="true" tabindex="-1"></a>Teachers[Hours <span class="sc">&gt;=</span> <span class="dv">15</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href aria-hidden="true" tabindex="-1"></a>Teachers[Hours <span class="sc">&gt;=</span> <span class="dv">15</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] &quot;Kiesner&quot;     &quot;Granziol&quot;    &quot;Calignano&quot;   &quot;Bastianelli&quot;</code></pre>
 </div>
@@ -1251,19 +1271,19 @@ Enrico Toffalini
 <h2>Indexing and Assignment</h2>
 <p>With indexing, you can not only select, but also <strong>assign or modify</strong> elements in a vector:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href aria-hidden="true" tabindex="-1"></a>Hours <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">20</span>, <span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">5</span>, <span class="dv">15</span>, <span class="dv">5</span>)</span>
-<span id="cb39-2"><a href aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-3"><a href aria-hidden="true" tabindex="-1"></a>Hours[<span class="dv">1</span>] <span class="ot">=</span> <span class="dv">0</span> <span class="co"># assign a new value</span></span>
-<span id="cb39-4"><a href aria-hidden="true" tabindex="-1"></a>Hours[<span class="dv">3</span>] <span class="ot">=</span> Hours[<span class="dv">3</span>]<span class="sc">+</span><span class="dv">50</span> <span class="co"># modify an existing element</span></span>
-<span id="cb39-5"><a href aria-hidden="true" tabindex="-1"></a>Hours</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href aria-hidden="true" tabindex="-1"></a>Hours <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">20</span>, <span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">5</span>, <span class="dv">15</span>, <span class="dv">5</span>)</span>
+<span id="cb45-2"><a href aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-3"><a href aria-hidden="true" tabindex="-1"></a>Hours[<span class="dv">1</span>] <span class="ot">=</span> <span class="dv">0</span> <span class="co"># assign a new value</span></span>
+<span id="cb45-4"><a href aria-hidden="true" tabindex="-1"></a>Hours[<span class="dv">3</span>] <span class="ot">=</span> Hours[<span class="dv">3</span>]<span class="sc">+</span><span class="dv">50</span> <span class="co"># modify an existing element</span></span>
+<span id="cb45-5"><a href aria-hidden="true" tabindex="-1"></a>Hours</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1]  0 15 70 10 15  5 15  5</code></pre>
 </div>
 </div>
 <p>You can even assign values <strong>outside the current range</strong> of the vector. But what happens?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href aria-hidden="true" tabindex="-1"></a>Hours[<span class="dv">20</span>] <span class="ot">=</span> <span class="dv">5</span></span>
-<span id="cb41-2"><a href aria-hidden="true" tabindex="-1"></a>Hours</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href aria-hidden="true" tabindex="-1"></a>Hours[<span class="dv">20</span>] <span class="ot">=</span> <span class="dv">5</span></span>
+<span id="cb47-2"><a href aria-hidden="true" tabindex="-1"></a>Hours</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1]  0 15 70 10 15  5 15  5 NA NA NA NA NA NA NA NA NA NA NA  5</code></pre>
 </div>
@@ -1273,23 +1293,23 @@ Enrico Toffalini
 <h2>Operating on Vectors</h2>
 <p>You can simultaneously apply an operation to a whole vector, like:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href aria-hidden="true" tabindex="-1"></a>Hours <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">20</span>, <span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">5</span>, <span class="dv">15</span>, <span class="dv">5</span>)</span>
-<span id="cb43-2"><a href aria-hidden="true" tabindex="-1"></a>Hours <span class="sc">/</span> <span class="dv">5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href aria-hidden="true" tabindex="-1"></a>Hours <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">20</span>, <span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">5</span>, <span class="dv">15</span>, <span class="dv">5</span>)</span>
+<span id="cb49-2"><a href aria-hidden="true" tabindex="-1"></a>Hours <span class="sc">/</span> <span class="dv">5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2 3 4 2 3 1 3 1</code></pre>
 </div>
 </div>
 <p>Of course, this is useful when you want to save the result as a new vector:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href aria-hidden="true" tabindex="-1"></a>ECTS <span class="ot">=</span> Hours <span class="sc">/</span> <span class="dv">5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href aria-hidden="true" tabindex="-1"></a>ECTS <span class="ot">=</span> Hours <span class="sc">/</span> <span class="dv">5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Similarly, you can apply functions to all elements of a vector:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(Hours) <span class="co"># computes square root of each element</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(Hours) <span class="co"># computes square root of each element</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 3.162278 3.872983 4.472136 3.162278 3.872983 2.236068 3.872983 2.236068</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(Hours) <span class="co"># computes the natural logarithm of each element</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(Hours) <span class="co"># computes the natural logarithm of each element</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2.302585 2.708050 2.995732 2.302585 2.708050 1.609438 2.708050 1.609438</code></pre>
 </div>
@@ -1300,15 +1320,15 @@ Enrico Toffalini
 <p>A whole vector may serve to compute summary statistics, for example using functions such as <strong><code>mean()</code>, <code>sd()</code>, <code>median()</code>, <code>quantile()</code>, <code>max()</code>, <code>min()</code></strong>:</p>
 <div class="large-code">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(Hours) <span class="co"># returns the average value (mean) of the vector</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(Hours) <span class="co"># returns the average value (mean) of the vector</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 11.875</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(Hours) <span class="co"># returns the Standard Deviation of the vector</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(Hours) <span class="co"># returns the Standard Deviation of the vector</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 5.303301</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(Hours) <span class="co"># returns the median value of the vector</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(Hours) <span class="co"># returns the median value of the vector</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 12.5</code></pre>
 </div>
@@ -1318,74 +1338,89 @@ Enrico Toffalini
 <section id="summary-statistics-on-vectors-1" class="slide level2">
 <h2>Summary Statistics on Vectors</h2>
 <p>A whole vector may serve to compute summary statistics, for example using functions such as <strong><code>mean()</code>, <code>sd()</code>, <code>median()</code>, <code>quantile()</code>, <code>max()</code>, <code>min()</code></strong>:</p>
-<div class="large-code">
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+<div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(Hours, <span class="at">probs=</span><span class="fu">c</span>(.<span class="dv">25</span>, .<span class="dv">50</span>, .<span class="dv">75</span>)) <span class="co"># returns desired quantiles</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(Hours, <span class="at">probs=</span><span class="fu">c</span>(.<span class="dv">25</span>, .<span class="dv">50</span>, .<span class="dv">75</span>)) <span class="co"># returns desired quantiles</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  25%   50%   75% 
  8.75 12.50 15.00 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(Hours) <span class="co"># returns largest value</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(Hours) <span class="co"># returns largest value</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 20</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">min</span>(Hours) <span class="co"># returns smallest value</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">min</span>(Hours) <span class="co"># returns smallest value</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 5</code></pre>
 </div>
 </div>
 </div>
+<div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(Hours)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img role="img" data-src="data:image/png;base64,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" width="432"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>A quick base R plot lets us <em>see</em> the distribution. Figure design belongs to the ggplot2 course.</p>
 </section>
-<section id="section" class="slide level2">
+<section id="section-1" class="slide level2">
 <h2></h2>
 <h3 id="summary-statistics---managing-missing-na-values">Summary Statistics - Managing Missing (<code>NA</code>) Values</h3>
 <p>All of the previous summary statistics will <strong>fail</strong> if there is even a single <code>NA</code> value:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href aria-hidden="true" tabindex="-1"></a>Hours <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">20</span>, <span class="dv">10</span>, <span class="dv">15</span>, <span class="cn">NA</span>, <span class="dv">15</span>, <span class="dv">5</span>)</span>
-<span id="cb62-2"><a href aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb62-3"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(Hours) <span class="co"># a single NA value implies that the average is impossible to determine</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href aria-hidden="true" tabindex="-1"></a>Hours <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">20</span>, <span class="dv">10</span>, <span class="dv">15</span>, <span class="cn">NA</span>, <span class="dv">15</span>, <span class="dv">5</span>)</span>
+<span id="cb69-2"><a href aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-3"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(Hours) <span class="co"># a single NA value implies that the average is impossible to determine</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] NA</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(Hours, <span class="at">probs=</span><span class="fu">c</span>(.<span class="dv">25</span>, .<span class="dv">75</span>)) <span class="co"># quantile() will even return an Error</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(Hours, <span class="at">probs=</span><span class="fu">c</span>(.<span class="dv">25</span>, .<span class="dv">75</span>)) <span class="co"># quantile() will even return an Error</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
 <pre><code>Error in quantile.default(Hours, probs = c(0.25, 0.75)): missing values and NaN&#39;s not allowed if &#39;na.rm&#39; is FALSE</code></pre>
 </div>
 </div>
 <p>You can easily manage missing values by adding the <strong><code>na.rm=TRUE</code></strong> argument:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(Hours, <span class="at">na.rm=</span><span class="cn">TRUE</span>) <span class="co"># NA values are ignored </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(Hours, <span class="at">na.rm=</span><span class="cn">TRUE</span>) <span class="co"># NA values are ignored </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 12.85714</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(Hours, <span class="at">probs=</span><span class="fu">c</span>(.<span class="dv">25</span>, .<span class="dv">75</span>), <span class="at">na.rm=</span><span class="cn">TRUE</span>) <span class="co"># NA values are ignored </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(Hours, <span class="at">probs=</span><span class="fu">c</span>(.<span class="dv">25</span>, .<span class="dv">75</span>), <span class="at">na.rm=</span><span class="cn">TRUE</span>) <span class="co"># NA values are ignored </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>25% 75% 
  10  15 </code></pre>
 </div>
 </div>
 </section>
-<section id="section-1" class="slide level2">
+<section id="section-2" class="slide level2">
 <h2></h2>
 <h3 id="replacing-na-with-the-average-value">Replacing <code>NA</code> With the Average Value</h3>
 <div style="large-code">
 <p>Replacing a missing value with the average across valid values is risky, as it may alter many other summary statistics, but it is a good example for understanding different concepts seen so far:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href aria-hidden="true" tabindex="-1"></a>Hours <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">20</span>, <span class="dv">10</span>, <span class="dv">15</span>, <span class="cn">NA</span>, <span class="dv">15</span>, <span class="dv">5</span>)</span>
-<span id="cb70-2"><a href aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-3"><a href aria-hidden="true" tabindex="-1"></a><span class="co"># compute the average value ignoring NAs, and put it wherever </span></span>
-<span id="cb70-4"><a href aria-hidden="true" tabindex="-1"></a><span class="co"># there is an NA value in the vector</span></span>
-<span id="cb70-5"><a href aria-hidden="true" tabindex="-1"></a>Hours[<span class="fu">is.na</span>(Hours)] <span class="ot">=</span> <span class="fu">mean</span>(Hours, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
-<span id="cb70-6"><a href aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-7"><a href aria-hidden="true" tabindex="-1"></a><span class="co"># now let&#39;s inspect the updated content of the vector</span></span>
-<span id="cb70-8"><a href aria-hidden="true" tabindex="-1"></a>Hours</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href aria-hidden="true" tabindex="-1"></a>Hours <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">20</span>, <span class="dv">10</span>, <span class="dv">15</span>, <span class="cn">NA</span>, <span class="dv">15</span>, <span class="dv">5</span>)</span>
+<span id="cb77-2"><a href aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-3"><a href aria-hidden="true" tabindex="-1"></a><span class="co"># compute the average value ignoring NAs, and put it wherever </span></span>
+<span id="cb77-4"><a href aria-hidden="true" tabindex="-1"></a><span class="co"># there is an NA value in the vector</span></span>
+<span id="cb77-5"><a href aria-hidden="true" tabindex="-1"></a>Hours[<span class="fu">is.na</span>(Hours)] <span class="ot">=</span> <span class="fu">mean</span>(Hours, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
+<span id="cb77-6"><a href aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-7"><a href aria-hidden="true" tabindex="-1"></a><span class="co"># now let&#39;s inspect the updated content of the vector</span></span>
+<span id="cb77-8"><a href aria-hidden="true" tabindex="-1"></a>Hours</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 10.00000 15.00000 20.00000 10.00000 15.00000 12.85714 15.00000  5.00000</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href aria-hidden="true" tabindex="-1"></a><span class="co"># by the way... na.rm=TRUE is no longer needed now, as NA is no longer there</span></span>
-<span id="cb72-2"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(Hours)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href aria-hidden="true" tabindex="-1"></a><span class="co"># by the way... na.rm=TRUE is no longer needed now, as NA is no longer there</span></span>
+<span id="cb79-2"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(Hours)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 12.85714</code></pre>
 </div>
@@ -1396,9 +1431,9 @@ Enrico Toffalini
 <h2>Frequency Counts</h2>
 <p>Another useful summary statistic is the <strong>frequency count</strong>, which shows how often each unique value appears in a vector. You can use the <strong><code>table()</code></strong> function to calculate frequencies easily:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href aria-hidden="true" tabindex="-1"></a>type <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;METHODOLOGY&quot;</span>, <span class="st">&quot;METHODOLOGY&quot;</span>, <span class="st">&quot;PROGRAMMING&quot;</span>, <span class="st">&quot;SOFT SKILLS&quot;</span>, <span class="st">&quot;SOFT SKILLS&quot;</span>, </span>
-<span id="cb74-2"><a href aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;METHODOLOGY&quot;</span>, <span class="st">&quot;SOFT SKILLS&quot;</span>, <span class="st">&quot;METHODOLOGY&quot;</span>, <span class="st">&quot;PROGRAMMING&quot;</span>)</span>
-<span id="cb74-3"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(type)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href aria-hidden="true" tabindex="-1"></a>type <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;METHODOLOGY&quot;</span>, <span class="st">&quot;METHODOLOGY&quot;</span>, <span class="st">&quot;PROGRAMMING&quot;</span>, <span class="st">&quot;SOFT SKILLS&quot;</span>, <span class="st">&quot;SOFT SKILLS&quot;</span>, </span>
+<span id="cb81-2"><a href aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;METHODOLOGY&quot;</span>, <span class="st">&quot;SOFT SKILLS&quot;</span>, <span class="st">&quot;METHODOLOGY&quot;</span>, <span class="st">&quot;PROGRAMMING&quot;</span>)</span>
+<span id="cb81-3"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(type)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>type
 METHODOLOGY PROGRAMMING SOFT SKILLS 
@@ -1407,13 +1442,13 @@ METHODOLOGY PROGRAMMING SOFT SKILLS
 </div>
 <p><em>Be careful:</em> R is case-sensitive!</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href aria-hidden="true" tabindex="-1"></a>type <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;METHODOLOGY&quot;</span>, <span class="st">&quot;methodology&quot;</span>, <span class="st">&quot;PROGRAMMING&quot;</span>, <span class="st">&quot;SOFT SKILLS&quot;</span>, <span class="st">&quot;SOFT SKILLS&quot;</span>, </span>
-<span id="cb76-2"><a href aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;METHODOLOGY&quot;</span>, <span class="st">&quot;SOFT SKILLS&quot;</span>, <span class="st">&quot;METHODOLOGY&quot;</span>, <span class="st">&quot;Programming&quot;</span>)</span>
-<span id="cb76-3"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(type)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href aria-hidden="true" tabindex="-1"></a>type <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;METHODOLOGY&quot;</span>, <span class="st">&quot;methodology&quot;</span>, <span class="st">&quot;PROGRAMMING&quot;</span>, <span class="st">&quot;SOFT SKILLS&quot;</span>, <span class="st">&quot;SOFT SKILLS&quot;</span>, </span>
+<span id="cb83-2"><a href aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;METHODOLOGY&quot;</span>, <span class="st">&quot;SOFT SKILLS&quot;</span>, <span class="st">&quot;METHODOLOGY&quot;</span>, <span class="st">&quot;Programming&quot;</span>)</span>
+<span id="cb83-3"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(type)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>type
-methodology METHODOLOGY Programming PROGRAMMING SOFT SKILLS 
-          1           3           1           1           3 </code></pre>
+METHODOLOGY PROGRAMMING Programming SOFT SKILLS methodology 
+          3           1           1           3           1 </code></pre>
 </div>
 </div>
 <!-- --------------------------------------------------------------------- -->

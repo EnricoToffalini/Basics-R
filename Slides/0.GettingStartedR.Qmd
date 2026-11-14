@@ -73,27 +73,39 @@ execute:
 
 ## you may even create greeting cards
 
+<p class="small">*Optional / self-study*</p>
+
 <div style="text-align: center;">
-  <a href="https://github.com/EnricoToffalini/Basics-R/blob/main/Slides/figures/happyBirthday.R" target="_blank"><img src="figures/happyBirthday.png" style="width: 90%;" /></a>
+  <a href="https://github.com/EnricoToffalini/Basics-R/blob/main/Slides/figures/happyBirthday.R" target="_blank"><img src="figures/happyBirthday.png" style="max-height: 480px; width: auto;" /></a>
 </div>
 
+
 ## or fancy infographics
+
+<p class="small">*Optional / self-study*</p>
 
 <div style="text-align: center;">
   <img src="figures/worldInfographic.png" />
 </div>
 
+
 ## or fancy infographics
 
+<p class="small">*Optional / self-study*</p>
+
 <div style="text-align: center;">
-  <img src="figures/ItalyInfographic.png" style="width: 60%"  />
+  <img src="figures/ItalyInfographic.png" style="max-height: 490px; width: auto;"/>
 </div>
+
 
 ## or perform fancy moderated meta-analyses
 
+<p class="small">*Optional / self-study*</p>
+
 <div style="text-align: center;">
-  <img src="figures/colorfulPlot.png" style="width: 85%"/>
+  <img src="figures/colorfulPlot.png" style="max-height: 490px; width: auto;"/>
 </div>
+
 
 ## you may create interactive webapps with Shiny
 
@@ -109,9 +121,12 @@ here are a couple of recent real examples from **Psicostat** members:
 
 ## you may create interactive webapps with Shiny
 
+<p class="small">*Optional / self-study*</p>
+
 <div style="text-align: center;">
-  <img src="figures/shinyExample.png" />
+  <img src="figures/shinyExample.png" style="max-height: 490px; width: auto;"/>
 </div>
+
 
 
 ## or entire websites and books
@@ -141,7 +156,7 @@ Interesting alternatives to installing RStudio:
 ## R Console (just base R)
 
 <div style="text-align: center;">
-  <img src="figures/RConsole.png"/>
+  <img src="figures/RConsole.png" style="max-height: 490px; width: auto;"/>
 </div>
 
 ## RStudio (full IDE)
@@ -156,6 +171,19 @@ Interesting alternatives to installing RStudio:
   <a href="https://colab.research.google.com/drive/1fSiTnDShj1YOrsujqkkzwgFaGCjm2utm" target="_blank"><img src="figures/googlecolab.png"/></a>
 </div>
 
+
+## (Re)start with a clean session
+
+I suggest that you go to **Tools > Global Options > General** and:
+
+- Uncheck **"Restore .RData into workspace at startup"**.
+- Set **"Save workspace to .RData on exit"** to **`Never`**.
+
+Your saved scripts (`.R` files) should be what recreate all objects. In some cases, storing and retrieving selected results is useful (as `.RData`, `.rds`, `.csv`, etc., as we will see later), but it should be done on purpose.
+
+::: {.callout-tip}
+Use **Session > Restart R** (or **Ctrl+Shift+F10**) to restart R, then run the script from top to bottom to double-check that it works well (without objects left from the current or earlier sessions).
+:::
 
 ## Let's Test the Environment!
 
@@ -183,4 +211,45 @@ fisherz(rho=0.5) # use it to transform a correlation into a Fisher's z
 
 <!-- --------------------------------------------------------------------- -->
 
+
+
+##
+### Literate programming: Quarto / R Markdown
+
+These slides and the course website are **Quarto (`.Qmd`) files**: text, figures, executable R code, and more are in the same document.
+
+:::: {.columns}
+
+::: {.column style="width: 48%; margin-right: 2%; background-color: #f1f3fc; border: 1px solid #c5cce5; border-left: 5px solid #687bb5; border-radius: 6px; padding: 14px; box-sizing: border-box;"}
+
+<div style="font-size: 20px; font-weight: 600; border-bottom: 1px solid #c5cce5; padding-bottom: 8px; margin-bottom: 14px;">Quarto source (<code>.qmd</code>)</div>
+
+<pre><code>## Random values
+### A first example
+
+Let's try a basic function in R...
+
+&#96;&#96;&#96;{r}
+rnorm(3)
+&#96;&#96;&#96;</code></pre>
+
+:::
+::: {.column style="width: 48%; background-color: #eef7f3; border: 1px solid #bfd9cd; border-left: 5px solid #4d9072; border-radius: 6px; padding: 14px; box-sizing: border-box;"}
+
+<div style="font-size: 20px; font-weight: 600; border-bottom: 1px solid #bfd9cd; padding-bottom: 8px; margin-bottom: 14px;">Rendered output</div>
+
+<h2 style="font-size: 32px; margin: 0 0 8px;">Random values</h2>
+
+<h3 style="font-size: 26px; margin: 0 0 8px;">A first example</h3>
+
+<p style="font-size: 24px;">Let's try a basic function in R...</p>
+
+```{r}
+rnorm(3)
+```
+:::
+::::
+
+**"Render"** runs the code and combines its output with the text. <br/>
+**R Markdown (`.Rmd`)** follows the same idea.
 

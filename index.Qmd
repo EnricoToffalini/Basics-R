@@ -46,7 +46,7 @@ rnorm(10)
 
 ## Course Topics
 
-The goal of this short course is to make you proficient with the development environment, basic data structures, and essential concepts of programming in R. Advanced topics like statistical modelling and data simulation will be covered in future courses and are not presented here, although occasional simple examples may appear.
+The goal of this short course is to make you proficient with the development environment, basic data structures, and essential concepts of programming in R. Advanced topics like statistical modelling and data simulation will be covered in future courses and are not presented here, although occasional simple examples may appear. We will also use a few quick base R plots to inspect data; data visualization is covered in the dedicated ggplot2 course.
 
 #### Introduction to the R Environment and First Steps in R
 

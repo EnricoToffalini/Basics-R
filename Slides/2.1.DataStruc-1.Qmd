@@ -110,7 +110,18 @@ Hours = c("10", "15,", "20", " 10", "15 ", "tbd", "15.", "5_")
 as.numeric(Hours)
 ```
 
+## 
+### NA and NULL in vectors
 
+Recall the special values and objects introduced with basic data types: **`NA`** occupies a position in a vector; **`NULL`** contributes no element.
+
+```{r}
+length(NULL)
+length(NA)
+c(1, NULL, 3)
+```
+
+Use `is.na()` to identify missing values in a vector.
 
 ## Indexing Vectors
 
@@ -225,13 +236,29 @@ median(Hours) # returns the median value of the vector
 
 A whole vector may serve to compute summary statistics, for example using functions such as **`mean()`, `sd()`, `median()`, `quantile()`, `max()`, `min()`**:
 
-<div class="large-code">
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;"><div>
+
+
 ```{r}
 quantile(Hours, probs=c(.25, .50, .75)) # returns desired quantiles
 max(Hours) # returns largest value
 min(Hours) # returns smallest value
 ```
-</div>
+
+
+</div><div>
+
+```{r, fig.width=4.5, fig.height=3.5}
+hist(Hours)
+```
+
+
+</div></div>
+
+
+
+A quick base R plot lets us *see* the distribution. Figure design belongs to the ggplot2 course.
+
 
 ##
 ### Summary Statistics - Managing Missing (`NA`) Values

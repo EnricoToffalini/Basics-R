@@ -153,6 +153,71 @@ That's not surprising... a dataframe is actually a special kind of list, with ju
 
 - Are used in many contexts for handling **nested data** (e.g., JSON-formatted data)
 
+
+## Lists {.revision-new background-color="#dff0d8"}
+### The formula syntax: y ~ x
+
+A **formula** describes the roles of variables: **outcome ~ predictor(s)**. We already used it in `aggregate()`.
+
+Let's return to the performance data from the import examples:
+
+```{r}
+df = read.csv("data/Performance.csv")
+fit = lm(acc ~ anx, data=df)
+```
+
+Here `acc` is the outcome and `anx` the predictor. `data=df` tells R where to find them.
+
+Formulas also appear in `t.test()`, `boxplot()`, and later `glm()`, `lmer()` and `brm()`. We focus on the **R objects**, leaving statistical modelling to later courses.
+
+
+## {.revision-new background-color="#dff0d8"}
+### Model results are lists
+
+The fitted model is a list with named components:
+
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;"><div>
+
+```{r}
+names(fit)
+fit$coefficients
+summary(fit)$r.squared
+```
+
+
+
+</div><div>
+
+The fitted line:
+
+```{r, fig.width=4.5, fig.height=2.8}
+plot(acc ~ anx, data=df)
+abline(fit)
+```
+
+
+
+</div></div>
+
+`summary(fit)$coefficients` is a **matrix**. After the matrix section, try extracting its slope row with `["anx", ]`.
+
+
+## {.revision-new background-color="#dff0d8"}
+### Extracting results from a test
+
+`rep()` repeats A/B labels to create **illustrative groups**, unrelated to the actual study:
+
+```{r}
+dx = df
+dx$group = rep(c("A", "B"), length.out=nrow(dx))
+tt = t.test(acc ~ group, data=dx)
+tt$p.value
+tt$conf.int
+tt$estimate
+```
+
+Use `str(tt, max.level=1)` to inspect all components. **`$p.value`** will let us store results in simulation loops.
+
 ## Lists
 #### example with a power simulation
 
@@ -204,6 +269,7 @@ myMat^2 # element-wise squaring of all values
 ```
 
 ## Matrices
+<p class="small">*Matrix algebra: optional / self-study*</p>
 
 | Operator | What it does | Example |
 |------------|--------|-------|
@@ -227,7 +293,7 @@ myMat^2 # element-wise squaring of all values
 
 <!-- --------------------------------------------------------------------- -->
 
-## Arrays
+## Arrays (self-study)
 
 **Arrays** are multi-dimensional structures in R, generalizing *vectors (1-dimensional)* and *matrices (2-dimensional)* to the <em>**n-dimensional**</em> case
 
@@ -244,7 +310,7 @@ myArr
 In a similar way, you could create hypercubes and so on (4D+)
 </div></div>
 
-## Arrays
+## Arrays (self-study)
 ### indexing
 
 **Indexing** is exactly the same as with matrices but... with 3 (sets of) indices! 
@@ -255,7 +321,7 @@ myArr[1, 4, 2] # extract a single element
 myArr[1:2 , 1:2 , ] # extract subsets of elements
 ```
 
-## Arrays
+## Arrays (self-study)
 
 <div style="font-size:38px;">
 **Why use (know) arrays?**

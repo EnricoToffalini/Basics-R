@@ -189,9 +189,9 @@ In fact, R treats numeric values as *double* by default (even if without decimal
 
 
 ## Basic types of data
-### characters 
+### strings / characters
 
-Another extremely important type of data is **character** (often called ***strings***). It is used to store any text and must be enclosed in quotes (**`' '`** or **`" "`**) like this: 
+Another extremely important data type is **character** (most often called ***strings***). It is used to store text and must be enclosed in quotes (**`' '`** or **`" "`**) like this: 
 
 ```{r}
 myName = "Enrico"
@@ -204,6 +204,43 @@ myName == "Alexander" # is my name equal to Alexander?
 myName != "Alexander" # is my name NOT equal to Alexander?
 myName > "Alexander" # is my name larger than Alexander? (really?!)
 ```
+
+
+## Basic types of data
+### basic working with strings: paste(), paste0(), and more
+
+**`paste()`** joins text with spaces, **`paste0()`** joins it without a separator.
+```{r, echo=F}
+i=1
+```
+```{r}
+paste("Hello", myName)
+paste0("Fig", i, ".png")
+nchar(myName)
+toupper(myName)
+```
+
+::: {.callout-tip}
+With vectors, `paste0("subject_", 1:20)` will create participant labels as `"subject_1"`, `"subject_2"`, `"subject_3"`, `"subject_4"`, `"subject_5"`, ...
+:::
+
+## Basic types of data
+### basic working with strings: find & replace
+
+**`gsub()`** replaces all matches in a string
+
+```{r, warning=T}
+x = "12,5"
+as.numeric(x)
+```
+🤔
+```{r}
+x = gsub(",", ".", x)
+x
+as.numeric(x)
+```
+
+More examples: [Working with strings](../Examples-Tutorials/ExampleStrings.html){target="_blank"}.
 
 ## Basic types of data
 ### know the type of a variable
@@ -222,6 +259,22 @@ typeof(coursesTaught)
 typeof(age)
 ```
 
+
+## Basic types of data
+
+### special values: `NA`, `NULL`, `NaN`, `Inf`
+
+**`NA`** is missing value of any type; **`NULL`** represents the absence of an object; **`NaN`** is an undefined numerical result; **`Inf`** is infinity.
+
+```{r}
+0/0  # NaN
+1/0  # Inf
+is.na(NA)
+is.nan(0/0)
+is.null(NULL)
+```
+
+`is.na()` detects both `NA` and `NaN`; `is.nan()` specifically detects `NaN`.
 
 ## Basic types of data
 

@@ -54,7 +54,7 @@ Basic flowchart showing the logic of the **`if`** statement:
 Sometimes, however, you may need to perform *alternative* actions
 
 <div style="text-align: center;">
-  <img src="figures/ifelse_chart.png" width="55%"/>
+  <img src="figures/ifelse_chart.png" width="48%"/>
 </div>
 
 
@@ -103,13 +103,13 @@ if (age >= 18) {
 
 ## `if...else` statement
 
-A possible practical use of **`if...else`** in a preplanned analysis for a hypothetical preregistered study: automate the decision to conduct additional analyses based on the result of a preliminary test. This helps create a reproducible analysis pipeline with a clear set of decisions
+A hypothetical preregistered analysis can use **`if...else`** to implement a preplanned decision about follow-up analyses:
 
 ```{r, eval=F}
 ## PREPLANNED ANALYSIS
 
 # preliminary test
-tt1 = t.test(x1, x2, data=df, paired=TRUE)
+tt1 = t.test(df$x1, df$x2, paired=TRUE)
 
 # based on the p-value of the preliminary t-test, choose the next step
 if (tt1$p.value < 0.05) {
@@ -141,6 +141,22 @@ if(age >= 18){
 }
 ```
 </div>
+
+
+##  {.revision-new background-color="#dff0d8"}
+### & vs &&
+
+*Optional / self-study*. **`&`** and **`|`** compare elements of vectors. **`&&`** and **`||`** require single logical values and stop as soon as the answer is known:
+
+```{r}
+age >= 18 & age < 65
+
+if(length(age) == 1 && !is.na(age)){
+  print(age)
+}
+```
+
+Here `age` still contains several values, so the second check is skipped. Use **`any()`** or **`all()`** to reduce a vector condition to one answer, e.g., `if(any(age >= 18))`.
 
 ## `ifelse()`
 
@@ -208,7 +224,7 @@ case_when(
 Here are the basics of iterative programming with the **`for`** loop:
 
 <div style="text-align: center;">
-  <img src="figures/for_loop.png" width="50%"/>
+  <img src="figures/for_loop.png" width="48%"/>
 </div>
 
 ## `for` loop
@@ -222,20 +238,6 @@ for(i in 1:5)  print(i)
 ```{r}
 for(i in 1:5)  print(i^2)
 ```
-</div> <div>
-```{r, cache=T}
-for(i in 1:5){
-  print(Sys.time())
-  Sys.sleep(1)
-}
-```
-</div> <div>
-```{r, cache=T}
-for(i in 1:5){
-  print(Sys.time())
-  Sys.sleep(2)
-}
-```
 </div> </div>
 
 ## `for` loop
@@ -244,7 +246,7 @@ Here's a more interesting example of an iterative **`for`** loop with practical 
 
 <div class="large-code">
 ```{r}
-set.seed(0) # set a seed for reproducibility: best practice! 
+set.seed(0) # reproducible randomness, as we saw earlier
 
 for(i in 1:5){
   x = rnorm(n = 30, mean = 0, sd = 1)
@@ -264,7 +266,7 @@ In the previous example, the **`for`** loop displayed the results but didn't sto
 
 <div class="large-code">
 ```{r}
-set.seed(0) # set a seed for reproducibility: best practice! 
+set.seed(0) # reproducible randomness, as we saw earlier
 niter = 5 # set the desired number of iterations: best practice! 
 # initialize a results vector with NAs: best practice!
 results = rep(NA, niter) 
@@ -280,7 +282,7 @@ sd(results) # estimate standard error of the mean
 
 ## `for` loop
 
-Let's extend the previous example with ... a few more iterations!
+Let's extend the previous example to **10,000 iterations**!
 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 5px;"> <div>
 ```{r}
 # STEP 1: RUN SIMULATION
@@ -295,16 +297,15 @@ for(i in 1:niter){
   results[i] = mean(x)
 }
 ```
-</div> <div>
-```{r}
-# STEP 2: PLOT RESULTS
-
-hist(results, breaks=50) 
-```
-</div> <div>
 ```{r}
 # STEP 3: COMPUTE SD OF RESULTS
 sd(results)
+```
+</div> <div>
+```{r, fig.width=5, fig.height=3.5}
+# STEP 2: PLOT RESULTS
+
+hist(results, breaks=50) 
 ```
 </div> </div>
 
@@ -327,7 +328,7 @@ for(x in myVect){
 <!-- --------------------------------------------------------------------- -->
 
 
-## `while` loop
+## `while` loop (self-study)
 
 The **`while`** loop is another type of iterative structure in R. It may be useful when the precise number of iterations is *not* predetermined, but depends on a target being reached
 
@@ -346,7 +347,7 @@ month
 
 <p style="font-size:20px;"> *Interpretation: it takes `r month` months to reach an amount of $€1,500$ when starting with an amount of $€1,000$ with a $0.1$% monthly interest rate*</p>
 
-## `repeat` loop
+## `repeat` loop (self-study)
 
 The **`repeat`** loop has a logic similar to the `while` loop but 1) it always runs at least one iteration, 2) it explicitly emphasizes repetition until a condition (not necessarily a target) is met, using a `break` statement to terminate
 
@@ -388,13 +389,13 @@ round( tt$p.value , 3 )
 
 **`apply`** is a family of base functions that provide **efficient tools** for running iterations on structures like dataframes, vectors, matrices, lists
 
-Traditional loops provide a straightforward, intuitive way to compute sequences of operations, but the **`apply` family allows you to run faster computations**... this may become particularly important when you need to *parallelize* for computationally intensive tasks
+The **`apply` family** often expresses iterations more compactly. A preallocated `for` loop can be just as fast. Related tools (`parallel::parLapply()`, `future.apply`) allow parallel execution
 
 The following is *not* a computationally heavy task — but for example, let's say we want to compute the mean value *per column* in <a href="data/wisc.csv" download>this dataframe</a>:
 
 ```{r, echo=F}
 df = read.csv("data/wisc.csv")
-df[1:12,]
+head(df)
 ```
 
 ## `apply` family
@@ -432,7 +433,7 @@ apply(df, MARGIN=2, FUN=function(x) sum(is.na(x)) )
 
 ## `apply` family
 
-Although any of these tasks could be done using a `for` loop, the code would be more cumbersome and less efficient. For example, here's how the exact same result as the latter `apply` example could be obtained using a `for` loop:
+Although any of these tasks could be done using a `for` loop, the code would require more explicit steps. For example, here's how the exact same result as the latter `apply` example could be obtained using a `for` loop:
 
 ```{r}
 results = rep(NA, ncol(df))

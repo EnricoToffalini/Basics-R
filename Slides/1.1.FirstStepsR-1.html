@@ -1391,8 +1391,8 @@ Enrico Toffalini
 </section>
 <section id="basic-types-of-data-1" class="slide level2">
 <h2>Basic types of data</h2>
-<h3 id="characters">characters</h3>
-<p>Another extremely important type of data is <strong>character</strong> (often called <strong><em>strings</em></strong>). It is used to store any text and must be enclosed in quotes (<strong><code>&#39; &#39;</code></strong> or <strong><code>&quot; &quot;</code></strong>) like this:</p>
+<h3 id="strings-characters">strings / characters</h3>
+<p>Another extremely important data type is <strong>character</strong> (most often called <strong><em>strings</em></strong>). It is used to store text and must be enclosed in quotes (<strong><code>&#39; &#39;</code></strong> or <strong><code>&quot; &quot;</code></strong>) like this:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href aria-hidden="true" tabindex="-1"></a>myName <span class="ot">=</span> <span class="st">&quot;Enrico&quot;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -1414,62 +1414,154 @@ Enrico Toffalini
 </section>
 <section id="basic-types-of-data-2" class="slide level2">
 <h2>Basic types of data</h2>
-<h3 id="know-the-type-of-a-variable">know the type of a variable</h3>
-<p>The <strong><code>typeof()</code></strong> function tells you what type of data you are handling:</p>
+<h3 id="basic-working-with-strings-paste-paste0-and-more">basic working with strings: paste(), paste0(), and more</h3>
+<p><strong><code>paste()</code></strong> joins text with spaces, <strong><code>paste0()</code></strong> joins it without a separator.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href aria-hidden="true" tabindex="-1"></a>myName <span class="ot">=</span> <span class="st">&quot;Enrico&quot;</span></span>
-<span id="cb26-2"><a href aria-hidden="true" tabindex="-1"></a>prof <span class="ot">=</span> <span class="cn">TRUE</span></span>
-<span id="cb26-3"><a href aria-hidden="true" tabindex="-1"></a>coursesTaught <span class="ot">=</span> <span class="dv">4</span>L</span>
-<span id="cb26-4"><a href aria-hidden="true" tabindex="-1"></a>age <span class="ot">=</span> <span class="dv">37</span></span>
-<span id="cb26-5"><a href aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-6"><a href aria-hidden="true" tabindex="-1"></a><span class="co"># see data types</span></span>
-<span id="cb26-7"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(myName)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(<span class="st">&quot;Hello&quot;</span>, myName)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] &quot;character&quot;</code></pre>
+<pre><code>[1] &quot;Hello Enrico&quot;</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(prof)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">paste0</span>(<span class="st">&quot;Fig&quot;</span>, i, <span class="st">&quot;.png&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] &quot;logical&quot;</code></pre>
+<pre><code>[1] &quot;Fig1.png&quot;</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(coursesTaught)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">nchar</span>(myName)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] &quot;integer&quot;</code></pre>
+<pre><code>[1] 6</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(age)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">toupper</span>(myName)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] &quot;double&quot;</code></pre>
+<pre><code>[1] &quot;ENRICO&quot;</code></pre>
+</div>
+</div>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Tip</strong></p>
+</div>
+<div class="callout-content">
+<p>With vectors, <code>paste0(&quot;subject_&quot;, 1:20)</code> will create participant labels as <code>&quot;subject_1&quot;</code>, <code>&quot;subject_2&quot;</code>, <code>&quot;subject_3&quot;</code>, <code>&quot;subject_4&quot;</code>, <code>&quot;subject_5&quot;</code>, …</p>
+</div>
 </div>
 </div>
 </section>
 <section id="basic-types-of-data-3" class="slide level2">
 <h2>Basic types of data</h2>
+<h3 id="basic-working-with-strings-find-replace">basic working with strings: find &amp; replace</h3>
+<p><strong><code>gsub()</code></strong> replaces all matches in a string</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="st">&quot;12,5&quot;</span></span>
+<span id="cb34-2"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: NAs introduced by coercion</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] NA</code></pre>
+</div>
+</div>
+<p>🤔</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="fu">gsub</span>(<span class="st">&quot;,&quot;</span>, <span class="st">&quot;.&quot;</span>, x)</span>
+<span id="cb37-2"><a href aria-hidden="true" tabindex="-1"></a>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] &quot;12.5&quot;</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 12.5</code></pre>
+</div>
+</div>
+<p>More examples: <a href="../Examples-Tutorials/ExampleStrings.html" target="_blank">Working with strings</a>.</p>
+</section>
+<section id="basic-types-of-data-4" class="slide level2">
+<h2>Basic types of data</h2>
+<h3 id="know-the-type-of-a-variable">know the type of a variable</h3>
+<p>The <strong><code>typeof()</code></strong> function tells you what type of data you are handling:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href aria-hidden="true" tabindex="-1"></a>myName <span class="ot">=</span> <span class="st">&quot;Enrico&quot;</span></span>
+<span id="cb41-2"><a href aria-hidden="true" tabindex="-1"></a>prof <span class="ot">=</span> <span class="cn">TRUE</span></span>
+<span id="cb41-3"><a href aria-hidden="true" tabindex="-1"></a>coursesTaught <span class="ot">=</span> <span class="dv">4</span>L</span>
+<span id="cb41-4"><a href aria-hidden="true" tabindex="-1"></a>age <span class="ot">=</span> <span class="dv">37</span></span>
+<span id="cb41-5"><a href aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-6"><a href aria-hidden="true" tabindex="-1"></a><span class="co"># see data types</span></span>
+<span id="cb41-7"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(myName)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] &quot;character&quot;</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(prof)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] &quot;logical&quot;</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(coursesTaught)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] &quot;integer&quot;</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(age)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] &quot;double&quot;</code></pre>
+</div>
+</div>
+</section>
+<section id="basic-types-of-data-5" class="slide level2">
+<h2>Basic types of data</h2>
+<h3 id="special-values-na-null-nan-inf">special values: <code>NA</code>, <code>NULL</code>, <code>NaN</code>, <code>Inf</code></h3>
+<p><strong><code>NA</code></strong> is missing value of any type; <strong><code>NULL</code></strong> represents the absence of an object; <strong><code>NaN</code></strong> is an undefined numerical result; <strong><code>Inf</code></strong> is infinity.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href aria-hidden="true" tabindex="-1"></a><span class="dv">0</span><span class="sc">/</span><span class="dv">0</span>  <span class="co"># NaN</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] NaN</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">/</span><span class="dv">0</span>  <span class="co"># Inf</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] Inf</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">is.na</span>(<span class="cn">NA</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">is.nan</span>(<span class="dv">0</span><span class="sc">/</span><span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">is.null</span>(<span class="cn">NULL</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+<p><code>is.na()</code> detects both <code>NA</code> and <code>NaN</code>; <code>is.nan()</code> specifically detects <code>NaN</code>.</p>
+</section>
+<section id="basic-types-of-data-6" class="slide level2">
+<h2>Basic types of data</h2>
 <p>You may also check the data type directly with the <code>is.*</code> functions:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">is.numeric</span>(age)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">is.numeric</span>(age)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">is.character</span>(age)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">is.character</span>(age)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">is.infinite</span>(age<span class="sc">/</span><span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">is.infinite</span>(age<span class="sc">/</span><span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">is.logical</span>(prof)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">is.logical</span>(prof)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">is.integer</span>(coursesTaught)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">is.integer</span>(coursesTaught)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">is.integer</span>(age)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">is.integer</span>(age)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">is.na</span>(myName) <span class="co"># checks if a value is missing (i.e., NA) </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">is.na</span>(myName) <span class="co"># checks if a value is missing (i.e., NA) </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE</code></pre>
 </div>

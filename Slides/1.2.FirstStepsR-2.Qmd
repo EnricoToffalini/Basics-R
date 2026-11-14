@@ -121,6 +121,8 @@ library(ggplot2)
 sessionInfo()
 ```
 
+<p class="small">*Optional:* `renv` records package versions for a project, so its environment can be restored later.</p>
+
 
 <!-- --------------------------------------------------------------------- -->
 
@@ -185,6 +187,36 @@ rnorm(mean = 100, sd = 15)
 rnorm(n = 5, mean = 100, sd = -15)
 ```
 
+
+## Functions and arguments
+### Reproducible randomness: `set.seed()`
+
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;"><div>
+
+Random draws normally change from one call to the next:
+
+```{r}
+rnorm(3)
+rnorm(3)
+```
+
+</div><div>
+
+Setting the **seed** reproduces the same sequence:
+
+```{r}
+set.seed(42)
+rnorm(3)
+set.seed(42)
+rnorm(3)
+```
+
+</div></div>
+
+:::{.callout-tip}
+Set the seed once **before a simulation script** if you aim to ensure exact reproducibility (it may not be enough with parallelized computing). 
+:::
+
 ## Functions and arguments
 ### *HELP!* see the documentation of a function
 
@@ -196,10 +228,24 @@ help(rnorm) # this does the same
 ```
 
 <div style="text-align: center;">
-  <img src="figures/exampleHelp.png"/>
+  <img src="figures/exampleHelp.png" style="max-height: 390px; width: auto;"/>
 </div>
 
 <!-- --------------------------------------------------------------------- -->
+
+
+## Some common errors
+
+| Error message | What to check |
+|---|---|
+| `object 'x' not found` | name, or a line not run yet |
+| `could not find function "fisherz"` | Load `library(psych)` |
+| `there is no package called 'psych'` | Install the package first |
+| `unexpected symbol` / `unexpected ')'` | Commas, parentheses, quotes |
+| `cannot open file` | File name or path |
+| `non-numeric argument to binary operator` | number stored as text? |
+
+Read the message and locate the **first failing line**. RStudio generally stops execution at first error. 
 
 ## Set up Working Directory
 
@@ -226,8 +272,8 @@ As a general rule:
 - If you open a file (e.g., a `.R` script) using RStudio, the WD is set to that file's location (unless the RStudio app was already open before);
 
 - However, you can set a new WD at any time from within the R code, using the **`setwd()`** function, for example:
-```{r}
-setwd( "C:/Users/enric/" )
+```{r, eval=F}
+setwd("C:/Users/enric/")
 ```
 
 ## Set up Working Directory
@@ -236,21 +282,23 @@ setwd( "C:/Users/enric/" )
 
 When you copy-and-paste a folder address, Windows will probably take "`\`" as path separator, but "`\`" is the escape character in R, so you will get an error:
 
-```{r, error=TRUE}
-setwd( "C:\Users\enric\" )
+```{r, eval=F}
+setwd("C:\Users\enric\")
 ```
+
+<pre style="color: red; font-size: 22px; font-style: italic;">Error: '&#92;U' used without hex digits in character string (&lt;input&gt;:1:11)</pre>
 
 \
 
 ### How to fix
 
-```{r, error=TRUE}
-setwd( "C:\\Users\\enric\\" )
+```{r, eval=F}
+setwd("C:\\Users\\enric\\")
 ```
 
 or 
 
-```{r, error=TRUE}
+```{r, eval=F}
 setwd( "C:/Users/enric/" )
 ```
 
@@ -404,32 +452,17 @@ head(df)
 
 
 ## Import/export
-### Data
+### Data: interactive import
 
-A good trick if you don't want to specify any relative or absolute path, and want to manually select data each time, is using the **`file.choose()`** function:
+Use **`file.choose()`** to select a file manually:
 
 ```{r, eval=F}
-df = read.csv( file.choose() )
+df = read.csv(file.choose())
 ```
 
-<div style="text-align: center;">
-  <img src="figures/selectFileBox.png" style="width: 80%"/>
-</div>
+The **RStudio menu** also offers **File > Import Dataset**, with options for text, Excel and SPSS files.
 
-
-## Import/export
-### Data
-
-Other "tricks" for importing data involve using the functions in the **RStudio menu**, particularly:
-
-- File > Import Dataset > From text (base)...
-
-- File > Import Dataset > From Excel
-
-- File > Import Dataset > From SPSS...
-
-However, using these functions is not best practice, because they are specific to the RStudio IDE. **It’s better to use code for reproducibility**
-
+Keep the resulting import code in your script. A saved relative path makes rerunning the analysis possible without selecting the file again.
 
 ## Import/export
 ### Data
@@ -454,7 +487,7 @@ write.csv(df, file="myExportedData.csv", row.names=F)
 
 R has a collection of functions for exporting figures in different formats: `pdf()`, `png()`, `jpeg()`, `bmp()`, `tiff()`, `svg()`.
 
-Here is an example using `png()`:
+Here is an example using `png()`. We use quick base R plots to check data; figure design is covered in the **ggplot2 course**:
 
 ```{r, eval=F}
 # set up a graphic output file named "MyFigure.png" with some settings

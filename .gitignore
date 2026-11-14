@@ -4,3 +4,8 @@
 .RData
 .Ruserdata
 Exercises/13-MonteCarloLogistic_cache
+# Local scratch slides and demonstration exports
+Slides/00.prove.Qmd
+Slides/00.prove.html
+Slides/00.prove_files/
+Slides/myExportedData.csv

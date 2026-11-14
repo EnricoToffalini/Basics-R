@@ -56,7 +56,7 @@ You have received messy datasets from students or colleagues who have been colle
 |  | Correlation matrix from a selection of dataframe columns | `cor(df[ , c(...)], use = "pairwise.complete.obs")` |
 |  | Skewness and kurtosis of dataframe column(s) | `moments::skewness(...)`<br/> `moments::kurtosis(...)` |
 | **Inferential Stats** | Compare genders using a t-test (missing values are dropped) | `t.test(y ~ gender, data = df)` |
-| **Visualization** | Histograms, scatterplots, boxplots | `hist(...)`<br/> `plot(...)`<br/> `boxplot(...)` |
+| **Visualization** | Histograms, scatterplots, boxplots (default calls only; figure design is covered in the ggplot2 course) | `hist(...)`<br/> `plot(...)`<br/> `boxplot(...)` |
 
 ------------------------------------------------------------------------
 

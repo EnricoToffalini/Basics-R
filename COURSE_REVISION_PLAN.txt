@@ -1,0 +1,470 @@
+=====================================================================
+BASICS OF R FOR DATA SCIENCE - REVIEW OF GAPS AND REVISION PLAN
+(prepared 2026-11-14, before the 17-23 November 2026 edition)
+=====================================================================
+
+OVERALL VERDICT
+---------------
+The course is solid on what it sets out to do: objects and types,
+operators, packages, functions and arguments, working directory and
+paths, import/export, vectors, dataframes, factors/lists/matrices/arrays,
+conditionals, loops, the apply family, custom functions. The exercises
+(especially "Data nightmare") are realistic and well designed.
+
+There are, however, some real gaps. Several everyday dataframe
+operations that the exercises rely on (aggregate, rowSums, order, %in%,
+paste, gsub, long vs wide format) appear only in the exercises and are
+never introduced in the slides.
+
+Data visualization is deliberately NOT treated as a theme: it belongs to
+the dedicated ggplot2 course in the PhD program. The plan only adds a
+handful of quick base R plots, scattered where they naturally help to
+check data or show a result (see section A).
+
+Gaps, ranked by priority:
+
+  MUST  (B) Everyday dataframe operations: sorting, %in%, unique,
+            missing data across rows, row/column sums, group summaries
+            with aggregate()
+  MUST  (C) Long vs wide data format (needed for the LMM courses)
+  SHOULD(D) Scripts, comments, a clean session and set.seed(): the
+            "how to work" part of the workflow
+  SHOULD(E) Reading errors, debugging, asking for help (and using AI
+            assistants with care)
+  SHOULD(F) Basic string operations: paste/paste0, nchar, gsub
+  SHOULD(G) A bridge to modelling: formula syntax (y ~ x) and pulling
+            results out of model objects
+  NICE  (H) A glimpse of the pipe |> and the tidyverse
+  NICE  (I) Small conceptual additions (floating-point comparison,
+            NULL/NaN/NA, && vs &, which())
+  LIGHT (A) A few scattered quick plots in existing slides (not a theme,
+            no new deck, no ggplot2 teaching)
+
+Below: where to put each one, and slide-by-slide content following the
+current deck conventions (## title / ### subtitle, <div class="large-code">,
+two-column grid divs, <!-- ---- --> separators between sections). The
+plan ends with timing and possible cuts so everything still fits in 10
+hours, and a few small fixes I found in the existing decks.
+
+Datasets already in Slides/data/ are reused wherever possible:
+Performance.csv (id, name, anx, acc, time), wisc.csv (10 WISC subtests),
+Courses40Cycle.xlsx.
+
+
+=====================================================================
+(A) SCATTERED QUICK PLOTS (no dedicated deck)     [LIGHT, ~0-3 slides]
+=====================================================================
+
+PRINCIPLE: plotting is taught in the dedicated ggplot2 course, so here
+it is never a topic in its own right. Plots only appear as one-line base
+R tools used *in passing*, to look at data or show a result, the way
+hist() already appears in the Monte Carlo slide of 3.Programming. No new
+deck, no table of graphical arguments, no ggplot2 syntax. When a plot
+appears, a short note can say "plots are covered properly in the
+ggplot2 course".
+
+Where a quick plot helps (each is one line inside an existing or
+planned slide, not a slide of its own):
+
+A1 - 2.1, "Summary Statistics on Vectors": after mean/sd/quantile, add
+     hist(Hours) or boxplot(Hours) as "the quickest way to *see* a
+     distribution". One line, default settings.
+
+A2 - 2.2, slide B6 (rowSums total score, see below): end with
+     hist(wisc$tot) to check that the total score looks plausible. This
+     shows that plots are for checking data.
+
+A3 - 2.2, slide B7 (aggregate): optionally add
+     boxplot(Hours ~ TypeOfCourse, data=df) next to the aggregate()
+     output. This shows that the same y ~ group formula is used again.
+
+A4 - 2.3, slide G2 (lm results as lists): plot(acc ~ anx, data=df);
+     abline(fit). Two lines, used to show what the extracted
+     coefficients mean.
+
+A5 - 3.Programming: keep the existing hist(results) in the Monte Carlo
+     slide. Optionally add one in the "repeat" p-hacking example
+     (hist of p-values in a for loop) if time allows.
+
+A6 - Exercise 5 asks for "histograms, scatter plots, boxplots". Keep
+     that, but say in its table that only the default
+     hist()/plot()/boxplot() calls are expected, and point to the
+     ggplot2 course for proper figures.
+
+Also: the README and the index.Qmd intro say the course covers "some
+fundamentals of data visualization". Reword it to something like "and
+see some quick ways to plot data (data visualization proper is covered
+in the dedicated ggplot2 course)", so that it doesn't promise a topic
+the course doesn't teach.
+
+The existing figure-export slide in 1.2 (png() ... dev.off()) stays as
+it is. Exporting is a file-handling skill, not a dataviz topic.
+
+
+=====================================================================
+(B) EVERYDAY DATAFRAME OPERATIONS                 [MUST, ~8 slides]
+=====================================================================
+
+WHERE: Slides/2.2.DataStruc-2.Qmd. Insert the sorting/selection slides
+after "Indexing Dataframes by Logical Conditions" (before "Indexing
+Elements in a Dataframe - A Summary", so the summary figure still closes
+the indexing part). Insert the missing-data and grouping slides after
+"Merge Two Dataframes Using merge()" and before "Contingency Tables".
+The %in% / unique() / which() slides could alternatively go into 2.1
+after "Logical Indexing", since they work on vectors.
+
+Slide B1 - "Quick overview of a dataframe: summary()"
+    summary(df)
+  It's used in Exercise 2.2 but never shown. Also mention View(df) for
+  the RStudio data viewer.
+
+Slide B2 - "Matching many values: %in%"
+    df[df$Teacher %in% c("MASSIMILIANO PASTORE","ENRICO TOFFALINI"), ]
+  Compare it with the long chain of == ... | == ... it replaces. Add the
+  "!(x %in% y)" negation.
+
+Slide B3 - "unique() and which()"
+    unique(df$TypeOfCourse)
+    which(df$Hours > 15)     # positions, not TRUE/FALSE
+    which.max(df$Hours)
+
+Slide B4 - "Sorting: sort() and order()"
+    sort(df$Hours)                       # sorts a vector
+    sort(df$Hours, decreasing=TRUE)
+    df[order(df$Hours), ]                # sorts the rows of a dataframe
+    df[order(df$TypeOfCourse, -df$Hours), ]   # by two keys
+  Key teaching point: order() returns row positions, which you then use
+  for indexing. This connects directly to what they just learned.
+
+Slide B5 - "Missing data in dataframes"
+    colSums(is.na(df))         # NAs per column
+    complete.cases(df)         # rows with no NA
+    dfComplete = na.omit(df)   # listwise deletion (use with care!)
+  Warn that na.omit() can drop many rows without saying so, and that
+  merge(..., all=TRUE) (used in Exercise 5) introduces NAs on purpose.
+
+Slide B6 - "Row-wise scores: rowSums() and rowMeans()"
+  The typical psych use case is computing a questionnaire total score.
+    items = c("BD","SI","DS")
+    wisc = read.csv("data/wisc.csv")
+    wisc$tot = rowSums(wisc[ , items], na.rm=TRUE)
+  Note: with na.rm=TRUE, a participant missing items gets a lower sum.
+  rowMeans() is often safer for scale scores.
+
+Slide B7 - "Summaries by group: aggregate()"
+    aggregate(Hours ~ TypeOfCourse, data=df, FUN=mean)
+    aggregate(cbind(Hours, ECTS) ~ TypeOfCourse, data=df, FUN=sum)
+    aggregate(. ~ TypeOfCourse, data=df[,c("TypeOfCourse","Hours","ECTS")], FUN=mean)
+  This is used in Exercises 2.2 and 5. Mention that tapply() (in deck 3)
+  does the same for a single variable.
+
+Slide B8 - "merge() keeping everyone: all=TRUE"
+  Add right after the existing merge slides, since the existing slide
+  already warns that unmatched data is lost:
+    merge(df1, df2, by="subjName", all=TRUE)
+  Show the NA rows that appear. Exercise 5 recommends exactly this.
+
+
+=====================================================================
+(C) LONG vs WIDE FORMAT                           [MUST, ~4 slides]
+=====================================================================
+
+WHERE: end of Slides/2.2.DataStruc-2.Qmd (after "Contingency Tables"),
+as a new section. Reshaping is currently only an "extra for advanced
+users" in Exercise 4, but long format is a prerequisite for every
+repeated-measures/LMM course students will take next. The concept
+deserves slides even if the code stays optional.
+
+Slide C1 - "Wide vs long format"
+  A small figure or two side-by-side tables: the same 3 subjects x 3
+  time points, once wide (id, T0, T1, T2) and once long (id, time,
+  score). Rule: in long format each row is one observation. lmer()
+  and most modelling functions (and ggplot2, which they will meet in its
+  own course) want long data.
+
+Slide C2 - "From wide to long with reshape() (base R)"
+    dfWide = data.frame(id=1:3, T0=c(10,12,9), T1=c(11,14,9), T2=c(13,15,10))
+    dfLong = reshape(dfWide, direction="long", varying=c("T0","T1","T2"),
+                     v.names="score", timevar="time", times=c("T0","T1","T2"),
+                     idvar="id")
+    dfLong[order(dfLong$id), ]
+  Be honest that reshape() is notoriously awkward.
+
+Slide C3 - "The same with tidyr::pivot_longer() / pivot_wider()"
+    library(tidyr)
+    dfLong = pivot_longer(dfWide, cols=c(T0,T1,T2),
+                          names_to="time", values_to="score")
+    pivot_wider(dfLong, names_from=time, values_from=score)
+
+Slide C4 - "Why it matters" (short)
+  A preview, with eval=F or pre-rendered, of
+  lmer(score ~ time + (1|id), data=dfLong), plus a one-line
+  aggregate(score ~ time, data=dfLong, FUN=mean). Students see why the
+  reshaping was needed: grouping by time is trivial in long format.
+
+
+=====================================================================
+(D) SCRIPTS, COMMENTS, CLEAN SESSIONS, set.seed() [SHOULD, ~4 slides]
+=====================================================================
+
+WHERE: Slides/0.GettingStartedR.Qmd, after "Google Colab (online
+notebook)" and before "Let's Test the Environment!". The set.seed slide
+goes into 1.2 right after the rnorm() argument slides, because random
+numbers are used from deck 0 onward but set.seed() only appears in 3.
+
+At present no slide explains console vs script, how to run code from a
+script, or comments. Students coming from SPSS need this on day 1.
+
+Slide D1 - "Console vs Script"
+  Console: type and run immediately, nothing is kept. Script (.R file,
+  File > New File > R Script): your analysis is written down and can be
+  rerun and shared. Run the current line/selection with Ctrl+Enter
+  (Cmd+Enter on macOS). Link to the existing TutorialShortcuts page.
+  Mention the "+" continuation prompt in the console (unclosed
+  parenthesis or quote) and how to escape it with Esc.
+
+Slide D2 - "Comments and sections"
+    # this is a comment: R ignores it
+    # ---- 1. Import data ----   (RStudio turns this into a foldable,
+    #                               navigable section; Ctrl+Shift+R)
+  Comment *why*, not *what*.
+
+Slide D3 - "Start clean: don't save the workspace on exit"
+  Tools > Global Options > General: uncheck "Restore .RData into
+  workspace at startup" and set "Save workspace to .RData on exit" to
+  Never. The script is the real record of your work; objects can always
+  be recreated. Session > Restart R (Ctrl+Shift+F10) to test that a
+  script runs from scratch. This fits well with the existing advice in
+  1.2 to save chosen objects deliberately with save().
+  (Alternatively, put this slide in 1.2 just before the "Import/export
+  - Workspace" slides.)
+
+Slide D4 (in 1.2) - "Reproducible randomness: set.seed()"
+    rnorm(3); rnorm(3)               # different every time
+    set.seed(42); rnorm(3)
+    set.seed(42); rnorm(3)           # identical
+  Then 3.Programming can just say "as we saw".
+
+
+=====================================================================
+(E) ERRORS, DEBUGGING, GETTING HELP               [SHOULD, ~3 slides]
+=====================================================================
+
+WHERE: Slides/1.2.FirstStepsR-2.Qmd, right after "Functions and
+arguments: HELP! see the documentation of a function". The deck already
+introduces errors and warnings there.
+
+Slide E1 - "The most common errors, decoded" (table)
+    | Message                                   | Usual cause                         |
+    | object 'x' not found                      | typo / case / not created yet       |
+    | could not find function "fisherz"         | package not loaded (library())      |
+    | there is no package called 'psych'        | package not installed               |
+    | unexpected symbol / unexpected ')'        | missing comma, paren or quote       |
+    | cannot open file 'x.csv': No such file    | wrong working directory / path      |
+    | non-numeric argument to binary operator   | a number stored as character        |
+  Each line links back to something the students have already seen
+  (case sensitivity, packages, WD, coercion).
+
+Slide E2 - "How to debug"
+  Run line by line; inspect objects with str(), head(), class(); restart
+  and rerun from the top; isolate the smallest piece of code that fails.
+  Mention traceback() and print() inside loops/functions. The latter is
+  useful again in deck 3.
+
+Slide E3 - "Asking for help (humans and AI)"
+  Copy the exact error message into a search engine. Make a minimal
+  reproducible example (small data via data.frame() or dput(head(df))).
+  The padlet. AI assistants: very good at R, but run and check the code,
+  make sure you understand every line, and never paste sensitive or
+  personal participant data into an external service. This ties in with
+  the AI mention in deck 0 and with the data-protection norms PhD
+  students need to know anyway.
+
+
+=====================================================================
+(F) BASIC STRING OPERATIONS                       [SHOULD, ~2 slides]
+=====================================================================
+
+WHERE: Slides/1.1.FirstStepsR-1.Qmd, after "Basic types of data:
+characters" (before "know the type of a variable"). Keep the existing
+ExampleStrings page as the extended reference and link it from the
+second slide.
+
+Slide F1 - "Working with strings: paste() and paste0()"
+    paste("Hello", myName)                 # "Hello Enrico"
+    paste0("subject_", 1:3)                # "subject_1" "subject_2" ...
+    paste0("Fig", 1, ".png")               # building file names
+    nchar(myName); toupper(myName)
+  paste0 is used constantly to build file names in loops and labels in
+  plots.
+
+Slide F2 - "Find and replace: gsub()"
+    x = c("12,5", "13,1", "9,8")
+    as.numeric(x)                    # NA NA NA + warning
+    as.numeric(gsub(",", ".", x))    # 12.5 13.1 9.8
+  This is exactly the Italian-decimal problem that Exercise 5 asks them
+  to solve and that the read.csv slide warns about. Point to
+  ExampleStrings for more.
+
+
+=====================================================================
+(G) BRIDGE TO MODELLING: FORMULAS AND MODEL OBJECTS [SHOULD, ~3 slides]
+=====================================================================
+
+WHERE: Slides/2.3.DataStruc-3.Qmd, inside the Lists section, after
+"Lists - Why use lists?" and before the power-simulation example. That
+slide already says "lm() returns its results as lists". These slides
+make the point concrete without teaching statistics.
+
+Slide G1 - "The formula syntax: y ~ x"
+  outcome ~ predictor(s). The same notation works in lm(), t.test(),
+  aggregate(), boxplot(), and later lmer(), glm(), brm().
+    t.test(acc ~ group, data=dx)
+    lm(acc ~ anx, data=df)
+  (If Performance.csv has no grouping variable, create one in the slide
+  with ifelse(), which also previews deck 3.)
+
+Slide G2 - "Model results are lists"
+    fit = lm(acc ~ anx, data=df)
+    names(fit)
+    fit$coefficients
+    summary(fit)$coefficients     # a matrix! index it with [ , ]
+    summary(fit)$r.squared
+  This brings lists, matrices and indexing together, and it is exactly
+  what the power-simulation example and the if...else slide in deck 3
+  (tt1$p.value) rely on.
+
+Slide G3 - "Extracting results from a test"
+    tt = t.test(acc ~ group, data=dx)
+    str(tt, max.level=1)
+    tt$p.value; tt$conf.int; tt$estimate
+  Forward link: "this is how you store p-values in a Monte Carlo loop".
+
+
+=====================================================================
+(H) A GLIMPSE OF THE PIPE AND THE TIDYVERSE       [NICE, ~3 slides]
+=====================================================================
+
+WHERE: end of Slides/2.2.DataStruc-2.Qmd (after section C), or as an
+appendix to 3.Programming. The course deliberately teaches base R, and I
+agree with that. But students will meet |> and %>% on day one of other
+courses, on StackOverflow and in AI-generated code. 3.Programming
+already uses dplyr::case_when() and 2.2 mentions tibbles. The aim here
+is to help them read such code, not to teach a second dialect.
+
+Slide H1 - "The pipe |>"
+    round(sqrt(mean(x)), 2)
+    x |> mean() |> sqrt() |> round(2)      # same thing, read left to right
+  Native pipe since R 4.1. %>% (magrittr/dplyr) works almost the same.
+
+Slide H2 - "The same task, base R vs dplyr"
+    # base R
+    aggregate(Hours ~ TypeOfCourse, data=df[df$Hours >= 10, ], FUN=mean)
+    # dplyr
+    df |> filter(Hours >= 10) |> group_by(TypeOfCourse) |>
+          summarise(meanHours = mean(Hours))
+  Message: both are fine. You should be able to read both and choose one
+  consistently.
+
+Slide H3 - "tibbles vs data.frames" (optional)
+  Why the slides wrap read_excel() in data.frame(). The main difference
+  in behavior is that df[, 1] on a tibble stays a tibble.
+
+
+=====================================================================
+(I) SMALL CONCEPTUAL ADDITIONS                    [NICE, 1 slide each]
+=====================================================================
+
+I1 - 1.1, after "Relational operators": "Careful with == on decimals"
+    0.1 + 0.2 == 0.3                    # FALSE!
+    isTRUE(all.equal(0.1 + 0.2, 0.3))   # TRUE
+    round(0.1 + 0.2, 10) == 0.3
+  The Hours/ECTS == 5 check in 2.2 happens to work, but students will
+  hit this sooner or later.
+
+I2 - 2.1, after "Vectors Must be Homogeneous": "NA, NULL, NaN, Inf"
+    0/0; 1/0; length(NULL); length(NA); c(1, NULL, 3)
+
+I3 - 3.Programming, after "if...else on a vector will NOT work":
+  "& vs &&". && and || are for single TRUE/FALSE values in if(). & and |
+  are vectorized. Since R 4.3, && on vectors gives an error.
+
+I4 - 1.2, after sessionInfo(): one line on renv for project-level
+  package versions (optional, advanced).
+
+I5 - end of 1.2 or end of deck 0: "Literate programming: Quarto / R
+  Markdown". One slide showing that these very slides and the course
+  website are .Qmd files mixing text and R code. A natural pointer
+  given the reproducibility theme already in deck 0.
+
+
+=====================================================================
+TIMING (10 hours in 4 sessions: 2h + 2h + 3h + 3h)
+=====================================================================
+
+Approximate added slide count:
+  MUST    B 8 + C 4                    = ~12 slides (~35 min)
+  SHOULD  D 4 + E 3 + F 2 + G 3        = ~12 slides (~35 min)
+  NICE    H 3 + I 5                    =  ~8 slides (~20 min, can be
+                                                     left as self-study)
+  LIGHT   A (one-liners inside existing slides) ~5 min overall
+
+To make room without lengthening the course, these existing parts could
+be cut or moved to "self-study" without much loss:
+  - Deck 0: the "greeting cards / infographics / meta-analysis / Shiny"
+    showcase is 8 slides. Two or three are enough for motivation.
+  - Deck 2.3: compress Arrays (3 slides) into 1, and drop the
+    matrix-algebra operator table (det, solve, %*%) or mark it optional.
+    It's the part least needed in the PhD courses that follow.
+  - Deck 3: merge the "while" and "repeat" slides into one. Reduce the
+    four Sys.sleep()/print for-loop examples to two.
+  - Deck 1.2: the "RStudio menu import" and file.choose() slides can be
+    one slide.
+  These cuts free about 10-12 slides (~30 min), which roughly covers
+  the MUST items. The SHOULD items (~35 min) need either part of the
+  exercise time or a few more cuts. The NICE items can stay as
+  self-study.
+
+Suggested day mapping after the revision:
+  Day 1 (2h): deck 0 (+D1-D3), 1.1 (+F, I1), start 1.2
+  Day 2 (2h): finish 1.2 (+D4, E, I4), 2.1 (+I2)
+  Day 3 (3h): 2.1 if unfinished, 2.2 (+B, C), 2.3 (+G)
+  Day 4 (3h): 3.Programming (+I3), exercises 3-5, optional H
+
+
+=====================================================================
+SMALL ISSUES SPOTTED IN THE EXISTING DECKS (worth fixing anyway)
+=====================================================================
+
+1. index.Qmd / README.md: they promise "fundamentals of data
+   visualization", which the course doesn't (and shouldn't) deliver.
+   Reword as suggested at the end of section A.
+
+2. 3.Programming, slide "if...else statement" (preregistered-analysis
+   example): `t.test(x1, x2, data=df, paired=TRUE)`. With the x, y form,
+   `data=` is silently ignored, so x1 and x2 must exist as standalone
+   objects. Suggest `t.test(df$x1, df$x2, paired=TRUE)`. (Note: since
+   R 4.4, `paired=TRUE` is no longer allowed with the formula interface,
+   so don't switch to `t.test(y ~ g, paired=TRUE)` either.)
+
+3. 3.Programming, first "apply family" slide: "the apply family allows
+   you to run faster computations". In modern R a preallocated for loop
+   (as the deck itself teaches) is usually about as fast as apply().
+   The real advantages are compact, readable code and an easy step to
+   parallel versions (parallel::mclapply, future.apply). Suggest
+   rewording to "more compact and expressive, and easy to parallelize".
+   The same applies to the "computationally faster" remark on the
+   subset() slide in 2.2, where readability and consistency with other
+   languages is the stronger argument.
+
+4. 1.2, "Import/export - Figures" slide: boxplot(iris$Sepal.Width) is a
+   good place for a one-line note: "plots are covered properly in the
+   ggplot2 course; here we only use quick base R plots to check
+   data".
+
+5. Slides/00.prove.Qmd(.html) is a scratch/test file tracked in the
+   repo. Consider removing it or adding it to .gitignore.
+
+6. Slides/myExportedData.csv is an output of rendering 1.2 that ends
+   up committed. Consider writing it to a temporary location in the
+   slide (eval=F is already set there, so it may just be a leftover).

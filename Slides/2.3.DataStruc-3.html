@@ -1251,21 +1251,100 @@ Levels: METHODOLOGY &lt; PROGRAMMING &lt; SOFT SKILLS &lt; THEMATIC COURSE</code
 <li><p>Are used in many contexts for handling <strong>nested data</strong> (e.g., JSON-formatted data)</p></li>
 </ul>
 </section>
-<section id="lists-4" class="slide level2">
+<section id="lists-4" class="slide level2 revision-new" data-background-color="#dff0d8">
+<h2>Lists</h2>
+<h3 id="the-formula-syntax-y-x">The formula syntax: y ~ x</h3>
+<p>A <strong>formula</strong> describes the roles of variables: <strong>outcome ~ predictor(s)</strong>. We already used it in <code>aggregate()</code>.</p>
+<p>Let’s return to the performance data from the import examples:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/Performance.csv&quot;</span>)</span>
+<span id="cb27-2"><a href aria-hidden="true" tabindex="-1"></a>fit <span class="ot">=</span> <span class="fu">lm</span>(acc <span class="sc">~</span> anx, <span class="at">data=</span>df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Here <code>acc</code> is the outcome and <code>anx</code> the predictor. <code>data=df</code> tells R where to find them.</p>
+<p>Formulas also appear in <code>t.test()</code>, <code>boxplot()</code>, and later <code>glm()</code>, <code>lmer()</code> and <code>brm()</code>. We focus on the <strong>R objects</strong>, leaving statistical modelling to later courses.</p>
+</section>
+<section id="section" class="slide level2 revision-new" data-background-color="#dff0d8">
+<h2></h2>
+<h3 id="model-results-are-lists">Model results are lists</h3>
+<p>The fitted model is a list with named components:</p>
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+<div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] &quot;coefficients&quot;  &quot;residuals&quot;     &quot;effects&quot;       &quot;rank&quot;         
+ [5] &quot;fitted.values&quot; &quot;assign&quot;        &quot;qr&quot;            &quot;df.residual&quot;  
+ [9] &quot;xlevels&quot;       &quot;call&quot;          &quot;terms&quot;         &quot;model&quot;        </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href aria-hidden="true" tabindex="-1"></a>fit<span class="sc">$</span>coefficients</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(Intercept)         anx 
+  8.5591391   0.1607399 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)<span class="sc">$</span>r.squared</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.09137102</code></pre>
+</div>
+</div>
+</div>
+<div>
+<p>The fitted line:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(acc <span class="sc">~</span> anx, <span class="at">data=</span>df)</span>
+<span id="cb34-2"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img role="img" data-src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA2AAAAIZCAMAAAD3FqwrAAAAyVBMVEUAAAAAADoAAGYAOjoAOmYAOpAAZrY6AAA6OgA6Ojo6OmY6ZmY6ZpA6ZrY6kLY6kNtmAABmOgBmOjpmOmZmZjpmZmZmZpBmkLZmkNtmtrZmtttmtv+QOgCQOjqQZjqQZmaQkLaQtraQttuQtv+Q2/+2ZgC2Zjq2kDq2kGa2tpC2tra225C227a229u22/+2///bkDrbkGbbtmbbtpDbtrbbttvb25Db27bb29vb2//b/7bb////tmb/25D/27b/29v//7b//9v///8J8XcGAAAACXBIWXMAAB2HAAAdhwGP5fFlAAAYJklEQVR4nO3d/YPTNp7HcYcCs7BwPNwO7AHHthwzS/e2dFp6W3ozDCT//x+1tuMkTiLHkqWPHpL36xdmjKyvlPiDHcUJ1QKATJV6AMAxI2CAEAEDhAgYIETAACECBggRMECIgAFCBAwQImCAEAEDhAgYIETAACECBggRMECIgAFCBAwQImCAEAEDhAgYIETAACECBggRMECIgAFCBAwQImCAEAEDhAgYIETAACECBggRMECIgAFCBAwQImCAEAEDhAgYIETAACECBggRMECIgAFCBAwQImCAEAEDhAgYIETAACECBggRMECIgAFCBAwQImCAEAEDhAgYIETAACECBggRMECIgAFCBAwQImCAEAEDhAgYIETAACECBggRMECIgAFCBAwQImCAEAEDhAgYIETAACECBggRMECIgAFCBAwQImCAEAEDhAgYIETAACECBggRMECIgAFCBAwQImCAEAEDhAgYIETAACECBggRMECIgAFCBAwQImCAEAEDhAgYIETAACECBggRMECIgAFCBAwQImCAEAEDhAgYIETAACECBggRMECIgAFCBAwQImCAEAEDhAgYIETAACECBggRMECIgAFCBAwQImCAEAEDhAgYIETAACECBggRMECIgAFCBAwQImCAEAEDhAgYIETAACECBggRMECIgAFCBAwQImCAEAEDhAgYIETAACECBggRMECIgAFCBAwQImCAEAEDhAgYIETAACECBggRMECIgAFCBAwQImCAEAEDhAgYIETAACECBggRMECIgAFCBAwQImCAEAEDhPIOWAVEFf4QDt5jQKkfbZye4Mdw6A5D8puu+UEzbrXf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" width="432"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p><code>summary(fit)$coefficients</code> is a <strong>matrix</strong>. After the matrix section, try extracting its slope row with <code>[&quot;anx&quot;, ]</code>.</p>
+</section>
+<section id="section-1" class="slide level2 revision-new" data-background-color="#dff0d8">
+<h2></h2>
+<h3 id="extracting-results-from-a-test">Extracting results from a test</h3>
+<p><code>rep()</code> repeats A/B labels to create <strong>illustrative groups</strong>, unrelated to the actual study:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href aria-hidden="true" tabindex="-1"></a>dx <span class="ot">=</span> df</span>
+<span id="cb35-2"><a href aria-hidden="true" tabindex="-1"></a>dx<span class="sc">$</span>group <span class="ot">=</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>), <span class="at">length.out=</span><span class="fu">nrow</span>(dx))</span>
+<span id="cb35-3"><a href aria-hidden="true" tabindex="-1"></a>tt <span class="ot">=</span> <span class="fu">t.test</span>(acc <span class="sc">~</span> group, <span class="at">data=</span>dx)</span>
+<span id="cb35-4"><a href aria-hidden="true" tabindex="-1"></a>tt<span class="sc">$</span>p.value</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.01396143</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href aria-hidden="true" tabindex="-1"></a>tt<span class="sc">$</span>conf.int</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.303608 2.631661
+attr(,&quot;conf.level&quot;)
+[1] 0.95</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href aria-hidden="true" tabindex="-1"></a>tt<span class="sc">$</span>estimate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>mean in group A mean in group B 
+       12.34483        10.87719 </code></pre>
+</div>
+</div>
+<p>Use <code>str(tt, max.level=1)</code> to inspect all components. <strong><code>$p.value</code></strong> will let us store results in simulation loops.</p>
+</section>
+<section id="lists-5" class="slide level2">
 <h2>Lists</h2>
 <h4 id="example-with-a-power-simulation">example with a power simulation</h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href aria-hidden="true" tabindex="-1"></a>N <span class="ot">=</span> <span class="dv">30</span>; b0 <span class="ot">=</span> <span class="dv">0</span>; b1 <span class="ot">=</span> <span class="fl">0.3</span>; sigma <span class="ot">=</span> <span class="dv">1</span></span>
-<span id="cb27-2"><a href aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-3"><a href aria-hidden="true" tabindex="-1"></a>niter <span class="ot">=</span> <span class="dv">1000</span></span>
-<span id="cb27-4"><a href aria-hidden="true" tabindex="-1"></a>results <span class="ot">=</span> <span class="fu">list</span>()</span>
-<span id="cb27-5"><a href aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-6"><a href aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>niter){</span>
-<span id="cb27-7"><a href aria-hidden="true" tabindex="-1"></a>  x <span class="ot">=</span> <span class="fu">rnorm</span>(N, <span class="dv">0</span>, <span class="dv">1</span>)</span>
-<span id="cb27-8"><a href aria-hidden="true" tabindex="-1"></a>  y <span class="ot">=</span> b0 <span class="sc">+</span> b1<span class="sc">*</span>x <span class="sc">+</span> <span class="fu">rnorm</span>(N, <span class="dv">0</span>, sigma)</span>
-<span id="cb27-9"><a href aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb27-10"><a href aria-hidden="true" tabindex="-1"></a>  results[[i]] <span class="ot">=</span> <span class="fu">lm</span>(y <span class="sc">~</span> x)</span>
-<span id="cb27-11"><a href aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href aria-hidden="true" tabindex="-1"></a>N <span class="ot">=</span> <span class="dv">30</span>; b0 <span class="ot">=</span> <span class="dv">0</span>; b1 <span class="ot">=</span> <span class="fl">0.3</span>; sigma <span class="ot">=</span> <span class="dv">1</span></span>
+<span id="cb41-2"><a href aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-3"><a href aria-hidden="true" tabindex="-1"></a>niter <span class="ot">=</span> <span class="dv">1000</span></span>
+<span id="cb41-4"><a href aria-hidden="true" tabindex="-1"></a>results <span class="ot">=</span> <span class="fu">list</span>()</span>
+<span id="cb41-5"><a href aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-6"><a href aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>niter){</span>
+<span id="cb41-7"><a href aria-hidden="true" tabindex="-1"></a>  x <span class="ot">=</span> <span class="fu">rnorm</span>(N, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb41-8"><a href aria-hidden="true" tabindex="-1"></a>  y <span class="ot">=</span> b0 <span class="sc">+</span> b1<span class="sc">*</span>x <span class="sc">+</span> <span class="fu">rnorm</span>(N, <span class="dv">0</span>, sigma)</span>
+<span id="cb41-9"><a href aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb41-10"><a href aria-hidden="true" tabindex="-1"></a>  results[[i]] <span class="ot">=</span> <span class="fu">lm</span>(y <span class="sc">~</span> x)</span>
+<span id="cb41-11"><a href aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This is an example of using a list in a power simulation. Typically, you store only one or a few values (e.g., p-values), but lists allow storing all fitted objects if needed.</p>
 <!-- --------------------------------------------------------------------- -->
@@ -1276,7 +1355,7 @@ Levels: METHODOLOGY &lt; PROGRAMMING &lt; SOFT SKILLS &lt; THEMATIC COURSE</code
 <p>You can create a matrix easily using the <strong><code>matrix()</code></strong> function:</p>
 <div class="large-code">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href aria-hidden="true" tabindex="-1"></a>( <span class="at">myMat =</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">28</span>, <span class="at">nrow=</span><span class="dv">4</span>, <span class="at">ncol=</span><span class="dv">7</span>) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href aria-hidden="true" tabindex="-1"></a>( <span class="at">myMat =</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">28</span>, <span class="at">nrow=</span><span class="dv">4</span>, <span class="at">ncol=</span><span class="dv">7</span>) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     [,1] [,2] [,3] [,4] [,5] [,6] [,7]
 [1,]    1    5    9   13   17   21   25
@@ -1284,7 +1363,7 @@ Levels: METHODOLOGY &lt; PROGRAMMING &lt; SOFT SKILLS &lt; THEMATIC COURSE</code
 [3,]    3    7   11   15   19   23   27
 [4,]    4    8   12   16   20   24   28</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href aria-hidden="true" tabindex="-1"></a>( <span class="at">myMat =</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">28</span>, <span class="at">nrow=</span><span class="dv">4</span>, <span class="at">ncol=</span><span class="dv">7</span>, <span class="at">byrow=</span>T) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href aria-hidden="true" tabindex="-1"></a>( <span class="at">myMat =</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">28</span>, <span class="at">nrow=</span><span class="dv">4</span>, <span class="at">ncol=</span><span class="dv">7</span>, <span class="at">byrow=</span>T) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     [,1] [,2] [,3] [,4] [,5] [,6] [,7]
 [1,]    1    2    3    4    5    6    7
@@ -1299,11 +1378,11 @@ Levels: METHODOLOGY &lt; PROGRAMMING &lt; SOFT SKILLS &lt; THEMATIC COURSE</code
 <h2>Matrices</h2>
 <p><strong>Indexing</strong> in matrices is similar to dataframes, with indexes for row(s) and column(s), using <strong><code>[ &lt;row(s) index&gt; , &lt;column(s) index&gt; ]</code></strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href aria-hidden="true" tabindex="-1"></a>myMat[<span class="dv">2</span>, <span class="dv">5</span>] <span class="co"># access a single element </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href aria-hidden="true" tabindex="-1"></a>myMat[<span class="dv">2</span>, <span class="dv">5</span>] <span class="co"># access a single element </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 12</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href aria-hidden="true" tabindex="-1"></a>myMat[<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>, <span class="dv">5</span><span class="sc">:</span><span class="dv">7</span>] <span class="co"># access ranges of elements</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href aria-hidden="true" tabindex="-1"></a>myMat[<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>, <span class="dv">5</span><span class="sc">:</span><span class="dv">7</span>] <span class="co"># access ranges of elements</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     [,1] [,2] [,3]
 [1,]   12   13   14
@@ -1312,7 +1391,7 @@ Levels: METHODOLOGY &lt; PROGRAMMING &lt; SOFT SKILLS &lt; THEMATIC COURSE</code
 </div>
 <p>As with vectors, you can perform <strong>appropriate operations</strong> on matrix data:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href aria-hidden="true" tabindex="-1"></a>myMat<span class="sc">^</span><span class="dv">2</span> <span class="co"># element-wise squaring of all values</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href aria-hidden="true" tabindex="-1"></a>myMat<span class="sc">^</span><span class="dv">2</span> <span class="co"># element-wise squaring of all values</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     [,1] [,2] [,3] [,4] [,5] [,6] [,7]
 [1,]    1    4    9   16   25   36   49
@@ -1324,6 +1403,9 @@ Levels: METHODOLOGY &lt; PROGRAMMING &lt; SOFT SKILLS &lt; THEMATIC COURSE</code
 </section>
 <section id="matrices-2" class="slide level2">
 <h2>Matrices</h2>
+<p class="small">
+<em>Matrix algebra: optional / self-study</em>
+</p>
 <table class="caption-top">
 <colgroup>
 <col style="width: 44%">
@@ -1378,15 +1460,15 @@ Levels: METHODOLOGY &lt; PROGRAMMING &lt; SOFT SKILLS &lt; THEMATIC COURSE</code
 </div>
 <!-- --------------------------------------------------------------------- -->
 </section>
-<section id="arrays" class="slide level2">
-<h2>Arrays</h2>
+<section id="arrays-self-study" class="slide level2">
+<h2>Arrays (self-study)</h2>
 <p><strong>Arrays</strong> are multi-dimensional structures in R, generalizing <em>vectors (1-dimensional)</em> and <em>matrices (2-dimensional)</em> to the <em><strong>n-dimensional</strong></em> case</p>
 It’s easy to create an array using the <strong><code>array()</code></strong> function:
 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
 <div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href aria-hidden="true" tabindex="-1"></a>myArr <span class="ot">=</span> <span class="fu">array</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">30</span>, <span class="at">dim =</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">2</span>))</span>
-<span id="cb38-2"><a href aria-hidden="true" tabindex="-1"></a>myArr</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href aria-hidden="true" tabindex="-1"></a>myArr <span class="ot">=</span> <span class="fu">array</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">30</span>, <span class="at">dim =</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">2</span>))</span>
+<span id="cb52-2"><a href aria-hidden="true" tabindex="-1"></a>myArr</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>, , 1
 
@@ -1411,16 +1493,16 @@ It’s easy to create an array using the <strong><code>array()</code></strong> f
 </div>
 </div>
 </section>
-<section id="arrays-1" class="slide level2">
-<h2>Arrays</h2>
+<section id="arrays-self-study-1" class="slide level2">
+<h2>Arrays (self-study)</h2>
 <h3 id="indexing">indexing</h3>
 <p><strong>Indexing</strong> is exactly the same as with matrices but… with 3 (sets of) indices!</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href aria-hidden="true" tabindex="-1"></a>myArr[<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">2</span>] <span class="co"># extract a single element</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href aria-hidden="true" tabindex="-1"></a>myArr[<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">2</span>] <span class="co"># extract a single element</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 25</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href aria-hidden="true" tabindex="-1"></a>myArr[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span> , <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span> , ] <span class="co"># extract subsets of elements</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href aria-hidden="true" tabindex="-1"></a>myArr[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span> , <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span> , ] <span class="co"># extract subsets of elements</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>, , 1
 
@@ -1436,8 +1518,8 @@ It’s easy to create an array using the <strong><code>array()</code></strong> f
 </div>
 </div>
 </section>
-<section id="arrays-2" class="slide level2">
-<h2>Arrays</h2>
+<section id="arrays-self-study-2" class="slide level2">
+<h2>Arrays (self-study)</h2>
 <div style="font-size:38px;">
 <p><strong>Why use (know) arrays?</strong></p>
 <ul>
