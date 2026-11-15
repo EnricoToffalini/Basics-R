@@ -143,21 +143,6 @@ if(age >= 18){
 </div>
 
 
-##  {.revision-new background-color="#dff0d8"}
-### & vs &&
-
-*Optional / self-study*. **`&`** and **`|`** compare elements of vectors. **`&&`** and **`||`** require single logical values and stop as soon as the answer is known:
-
-```{r}
-age >= 18 & age < 65
-
-if(length(age) == 1 && !is.na(age)){
-  print(age)
-}
-```
-
-Here `age` still contains several values, so the second check is skipped. Use **`any()`** or **`all()`** to reduce a vector condition to one answer, e.g., `if(any(age >= 18))`.
-
 ## `ifelse()`
 
 All previous examples required evaluating a single particular condition that might be `TRUE` or `FALSE`. However, you often want to apply this type of operation to an entire vector

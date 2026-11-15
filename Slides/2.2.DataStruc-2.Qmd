@@ -271,6 +271,26 @@ Let's extract matching rows and two columns (leave the column index blank for al
 df[df$Teacher == "MASSIMILIANO PASTORE", c("Teacher", "Hours")]
 ```
 
+## 
+### Subset
+
+The base function **`subset()`** can also be used as an alternative to indexing
+
+```{r}
+subset(df, Teacher == "MASSIMILIANO PASTORE", select=c("Teacher","Hours","TypeOfCourse"))
+df[df$Teacher == "MASSIMILIANO PASTORE" , c("Teacher","Hours","TypeOfCourse")]
+```
+
+Indexing with **`[]`** makes the row and column selection explicit and uses the same logic as vectors and matrices. It also transfers well to other programming languages (e.g., **Python**). Choose the form that makes your code clearest.
+
+
+## 
+### Indexing Elements in a Dataframe - A Summary
+
+<div style="text-align: center;">
+  <img src="figures/dataframeCourses.png" style="width: 80%;"/>
+</div>
+
 
 ## Matching many values: `%in%`
 
@@ -298,48 +318,26 @@ which.max(df$Hours)
 `which.max()` gives the position of the **first maximum**. These positions can go straight into the row index: `df[which(df$Hours > 15), ]`.
 :::
 
-##  {.revision-new background-color="#dff0d8"}
-### Sorting: sort() and order()
+## Sorting: `sort()` and `order()`
 
-**`sort()`** rearranges the values in a vector:
+- **`sort()`** rearranges the values in a vector:
 
 ```{r}
 sort(df$Hours)
 sort(df$Hours, decreasing=TRUE)
 ```
 
-**`order()`** returns positions. Use them to rearrange **whole rows**, keeping each teacher's information together:
+- **`order()`** returns positions, it's useful to **rearrange rows** of a data frame by one or more variables: 
 
 ```{r, results="hide"}
-df[order(df$Hours), c("Teacher", "Hours")]
-```
+# order data frame by "Hours"
+df[order(df$Hours), ] 
 
+```
 ```{r, eval=F}
-df[order(df$TypeOfCourse, -df$Hours), ]
+# order alphabetically by course type, then by hours from highest to lowest
+df[order(df$TypeOfCourse, -df$Hours), ] 
 ```
-
-The second example sorts by course type, then by hours from highest to lowest.
-
-## 
-### Indexing Elements in a Dataframe - A Summary
-
-<div style="text-align: center;">
-  <img src="figures/dataframeCourses.png" style="width: 80%;"/>
-</div>
-
-
-## 
-### Subset
-
-The base function **`subset()`** can also be used as an alternative to indexing
-
-```{r}
-subset(df, Teacher == "MASSIMILIANO PASTORE", select=c("Teacher","Hours","TypeOfCourse"))
-df[df$Teacher == "MASSIMILIANO PASTORE" , c("Teacher","Hours","TypeOfCourse")]
-```
-
-Indexing with **`[]`** makes the row and column selection explicit and uses the same logic as vectors and matrices. It also transfers well to other programming languages (e.g., **Python**). Choose the form that makes your code clearest.
-
 
 ## 
 ### Combine Two Dataframes Using `rbind()`
@@ -414,12 +412,12 @@ dfTotal
 ```
 </div>
 
-**Important**: `merge()` will work even if some or even all values that should be used for merging do not match... but in that case some or all of the data will be lost
+:::{.callout-tip}
+**Important**: **`merge()`** will work even if some or even all values that should be used for merging do not match... but in that case some or all of the data will be lost
+:::
 
-
-
-##  {.revision-new background-color="#dff0d8"}
-### merge() keeping everyone: all=TRUE
+##
+### `merge()` keeping everything: `all=TRUE`
 
 Let's reuse the participants from the previous example, but suppose **Amber is missing from the second file**:
 
@@ -428,27 +426,10 @@ df2partial = df2[df2$subjName != "Amber", ]
 merge(df1, df2partial, by="subjName", all=TRUE)
 ```
 
-**`all=TRUE`** keeps names found in either file. Missing information becomes **`NA`**; the default merge would lose Amber's row here.
+**`all=TRUE`** keeps names found in either file. Missing information is indicated with the special placeholder **`NA`** (the default merge would lose Amber's row here)
 
-
-##  {.revision-new background-color="#dff0d8"}
-### Missing data in dataframes
-
-Let's inspect the merged data, including the missing values we just created:
-
-```{r}
-dfTotal = merge(df1, df2partial, by="subjName", all=TRUE)
-colSums(is.na(dfTotal))
-complete.cases(dfTotal)
-dfComplete = na.omit(dfTotal)
-nrow(dfTotal) - nrow(dfComplete)
-```
-
-`colSums()` counts missing cells per column here. `complete.cases()` identifies rows without missing values. **`na.omit()` drops entire rows**: always check how many and whether this is appropriate.
-
-
-##  {.revision-new background-color="#dff0d8"}
-### Row-wise scores: rowSums() and rowMeans()
+##  
+### Row-wise scores: `rowSums()` and `rowMeans()`
 
 For a small scoring example, sum three subtests from the [WISC data](data/wisc.csv):
 
@@ -456,12 +437,9 @@ For a small scoring example, sum three subtests from the [WISC data](data/wisc.c
 
 ```{r}
 wisc = read.csv("data/wisc.csv")
-items = c("BD", "SI", "DS")
-wisc$tot = rowSums(wisc[ , items], na.rm=TRUE)
-head(wisc[ , c(items, "tot")], 3)
+wisc$tot = rowSums(wisc, na.rm=TRUE)
+head(wisc)
 ```
-
-
 
 </div><div>
 
@@ -469,40 +447,33 @@ head(wisc[ , c(items, "tot")], 3)
 hist(wisc$tot)
 ```
 
-
 </div></div>
 
-With `na.rm=TRUE`, missing items reduce the sum; an entirely missing row gives **0**. `rowMeans()` may be useful for comparable items, but still needs a minimum valid-item rule (all missing gives `NaN`). Follow the scoring protocol.
+⚠️ With **`na.rm=TRUE`** missing items lower the total sum in a misleading way (e.g., an entirely missing row gives **0**). **`rowMeans()`** may be useful for comparable totals when removing the **`NA`s**, but it still needs at least one observation (all missing gives **`NaN`**)
 
-This three-subtest sum is not a standardized IQ score.
-
-
-##  {.revision-new background-color="#dff0d8"}
-### Summaries by group: aggregate()
+##
+### Summaries by group: `aggregate()`
 
 **`Hours ~ TypeOfCourse`**: summarize hours separately for each course type.
 
 ```{r}
-aggregate(Hours ~ TypeOfCourse, data=df, FUN=mean)
+aggregate(Hours ~ TypeOfCourse, FUN=mean, data=df)
 ```
 
 For several numeric columns, combine them with **`cbind()`**:
 
 ```{r}
-aggregate(cbind(Hours, ECTS) ~ TypeOfCourse, data=df, FUN=sum)
+aggregate(cbind(Hours, ECTS) ~ TypeOfCourse, FUN=sum, data=df)
 ```
 
-Missing rows are omitted. Later, `tapply()` groups one vector.
-
-
-##  {.revision-new background-color="#dff0d8"}
+##  
 ### Summaries by group: selected columns
 
 In a formula, **`.`** means “all the other columns”. Select only the columns you intend to summarize:
 
 ```{r}
-aggregate(. ~ TypeOfCourse,
-          data=df[ , c("TypeOfCourse", "Hours", "ECTS")], FUN=mean)
+aggregate(. ~ TypeOfCourse, FUN=mean, 
+          data=df[ , c("TypeOfCourse", "Hours", "ECTS")])
 ```
 
 The same **`y ~ group`** notation can provide a quick graphical check:
@@ -511,7 +482,7 @@ The same **`y ~ group`** notation can provide a quick graphical check:
 boxplot(Hours ~ TypeOfCourse, data=df)
 ```
 
-Try the plot in the console. Proper figure design is covered in the ggplot2 course.
+Try this plot in your console. Proper figure design is covered in the ggplot2 course.
 
 ## 
 ### Contingency Tables
@@ -530,148 +501,145 @@ table(df$TypeOfCourse, df$Hours) # creates a contingency table
 
 <!-- --------------------------------------------------------------------- -->
 
-##  {.revision-new background-color="#dff0d8"}
-### Wide vs long format
+## Wide vs long format
 
-The **same three participants**, measured at three times:
+The **same three participants**, measured longitudinally:
 
 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; font-size: 28px;"><div>
 
-**Wide**: one row per participant
+**Wide format**: one row per participant
 
 | id | T0 | T1 | T2 |
 |---|---|---|---|
-| 1 | 10 | 11 | 13 |
-| 2 | 12 | 14 | 15 |
-| 3 | 9 | 9 | 10 |
+| a | 10 | 11 | 13 |
+| b | 12 | 14 | 15 |
+| c | 9 | 9 | 10 |
+| ... |
 
 </div><div>
 
-**Long**: one row per observation
+**Long format**: one row per observation
 
 | id | time | score |
 |---|---|---|
-| 1 | T0 | 10 |
-| 1 | T1 | 11 |
-| 1 | T2 | 13 |
-| 2 | T0 | 12 |
-| 2 | T1 | 14 |
-| 2 | T2 | 15 |
-| 3 | T0 | 9 |
-| 3 | T1 | 9 |
-| 3 | T2 | 10 |
+| a | T0 | 10 |
+| b | T0 | 12 |
+| c | T0 | 9 |
+| a | T1 | 11 |
+| b | T1 | 14 |
+| c | T1 | 9 |
+| a | T2 | 13 |
+| b | T2 | 15 |
+| c | T2 | 10 |
+| ... |
 
 </div></div>
 
 
-##  {.revision-new background-color="#dff0d8"}
-### From wide to long with reshape()
+## wide → long with `reshape()`
 
-Here is the wide dataframe. **`reshape()`** is base R, though its arguments take some practice:
+**`reshape()`** is base R; its arguments may take some practice...
 
+:::: {.columns}
+::: {.column width="35%"}
+```{r, echo=F}
+dfWide = data.frame(id=letters[1:3], T0=c(10,12,9), T1=c(11,14,9), T2=c(13,15,10))
+```
+```{r, eval=F}
+dfWide = ...
+```
+:::
+::: {.column width="65%"}
+| id | T0 | T1 | T2 |
+|---|---|---|---|
+| a | 10 | 11 | 13 |
+| b | 12 | 14 | 15 |
+| c | 9 | 9 | 10 |
+:::
+::::
+
+:::: {.columns}
+::: {.column width="65%"}
 ```{r}
-dfWide = data.frame(id=1:3, T0=c(10,12,9),
-                    T1=c(11,14,9), T2=c(13,15,10))
-dfLong = reshape(dfWide, direction="long",
-                 varying=c("T0", "T1", "T2"), v.names="score",
-                 timevar="time", times=c("T0", "T1", "T2"),
+dfLong = reshape(dfWide, 
+                 direction="long",
+                 varying=c("T0", "T1", "T2"), 
+                 v.names="score",
+                 timevar="time", 
+                 times=c("T0", "T1", "T2"),
                  idvar="id")
-head(dfLong[order(dfLong$id, dfLong$time), ])
+```
+:::
+::: {.column width="35%"}
+```{r, echo=F}
+dfLong
+```
+:::
+::::
+
+## The same with tidyr
+
+The **tidyr** package provides an easier to remember function
+```{r, eval=F}
+library(tidyr)
 ```
 
-`varying` identifies the repeated columns; `idvar` identifies participants. The **concept** matters most; keep the syntax as a reference.
+wide → long
+```{r, eval=F}
+dfLong = pivot_longer(dfWide, 
+                      cols=c(T0,T1,T2),
+                      names_to="time", 
+                      values_to="score")
+```
 
+long → wide
+```{r, eval=F}
+dfWide = pivot_wider(dfLong, 
+            names_from=time, 
+            values_from=score)
+```
 
-##  {.revision-new background-color="#dff0d8"}
-### The same with tidyr
+##  
+### The convenience of the long format
 
-*Optional syntax / self-study*. The **tidyr** package provides more explicit function names for the same task:
+**SUMMARIZING**: With time in one column, summarizing time points is easier
 
 ```{r}
-# install.packages("tidyr") # once, if needed
-dfLong = tidyr::pivot_longer(dfWide, cols=c(T0,T1,T2),
-                            names_to="time", values_to="score")
-tidyr::pivot_wider(dfLong, names_from=time, values_from=score)
+aggregate(score ~ time, FUN=mean, data=dfLong)
 ```
 
-`pivot_longer()` gathers repeated columns into rows. `pivot_wider()` spreads them back into columns; here each id/time pair is unique.
-
-
-##  {.revision-new background-color="#dff0d8"}
-### Why long format matters
-
-With **time in one column**, summaries at each time point are straightforward:
-
-```{r}
-aggregate(score ~ time, data=dfLong, FUN=mean)
-```
-
-In a future mixed-model course, the same layout lets you identify repeated observations from the same participant:
+**STATISTICAL MODELING**: e.g., in mixed-models long formats let you identify repeated observations within clustering factor 
 
 ```{r, eval=F}
 lme4::lmer(score ~ time + (1|id), data=dfLong)
 ```
 
-This is a **preview of the syntax**, not an analysis of these nine values. Long data are also useful for ggplot2.
+**DATA VISUALIZATION**: Long data are also useful for **`ggplot2`**, where you want to have all observations for the same variable in a same column/vector
 
 
-##  {.revision-new background-color="#dff0d8"}
-### The pipe |>
+## The pipe `|>`
 
-*Optional / self-study*. The native pipe **`|>`** passes a result into the first argument of the next function (R 4.1 or later):
+in R 4.1 and later, "**`|>`**" passes a result to the first argument of the next function
 
+::::: columns
+::: {.column width="50%"}
+Classical nested functions style
 ```{r}
 x = df$Hours
 round(sqrt(mean(x)), 2)
+```
+:::
+::: {.column width="50%"}
+Pipelined 
+```{r}
 x |> mean() |> sqrt() |> round(2)
 ```
+:::
+:::::
 
-Read the second expression from left to right. You may also encounter **`%>%`** from magrittr/dplyr: it works similarly for these simple chains.
+They do the same, but the right expression may be easier to read (left to right) 
 
+:::{.callout-tip}
+You may also encounter **`%>%`** from magrittr/dplyr: it works similarly in the `tidyverse` package suite.
+:::
 
-##  {.revision-new background-color="#dff0d8"}
-### The same task, base R vs dplyr
-
-*Optional / self-study*. Mean hours by course type, keeping courses of at least 10 hours:
-
-<div style="display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 20px;"><div>
-
-```{r}
-# base R
-aggregate(Hours ~ TypeOfCourse,
-          data=df[df$Hours >= 10, ],
-          FUN=mean)
-```
-
-
-
-</div><div>
-
-```{r}
-# dplyr
-df |> dplyr::filter(Hours >= 10) |>
-  dplyr::group_by(TypeOfCourse) |>
-  dplyr::summarise(
-    meanHours = mean(Hours))
-```
-
-
-
-</div></div>
-
-Both express the same operation here. Learn to read both; keep a consistent style in your own script.
-
-
-##  {.revision-new background-color="#dff0d8"}
-### Tibbles vs data.frames
-
-*Optional / self-study*. This is why our import examples wrap **`read_excel()`** in **`data.frame()`**:
-
-```{r}
-tb = readxl::read_excel("data/Courses40Cycle.xlsx")
-class(tb[ , 1])
-class(df[ , 1])
-class(df[ , 1, drop=FALSE])
-```
-
-A **tibble** keeps its tabular structure when selecting one column with `[ , 1]`. A base dataframe usually returns the column as a vector. **`$`** extracts a vector from either.

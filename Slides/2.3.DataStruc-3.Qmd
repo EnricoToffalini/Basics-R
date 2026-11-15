@@ -103,7 +103,7 @@ In many cases, you might ignore and avoid them. However:
 
 ## Lists
 
-**Lists** are flexible structures that can contain **objects of different types and different lengths** (including other lists... potentially creating an infinite *Inception*...)
+**Lists** are flexible structures that can contain **objects of different types and different lengths** (including other lists...)
 
 ```{r}
 myChaos = list(TRUE, 0:5, df$Hours, letters[8:18], "PSICOSTAT")
@@ -154,72 +154,10 @@ That's not surprising... a dataframe is actually a special kind of list, with ju
 - Are used in many contexts for handling **nested data** (e.g., JSON-formatted data)
 
 
-## Lists {.revision-new background-color="#dff0d8"}
-### The formula syntax: y ~ x
-
-A **formula** describes the roles of variables: **outcome ~ predictor(s)**. We already used it in `aggregate()`.
-
-Let's return to the performance data from the import examples:
-
-```{r}
-df = read.csv("data/Performance.csv")
-fit = lm(acc ~ anx, data=df)
-```
-
-Here `acc` is the outcome and `anx` the predictor. `data=df` tells R where to find them.
-
-Formulas also appear in `t.test()`, `boxplot()`, and later `glm()`, `lmer()` and `brm()`. We focus on the **R objects**, leaving statistical modelling to later courses.
-
-
-## {.revision-new background-color="#dff0d8"}
-### Model results are lists
-
-The fitted model is a list with named components:
-
-<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;"><div>
-
-```{r}
-names(fit)
-fit$coefficients
-summary(fit)$r.squared
-```
-
-
-
-</div><div>
-
-The fitted line:
-
-```{r, fig.width=4.5, fig.height=2.8}
-plot(acc ~ anx, data=df)
-abline(fit)
-```
-
-
-
-</div></div>
-
-`summary(fit)$coefficients` is a **matrix**. After the matrix section, try extracting its slope row with `["anx", ]`.
-
-
-## {.revision-new background-color="#dff0d8"}
-### Extracting results from a test
-
-`rep()` repeats A/B labels to create **illustrative groups**, unrelated to the actual study:
-
-```{r}
-dx = df
-dx$group = rep(c("A", "B"), length.out=nrow(dx))
-tt = t.test(acc ~ group, data=dx)
-tt$p.value
-tt$conf.int
-tt$estimate
-```
-
-Use `str(tt, max.level=1)` to inspect all components. **`$p.value`** will let us store results in simulation loops.
-
 ## Lists
 #### example with a power simulation
+
+This is an example of using a list in a power simulation. Typically, you store only one or a few values (e.g., p-values), but lists allow storing all fitted objects if needed
 
 ```{r, eval=F}
 N = 30; b0 = 0; b1 = 0.3; sigma = 1
@@ -233,10 +171,43 @@ for(i in 1:niter){
   
   results[[i]] = lm(y ~ x)
 }
-
 ```
 
-This is an example of using a list in a power simulation. Typically, you store only one or a few values (e.g., p-values), but lists allow storing all fitted objects if needed.
+## Lists
+### Results / fitted models are themselves lists
+
+```{r, echo=F}
+df = read.csv("data/Performance.csv")
+y = df$acc; x = df$anx
+```
+
+```{r}
+fit = lm(y ~ x)
+```
+
+The fitted model is a list with named components:
+
+```{r}
+names(fit)
+fit$coefficients
+fit$residuals[1:7] 
+fit$call
+```
+
+## List 
+### Extracting results from a t-test
+
+```{r,echo=F}
+dx = df
+dx$group = rep(c("A", "B"), length.out=nrow(dx))
+```
+```{r}
+tt = t.test(acc ~ group, data=dx)
+tt$statistic
+tt$p.value
+tt$estimate
+tt$conf.int
+```
 
 <!-- --------------------------------------------------------------------- -->
 
