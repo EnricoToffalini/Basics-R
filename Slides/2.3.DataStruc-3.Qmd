@@ -194,7 +194,7 @@ fit$residuals[1:7]
 fit$call
 ```
 
-## List 
+## Lists
 ### Extracting results from a t-test
 
 ```{r,echo=F}
