@@ -6,3 +6,13 @@ The primary resource for the course is the online book available on GitHub: <a h
 
 Find the course website at **<a href="https://enricotoffalini.github.io/Basics-R/" target="_blank">https://enricotoffalini.github.io/Basics-R/</a>**
 
+
+**How to update the website**
+
+The course website is a Quarto website (`_quarto.yml`). Edit the `.Qmd` sources, then run from the repository root:
+
+```
+quarto render
+```
+
+The site is written to `docs/` (generated output: do not edit by hand) and computations are stored in `_freeze/`, so only modified files are re-executed. Commit `docs/` and `_freeze/` together with the sources; pushing to `main` publishes `docs/` on GitHub Pages (`.github/workflows/static.yml`; nothing is rendered on GitHub). Datasets and slide PDFs linked for download are listed under `resources:` in `_quarto.yml`: add new downloadable files there. Slide PDFs are made with `Slides/_rendering to pdf.R` after rendering.

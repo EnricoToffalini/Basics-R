@@ -1,0 +1,15 @@
+{
+  "hash": "8e2bd6332bc99ff235de3d43d8030a7f",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Working With Strings, a Few Tricks\"\nsubtitle: \"*Basics of R for Data Science*\"\nformat: \n  html:\n    toc: true   \n    toc-depth: 4  \n    toc-expand: 4\n    code-fold: false \n    message: false\neditor: visual\n---\n\n#### Uppercase and lowercase with `toupper()` and `tolower()`\n\n\n::: {.cell}\n\n```{.r .cell-code}\ntext = \"This is a String\"\n\ntoupper(text)\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n[1] \"THIS IS A STRING\"\n```\n\n\n:::\n\n```{.r .cell-code}\ntolower(text)\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n[1] \"this is a string\"\n```\n\n\n:::\n:::\n\n\n#### Replace a character with another in a string using `gsub()`\n\n\n::: {.cell}\n\n```{.r .cell-code}\ntext = \"this is a string\"\n\ngsub(\"t\", \"X\", text)\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n[1] \"Xhis is a sXring\"\n```\n\n\n:::\n:::\n\n\n#### Removing all punctuation\n\n\n::: {.cell}\n\n```{.r .cell-code}\ntext = \"This is a string. For some reason, there is some punctuation.\"\n\ngsub(\"[[:punct:]]\", \"\", text)\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n[1] \"This is a string For some reason there is some punctuation\"\n```\n\n\n:::\n:::\n\n\n#### Removing all digits\n\n\n::: {.cell}\n\n```{.r .cell-code}\ntext = \"in this string231 there are some 1241useless digits 443perhaps because 3434someone copied and pasted 985from a pdf\"\n\ngsub(\"[[:digit:]]\", \"\", text)\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n[1] \"in this string there are some useless digits perhaps because someone copied and pasted from a pdf\"\n```\n\n\n:::\n:::\n\n\n#### Splitting a string into a vector of words\n\n\n::: {.cell}\n\n```{.r .cell-code}\ntext = \"this is a string\"\n\nunlist(strsplit(text, split=\" \"))\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n[1] \"this\"   \"is\"     \"a\"      \"string\"\n```\n\n\n:::\n:::\n\n\n*Note:* `strsplit()` actually does the job, but it returns a list; if you want a vector for convenience, use `unlist()` on the output list\n\n#### Removing a few cases from a vector\n\n\n::: {.cell}\n\n```{.r .cell-code}\nmyVect = c(\"this\", \"is\", \"a\", \"vector\")\n\nmyVect[!myVect %in% c(\"is\", \"a\")]\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n[1] \"this\"   \"vector\"\n```\n\n\n:::\n:::\n\n\n#### Counting characters in strings\n\n\n::: {.cell}\n\n```{.r .cell-code}\nmyVect = c(\"this\", \"is\", \"a\", \"vector\")\n\nnchar(myVect)\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n[1] 4 2 1 6\n```\n\n\n:::\n:::\n\n\n#### Turning a vector of strings into a single string\n\n\n::: {.cell}\n\n```{.r .cell-code}\nmyVect = c(\"this\", \"is\", \"a\", \"vector\")\n\npaste(myVect, collapse=\" \")\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n[1] \"this is a vector\"\n```\n\n\n:::\n:::\n\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

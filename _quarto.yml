@@ -1,0 +1,89 @@
+project:
+  type: website
+  output-dir: docs
+  render:
+    - "index.Qmd"
+    - "Slides/*.Qmd"
+    - "Examples-Tutorials/*.Qmd"
+    - "Exercises/*.Qmd"
+    - "!Slides/00.prove.Qmd"
+  # files linked for download (not detected automatically by Quarto)
+  resources:
+    - "Slides/*.pdf"
+    - "Slides/data/*"
+    - "Exercises/datasets/*"
+    - "Exercises/wordcloud/*"
+
+website:
+  title: "Basics of R for Data Science"
+  site-url: "https://enricotoffalini.github.io/Basics-R/"
+  repo-url: "https://github.com/EnricoToffalini/Basics-R"
+  favicon: figures/faviconpsicostat2.png
+  page-navigation: false
+  navbar:
+    logo: figures/psicostatLogoNav.png
+    logo-href: "https://psicostat.github.io/"
+    left:
+      - href: index.Qmd
+        text: Home
+      - text: Slides
+        menu:
+          - href: Slides/0.GettingStartedR.Qmd
+            text: "Intro, Getting Started with R"
+          - href: Slides/1.1.FirstStepsR-1.Qmd
+            text: "Basic Operations, Basic Types of Data"
+          - href: Slides/1.2.FirstStepsR-2.Qmd
+            text: "Environment, Packages, Functions, Import/Export"
+          - href: Slides/2.1.DataStruc-1.Qmd
+            text: "Data Structures: Vectors"
+          - href: Slides/2.2.DataStruc-2.Qmd
+            text: "Data Structures: Data Frames"
+          - href: Slides/2.3.DataStruc-3.Qmd
+            text: "Data Structures: Factors, Lists, Matrices, Arrays"
+          - href: Slides/3.Programming.Qmd
+            text: "Basics of Programming"
+      - text: Exercises
+        menu:
+          - href: Exercises/1-Exercises-First-steps.Qmd
+            text: "First steps in R"
+          - href: Exercises/2.1-Exercises-Vectors.Qmd
+            text: "Vectors"
+          - href: Exercises/2.2-Exercises-Dataframes.Qmd
+            text: "Dataframes"
+          - href: Exercises/3-Exercises-ProgrMore.Qmd
+            text: "Basics of Programming... with some data science"
+          - href: Exercises/4-Exercises-LikeDataScientist.Qmd
+            text: "Programming like a data scientist"
+          - href: Exercises/5-Exercises-DataNightmare.Qmd
+            text: "The data nightmare exercise"
+          - text: "---"
+          - text: "Beyond this course"
+          - href: Exercises/10-WordCloud.Qmd
+            text: "Creating a word cloud"
+          - href: Exercises/11-BasicsSimulations.Qmd
+            text: "Basics of statistical data simulation"
+          - href: Exercises/12-MonteCarloSim.Qmd
+            text: "Monte Carlo simulations for power analysis"
+          - href: Exercises/13-MonteCarloLogistic.Qmd
+            text: "Monte Carlo power: mixed-effects logistic regression"
+      - text: Extra
+        menu:
+          - href: Examples-Tutorials/TutorialShortcuts.Qmd
+            text: "RStudio shortcuts"
+          - href: Examples-Tutorials/TutorialExtensions.Qmd
+            text: "File extensions (in Windows)"
+          - href: Examples-Tutorials/ExampleStrings.Qmd
+            text: "Working with strings"
+    right:
+      - icon: github
+        href: "https://github.com/EnricoToffalini/Basics-R"
+        aria-label: GitHub repository
+
+format:
+  html:
+    theme: [default, assets/site.scss]
+    css: assets/custom.css
+    include-after-body: assets/navbarlogo.html
+
+execute:
+  freeze: auto
