@@ -1,0 +1,29 @@
+/*-- scss:defaults --*/
+
+$accent: #760000;
+
+$navbar-bg: $accent;
+$navbar-fg: rgba(255, 255, 255, .85);
+$navbar-hl: #ffffff;
+$link-color: $accent;
+
+/*-- scss:rules --*/
+
+#quarto-header .navbar {
+  box-shadow: none;
+}
+
+.navbar-brand img {
+  max-height: 40px;
+  margin-right: 0.9rem;
+}
+
+.navbar-nav .nav-link.active {
+  text-decoration: underline;
+  text-underline-offset: 6px;
+  text-decoration-thickness: 2px;
+}
+
+.dropdown-header {
+  font-style: italic;
+}

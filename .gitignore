@@ -9,3 +9,14 @@ Slides/00.prove.Qmd
 Slides/00.prove.html
 Slides/00.prove_files/
 Slides/myExportedData.csv
+
+/.quarto/
+
+# knitr chunk caches (regenerated locally)
+*_cache/
+
+# intermediate figure folders left next to the sources (the site is in docs/)
+/Slides/*_files/
+/Exercises/*_files/
+/Examples-Tutorials/*_files/
+/*_files/

@@ -1,0 +1,1 @@
+Sitemap: https://enricotoffalini.github.io/Basics-R/sitemap.xml

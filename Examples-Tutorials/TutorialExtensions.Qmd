@@ -1,13 +1,10 @@
 ---
 title: "Understanding and Showing File Extensions - in Windows"
 subtitle: "*Basics of R for Data Science*"
-include-in-header: ../assets/header.html
 format: 
   html:
-    self-contained: true
     code-fold: false 
     message: false
-    css: "../assets/custom.css"
 editor: visual
 ---
 

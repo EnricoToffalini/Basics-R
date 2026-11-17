@@ -2,16 +2,13 @@
 title: "Basics of R for Data Science"
 subtitle: "PhD Course in Psychological Sciences - University of Padova"
 author: "<a href='https://enricotoffalini.github.io/' target='blank'>Enrico Toffalini</a>"
-include-in-header: assets/header.html
 format: 
   html:
-    self-contained: true
     toc: true   
     toc-depth: 3 
     toc-expand: 3 
     code-fold: false 
     message: false
-    css: "assets/custom.css"
 editor: visual
 ---
 
