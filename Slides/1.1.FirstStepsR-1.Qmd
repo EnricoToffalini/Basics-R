@@ -45,7 +45,7 @@ str(age)
 ## Create, name objects
 ### Assignment operators
 
-In R, both the assignment operators "**`=`**" and "**`<-`**" (and actually even "**`->`**") can be used to assign values to objects. That said, "**`<-`**" is considered more traditional in R and often preferred for clarity, also because it allows differentiating assignment from other uses of "**`=`**". 
+In R, both the assignment operators "**`=`**" and "**`<-`**" (and actually even "**`->`**", "**`<<-`**", and "**`->>`**") can be used to assign values to objects. That said, "**`<-`**" is considered more traditional in R and often preferred for clarity, also because it allows differentiating assignment from other uses of "**`=`**". 
 
 ```{r}
 # these two commands do the same thing 
@@ -99,8 +99,8 @@ Across different languages, *naming conventions* for longer, multi-word variable
 | `-` | Subtraction | `9 - 4.3`   |`4.7` |
 | `*` | Multiplication | `7 * 1.4`    |`9.8` |
 | `/` | Division| `9 / 12`   |`0.75` |
-| `%/%` | Floor division| `13 %/% 4`   |`3` |
-| `%%` | Modulus| `13 %% 4`   |`1` |
+| `%/%` | Floor division| `12 %/% 5`   |`2` |
+| `%%` | Modulus| `21 %% 5`   |`1` |
 | `^` | Exponentiation| `15 ^ 2`   |`225` |
 
 (also useful: object "`pi`" contains ``r pi``)
@@ -185,7 +185,7 @@ So far, we have encountered at least two types of data:
 
 **Numeric** data can actually be of two types: ***double*** (i.e., "*double-precision floating-point*"), that is, with decimals like `11.5`, and ***integer***, like `20`.
 
-In fact, R treats numeric values as *double* by default (even if without decimals). To specify numbers as integers, explicitly add an **`L`** after the number, like `age = 20L` (you likely **will not** need this, unless you explicitly need integers for specific purposes, such as saving memory).
+In fact, R treats all numeric values as *double* by default (even if without decimals). To specify numbers as integers, explicitly add an **`L`** after the number, like `age = 20L` (you likely **will not** need this, unless you explicitly need integers for specific purposes, such as saving memory).
 
 
 ## Basic types of data
@@ -207,7 +207,7 @@ myName > "Alexander" # is my name larger than Alexander? (really?!)
 
 
 ## Basic types of data
-### basic working with strings: paste(), paste0(), and more
+### basic working with strings: `paste()`, `paste0()`, and more
 
 **`paste()`** joins text with spaces, **`paste0()`** joins it without a separator.
 ```{r, echo=F}
@@ -250,13 +250,13 @@ The **`typeof()`** function tells you what type of data you are handling:
 myName = "Enrico"
 prof = TRUE
 coursesTaught = 4L
-age = 37
+hoursTaught = 125
 
 # see data types
 typeof(myName)
 typeof(prof)
 typeof(coursesTaught)
-typeof(age)
+typeof(hoursTaught)
 ```
 
 
@@ -280,12 +280,12 @@ is.null(NULL)
 
 You may also check the data type directly with the `is.*` functions:
 ```{r}
-is.numeric(age)
-is.character(age)
-is.infinite(age/0)
+is.numeric(hoursTaught)
+is.character(hoursTaught)
+is.infinite(hoursTaught/0)
 is.logical(prof)
 is.integer(coursesTaught)
-is.integer(age)
+is.integer(hoursTaught)
 is.na(myName) # checks if a value is missing (i.e., NA) 
 ```
 

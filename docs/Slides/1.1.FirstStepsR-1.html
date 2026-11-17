@@ -1096,7 +1096,7 @@ Enrico Toffalini
 <section id="create-name-objects-1" class="slide level2">
 <h2>Create, name objects</h2>
 <h3 id="assignment-operators">Assignment operators</h3>
-<p>In R, both the assignment operators “<strong><code>=</code></strong>” and “<strong><code>&lt;-</code></strong>” (and actually even “<strong><code>-&gt;</code></strong>”) can be used to assign values to objects. That said, “<strong><code>&lt;-</code></strong>” is considered more traditional in R and often preferred for clarity, also because it allows differentiating assignment from other uses of “<strong><code>=</code></strong>”.</p>
+<p>In R, both the assignment operators “<strong><code>=</code></strong>” and “<strong><code>&lt;-</code></strong>” (and actually even “<strong><code>-&gt;</code></strong>”, “<strong><code>&lt;&lt;-</code></strong>”, and “<strong><code>-&gt;&gt;</code></strong>”) can be used to assign values to objects. That said, “<strong><code>&lt;-</code></strong>” is considered more traditional in R and often preferred for clarity, also because it allows differentiating assignment from other uses of “<strong><code>=</code></strong>”.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a aria-hidden="true" tabindex="-1"></a><span class="co"># these two commands do the same thing </span></span>
 <span id="cb8-2"><a aria-hidden="true" tabindex="-1"></a>age <span class="ot">&lt;-</span> <span class="dv">20</span></span>
@@ -1172,13 +1172,13 @@ Enrico Toffalini
 <tr class="odd">
 <td><code>%/%</code></td>
 <td>Floor division</td>
-<td><code>13 %/% 4</code></td>
-<td><code>3</code></td>
+<td><code>12 %/% 5</code></td>
+<td><code>2</code></td>
 </tr>
 <tr class="even">
 <td><code>%%</code></td>
 <td>Modulus</td>
-<td><code>13 %% 4</code></td>
+<td><code>21 %% 5</code></td>
 <td><code>1</code></td>
 </tr>
 <tr class="odd">
@@ -1388,7 +1388,7 @@ Enrico Toffalini
 <li><p><strong>logical/Boolean</strong> (<code>TRUE</code>, <code>FALSE</code>).</p></li>
 </ul>
 <p><strong>Numeric</strong> data can actually be of two types: <strong><em>double</em></strong> (i.e., “<em>double-precision floating-point</em>”), that is, with decimals like <code>11.5</code>, and <strong><em>integer</em></strong>, like <code>20</code>.</p>
-<p>In fact, R treats numeric values as <em>double</em> by default (even if without decimals). To specify numbers as integers, explicitly add an <strong><code>L</code></strong> after the number, like <code>age = 20L</code> (you likely <strong>will not</strong> need this, unless you explicitly need integers for specific purposes, such as saving memory).</p>
+<p>In fact, R treats all numeric values as <em>double</em> by default (even if without decimals). To specify numbers as integers, explicitly add an <strong><code>L</code></strong> after the number, like <code>age = 20L</code> (you likely <strong>will not</strong> need this, unless you explicitly need integers for specific purposes, such as saving memory).</p>
 </section>
 <section id="basic-types-of-data-1" class="slide level2">
 <h2>Basic types of data</h2>
@@ -1415,7 +1415,7 @@ Enrico Toffalini
 </section>
 <section id="basic-types-of-data-2" class="slide level2">
 <h2>Basic types of data</h2>
-<h3 id="basic-working-with-strings-paste-paste0-and-more">basic working with strings: paste(), paste0(), and more</h3>
+<h3 id="basic-working-with-strings-paste-paste0-and-more">basic working with strings: <code>paste()</code>, <code>paste0()</code>, and more</h3>
 <p><strong><code>paste()</code></strong> joins text with spaces, <strong><code>paste0()</code></strong> joins it without a separator.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(<span class="st">&quot;Hello&quot;</span>, myName)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1485,7 +1485,7 @@ Enrico Toffalini
 <div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a aria-hidden="true" tabindex="-1"></a>myName <span class="ot">=</span> <span class="st">&quot;Enrico&quot;</span></span>
 <span id="cb41-2"><a aria-hidden="true" tabindex="-1"></a>prof <span class="ot">=</span> <span class="cn">TRUE</span></span>
 <span id="cb41-3"><a aria-hidden="true" tabindex="-1"></a>coursesTaught <span class="ot">=</span> <span class="dv">4</span>L</span>
-<span id="cb41-4"><a aria-hidden="true" tabindex="-1"></a>age <span class="ot">=</span> <span class="dv">37</span></span>
+<span id="cb41-4"><a aria-hidden="true" tabindex="-1"></a>hoursTaught <span class="ot">=</span> <span class="dv">125</span></span>
 <span id="cb41-5"><a aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb41-6"><a aria-hidden="true" tabindex="-1"></a><span class="co"># see data types</span></span>
 <span id="cb41-7"><a aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(myName)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1500,7 +1500,7 @@ Enrico Toffalini
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] &quot;integer&quot;</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(age)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(hoursTaught)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] &quot;double&quot;</code></pre>
 </div>
@@ -1538,15 +1538,15 @@ Enrico Toffalini
 <h2>Basic types of data</h2>
 <p>You may also check the data type directly with the <code>is.*</code> functions:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">is.numeric</span>(age)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">is.numeric</span>(hoursTaught)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">is.character</span>(age)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">is.character</span>(hoursTaught)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">is.infinite</span>(age<span class="sc">/</span><span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">is.infinite</span>(hoursTaught<span class="sc">/</span><span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
@@ -1558,7 +1558,7 @@ Enrico Toffalini
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">is.integer</span>(age)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">is.integer</span>(hoursTaught)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE</code></pre>
 </div>
