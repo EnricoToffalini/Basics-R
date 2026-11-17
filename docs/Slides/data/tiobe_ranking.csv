@@ -1,0 +1,21 @@
+rank,language,rating
+1,"Python",20.86
+2,"C",11.48
+3,"Java",8.89
+4,"C++",8.35
+5,"C#",3.39
+6,"JavaScript",2.42
+7,"R",2.27
+8,"SQL",1.91
+9,"Visual Basic",1.88
+10,"Go",1.69
+11,"Rust",1.63
+12,"PHP",1.58
+13,"Fortran",1.21
+14,"Scratch",1.15
+15,"Perl",1.14
+16,"MATLAB",1.08
+17,"Assembly language",0.92
+18,"Swift",0.89
+19,"Delphi/Object Pascal",0.78
+20,"Dart",0.74
