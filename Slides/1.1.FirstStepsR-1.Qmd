@@ -23,7 +23,7 @@ execute:
 
 ## Create, name objects
 
-In R, **everything is an object**: variables, vectors, dataframes, functions, even entire environments.
+In R, **everything can be treated as an object**: variables, vectors, dataframes, functions, even entire environments.
 
 Let's create a variable named "`age`" that contains a single numerical value:
 

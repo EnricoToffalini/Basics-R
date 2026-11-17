@@ -501,7 +501,7 @@
     "href": "Slides/1.1.FirstStepsR-1.html#create-name-objects",
     "title": "Basic Operations, Basic Types of Data",
     "section": "Create, name objects",
-    "text": "Create, name objects\nIn R, everything is an object: variables, vectors, dataframes, functions, even entire environments.\nLet’s create a variable named “age” that contains a single numerical value:\n\nage = 20 # assign number 20 to variable named \"age\"\n\nNow let’s simply inspect its content:\n\nage\n\n[1] 20\n\n# alternative way of showing content, \n# useful in programming when within functions or loops\nprint(age)\n\n[1] 20\n\n# for more complex data structures the \"str\" function may be useful\nstr(age)\n\n num 20"
+    "text": "Create, name objects\nIn R, everything can be treated as an object: variables, vectors, dataframes, functions, even entire environments.\nLet’s create a variable named “age” that contains a single numerical value:\n\nage = 20 # assign number 20 to variable named \"age\"\n\nNow let’s simply inspect its content:\n\nage\n\n[1] 20\n\n# alternative way of showing content, \n# useful in programming when within functions or loops\nprint(age)\n\n[1] 20\n\n# for more complex data structures the \"str\" function may be useful\nstr(age)\n\n num 20"
   },
   {
     "objectID": "Slides/1.1.FirstStepsR-1.html#create-name-objects-1",
