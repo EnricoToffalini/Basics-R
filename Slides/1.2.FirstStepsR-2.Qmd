@@ -239,9 +239,9 @@ help(rnorm) # this does the same
 
 | Error message | What to check |
 |---|---|
-| `object 'x' not found` | name, or a line not run yet |
-| `could not find function "fisherz"` | Load `library(psych)` |
 | `there is no package called 'psych'` | Install the package first |
+| `could not find function "fisherz"` | Load `library(psych)` |
+| `object 'x' not found` | name, or a line not run yet |
 | `unexpected symbol` / `unexpected ')'` | Commas, parentheses, quotes |
 | `cannot open file` | File name or path |
 | `non-numeric argument to binary operator` | number stored as text? |
@@ -266,7 +266,7 @@ If you import/export anything (*data*, *figures*, *workspaces*, etc.) you need t
 
 As a general rule:
 
-- When you open R or the RStudio app, the default WD may be the `documents` folder (in Windows) or the `home directory` (e.g., `/home/username`; in Linux or macOS);
+- When you open R or the RStudio app, the default WD may your `documents` folder (in Windows) or your `home directory` (e.g., `/home/username`; in Linux or macOS);
 
 - This default may be changed at any time from inside RStudio via `Tools > Global Options... > General`;
 
@@ -307,8 +307,7 @@ setwd( "C:/Users/enric/" )
 
 - **ABSOLUTE paths**: indicate the full path **from the root**, e.g., `"C:/Users/enric/"` (in Linux it might be `"/home/enric/"`; in macOS `"/Users/enric/"`)
 
-
-- **RELATIVE paths**: indicate the path starting from *(relative to)* the current directory. Most often, you prefer this for import/export, so the same script works on any device; e.g., `"figures/"` or `../figures/`:
+- **RELATIVE paths**: indicate the path starting from *(relative to)* the current directory. Most often, you prefer this for import/export, so the same script works on any device; e.g., `"figures/"` or `../figures/`
   - `png(filename = "figures/Fig1.png")` saves a file `Fig1.png` into `figures`, which is a subfolder **inside** the current WD; 
   - `png(filename = "../figures/Fig1.png")` saves a file `Fig1.png` into `figures`, which is a folder **outside, one level up** (`"../"`) from the current WD
 

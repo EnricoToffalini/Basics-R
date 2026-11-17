@@ -1354,14 +1354,14 @@ loaded via a namespace (and not attached):
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">5</span>, <span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">15</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 109.12561  94.49578  73.04991  94.97702  77.80499</code></pre>
+<pre><code>[1]  75.38222  85.76437  94.26437 105.08416  82.28577</code></pre>
 </div>
 </div>
 <p><strong>Positional matching</strong> - argument names may be omitted if placed in the correct order</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="dv">100</span>, <span class="dv">15</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1]  90.43153  98.26990 123.33851 116.56549  92.68403</code></pre>
+<pre><code>[1]  96.88712  90.62131 104.77531  98.78010  91.92415</code></pre>
 </div>
 </div>
 </section>
@@ -1371,7 +1371,7 @@ loaded via a namespace (and not attached):
 <div class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1]  1.6923520  0.7447647 -1.1679242 -0.7605575 -0.0665090</code></pre>
+<pre><code>[1] -0.54426680  0.87785128 -0.09772879  1.97352174  0.44375369</code></pre>
 </div>
 </div>
 <p><em><strong>Errors</strong></em> - however, omitting mandatory arguments will result in an <em>Error</em></p>
@@ -1401,11 +1401,11 @@ loaded via a namespace (and not attached):
 <div class="cell">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -1.7973226 -0.7628698  0.4316835</code></pre>
+<pre><code>[1] 0.5578005 1.7443403 1.9692890</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1]  0.6766151  1.0207687 -0.7402492</code></pre>
+<pre><code>[1] -0.7956037 -0.2073927  0.6115656</code></pre>
 </div>
 </div>
 </div>
@@ -1463,16 +1463,16 @@ loaded via a namespace (and not attached):
 </thead>
 <tbody>
 <tr class="odd">
-<td><code>object &#39;x&#39; not found</code></td>
-<td>name, or a line not run yet</td>
+<td><code>there is no package called &#39;psych&#39;</code></td>
+<td>Install the package first</td>
 </tr>
 <tr class="even">
 <td><code>could not find function &quot;fisherz&quot;</code></td>
 <td>Load <code>library(psych)</code></td>
 </tr>
 <tr class="odd">
-<td><code>there is no package called &#39;psych&#39;</code></td>
-<td>Install the package first</td>
+<td><code>object &#39;x&#39; not found</code></td>
+<td>name, or a line not run yet</td>
 </tr>
 <tr class="even">
 <td><code>unexpected symbol</code> / <code>unexpected &#39;)&#39;</code></td>
@@ -1508,7 +1508,7 @@ loaded via a namespace (and not attached):
 <h2>Set up Working Directory</h2>
 <p>As a general rule:</p>
 <ul>
-<li><p>When you open R or the RStudio app, the default WD may be the <code>documents</code> folder (in Windows) or the <code>home directory</code> (e.g., <code>/home/username</code>; in Linux or macOS);</p></li>
+<li><p>When you open R or the RStudio app, the default WD may your <code>documents</code> folder (in Windows) or your <code>home directory</code> (e.g., <code>/home/username</code>; in Linux or macOS);</p></li>
 <li><p>This default may be changed at any time from inside RStudio via <code>Tools &gt; Global Options... &gt; General</code>;</p></li>
 <li><p>If you open a file (e.g., a <code>.R</code> script) using RStudio, the WD is set to that file’s location (unless the RStudio app was already open before);</p></li>
 <li><p>However, you can set a new WD at any time from within the R code, using the <strong><code>setwd()</code></strong> function, for example:</p></li>
@@ -1540,7 +1540,7 @@ loaded via a namespace (and not attached):
 <h2>Absolute vs Relative paths</h2>
 <ul>
 <li><p><strong>ABSOLUTE paths</strong>: indicate the full path <strong>from the root</strong>, e.g., <code>&quot;C:/Users/enric/&quot;</code> (in Linux it might be <code>&quot;/home/enric/&quot;</code>; in macOS <code>&quot;/Users/enric/&quot;</code>)</p></li>
-<li><p><strong>RELATIVE paths</strong>: indicate the path starting from <em>(relative to)</em> the current directory. Most often, you prefer this for import/export, so the same script works on any device; e.g., <code>&quot;figures/&quot;</code> or <code>../figures/</code>:</p>
+<li><p><strong>RELATIVE paths</strong>: indicate the path starting from <em>(relative to)</em> the current directory. Most often, you prefer this for import/export, so the same script works on any device; e.g., <code>&quot;figures/&quot;</code> or <code>../figures/</code></p>
 <ul>
 <li><code>png(filename = &quot;figures/Fig1.png&quot;)</code> saves a file <code>Fig1.png</code> into <code>figures</code>, which is a subfolder <strong>inside</strong> the current WD;</li>
 <li><code>png(filename = &quot;../figures/Fig1.png&quot;)</code> saves a file <code>Fig1.png</code> into <code>figures</code>, which is a folder <strong>outside, one level up</strong> (<code>&quot;../&quot;</code>) from the current WD</li>

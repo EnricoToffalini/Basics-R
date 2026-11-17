@@ -837,21 +837,21 @@
     "href": "Slides/1.2.FirstStepsR-2.html#functions-and-arguments-2",
     "title": "Environment, Packages, Functions, Import/Export",
     "section": "Functions and arguments",
-    "text": "Functions and arguments\narguments\n\nvalues or variables you pass to a function as input, or to control its behavior\n\nrnorm() will generate “n” random numbers from a normal distribution with “mean” as the average and “sd” as the standard deviation:\n\nrnorm(n = 5, mean = 100, sd = 15)\n\n[1] 109.12561  94.49578  73.04991  94.97702  77.80499\n\n\nPositional matching - argument names may be omitted if placed in the correct order\n\nrnorm(5, 100, 15)\n\n[1]  90.43153  98.26990 123.33851 116.56549  92.68403"
+    "text": "Functions and arguments\narguments\n\nvalues or variables you pass to a function as input, or to control its behavior\n\nrnorm() will generate “n” random numbers from a normal distribution with “mean” as the average and “sd” as the standard deviation:\n\nrnorm(n = 5, mean = 100, sd = 15)\n\n[1]  75.38222  85.76437  94.26437 105.08416  82.28577\n\n\nPositional matching - argument names may be omitted if placed in the correct order\n\nrnorm(5, 100, 15)\n\n[1]  96.88712  90.62131 104.77531  98.78010  91.92415"
   },
   {
     "objectID": "Slides/1.2.FirstStepsR-2.html#functions-and-arguments-3",
     "href": "Slides/1.2.FirstStepsR-2.html#functions-and-arguments-3",
     "title": "Environment, Packages, Functions, Import/Export",
     "section": "Functions and arguments",
-    "text": "Functions and arguments\nDefault arguments - a function might still work even if some arguments are omitted, if it can use its own default values (in this case “mean=0, sd=1”)\n\nrnorm(n = 5)\n\n[1]  1.6923520  0.7447647 -1.1679242 -0.7605575 -0.0665090\n\n\nErrors - however, omitting mandatory arguments will result in an Error\n\nrnorm(mean = 100, sd = 15)\n\nError in rnorm(mean = 100, sd = 15): argument \"n\" is missing, with no default\n\n\nWarnings - some inputs may cause the function to produce Warnings and bad output, but they do not stop code execution\n\nrnorm(n = 5, mean = 100, sd = -15)\n\nWarning in rnorm(n = 5, mean = 100, sd = -15): NAs produced\n\n\n[1] NaN NaN NaN NaN NaN"
+    "text": "Functions and arguments\nDefault arguments - a function might still work even if some arguments are omitted, if it can use its own default values (in this case “mean=0, sd=1”)\n\nrnorm(n = 5)\n\n[1] -0.54426680  0.87785128 -0.09772879  1.97352174  0.44375369\n\n\nErrors - however, omitting mandatory arguments will result in an Error\n\nrnorm(mean = 100, sd = 15)\n\nError in rnorm(mean = 100, sd = 15): argument \"n\" is missing, with no default\n\n\nWarnings - some inputs may cause the function to produce Warnings and bad output, but they do not stop code execution\n\nrnorm(n = 5, mean = 100, sd = -15)\n\nWarning in rnorm(n = 5, mean = 100, sd = -15): NAs produced\n\n\n[1] NaN NaN NaN NaN NaN"
   },
   {
     "objectID": "Slides/1.2.FirstStepsR-2.html#functions-and-arguments-4",
     "href": "Slides/1.2.FirstStepsR-2.html#functions-and-arguments-4",
     "title": "Environment, Packages, Functions, Import/Export",
     "section": "Functions and arguments",
-    "text": "Functions and arguments\nReproducible randomness: set.seed()\n\n\nRandom draws normally change from one call to the next:\n\nrnorm(3)\n\n[1] -1.7973226 -0.7628698  0.4316835\n\nrnorm(3)\n\n[1]  0.6766151  1.0207687 -0.7402492\n\n\n\n\nSetting the seed reproduces the same sequence:\n\nset.seed(20261117)\nrnorm(3)\n\n[1] -0.01725691  0.11903041 -1.01027208\n\nset.seed(20261117)\nrnorm(3)\n\n[1] -0.01725691  0.11903041 -1.01027208\n\n\n\n\n\n\n\n\n\n\nTip\n\n\nSet the seed once before a simulation script if you aim to ensure exact reproducibility (it may not be enough with parallelized computing)."
+    "text": "Functions and arguments\nReproducible randomness: set.seed()\n\n\nRandom draws normally change from one call to the next:\n\nrnorm(3)\n\n[1] 0.5578005 1.7443403 1.9692890\n\nrnorm(3)\n\n[1] -0.7956037 -0.2073927  0.6115656\n\n\n\n\nSetting the seed reproduces the same sequence:\n\nset.seed(20261117)\nrnorm(3)\n\n[1] -0.01725691  0.11903041 -1.01027208\n\nset.seed(20261117)\nrnorm(3)\n\n[1] -0.01725691  0.11903041 -1.01027208\n\n\n\n\n\n\n\n\n\n\nTip\n\n\nSet the seed once before a simulation script if you aim to ensure exact reproducibility (it may not be enough with parallelized computing)."
   },
   {
     "objectID": "Slides/1.2.FirstStepsR-2.html#functions-and-arguments-5",
@@ -865,7 +865,7 @@
     "href": "Slides/1.2.FirstStepsR-2.html#some-common-errors",
     "title": "Environment, Packages, Functions, Import/Export",
     "section": "Some common errors",
-    "text": "Some common errors\n\n\n\nError message\nWhat to check\n\n\n\n\nobject 'x' not found\nname, or a line not run yet\n\n\ncould not find function \"fisherz\"\nLoad library(psych)\n\n\nthere is no package called 'psych'\nInstall the package first\n\n\nunexpected symbol / unexpected ')'\nCommas, parentheses, quotes\n\n\ncannot open file\nFile name or path\n\n\nnon-numeric argument to binary operator\nnumber stored as text?\n\n\n\nRead the message and locate the first failing line. RStudio generally stops execution at first error."
+    "text": "Some common errors\n\n\n\nError message\nWhat to check\n\n\n\n\nthere is no package called 'psych'\nInstall the package first\n\n\ncould not find function \"fisherz\"\nLoad library(psych)\n\n\nobject 'x' not found\nname, or a line not run yet\n\n\nunexpected symbol / unexpected ')'\nCommas, parentheses, quotes\n\n\ncannot open file\nFile name or path\n\n\nnon-numeric argument to binary operator\nnumber stored as text?\n\n\n\nRead the message and locate the first failing line. RStudio generally stops execution at first error."
   },
   {
     "objectID": "Slides/1.2.FirstStepsR-2.html#set-up-working-directory",
@@ -879,7 +879,7 @@
     "href": "Slides/1.2.FirstStepsR-2.html#set-up-working-directory-1",
     "title": "Environment, Packages, Functions, Import/Export",
     "section": "Set up Working Directory",
-    "text": "Set up Working Directory\nAs a general rule:\n\nWhen you open R or the RStudio app, the default WD may be the documents folder (in Windows) or the home directory (e.g., /home/username; in Linux or macOS);\nThis default may be changed at any time from inside RStudio via Tools &gt; Global Options... &gt; General;\nIf you open a file (e.g., a .R script) using RStudio, the WD is set to that file’s location (unless the RStudio app was already open before);\nHowever, you can set a new WD at any time from within the R code, using the setwd() function, for example:\n\n\nsetwd(\"C:/Users/enric/\")"
+    "text": "Set up Working Directory\nAs a general rule:\n\nWhen you open R or the RStudio app, the default WD may your documents folder (in Windows) or your home directory (e.g., /home/username; in Linux or macOS);\nThis default may be changed at any time from inside RStudio via Tools &gt; Global Options... &gt; General;\nIf you open a file (e.g., a .R script) using RStudio, the WD is set to that file’s location (unless the RStudio app was already open before);\nHowever, you can set a new WD at any time from within the R code, using the setwd() function, for example:\n\n\nsetwd(\"C:/Users/enric/\")"
   },
   {
     "objectID": "Slides/1.2.FirstStepsR-2.html#set-up-working-directory-2",
@@ -893,7 +893,7 @@
     "href": "Slides/1.2.FirstStepsR-2.html#absolute-vs-relative-paths",
     "title": "Environment, Packages, Functions, Import/Export",
     "section": "Absolute vs Relative paths",
-    "text": "Absolute vs Relative paths\n\nABSOLUTE paths: indicate the full path from the root, e.g., \"C:/Users/enric/\" (in Linux it might be \"/home/enric/\"; in macOS \"/Users/enric/\")\nRELATIVE paths: indicate the path starting from (relative to) the current directory. Most often, you prefer this for import/export, so the same script works on any device; e.g., \"figures/\" or ../figures/:\n\npng(filename = \"figures/Fig1.png\") saves a file Fig1.png into figures, which is a subfolder inside the current WD;\npng(filename = \"../figures/Fig1.png\") saves a file Fig1.png into figures, which is a folder outside, one level up (\"../\") from the current WD"
+    "text": "Absolute vs Relative paths\n\nABSOLUTE paths: indicate the full path from the root, e.g., \"C:/Users/enric/\" (in Linux it might be \"/home/enric/\"; in macOS \"/Users/enric/\")\nRELATIVE paths: indicate the path starting from (relative to) the current directory. Most often, you prefer this for import/export, so the same script works on any device; e.g., \"figures/\" or ../figures/\n\npng(filename = \"figures/Fig1.png\") saves a file Fig1.png into figures, which is a subfolder inside the current WD;\npng(filename = \"../figures/Fig1.png\") saves a file Fig1.png into figures, which is a folder outside, one level up (\"../\") from the current WD"
   },
   {
     "objectID": "Slides/1.2.FirstStepsR-2.html#rstudio-projects",
@@ -1446,7 +1446,7 @@
     "href": "Examples-Tutorials/TutorialExtensions.html#ok-now-how-can-i-view-file-extensions-in-windows",
     "title": "Understanding and Showing File Extensions - in Windows",
     "section": "Ok, now how can I view file extensions in Windows?",
-    "text": "Ok, now how can I view file extensions in Windows?\nHere’s how to do it… The following was done on Windows 11, but other versions of Windows are only slightly different.\n\nStep 0: open a folder - doesn’t matter which, just open any folder!\n\n\nStep 1: open the Folder Options panel\n\n\n\nStep 2: go to the View tab\n\n\n\nStep 3: remove the checkmark from the Hide extensions for known file types option under the Advanced settings menu, so that extensions are NO longer hidden\n\n\n\nStep 4: go back to your folder, or wherever there are files (not just folders), and check that the file extensions are now visible\n\n\n\n⚠️ Be careful! Unhiding the extensions will now show file extensions throughout your operating system, in any folder. From now on, if you accidentally change a file extension (for example while renaming the file) this may affect the default app with which that file is opened (therefore, the file may no longer behave as it did before, until the original extension is restored)"
+    "text": "Ok, now how can I view file extensions in Windows?\nHere’s how to do it… The following was done on Windows 11, but other versions of Windows are only slightly different.\n\nStep 0: open a folder - doesn’t matter which, just open any folder!\nClick View &gt; Show &gt; File name extensions\nThat’s usually enough! However, if this is not available or doesn’t work, try the following…\n\n\nStep 1: open the Folder Options panel\n\n\n\nStep 2: go to the View tab\n\n\n\nStep 3: remove the checkmark from the Hide extensions for known file types option under the Advanced settings menu, so that extensions are NO longer hidden\n\n\n\nStep 4: go back to your folder, or wherever there are files (not just folders), and check that the file extensions are now visible\n\n\n\n⚠️ Be careful! Unhiding the extensions will now show file extensions throughout your operating system, in any folder. From now on, if you accidentally change a file extension (for example while renaming the file) this may affect the default app with which that file is opened (therefore, the file may no longer behave as it did before, until the original extension is restored)"
   },
   {
     "objectID": "Exercises/1-Exercises-First-steps.html",

@@ -10,19 +10,19 @@ editor: visual
 
 A file extension is the short group of letters that comes after the dot (`.`) in a file name — for example:
 
--   `report.pdf` → extension: `.pdf`
--   `photo.jpg` → extension: `.jpg`
--   `script.R` → extension: `.R`
+- `report.pdf` → extension: `.pdf`
+- `photo.jpg` → extension: `.jpg`
+- `script.R` → extension: `.R`
 
 The extension tells the operating system and software what type of file it is, and which program / app should be used to open it.
 
 For instance, these are common associations:
 
--   `.html` → default browser
--   `.docx` → Microsoft Word document
--   `.xlsx` → Excel spreadsheet
--   `.png` → photo viewer
--   `.R` → R file, opened with RStudio
+- `.html` → default browser
+- `.docx` → Microsoft Word document
+- `.xlsx` → Excel spreadsheet
+- `.png` → photo viewer
+- `.R` → R file, opened with RStudio
 
 For better or for worse, Windows tends to hide known file extensions, so you may see something like this (i.e., **NO** file extensions visible next to the file names):
 
@@ -37,6 +37,10 @@ Sometimes, however, you may want to explicitly view & edit the file extensions t
 Here's how to do it... The following was done on Windows 11, but other versions of Windows are only slightly different.
 
 ##### Step 0: open a folder - doesn't matter which, just open any folder!
+
+Click **View > Show > File name extensions** 
+
+That's usually enough! However, if this is not available or doesn't work, try the following...
 
 ##### Step 1: open the `Folder Options` panel
 
