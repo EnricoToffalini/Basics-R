@@ -1,6 +1,13 @@
 <script>
-  // il logo Psicostat apre psicostat.github.io in una nuova scheda
+  // solo l'esagono del logo porta a psicostat.github.io (il titolo resta sulla home del corso)
   document.querySelectorAll('a.navbar-brand-logo').forEach(function (a) {
+    a.href = 'https://psicostat.github.io/';
+  });
+  // tutti i link della navbar si aprono in una nuova scheda
+  // (esclusi il titolo del sito, che resta nella stessa scheda, e i pulsanti dei menu a tendina)
+  document.querySelectorAll('#quarto-header a[href]').forEach(function (a) {
+    if (a.hasAttribute('data-bs-toggle') || a.getAttribute('href') === '#') return;
+    if (a.classList.contains('navbar-brand') && !a.classList.contains('navbar-brand-logo')) return;
     a.target = '_blank';
     a.rel = 'noopener';
   });

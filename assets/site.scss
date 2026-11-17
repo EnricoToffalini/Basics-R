@@ -27,3 +27,9 @@ $link-color: $accent;
 .dropdown-header {
   font-style: italic;
 }
+
+.navbar .dropdown-menu .dropdown-item:hover,
+.navbar .dropdown-menu .dropdown-item:focus {
+  background-color: $accent;
+  color: #ffffff;
+}

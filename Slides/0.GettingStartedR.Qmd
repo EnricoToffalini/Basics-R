@@ -20,10 +20,22 @@ execute:
   echo: true
   output: true
 ---
+## How popular is R?
+
+<div style="font-size:26px;">
+[**TIOBE index**](https://www.tiobe.com/tiobe-index/){target="_blank"} of programming languages popularity: in **November 2026** R ranks **# 7** worldwide (2.27%), its highest position ever, after Python, C, Java, C++, C#, JavaScript (see [R history](https://www.tiobe.com/tiobe-index/r/){target="_blank"})
+</div>
+
+::: {.r-stack}
+<img src="figures/tiobeRanking.png" class="fragment fade-out" data-fragment-index="1" style="width: auto;" />
+
+<img src="figures/tiobeR.png" class="fragment fade-in" data-fragment-index="1" style="width: auto;" />
+:::
+
 ## Why become an R user?
 
 <div style="font-size:30px;">
-- **Mainstream in academia** for statistical computing and data science, increasingly used in business. *Job market advantage!*
+- **Mainstream in academia** for statistical computing and data science, also widely used in business. *Job market advantage!*
 
 - **Free & open-source**: wherever you go, R will be with you at no cost (unlike *MATLAB*, *MPLUS*, *SPSS*, etc.)
 
@@ -31,25 +43,27 @@ execute:
 
 - **Vast community support** thanks to a large and active community (plus *ChatGPT*, *Gemini*, *Lucrez-IA*, etc. know it pretty well!).
 
-- **Huge ecosystem**, >23,000 packages on CRAN, more from other sources (e.g., GitHub), to do amazing stuff with statistical data analysis, machine learning, data visualization, developing webapps [*shiny*], writing reports and even entire books [*bookdown*, *rmarkdown*]; also, it can integrate with *Quarto*, *GitHub*.
+- **Huge ecosystem**, >25,000 packages on CRAN, more from other sources (e.g., GitHub), to do amazing stuff with statistical data analysis, machine learning, data visualization, developing webapps [*shiny*], writing reports and even entire books [*bookdown*, *rmarkdown*]; also, it can integrate with *Quarto*, *GitHub*.
 
 - Facilitates **reproducible scientific research** by sharing code and workflows.
 </div>
 
 ## What you may expect to learn in this course:
 
-<div style="font-size:44px;">
-- Executing fundamental operations and using basic functions; 
+<div style="font-size:40px;">
+- Using basic operations and functions; 
 
-- Working with essential data types and structures;
+- Working with most important data types and structures;
 
-- Gaining some proficiency in managing and manipulating data with vectors and dataframes;
+- Gaining some proficiency in managing and manipulating data with vectors and dataframes; 
 
-- Understanding some fundamental concepts of programming.
+- Understanding some fundamental concepts of programming; 
+
+- Building the foundations to delegate more complex tasks to AI agents... while retaining control. 
 </div>
 
 ##
-### Over the next two years, following this PhD program, you will or may have the opportunity to use R for at least the fundamentals of: 
+### Over the next two years, following this PhD program, you have the opportunity to use R for the fundamentals of...
 
 <div style="font-size:36px;">
 - Core **statistical inference** methods;
@@ -60,7 +74,7 @@ execute:
 
 - Power analysis & more via **data simulation**; 
 
-- **SEM**: Structural Equation Modeling; 
+- **SEM** (Structural Equation Modeling); 
 
 - Conducting **meta-analysis**.
 </div>
@@ -73,8 +87,6 @@ execute:
 
 ## you may even create greeting cards
 
-<p class="small">*Optional / self-study*</p>
-
 <div style="text-align: center;">
   <a href="https://github.com/EnricoToffalini/Basics-R/blob/main/Slides/figures/happyBirthday.R" target="_blank"><img src="figures/happyBirthday.png" style="max-height: 480px; width: auto;" /></a>
 </div>
@@ -82,16 +94,12 @@ execute:
 
 ## or fancy infographics
 
-<p class="small">*Optional / self-study*</p>
-
 <div style="text-align: center;">
   <img src="figures/worldInfographic.png" />
 </div>
 
 
 ## or fancy infographics
-
-<p class="small">*Optional / self-study*</p>
 
 <div style="text-align: center;">
   <img src="figures/ItalyInfographic.png" style="max-height: 490px; width: auto;"/>
@@ -121,13 +129,9 @@ here are a couple of recent real examples from **Psicostat** members:
 
 ## you may create interactive webapps with Shiny
 
-<p class="small">*Optional / self-study*</p>
-
 <div style="text-align: center;">
   <img src="figures/shinyExample.png" style="max-height: 490px; width: auto;"/>
 </div>
-
-
 
 ## or entire websites and books
 
@@ -174,7 +178,7 @@ Interesting alternatives to installing RStudio:
 
 ## (Re)start with a clean session
 
-I suggest that you go to **Tools > Global Options > General** and:
+In your **RStudio**, I suggest that you go to **Tools > Global Options > General** and:
 
 - Uncheck **"Restore .RData into workspace at startup"**.
 - Set **"Save workspace to .RData on exit"** to **`Never`**.
@@ -222,12 +226,12 @@ These slides and the course website are **Quarto (`.Qmd`) files**: text, figures
 
 ::: {.column style="width: 48%; margin-right: 2%; background-color: #f1f3fc; border: 1px solid #c5cce5; border-left: 5px solid #687bb5; border-radius: 6px; padding: 14px; box-sizing: border-box;"}
 
-<div style="font-size: 20px; font-weight: 600; border-bottom: 1px solid #c5cce5; padding-bottom: 8px; margin-bottom: 14px;">Quarto source (<code>.qmd</code>)</div>
+<div style="font-size: 20px; font-weight: 600; border-bottom: 1px solid #c5cce5; padding-bottom: 8px; margin-bottom: 14px;"><em>Quarto source (<code>.qmd</code>)</em></div>
 
 <pre><code>## Random values
 ### A first example
 
-Let's try a basic function in R...
+Let's try a basic function in R. It simply draws random numbers from a standard Normal distribution...
 
 &#96;&#96;&#96;{r}
 rnorm(3)
@@ -236,13 +240,13 @@ rnorm(3)
 :::
 ::: {.column style="width: 48%; background-color: #eef7f3; border: 1px solid #bfd9cd; border-left: 5px solid #4d9072; border-radius: 6px; padding: 14px; box-sizing: border-box;"}
 
-<div style="font-size: 20px; font-weight: 600; border-bottom: 1px solid #bfd9cd; padding-bottom: 8px; margin-bottom: 14px;">Rendered output</div>
+<div style="font-size: 20px; font-weight: 600; border-bottom: 1px solid #bfd9cd; padding-bottom: 8px; margin-bottom: 14px;"><em>Rendered output</em></div>
 
 <h2 style="font-size: 32px; margin: 0 0 8px;">Random values</h2>
 
 <h3 style="font-size: 26px; margin: 0 0 8px;">A first example</h3>
 
-<p style="font-size: 24px;">Let's try a basic function in R...</p>
+<p style="font-size: 24px;">Let's try a basic function in R. It simply draws random numbers from a standard Normal distribution...</p>
 
 ```{r}
 rnorm(3)
