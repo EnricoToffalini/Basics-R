@@ -75,7 +75,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-df72ca5b189826ab7a326fbb25b5dd7d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-0dc65435dc5d5f94a09fefa1155ce953.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -115,10 +115,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="https://psicostat.github.io/" class="navbar-brand navbar-brand-logo">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
     <img src="../figures/psicostatLogoNav.png" alt="" class="navbar-logo">
     </a>
-    <a class="navbar-brand" href="https://psicostat.github.io/">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Basics of R for Data Science</span>
     </a>
   </div>
@@ -575,12 +575,33 @@ Preprocessing choices matter
 
 </main> <!-- /main -->
 <script>
-  // il logo Psicostat apre psicostat.github.io in una nuova scheda
+
+  // solo l'esagono del logo porta a psicostat.github.io (il titolo resta sulla home del corso)
+
   document.querySelectorAll('a.navbar-brand-logo').forEach(function (a) {
-    a.target = '_blank';
-    a.rel = 'noopener';
+
+    a.href = 'https://psicostat.github.io/';
+
   });
+
+  // tutti i link della navbar si aprono in una nuova scheda
+
+  // (esclusi il titolo del sito, che resta nella stessa scheda, e i pulsanti dei menu a tendina)
+
+  document.querySelectorAll('#quarto-header a[href]').forEach(function (a) {
+
+    if (a.hasAttribute('data-bs-toggle') || a.getAttribute('href') === '#') return;
+
+    if (a.classList.contains('navbar-brand') && !a.classList.contains('navbar-brand-logo')) return;
+
+    a.target = '_blank';
+
+    a.rel = 'noopener';
+
+  });
+
 </script>
+
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
