@@ -22,7 +22,6 @@ website:
   page-navigation: false
   navbar:
     logo: figures/psicostatLogoNav.png
-    logo-href: "https://psicostat.github.io/"
     left:
       - href: index.Qmd
         text: Home

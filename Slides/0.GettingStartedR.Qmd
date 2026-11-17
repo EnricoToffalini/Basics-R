@@ -36,6 +36,18 @@ execute:
 - Facilitates **reproducible scientific research** by sharing code and workflows.
 </div>
 
+## How popular is R?
+
+<div style="font-size:26px;">
+According to the [**TIOBE index**](https://www.tiobe.com/tiobe-index/){target="_blank"} of programming languages popularity, in **November 2026** R ranks **#7** worldwide (2.27%), its highest position ever, after Python, C, Java, C++, C#, JavaScript (see [R history](https://www.tiobe.com/tiobe-index/r/){target="_blank"})
+</div>
+
+::: {.r-stack}
+<img src="figures/tiobeRanking.png" class="fragment fade-out" data-fragment-index="1" style="max-height: 430px; width: auto;" />
+
+<img src="figures/tiobeR.png" class="fragment fade-in" data-fragment-index="1" style="max-height: 430px; width: auto;" />
+:::
+
 ## What you may expect to learn in this course:
 
 <div style="font-size:44px;">
