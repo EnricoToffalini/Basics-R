@@ -106,22 +106,9 @@ as.numeric(Hours)
 
 *But be careful!* Elements that cannot be coerced to the target type will be replaced with NA
 ```{r, warning=T}
-Hours = c("10", "15,", "20", " 10", "15 ", "tbd", "15.", "5_")
+Hours = c("10", "15,0", "20", " 10", "15 ", "tbd", "15.", "5_")
 as.numeric(Hours)
 ```
-
-## 
-### NA and NULL in vectors
-
-Recall the special values and objects introduced with basic data types: **`NA`** occupies a position in a vector; **`NULL`** contributes no element.
-
-```{r}
-length(NULL)
-length(NA)
-c(1, NULL, 3)
-```
-
-Use `is.na()` to identify missing values in a vector.
 
 ## Indexing Vectors
 

@@ -417,14 +417,14 @@
     "href": "Slides/2.1.DataStruc-1.html#vectors-must-be-homogeneous-1",
     "title": "Data Structures: Vectors",
     "section": "Vectors Must be Homogeneous",
-    "text": "Vectors Must be Homogeneous\nYou may coerce a vector to be a particular type if needed\n\nHours = c(10, 15, 20, 10, 15, \"tbd\", 15, 5)\nHours\n\n[1] \"10\"  \"15\"  \"20\"  \"10\"  \"15\"  \"tbd\" \"15\"  \"5\"  \n\nas.numeric(Hours)\n\nWarning: NAs introduced by coercion\n\n\n[1] 10 15 20 10 15 NA 15  5\n\n\nBut be careful! Elements that cannot be coerced to the target type will be replaced with NA\n\nHours = c(\"10\", \"15,\", \"20\", \" 10\", \"15 \", \"tbd\", \"15.\", \"5_\")\nas.numeric(Hours)\n\nWarning: NAs introduced by coercion\n\n\n[1] 10 NA 20 10 15 NA 15 NA"
+    "text": "Vectors Must be Homogeneous\nYou may coerce a vector to be a particular type if needed\n\nHours = c(10, 15, 20, 10, 15, \"tbd\", 15, 5)\nHours\n\n[1] \"10\"  \"15\"  \"20\"  \"10\"  \"15\"  \"tbd\" \"15\"  \"5\"  \n\nas.numeric(Hours)\n\nWarning: NAs introduced by coercion\n\n\n[1] 10 15 20 10 15 NA 15  5\n\n\nBut be careful! Elements that cannot be coerced to the target type will be replaced with NA\n\nHours = c(\"10\", \"15,0\", \"20\", \" 10\", \"15 \", \"tbd\", \"15.\", \"5_\")\nas.numeric(Hours)\n\nWarning: NAs introduced by coercion\n\n\n[1] 10 NA 20 10 15 NA 15 NA"
   },
   {
     "objectID": "Slides/2.1.DataStruc-1.html#section",
     "href": "Slides/2.1.DataStruc-1.html#section",
     "title": "Data Structures: Vectors",
     "section": "",
-    "text": "NA and NULL in vectors\nRecall the special values and objects introduced with basic data types: NA occupies a position in a vector; NULL contributes no element.\n\nlength(NULL)\n\n[1] 0\n\nlength(NA)\n\n[1] 1\n\nc(1, NULL, 3)\n\n[1] 1 3\n\n\nUse is.na() to identify missing values in a vector."
+    "text": "Summary Statistics - Managing Missing (NA) Values\nAll of the previous summary statistics will fail if there is even a single NA value:\n\nHours = c(10, 15, 20, 10, 15, NA, 15, 5)\n\nmean(Hours) # a single NA value implies that the average is impossible to determine\n\n[1] NA\n\n\n\nquantile(Hours, probs=c(.25, .75)) # quantile() will even return an Error\n\nError in quantile.default(Hours, probs = c(0.25, 0.75)): missing values and NaN's not allowed if 'na.rm' is FALSE\n\n\nYou can easily manage missing values by adding the na.rm=TRUE argument:\n\nmean(Hours, na.rm=TRUE) # NA values are ignored \n\n[1] 12.85714\n\nquantile(Hours, probs=c(.25, .75), na.rm=TRUE) # NA values are ignored \n\n25% 75% \n 10  15"
   },
   {
     "objectID": "Slides/2.1.DataStruc-1.html#indexing-vectors",
@@ -480,7 +480,7 @@
     "href": "Slides/2.1.DataStruc-1.html#section-1",
     "title": "Data Structures: Vectors",
     "section": "",
-    "text": "Summary Statistics - Managing Missing (NA) Values\nAll of the previous summary statistics will fail if there is even a single NA value:\n\nHours = c(10, 15, 20, 10, 15, NA, 15, 5)\n\nmean(Hours) # a single NA value implies that the average is impossible to determine\n\n[1] NA\n\n\n\nquantile(Hours, probs=c(.25, .75)) # quantile() will even return an Error\n\nError in quantile.default(Hours, probs = c(0.25, 0.75)): missing values and NaN's not allowed if 'na.rm' is FALSE\n\n\nYou can easily manage missing values by adding the na.rm=TRUE argument:\n\nmean(Hours, na.rm=TRUE) # NA values are ignored \n\n[1] 12.85714\n\nquantile(Hours, probs=c(.25, .75), na.rm=TRUE) # NA values are ignored \n\n25% 75% \n 10  15"
+    "text": "Replacing NA With the Average Value\n\nReplacing a missing value with the average across valid values is risky, as it may alter many other summary statistics, but it is a good example for understanding different concepts seen so far:\n\nHours = c(10, 15, 20, 10, 15, NA, 15, 5)\n\n# compute the average value ignoring NAs, and put it wherever \n# there is an NA value in the vector\nHours[is.na(Hours)] = mean(Hours, na.rm=TRUE)\n\n# now let's inspect the updated content of the vector\nHours\n\n[1] 10.00000 15.00000 20.00000 10.00000 15.00000 12.85714 15.00000  5.00000\n\n# by the way... na.rm=TRUE is no longer needed now, as NA is no longer there\nmean(Hours)\n\n[1] 12.85714"
   },
   {
     "objectID": "Slides/2.1.DataStruc-1.html#section-2",
