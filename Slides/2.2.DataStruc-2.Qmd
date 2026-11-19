@@ -104,19 +104,38 @@ The "**`$`**" (dollar) operator is essential to access variables in a dataframe:
 As an exercise, let's check whether `Hours` is actually always `ECTS*5`
 
 We may use many different, increasingly sophisticated, strategies: 
-<div class="large-code">
+
+:::: {.large-code}
+::: {.fragment}
 ```{r}
 df$Hours / df$ECTS
+```
+:::
 
+::: {.fragment}
+```{r}
 (df$Hours / df$ECTS) == 5
+```
+:::
 
+::: {.fragment}
+```{r}
 sum((df$Hours / df$ECTS) == 5)
+```
+:::
 
+::: {.fragment}
+```{r}
 sum((df$Hours / df$ECTS) == 5) == nrow(df)
+```
+:::
 
+::: {.fragment}
+```{r}
 sum((df$Hours / df$ECTS) != 5)
 ```
-</div>
+:::
+::::
 
 ##
 ### Accessing and Working with Elements in Dataframes
@@ -128,10 +147,10 @@ log(df$Hours)
 
 Also, new variables can easily be created and added at any time: 
 ```{r}
-df$newVar = log(df$Hours)
+df$logHours = log(df$Hours)
 names(df)
 
-head(df$newVar)
+head(df$logHours)
 ```
 
 ## 

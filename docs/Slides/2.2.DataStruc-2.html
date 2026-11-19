@@ -1209,29 +1209,47 @@ Enrico Toffalini
 <h2></h2>
 <h3 id="accessing-and-working-with-elements-in-dataframes">Accessing and Working with Elements in Dataframes</h3>
 <p>As an exercise, let’s check whether <code>Hours</code> is actually always <code>ECTS*5</code></p>
-We may use many different, increasingly sophisticated, strategies:
+<p>We may use many different, increasingly sophisticated, strategies:</p>
 <div class="large-code">
+<div class="fragment">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>Hours <span class="sc">/</span> df<span class="sc">$</span>ECTS</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5</code></pre>
 </div>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a aria-hidden="true" tabindex="-1"></a>(df<span class="sc">$</span>Hours <span class="sc">/</span> df<span class="sc">$</span>ECTS) <span class="sc">==</span> <span class="dv">5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE
 [16] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE</code></pre>
 </div>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>((df<span class="sc">$</span>Hours <span class="sc">/</span> df<span class="sc">$</span>ECTS) <span class="sc">==</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 28</code></pre>
 </div>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>((df<span class="sc">$</span>Hours <span class="sc">/</span> df<span class="sc">$</span>ECTS) <span class="sc">==</span> <span class="dv">5</span>) <span class="sc">==</span> <span class="fu">nrow</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>((df<span class="sc">$</span>Hours <span class="sc">/</span> df<span class="sc">$</span>ECTS) <span class="sc">!=</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0</code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -1251,15 +1269,15 @@ We may use many different, increasingly sophisticated, strategies:
 </div>
 <p>Also, new variables can easily be created and added at any time:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>newVar <span class="ot">=</span> <span class="fu">log</span>(df<span class="sc">$</span>Hours)</span>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>logHours <span class="ot">=</span> <span class="fu">log</span>(df<span class="sc">$</span>Hours)</span>
 <span id="cb31-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] &quot;Year&quot;                &quot;TypeOfCourse&quot;        &quot;Title&quot;              
  [4] &quot;Teacher&quot;             &quot;Hours&quot;               &quot;ECTS&quot;               
  [7] &quot;MandatoryAttendance&quot; &quot;DeliveryMethod&quot;      &quot;Language&quot;           
-[10] &quot;newVar&quot;             </code></pre>
+[10] &quot;logHours&quot;           </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df<span class="sc">$</span>newVar)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df<span class="sc">$</span>logHours)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2.302585 2.708050 2.995732 2.302585 2.708050 1.609438</code></pre>
 </div>
