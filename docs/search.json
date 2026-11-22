@@ -357,25 +357,25 @@
     "text": "Matrices\n\nWhy use (know) matrices?\n\nMathematical operations: matrices are fundamental for many tasks of linear algebra\nEssential in modeling: many statistical methods for statistical modeling and machine learning actually operate on matrices (even though this may remain hidden to you)\nComputational efficiency: much faster than dataframes for numeric computations"
   },
   {
-    "objectID": "Slides/2.3.DataStruc-3.html#arrays-self-study",
-    "href": "Slides/2.3.DataStruc-3.html#arrays-self-study",
+    "objectID": "Slides/2.3.DataStruc-3.html#arrays",
+    "href": "Slides/2.3.DataStruc-3.html#arrays",
     "title": "Data Structures: Factors, Lists, Matrices, Arrays",
-    "section": "Arrays (self-study)",
-    "text": "Arrays (self-study)\nArrays are multi-dimensional structures in R, generalizing vectors (1-dimensional) and matrices (2-dimensional) to the n-dimensional case\nIt’s easy to create an array using the array() function:\n\n\n\nmyArr = array(1:30, dim = c(3,5,2))\nmyArr\n\n, , 1\n\n     [,1] [,2] [,3] [,4] [,5]\n[1,]    1    4    7   10   13\n[2,]    2    5    8   11   14\n[3,]    3    6    9   12   15\n\n, , 2\n\n     [,1] [,2] [,3] [,4] [,5]\n[1,]   16   19   22   25   28\n[2,]   17   20   23   26   29\n[3,]   18   21   24   27   30\n\n\n\n\n\n→ this is a kind of “cubic structure” (3D structure): 3 rows, 5 columns, 2 slices\nIn a similar way, you could create hypercubes and so on (4D+)"
+    "section": "Arrays",
+    "text": "Arrays\nArrays are multi-dimensional structures in R, generalizing vectors (1-dimensional) and matrices (2-dimensional) to the n-dimensional case\nIt’s easy to create an array using the array() function:\n\n\n\nmyArr = array(1:30, dim = c(3,5,2))\nmyArr\n\n, , 1\n\n     [,1] [,2] [,3] [,4] [,5]\n[1,]    1    4    7   10   13\n[2,]    2    5    8   11   14\n[3,]    3    6    9   12   15\n\n, , 2\n\n     [,1] [,2] [,3] [,4] [,5]\n[1,]   16   19   22   25   28\n[2,]   17   20   23   26   29\n[3,]   18   21   24   27   30\n\n\n\n\n\n→ this is a kind of “cubic structure” (3D structure): 3 rows, 5 columns, 2 slices\nIn a similar way, you could create hypercubes and so on (4D+)"
   },
   {
-    "objectID": "Slides/2.3.DataStruc-3.html#arrays-self-study-1",
-    "href": "Slides/2.3.DataStruc-3.html#arrays-self-study-1",
+    "objectID": "Slides/2.3.DataStruc-3.html#arrays-1",
+    "href": "Slides/2.3.DataStruc-3.html#arrays-1",
     "title": "Data Structures: Factors, Lists, Matrices, Arrays",
-    "section": "Arrays (self-study)",
-    "text": "Arrays (self-study)\nindexing\nIndexing is exactly the same as with matrices but… with 3 (sets of) indices!\n\nmyArr[1, 4, 2] # extract a single element\n\n[1] 25\n\nmyArr[1:2 , 1:2 , ] # extract subsets of elements\n\n, , 1\n\n     [,1] [,2]\n[1,]    1    4\n[2,]    2    5\n\n, , 2\n\n     [,1] [,2]\n[1,]   16   19\n[2,]   17   20"
+    "section": "Arrays",
+    "text": "Arrays\nindexing\nIndexing is exactly the same as with matrices but… with 3 (sets of) indices!\n\nmyArr[1, 4, 2] # extract a single element\n\n[1] 25\n\nmyArr[1:2 , 1:2 , ] # extract subsets of elements\n\n, , 1\n\n     [,1] [,2]\n[1,]    1    4\n[2,]    2    5\n\n, , 2\n\n     [,1] [,2]\n[1,]   16   19\n[2,]   17   20"
   },
   {
-    "objectID": "Slides/2.3.DataStruc-3.html#arrays-self-study-2",
-    "href": "Slides/2.3.DataStruc-3.html#arrays-self-study-2",
+    "objectID": "Slides/2.3.DataStruc-3.html#arrays-2",
+    "href": "Slides/2.3.DataStruc-3.html#arrays-2",
     "title": "Data Structures: Factors, Lists, Matrices, Arrays",
-    "section": "Arrays (self-study)",
-    "text": "Arrays (self-study)\n\nWhy use (know) arrays?\n\nUseful for efficiently storing and manipulating multi-dimensional data\nGenerally used in advanced topics and machine learning, such as image/video processing and spatial data\nArrays in R are conceptually similar to tensors in Python (e.g., NumPy, TensorFlow), where they play a fundamental role in machine learning and deep learning, as they allow researchers to manage large amounts of data with complex structures"
+    "section": "Arrays",
+    "text": "Arrays\n\nWhy use (know) arrays?\n\nUseful for efficiently storing and manipulating multi-dimensional data\nGenerally used in advanced topics including image/video processing, spatial data processing, or machine learning\nArrays in R are conceptually similar to tensors in Python (e.g., NumPy, TensorFlow), where they play a fundamental role in machine learning and deep learning, as they allow researchers to manage large amounts of data with complex structures"
   },
   {
     "objectID": "Slides/2.1.DataStruc-1.html#data-structures",
@@ -418,13 +418,6 @@
     "title": "Data Structures: Vectors",
     "section": "Vectors Must be Homogeneous",
     "text": "Vectors Must be Homogeneous\nYou may coerce a vector to be a particular type if needed\n\nHours = c(10, 15, 20, 10, 15, \"tbd\", 15, 5)\nHours\n\n[1] \"10\"  \"15\"  \"20\"  \"10\"  \"15\"  \"tbd\" \"15\"  \"5\"  \n\nas.numeric(Hours)\n\nWarning: NAs introduced by coercion\n\n\n[1] 10 15 20 10 15 NA 15  5\n\n\nBut be careful! Elements that cannot be coerced to the target type will be replaced with NA\n\nHours = c(\"10\", \"15,0\", \"20\", \" 10\", \"15 \", \"tbd\", \"15.\", \"5_\")\nas.numeric(Hours)\n\nWarning: NAs introduced by coercion\n\n\n[1] 10 NA 20 10 15 NA 15 NA"
-  },
-  {
-    "objectID": "Slides/2.1.DataStruc-1.html#section",
-    "href": "Slides/2.1.DataStruc-1.html#section",
-    "title": "Data Structures: Vectors",
-    "section": "",
-    "text": "Summary Statistics - Managing Missing (NA) Values\nAll of the previous summary statistics will fail if there is even a single NA value:\n\nHours = c(10, 15, 20, 10, 15, NA, 15, 5)\n\nmean(Hours) # a single NA value implies that the average is impossible to determine\n\n[1] NA\n\n\n\nquantile(Hours, probs=c(.25, .75)) # quantile() will even return an Error\n\nError in quantile.default(Hours, probs = c(0.25, 0.75)): missing values and NaN's not allowed if 'na.rm' is FALSE\n\n\nYou can easily manage missing values by adding the na.rm=TRUE argument:\n\nmean(Hours, na.rm=TRUE) # NA values are ignored \n\n[1] 12.85714\n\nquantile(Hours, probs=c(.25, .75), na.rm=TRUE) # NA values are ignored \n\n25% 75% \n 10  15"
   },
   {
     "objectID": "Slides/2.1.DataStruc-1.html#indexing-vectors",
@@ -476,15 +469,15 @@
     "text": "Summary Statistics on Vectors\nA whole vector may serve to compute summary statistics, for example using functions such as mean(), sd(), median(), quantile(), max(), min():\n\n\n\nquantile(Hours, probs=c(.25, .50, .75)) # returns desired quantiles\n\n  25%   50%   75% \n 8.75 12.50 15.00 \n\nmax(Hours) # returns largest value\n\n[1] 20\n\nmin(Hours) # returns smallest value\n\n[1] 5\n\n\n\n\n\nhist(Hours)\n\n\n\n\n\n\n\n\n\n\nA quick base R plot lets us see the distribution. Figure design belongs to the ggplot2 course."
   },
   {
-    "objectID": "Slides/2.1.DataStruc-1.html#section-1",
-    "href": "Slides/2.1.DataStruc-1.html#section-1",
+    "objectID": "Slides/2.1.DataStruc-1.html#section",
+    "href": "Slides/2.1.DataStruc-1.html#section",
     "title": "Data Structures: Vectors",
     "section": "",
-    "text": "Replacing NA With the Average Value\n\nReplacing a missing value with the average across valid values is risky, as it may alter many other summary statistics, but it is a good example for understanding different concepts seen so far:\n\nHours = c(10, 15, 20, 10, 15, NA, 15, 5)\n\n# compute the average value ignoring NAs, and put it wherever \n# there is an NA value in the vector\nHours[is.na(Hours)] = mean(Hours, na.rm=TRUE)\n\n# now let's inspect the updated content of the vector\nHours\n\n[1] 10.00000 15.00000 20.00000 10.00000 15.00000 12.85714 15.00000  5.00000\n\n# by the way... na.rm=TRUE is no longer needed now, as NA is no longer there\nmean(Hours)\n\n[1] 12.85714"
+    "text": "Summary Statistics - Managing Missing (NA) Values\nAll of the previous summary statistics will fail if there is even a single NA value:\n\nHours = c(10, 15, 20, 10, 15, NA, 15, 5)\n\nmean(Hours) # a single NA value implies that the average is impossible to determine\n\n[1] NA\n\n\n\nquantile(Hours, probs=c(.25, .75)) # quantile() will even return an Error\n\nError in quantile.default(Hours, probs = c(0.25, 0.75)): missing values and NaN's not allowed if 'na.rm' is FALSE\n\n\nYou can easily manage missing values by adding the na.rm=TRUE argument:\n\nmean(Hours, na.rm=TRUE) # NA values are ignored \n\n[1] 12.85714\n\nquantile(Hours, probs=c(.25, .75), na.rm=TRUE) # NA values are ignored \n\n25% 75% \n 10  15"
   },
   {
-    "objectID": "Slides/2.1.DataStruc-1.html#section-2",
-    "href": "Slides/2.1.DataStruc-1.html#section-2",
+    "objectID": "Slides/2.1.DataStruc-1.html#section-1",
+    "href": "Slides/2.1.DataStruc-1.html#section-1",
     "title": "Data Structures: Vectors",
     "section": "",
     "text": "Replacing NA With the Average Value\n\nReplacing a missing value with the average across valid values is risky, as it may alter many other summary statistics, but it is a good example for understanding different concepts seen so far:\n\nHours = c(10, 15, 20, 10, 15, NA, 15, 5)\n\n# compute the average value ignoring NAs, and put it wherever \n# there is an NA value in the vector\nHours[is.na(Hours)] = mean(Hours, na.rm=TRUE)\n\n# now let's inspect the updated content of the vector\nHours\n\n[1] 10.00000 15.00000 20.00000 10.00000 15.00000 12.85714 15.00000  5.00000\n\n# by the way... na.rm=TRUE is no longer needed now, as NA is no longer there\nmean(Hours)\n\n[1] 12.85714"
@@ -649,6 +642,13 @@
     "title": "Basics of R for Data Science",
     "section": "Materials",
     "text": "Materials\n\nSlides\n\nIntro to This Course, Getting Started with R - (pdf)\nBasic Operations, Basic Types of Data - (pdf)\nEnvironment, Packages, Functions, Import/Export - (pdf)\nData Structures: Vectors - (pdf)\nData Structures: Data Frames - (pdf)\nData Structures: Factors, Lists, Matrices, Arrays - (pdf)\nBasics of Programming: If…Else, Iterations, Custom Functions - (pdf)\n\n\n\nExtra materials\nHave a look at these pages, and remember that they are here if you need them later:\n\nList of RStudio Shortcuts that Everyone Should Know\nTutorial on files extensions (in Windows)\n\n\n\nExercises\n— The following exercises are fundamental, and they importantly integrate concepts from the slides and introduce new functions and methods that you want to know!\n\nFirst steps in R\nVectors\nDataframes\nBasics of Programming… with some data science\nProgramming like a data scientist\nThe data nightmare exercise\n\n— These other exercises are beyond the scope of this introductory course, but they could be stimulating and useful for more advanced R users:\n\nCreating a word cloud\n\n\nsee additional material on Working With Strings\n\n\nBasics of Statistical Data Simulation in R\nBasics of Monte Carlo simulations for Power analysis\nMonte Carlo Power Simulation: Mixed-Effects Logistic Regression and Some Parallelization\n\n\n\nOther links:\n\n\n\nGitHub repo associated with the present course website: https://github.com/EnricoToffalini/Basics-R\nAccess padlet for questions or additional materials\nRead a modest proposal for open source software in the PhD program in Psychological Sciences\nThousands of thanks to Filippo Gambarota for sharing his expertise in using GitHub and Quarto."
+  },
+  {
+    "objectID": "Slides/0.GettingStartedR.html#how-popular-is-r",
+    "href": "Slides/0.GettingStartedR.html#how-popular-is-r",
+    "title": "Intro to This Course; Getting Started with R",
+    "section": "How popular is R?",
+    "text": "How popular is R?\n\nTIOBE index of programming languages popularity: in November 2026 R ranks # 7 worldwide (2.27%), its highest position ever, after Python, C, Java, C++, C#, JavaScript (see R history)"
   },
   {
     "objectID": "Slides/0.GettingStartedR.html#why-become-an-r-user",
@@ -1344,18 +1344,18 @@
     "text": "for loop\nYou don’t necessarily have to iterate over a sequence of integers (e.g., “i in 1:10000”; “j in 1:ncol(df)”), although this is the most common practice. You can iterate over anything, for example directly over the elements of a vector or other data structures\n\n\nmyVect = c(\"this\", \"is\", \"a\", \"vector\", \"of\", \"strings\")\n\nfor(x in myVect){\n  print(toupper(x))\n}\n\n[1] \"THIS\"\n[1] \"IS\"\n[1] \"A\"\n[1] \"VECTOR\"\n[1] \"OF\"\n[1] \"STRINGS\""
   },
   {
-    "objectID": "Slides/3.Programming.html#while-loop-self-study",
-    "href": "Slides/3.Programming.html#while-loop-self-study",
+    "objectID": "Slides/3.Programming.html#while-loop",
+    "href": "Slides/3.Programming.html#while-loop",
     "title": "Basics of Programming:  if…else, iterations, custom functions",
-    "section": "while loop (self-study)",
-    "text": "while loop (self-study)\nThe while loop is another type of iterative structure in R. It may be useful when the precise number of iterations is not predetermined, but depends on a target being reached\n\namount = 1000\nmonth = 0\ninterest_rate = 0.001 # 0.1% monthly interest rate\n\nwhile(amount &lt; 1500){\n  month = month + 1\n  amount = amount + amount * interest_rate\n}\n\nmonth\n\n[1] 406\n\n\n\nInterpretation: it takes 406 months to reach an amount of \\(€1,500\\) when starting with an amount of \\(€1,000\\) with a \\(0.1\\)% monthly interest rate"
+    "section": "while loop",
+    "text": "while loop\nThe while loop is another type of iterative structure in R. It may be useful when the precise number of iterations is not predetermined, but depends on a target being reached\n\namount = 1000\nmonth = 0\ninterest_rate = 0.005 # 0.5% monthly interest rate\n\nwhile(amount &lt; 2000){\n  month = month + 1\n  amount = amount + amount * interest_rate\n}\n\nmonth\n\n[1] 139\n\n\n\nInterpretation: it takes 139 months to double the starting of \\(€1,000\\) with a \\(0.5\\)% monthly interest rate"
   },
   {
-    "objectID": "Slides/3.Programming.html#repeat-loop-self-study",
-    "href": "Slides/3.Programming.html#repeat-loop-self-study",
+    "objectID": "Slides/3.Programming.html#repeat-loop",
+    "href": "Slides/3.Programming.html#repeat-loop",
     "title": "Basics of Programming:  if…else, iterations, custom functions",
-    "section": "repeat loop (self-study)",
-    "text": "repeat loop (self-study)\nThe repeat loop has a logic similar to the while loop but 1) it certainly enters at least the first iteration, 2) it explicitly emphasizes repetition until a condition is met, using the “break” statement to terminate\n\n\n\nrepeat{\n  roll_die = sample(1:6, 1)\n  print(roll_die)\n  if(roll_die == 6) break\n}\n\n[1] 2\n[1] 3\n[1] 1\n[1] 3\n[1] 1\n[1] 1\n[1] 5\n[1] 6\n\n\n\n\n\nattempts = 0\nrepeat{\n  attempts = attempts + 1\n  tt = t.test(rnorm(10),rnorm(10))\n  if(tt$p.value &lt; 0.05) break\n}\n\n# number of experiments I attempted to... \n# get a false positive :-)\nattempts\n\n[1] 12\n\nround(tt$p.value, 3)\n\n[1] 0.041"
+    "section": "repeat loop",
+    "text": "repeat loop\nThe repeat loop has a logic similar to the while loop but 1) it certainly enters at least the first iteration, 2) it explicitly emphasizes repetition until a condition is met, using the “break” statement to terminate\n\n\n\nrepeat{\n  roll_die = sample(1:6, 1)\n  print(roll_die)\n  if(roll_die == 6) break\n}\n\n[1] 2\n[1] 3\n[1] 1\n[1] 3\n[1] 1\n[1] 1\n[1] 5\n[1] 6\n\n\n\n\n\nattempts = 0\nrepeat{\n  attempts = attempts + 1\n  tt = t.test(rnorm(10),rnorm(10))\n  if(tt$p.value &lt; 0.05) break\n}\n\n# number of experiments I attempted to... \n# get a false positive :-)\nattempts\n\n[1] 12\n\nround(tt$p.value, 3)\n\n[1] 0.041"
   },
   {
     "objectID": "Slides/3.Programming.html#apply-family",
@@ -1510,47 +1510,5 @@
     "title": "Exercises - Programming Like a Data Scientist",
     "section": "",
     "text": "This set of exercises includes practicing and integrating various skills: working with dataframes and lists, applying conditional logic and iterative programming. Some of these exercises are pretty advanced for the purposes of the present course!\n\nDownload this workspace and import it using the load() function.\nThe dataframe df1 has all its columns stored as character, but many are mostly numeric, and should be treated as such. Your task is to determine which columns can reasonably be coerced to numeric. Use a combination of iterative and conditional programming to complete the following steps:\n\nIterate over all columns of df1 (using a for loop is recommended);\nFor each column, calculate the percentage of observations that remain valid (i.e., do not become NA) when coerced to numeric using as.numeric();\nIf the percentage exceeds 80%, coerce the column to numeric;\nKeep track of the columns that were coerced to numeric;\nAfter processing all columns, compute a correlation matrix that includes only the columns that were coerced to numeric (use the cor() function; set argument use=\"pairwise.complete\" to avoid losing too many observations with listwise deletion);\nfor fun: use the corrplot() function from the corrplot package to obtain a more colorful correlation matrix\n\nExtra for advanced users: The dataframe dfWide1 contains data for treated subjects at three times (\"T0\", \"T1\", and \"T2\") in wide format, but it needs to be reshaped to long format for data analysis. Your task is to reshape it to long format using the basic reshape() function (first of all, have a look at the documentation of reshape()).\nExtra for advanced users: Repeat the previous task using the convenient pivot_longer() function from the tidyr package.\nExtra for super advanced users: The dataframe dfWide2 is even more complex, as it contains two variables, Acc and RT, measured at three times. Reshape dfWide2 to long format, but keeping Acc and RT values in separate columns. Use any approach you like, but try to keep the code compact if possible."
-  },
-  {
-    "objectID": "Slides/0.GettingStartedR.html#how-popular-is-r",
-    "href": "Slides/0.GettingStartedR.html#how-popular-is-r",
-    "title": "Intro to This Course; Getting Started with R",
-    "section": "How popular is R?",
-    "text": "How popular is R?\n\nTIOBE index of programming languages popularity: in November 2026 R ranks # 7 worldwide (2.27%), its highest position ever, after Python, C, Java, C++, C#, JavaScript (see R history)"
-  },
-  {
-    "objectID": "Slides/2.3.DataStruc-3.html#arrays",
-    "href": "Slides/2.3.DataStruc-3.html#arrays",
-    "title": "Data Structures: Factors, Lists, Matrices, Arrays",
-    "section": "Arrays",
-    "text": "Arrays\nArrays are multi-dimensional structures in R, generalizing vectors (1-dimensional) and matrices (2-dimensional) to the n-dimensional case\nIt’s easy to create an array using the array() function:\n\n\n\nmyArr = array(1:30, dim = c(3,5,2))\nmyArr\n\n, , 1\n\n     [,1] [,2] [,3] [,4] [,5]\n[1,]    1    4    7   10   13\n[2,]    2    5    8   11   14\n[3,]    3    6    9   12   15\n\n, , 2\n\n     [,1] [,2] [,3] [,4] [,5]\n[1,]   16   19   22   25   28\n[2,]   17   20   23   26   29\n[3,]   18   21   24   27   30\n\n\n\n\n\n→ this is a kind of “cubic structure” (3D structure): 3 rows, 5 columns, 2 slices\nIn a similar way, you could create hypercubes and so on (4D+)"
-  },
-  {
-    "objectID": "Slides/2.3.DataStruc-3.html#arrays-1",
-    "href": "Slides/2.3.DataStruc-3.html#arrays-1",
-    "title": "Data Structures: Factors, Lists, Matrices, Arrays",
-    "section": "Arrays",
-    "text": "Arrays\nindexing\nIndexing is exactly the same as with matrices but… with 3 (sets of) indices!\n\nmyArr[1, 4, 2] # extract a single element\n\n[1] 25\n\nmyArr[1:2 , 1:2 , ] # extract subsets of elements\n\n, , 1\n\n     [,1] [,2]\n[1,]    1    4\n[2,]    2    5\n\n, , 2\n\n     [,1] [,2]\n[1,]   16   19\n[2,]   17   20"
-  },
-  {
-    "objectID": "Slides/2.3.DataStruc-3.html#arrays-2",
-    "href": "Slides/2.3.DataStruc-3.html#arrays-2",
-    "title": "Data Structures: Factors, Lists, Matrices, Arrays",
-    "section": "Arrays",
-    "text": "Arrays\n\nWhy use (know) arrays?\n\nUseful for efficiently storing and manipulating multi-dimensional data\nGenerally used in advanced topics and machine learning, such as image/video processing and spatial data\nArrays in R are conceptually similar to tensors in Python (e.g., NumPy, TensorFlow), where they play a fundamental role in machine learning and deep learning, as they allow researchers to manage large amounts of data with complex structures"
-  },
-  {
-    "objectID": "Slides/3.Programming.html#while-loop",
-    "href": "Slides/3.Programming.html#while-loop",
-    "title": "Basics of Programming:  if…else, iterations, custom functions",
-    "section": "while loop",
-    "text": "while loop\nThe while loop is another type of iterative structure in R. It may be useful when the precise number of iterations is not predetermined, but depends on a target being reached\n\namount = 1000\nmonth = 0\ninterest_rate = 0.005 # 0.5% monthly interest rate\n\nwhile(amount &lt; 2000){\n  month = month + 1\n  amount = amount + amount * interest_rate\n}\n\nmonth\n\n[1] 139\n\n\n\nInterpretation: it takes 139 months to double the starting of \\(€1,000\\) with a \\(0.5\\)% monthly interest rate"
-  },
-  {
-    "objectID": "Slides/3.Programming.html#repeat-loop",
-    "href": "Slides/3.Programming.html#repeat-loop",
-    "title": "Basics of Programming:  if…else, iterations, custom functions",
-    "section": "repeat loop",
-    "text": "repeat loop\nThe repeat loop has a logic similar to the while loop but 1) it certainly enters at least the first iteration, 2) it explicitly emphasizes repetition until a condition is met, using the “break” statement to terminate\n\n\n\nrepeat{\n  roll_die = sample(1:6, 1)\n  print(roll_die)\n  if(roll_die == 6) break\n}\n\n[1] 2\n[1] 3\n[1] 1\n[1] 3\n[1] 1\n[1] 1\n[1] 5\n[1] 6\n\n\n\n\n\nattempts = 0\nrepeat{\n  attempts = attempts + 1\n  tt = t.test(rnorm(10),rnorm(10))\n  if(tt$p.value &lt; 0.05) break\n}\n\n# number of experiments I attempted to... \n# get a false positive :-)\nattempts\n\n[1] 12\n\nround(tt$p.value, 3)\n\n[1] 0.041"
   }
 ]
