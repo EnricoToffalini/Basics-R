@@ -31,11 +31,11 @@ Conditional statements like `if`, `if...else`, and `ifelse` in R are essential t
 The `if` statement performs an action *only if* a condition is met
 <div class="large-code">
 ```{r}
-age = 20
+pval = 0.02
 ```
 ```{r}
-if(age >= 18){
-  print("Adult")
+if(pval < 0.05){
+  print("Significant")
 }
 ```
 </div>
@@ -65,21 +65,21 @@ Sometimes, however, you may need to perform *alternative* actions
 Here is a practical example of the **`if...else`** statement
 <div class="large-code">
 ```{r}
-age = 15
+pval = 0.02
 ```
 ```{r}
-if(age >= 18){
-  print("Adult")
+if(pval < 0.05){
+  print("Significant")
 } else {
-  print("Minor")
+  print("NS")
 }
 ```
 </div>
 
 In the above example:
 
-- *if* `age` is 18 or older, R will print `"Adult"`;
-- otherwise (*else*) it will print `"Minor"`
+- *if* `pval` is less than $0.05$, R will print `"Significant"`;
+- otherwise (*else*) it will print `"NS"`
 
 ## `if...else if...else` statement
 
@@ -132,12 +132,12 @@ Using `if` and `if...else` directly on a vector will **NOT** work as intended:
 
 <div class="large-code">
 ```{r, error=T}
-age = c(2, 28, 15, 1, 4, 67, 42, 14, 7)
+pvals = c(0.02, 0.001, 0.15, 0.01, 0.09, 0.67, 0.42, 0.14, 0.03)
 
-if(age >= 18){
-  print("Adult")
+if(pvals < 0.05){
+  print("Significant")
 } else {
-  print("Minor")
+  print("NS")
 }
 ```
 </div>
@@ -145,14 +145,12 @@ if(age >= 18){
 
 ## `ifelse()`
 
-All previous examples required evaluating a single particular condition that might be `TRUE` or `FALSE`. However, you often want to apply this type of operation to an entire vector
-
-To handle such cases you can use the base **`ifelse()`** function, which evaluates each element of a vector individually:
+To handle cases where you have multiple elements (e.g., in vectors, matrices) to evaluate individually, you can use the base **`ifelse()`** function:
 
 <div class="large-code">
 ```{r}
-age = c(2, 28, 15, 1, 4, 67, 42, 14, 7)
-ifelse(age >= 18, "Adult", "Minor")
+pvals = c(0.02, 0.001, 0.15, 0.01, 0.09, 0.67, 0.42, 0.14, 0.03)
+ifelse(pvals < 0.05, "Significant", "NS")
 ```
 </div>
 
@@ -160,9 +158,9 @@ ifelse(age >= 18, "Adult", "Minor")
 — Best practices: store results and set type as appropriate!
 </div>
 ```{r}
-ageCategory = ifelse(age >= 18, "Adult", "Minor")
-ageCategory = factor(ageCategory, levels=c("Minor", "Adult"))
-ageCategory
+inferences = ifelse(pvals < 0.05, "Significant", "NS")
+inferences = factor(inferences, levels=c("Significant", "NS"))
+inferences
 ```
 
 ## `ifelse()`
@@ -171,11 +169,11 @@ The **`ifelse()`** function can also be nested to manage multiple conditions, su
  
 <div class="large-code">
 ```{r}
-age = c(2, 28, 15, 1, 4, 67, 42, 14, 7)
+ages = c(2, 28, 15, 1, 4, 72, 45, 21, 7, 0)
 
-ifelse(age >= 18, "Adult" , 
-               ifelse(age >= 13, "Adolescent" ,
-                            ifelse(age >= 2, "Child", 
+ifelse(ages >= 18, "Adult" , 
+               ifelse(ages >= 13, "Adolescent" ,
+                            ifelse(ages >= 2, "Child", 
                                                  "Infant")))
 
 ```
@@ -188,14 +186,13 @@ While this works, the nested structure can become cumbersome and less readable a
 In such cases, the **`case_when()`** function from the `dplyr` package (part of the *tidyverse* collection) may be more convenient:
 
 ```{r}
-age = c(2, 28, 15, 1, 4, 67, 42, 14, 7)
+ages = c(2, 28, 15, 1, 4, 67, 42, 14, 7, 0)
 
 library(dplyr)
-
 case_when(
-  age >= 18 ~ "Adult",
-  age >= 13 ~ "Adolescent",
-  age >= 2  ~ "Child",
+  ages >= 18 ~ "Adult",
+  ages >= 13 ~ "Adolescent",
+  ages >= 2  ~ "Child",
   TRUE      ~ "Infant"
 )
 ```
@@ -217,23 +214,35 @@ Here are the basics of iterative programming with the **`for`** loop:
 Here are a few simple examples of using the **`for`** loop
 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;"> <div>
 ```{r}
-for(i in 1:5)  print(i)
+for(i in 1:5) print(i)
 ```
 </div> <div>
 ```{r}
-for(i in 1:5)  print(i^2)
+for(i in 1:5) print(sqrt(i))
+```
+</div> </div>
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;"> <div>
+```{r}
+for(x in letters[1:5]) print(x)
+```
+</div> <div>
+```{r}
+for(x in letters[1:5]){
+  X = toupper(x)
+  print(X)
+}
 ```
 </div> </div>
 
 ## `for` loop
 
-Here's a more interesting example of an iterative **`for`** loop with practical usefulness: we want to repeat a data simulation a predetermined number of times (5 iterations), each time drawing $n = 30$ values from a *standard normal distribution*, computing and displaying the average ... 
+The starting point of a Monte Carlo simulation 😃 using the **`for`** loop: repeat some data simulation for a predetermined number of times, each time drawing $n$ values, then performing some computation on them...
 
 <div class="large-code">
 ```{r}
 set.seed(0) # reproducible randomness, as we saw earlier
 
-for(i in 1:5){
+for(i in 1:7){
   x = rnorm(n = 30, mean = 0, sd = 1)
   print(mean(x))
 }
@@ -241,18 +250,16 @@ for(i in 1:5){
 ```
 </div>
 
-<div style="font-size:24px;">
-*This is actually the starting point of a Monte Carlo simulation*! 😃
-</div>
-
 ## `for` loop
 
 In the previous example, the **`for`** loop displayed the results but didn't store them. For more effective use, you can combine the **`for`** loop with indexing with **`[]`** to save each result: 
 
 <div class="large-code">
+```{r, echo=F}
+set.seed(0)
+```
 ```{r}
-set.seed(0) # reproducible randomness, as we saw earlier
-niter = 5 # set the desired number of iterations: best practice! 
+niter = 7 # set the desired number of iterations: best practice! 
 # initialize a results vector with NAs: best practice!
 results = rep(NA, niter) 
 # now run the for loop! :-)
@@ -294,7 +301,7 @@ hist(results, breaks=50)
 ```
 </div> </div>
 
-→ Enjoy it! This is a proper estimation of the *Standard Error of the Mean* via Monte Carlo simulation! 😊
+→ Enjoy it! This is a <b>proper estimation of the *Standard Error of the Mean* via Monte Carlo simulation!</b> 😊
 
 ## `for` loop
 
@@ -313,16 +320,16 @@ for(x in myVect){
 <!-- --------------------------------------------------------------------- -->
 
 
-## `while` loop (self-study)
+## `while` loop
 
 The **`while`** loop is another type of iterative structure in R. It may be useful when the precise number of iterations is *not* predetermined, but depends on a target being reached
 
 ```{r}
 amount = 1000
 month = 0
-interest_rate = 0.001 # 0.1% monthly interest rate
+interest_rate = 0.005 # 0.5% monthly interest rate
 
-while(amount < 1500){
+while(amount < 2000){
   month = month + 1
   amount = amount + amount * interest_rate
 }
@@ -330,11 +337,11 @@ while(amount < 1500){
 month
 ```
 
-<p style="font-size:20px;"> *Interpretation: it takes `r month` months to reach an amount of $€1,500$ when starting with an amount of $€1,000$ with a $0.1$% monthly interest rate*</p>
+<p style="font-size:24px;"> *Interpretation: it takes <b>`r month` months</b> to double the starting of $€1,000$ with a $0.5$% monthly interest rate*</p>
 
-## `repeat` loop (self-study)
+## `repeat` loop
 
-The **`repeat`** loop has a logic similar to the `while` loop but 1) it always runs at least one iteration, 2) it explicitly emphasizes repetition until a condition (not necessarily a target) is met, using a `break` statement to terminate
+The **`repeat`** loop has a logic similar to the `while` loop but 1) it certainly enters at least the first iteration, 2) it explicitly emphasizes repetition until a condition is met, using the "**`break`**" statement to terminate
 
 ```{r,echo=F}
 set.seed(5)
@@ -352,19 +359,18 @@ repeat{
 set.seed(2)
 ```
 ```{r}
-attemptedExper = 0
-
+attempts = 0
 repeat{
-  attemptedExper = attemptedExper + 1
+  attempts = attempts + 1
   tt = t.test(rnorm(10),rnorm(10))
   if(tt$p.value < 0.05) break
 }
 
 # number of experiments I attempted to... 
 # get a false positive :-)
-attemptedExper
+attempts
 
-round( tt$p.value , 3 )
+round(tt$p.value, 3)
 ```
 </div> </div>
 
@@ -372,11 +378,11 @@ round( tt$p.value , 3 )
 
 ## `apply` family
 
-**`apply`** is a family of base functions that provide **efficient tools** for running iterations on structures like dataframes, vectors, matrices, lists
+**`apply`** is a family of base functions that provide **efficient tools** for running iterations on data structures like dataframes, vectors, matrices, lists
 
-The **`apply` family** often expresses iterations more compactly. A preallocated `for` loop can be just as fast. Related tools (`parallel::parLapply()`, `future.apply`) allow parallel execution
+The **`apply` family** can: 1) express some iterations more compactly; 2) compute faster (but a preallocated `for` loop can be just as fast); 3) facilitate parallel execution via related tools (`parallel::parLapply()`, `future.apply`)
 
-The following is *not* a computationally heavy task — but for example, let's say we want to compute the mean value *per column* in <a href="data/wisc.csv" download>this dataframe</a>:
+The following is *not* a computationally heavy task — but let's say we want to compute the mean value *per column* in <a href="data/wisc.csv" download>this dataframe</a>:
 
 ```{r, echo=F}
 df = read.csv("data/wisc.csv")
@@ -452,56 +458,55 @@ Here's how **`apply`** family functions can be used to compactly compute the *st
 
 <div class="large-code">
 ```{r}
-myVectorsList = lapply(1:10000, function(i) rnorm(30))
+# populate a long list of vectors 
+# each including 30 randomly generated numbers
+allSamples = lapply(1:10000, function(i) rnorm(30))
 
-allMeans = sapply(myVectorsList, mean)
+# compute the mean of each vector in the list
+allMeans = sapply(allSamples, mean)
 
+# compute the standard error across all means
 sd(allMeans)
 ```
 </div>
-<div style="font-size:22px; font-style:italic;"> 
-1) `lapply` is used to populate a long list of vectors each including 30 randomly generated numbers; 
-2) <b>`sapply` is then used to compute the `mean` of each vector in the list; </b>
-3) *standard error of the mean* is computed as the `sd` of the vector of the *means*
-</div>
 
-<div style="font-size:24px; font-style:italic;"> Note: `"i"` represents the current element of `1:10000` over which `lapply` iterates. Even though it is practically useless here, because only random numbers are generated at each iteration, it must be included because `lapply` must pass an element as the argument to the function by default</div>
+<div style="font-size:24px; font-style:italic;"> Note: `"i"` represents the element across `1:10000` over which `lapply` iterates. Even though it is practically useless here, because only random numbers are generated at each iteration, it must be included because `lapply` must pass an element as the argument to the function by default</div>
 
 
 <!-- --------------------------------------------------------------------- -->
 
 ## Define Custom Functions with `function()`
 
-Previously, we saw a few cases of custom functions, for example for counting `NA`s in vectors, or computing the mean of a randomly generated vector
+With **custom functions** you can define a set of operations to reuse them here and there as needed, possibly varying some inputs and conditions. 
 
-Here is the schema for defining custom functions with input (argument[s]), body, and output (return):
+Here is the schema for defining a custom function with input/ARGUMENT(S), its BODY, and its OUTPUT (`return`):
 
 <div class="large-code">
 ```{r, eval=F}
-# define new function with some argument(s) as input
-myFunctName = function(arg1 = NA, arg2 = NA, arg3 = TRUE){ 
+# define new function with some ARGUMENT(S) as input
+myFunctName = function(arg1 = NA, arg2 = NA, arg3 = TRUE) { 
   
-  # body, series of operations
-    computes several operations 
-    variously uses arg1, arg2, arg3 
-    res = ... get an object named "res" as final result 
+   # BODY, series of operations
+     variously process input arg1, arg2, arg3   
+     computes several operations 
+     res = ... can get an object "res" as final result 
  
-  # gives an output
-  return(res)
+   # gives an OUTPUT
+     return(res)
 }
 ```
 </div>
 
 ## Define Custom Functions with `function()`
 
-Here's a full example:
+Here's a full example to compute z-scores from a vector:
 
 ```{r}
 z_score = function(vect = NA){
   
-  vectM = mean(vect, na.rm=T)
-  vectSD = sd(vect, na.rm=T)
-  z = (vect - vectM) / vectSD
+  mu = mean(vect, na.rm=T)
+  sigma = sd(vect, na.rm=T)
+  z = (vect - mu) / sigma
   
   return(z)
 }

@@ -1236,7 +1236,7 @@
     "href": "Slides/3.Programming.html#conditional-programming",
     "title": "Basics of Programming:  if…else, iterations, custom functions",
     "section": "Conditional Programming",
-    "text": "Conditional Programming\nConditional statements like if, if...else, and ifelse in R are essential tools for automating tasks and assisting decision-making in data science. What follows are a few simple “toy examples”, but focus on the underlying logic. This will be very useful in more advanced applications\n\nif statement\nThe if statement performs an action only if a condition is met\n\n\nage = 20\n\n\nif(age &gt;= 18){\n  print(\"Adult\")\n}\n\n[1] \"Adult\""
+    "text": "Conditional Programming\nConditional statements like if, if...else, and ifelse in R are essential tools for automating tasks and assisting decision-making in data science. What follows are a few simple “toy examples”, but focus on the underlying logic. This will be very useful in more advanced applications\n\nif statement\nThe if statement performs an action only if a condition is met\n\n\npval = 0.02\n\n\nif(pval &lt; 0.05){\n  print(\"Significant\")\n}\n\n[1] \"Significant\""
   },
   {
     "objectID": "Slides/3.Programming.html#if-statement-1",
@@ -1257,7 +1257,7 @@
     "href": "Slides/3.Programming.html#if...else-statement-1",
     "title": "Basics of Programming:  if…else, iterations, custom functions",
     "section": "if...else statement",
-    "text": "if...else statement\nSometimes, however, you may need to perform alternative actions\nHere is a practical example of the if...else statement\n\n\nage = 15\n\n\nif(age &gt;= 18){\n  print(\"Adult\")\n} else {\n  print(\"Minor\")\n}\n\n[1] \"Minor\"\n\n\n\nIn the above example:\n\nif age is 18 or older, R will print \"Adult\";\notherwise (else) it will print \"Minor\""
+    "text": "if...else statement\nSometimes, however, you may need to perform alternative actions\nHere is a practical example of the if...else statement\n\n\npval = 0.02\n\n\nif(pval &lt; 0.05){\n  print(\"Significant\")\n} else {\n  print(\"NS\")\n}\n\n[1] \"Significant\"\n\n\n\nIn the above example:\n\nif pval is less than \\(0.05\\), R will print \"Significant\";\notherwise (else) it will print \"NS\""
   },
   {
     "objectID": "Slides/3.Programming.html#if...else-if...else-statement",
@@ -1278,28 +1278,28 @@
     "href": "Slides/3.Programming.html#if...else-statement-3",
     "title": "Basics of Programming:  if…else, iterations, custom functions",
     "section": "if...else statement",
-    "text": "if...else statement\nAll previous examples required evaluating a single particular condition that might be TRUE or FALSE. However, you often want to apply this type of operation to an entire vector\nUsing if and if...else directly on a vector will NOT work as intended:\n\n\nage = c(2, 28, 15, 1, 4, 67, 42, 14, 7)\n\nif(age &gt;= 18){\n  print(\"Adult\")\n} else {\n  print(\"Minor\")\n}\n\nError in if (age &gt;= 18) {: the condition has length &gt; 1"
+    "text": "if...else statement\nAll previous examples required evaluating a single particular condition that might be TRUE or FALSE. However, you often want to apply this type of operation to an entire vector\nUsing if and if...else directly on a vector will NOT work as intended:\n\n\npvals = c(0.02, 0.001, 0.15, 0.01, 0.09, 0.67, 0.42, 0.14, 0.03)\n\nif(pvals &lt; 0.05){\n  print(\"Significant\")\n} else {\n  print(\"NS\")\n}\n\nError in if (pvals &lt; 0.05) {: the condition has length &gt; 1"
   },
   {
     "objectID": "Slides/3.Programming.html#ifelse",
     "href": "Slides/3.Programming.html#ifelse",
     "title": "Basics of Programming:  if…else, iterations, custom functions",
     "section": "ifelse()",
-    "text": "ifelse()\nAll previous examples required evaluating a single particular condition that might be TRUE or FALSE. However, you often want to apply this type of operation to an entire vector\nTo handle such cases you can use the base ifelse() function, which evaluates each element of a vector individually:\n\n\nage = c(2, 28, 15, 1, 4, 67, 42, 14, 7)\nifelse(age &gt;= 18, \"Adult\", \"Minor\")\n\n[1] \"Minor\" \"Adult\" \"Minor\" \"Minor\" \"Minor\" \"Adult\" \"Adult\" \"Minor\" \"Minor\"\n\n\n\n\n— Best practices: store results and set type as appropriate!\n\n\nageCategory = ifelse(age &gt;= 18, \"Adult\", \"Minor\")\nageCategory = factor(ageCategory, levels=c(\"Minor\", \"Adult\"))\nageCategory\n\n[1] Minor Adult Minor Minor Minor Adult Adult Minor Minor\nLevels: Minor Adult"
+    "text": "ifelse()\nTo handle cases where you have multiple elements (e.g., in vectors, matrices) to evaluate individually, you can use the base ifelse() function:\n\n\npvals = c(0.02, 0.001, 0.15, 0.01, 0.09, 0.67, 0.42, 0.14, 0.03)\nifelse(pvals &lt; 0.05, \"Significant\", \"NS\")\n\n[1] \"Significant\" \"Significant\" \"NS\"          \"Significant\" \"NS\"         \n[6] \"NS\"          \"NS\"          \"NS\"          \"Significant\"\n\n\n\n\n— Best practices: store results and set type as appropriate!\n\n\ninferences = ifelse(pvals &lt; 0.05, \"Significant\", \"NS\")\ninferences = factor(inferences, levels=c(\"Significant\", \"NS\"))\ninferences\n\n[1] Significant Significant NS          Significant NS          NS         \n[7] NS          NS          Significant\nLevels: Significant NS"
   },
   {
     "objectID": "Slides/3.Programming.html#ifelse-1",
     "href": "Slides/3.Programming.html#ifelse-1",
     "title": "Basics of Programming:  if…else, iterations, custom functions",
     "section": "ifelse()",
-    "text": "ifelse()\nThe ifelse() function can also be nested to manage multiple conditions, such as in the following example:\n\n\nage = c(2, 28, 15, 1, 4, 67, 42, 14, 7)\n\nifelse(age &gt;= 18, \"Adult\" , \n               ifelse(age &gt;= 13, \"Adolescent\" ,\n                            ifelse(age &gt;= 2, \"Child\", \n                                                 \"Infant\")))\n\n[1] \"Child\"      \"Adult\"      \"Adolescent\" \"Infant\"     \"Child\"     \n[6] \"Adult\"      \"Adult\"      \"Adolescent\" \"Child\""
+    "text": "ifelse()\nThe ifelse() function can also be nested to manage multiple conditions, such as in the following example:\n\n\nages = c(2, 28, 15, 1, 4, 72, 45, 21, 7, 0)\n\nifelse(ages &gt;= 18, \"Adult\" , \n               ifelse(ages &gt;= 13, \"Adolescent\" ,\n                            ifelse(ages &gt;= 2, \"Child\", \n                                                 \"Infant\")))\n\n [1] \"Child\"      \"Adult\"      \"Adolescent\" \"Infant\"     \"Child\"     \n [6] \"Adult\"      \"Adult\"      \"Adult\"      \"Child\"      \"Infant\""
   },
   {
     "objectID": "Slides/3.Programming.html#dplyrcase_when",
     "href": "Slides/3.Programming.html#dplyrcase_when",
     "title": "Basics of Programming:  if…else, iterations, custom functions",
     "section": "dplyr::case_when()",
-    "text": "dplyr::case_when()\nWhile this works, the nested structure can become cumbersome and less readable as the number of conditions increases.\nIn such cases, the case_when() function from the dplyr package (part of the tidyverse collection) may be more convenient:\n\nage = c(2, 28, 15, 1, 4, 67, 42, 14, 7)\n\nlibrary(dplyr)\n\ncase_when(\n  age &gt;= 18 ~ \"Adult\",\n  age &gt;= 13 ~ \"Adolescent\",\n  age &gt;= 2  ~ \"Child\",\n  TRUE      ~ \"Infant\"\n)\n\n[1] \"Child\"      \"Adult\"      \"Adolescent\" \"Infant\"     \"Child\"     \n[6] \"Adult\"      \"Adult\"      \"Adolescent\" \"Child\""
+    "text": "dplyr::case_when()\nWhile this works, the nested structure can become cumbersome and less readable as the number of conditions increases.\nIn such cases, the case_when() function from the dplyr package (part of the tidyverse collection) may be more convenient:\n\nages = c(2, 28, 15, 1, 4, 67, 42, 14, 7, 0)\n\nlibrary(dplyr)\ncase_when(\n  ages &gt;= 18 ~ \"Adult\",\n  ages &gt;= 13 ~ \"Adolescent\",\n  ages &gt;= 2  ~ \"Child\",\n  TRUE      ~ \"Infant\"\n)\n\n [1] \"Child\"      \"Adult\"      \"Adolescent\" \"Infant\"     \"Child\"     \n [6] \"Adult\"      \"Adult\"      \"Adolescent\" \"Child\"      \"Infant\""
   },
   {
     "objectID": "Slides/3.Programming.html#iterative-programming",
@@ -1313,28 +1313,28 @@
     "href": "Slides/3.Programming.html#for-loop",
     "title": "Basics of Programming:  if…else, iterations, custom functions",
     "section": "for loop",
-    "text": "for loop\nHere are a few simple examples of using the for loop\n\n\n\nfor(i in 1:5)  print(i)\n\n[1] 1\n[1] 2\n[1] 3\n[1] 4\n[1] 5\n\n\n\n\n\nfor(i in 1:5)  print(i^2)\n\n[1] 1\n[1] 4\n[1] 9\n[1] 16\n[1] 25"
+    "text": "for loop\nHere are a few simple examples of using the for loop\n\n\n\nfor(i in 1:5) print(i)\n\n[1] 1\n[1] 2\n[1] 3\n[1] 4\n[1] 5\n\n\n\n\n\nfor(i in 1:5) print(sqrt(i))\n\n[1] 1\n[1] 1.414214\n[1] 1.732051\n[1] 2\n[1] 2.236068\n\n\n\n\n\n\n\nfor(x in letters[1:5]) print(x)\n\n[1] \"a\"\n[1] \"b\"\n[1] \"c\"\n[1] \"d\"\n[1] \"e\"\n\n\n\n\n\nfor(x in letters[1:5]){\n  X = toupper(x)\n  print(X)\n}\n\n[1] \"A\"\n[1] \"B\"\n[1] \"C\"\n[1] \"D\"\n[1] \"E\""
   },
   {
     "objectID": "Slides/3.Programming.html#for-loop-1",
     "href": "Slides/3.Programming.html#for-loop-1",
     "title": "Basics of Programming:  if…else, iterations, custom functions",
     "section": "for loop",
-    "text": "for loop\nHere’s a more interesting example of an iterative for loop with practical usefulness: we want to repeat a data simulation a predetermined number of times (5 iterations), each time drawing \\(n = 30\\) values from a standard normal distribution, computing and displaying the average …\n\n\nset.seed(0) # reproducible randomness, as we saw earlier\n\nfor(i in 1:5){\n  x = rnorm(n = 30, mean = 0, sd = 1)\n  print(mean(x))\n}\n\n[1] 0.02195079\n[1] -0.02577153\n[1] -0.009581231\n[1] 0.03212316\n[1] -0.2946441\n\n\n\n\nThis is actually the starting point of a Monte Carlo simulation! 😃"
+    "text": "for loop\nThe starting point of a Monte Carlo simulation 😃 using the for loop: repeat some data simulation for a predetermined number of times, each time drawing \\(n\\) values, then performing some computation on them…\n\n\nset.seed(0) # reproducible randomness, as we saw earlier\n\nfor(i in 1:7){\n  x = rnorm(n = 30, mean = 0, sd = 1)\n  print(mean(x))\n}\n\n[1] 0.02195079\n[1] -0.02577153\n[1] -0.009581231\n[1] 0.03212316\n[1] -0.2946441\n[1] 0.1016567\n[1] 0.1694374"
   },
   {
     "objectID": "Slides/3.Programming.html#for-loop-2",
     "href": "Slides/3.Programming.html#for-loop-2",
     "title": "Basics of Programming:  if…else, iterations, custom functions",
     "section": "for loop",
-    "text": "for loop\nIn the previous example, the for loop displayed the results but didn’t store them. For more effective use, you can combine the for loop with indexing with [] to save each result:\n\n\nset.seed(0) # reproducible randomness, as we saw earlier\nniter = 5 # set the desired number of iterations: best practice! \n# initialize a results vector with NAs: best practice!\nresults = rep(NA, niter) \n# now run the for loop! :-)\nfor(i in 1:niter){\n  x = rnorm(n = 30, mean = 0, sd = 1)\n  results[i] = mean(x)\n}\nresults # display results\n\n[1]  0.021950789 -0.025771530 -0.009581231  0.032123159 -0.294644080\n\nsd(results) # estimate standard error of the mean\n\n[1] 0.1358843"
+    "text": "for loop\nIn the previous example, the for loop displayed the results but didn’t store them. For more effective use, you can combine the for loop with indexing with [] to save each result:\n\n\nniter = 7 # set the desired number of iterations: best practice! \n# initialize a results vector with NAs: best practice!\nresults = rep(NA, niter) \n# now run the for loop! :-)\nfor(i in 1:niter){\n  x = rnorm(n = 30, mean = 0, sd = 1)\n  results[i] = mean(x)\n}\nresults # display results\n\n[1]  0.021950789 -0.025771530 -0.009581231  0.032123159 -0.294644080\n[6]  0.101656655  0.169437390\n\nsd(results) # estimate standard error of the mean\n\n[1] 0.1461304"
   },
   {
     "objectID": "Slides/3.Programming.html#for-loop-3",
     "href": "Slides/3.Programming.html#for-loop-3",
     "title": "Basics of Programming:  if…else, iterations, custom functions",
     "section": "for loop",
-    "text": "for loop\nLet’s extend the previous example to 10,000 iterations!\n\n\n\n# STEP 1: RUN SIMULATION\n\n# set number of iterations\nniter = 10000\n# initialize results vector\nresults = rep(NA, niter) \n# actually run simulation\nfor(i in 1:niter){\n  x = rnorm(n = 30, mean = 0, sd = 1)\n  results[i] = mean(x)\n}\n\n\n# STEP 3: COMPUTE SD OF RESULTS\nsd(results)\n\n[1] 0.1806616\n\n\n\n\n\n# STEP 2: PLOT RESULTS\n\nhist(results, breaks=50) \n\n\n\n\n\n\n\n\n\n\n→ Enjoy it! This is a proper estimation of the Standard Error of the Mean via Monte Carlo simulation! 😊"
+    "text": "for loop\nLet’s extend the previous example to 10,000 iterations!\n\n\n\n# STEP 1: RUN SIMULATION\n\n# set number of iterations\nniter = 10000\n# initialize results vector\nresults = rep(NA, niter) \n# actually run simulation\nfor(i in 1:niter){\n  x = rnorm(n = 30, mean = 0, sd = 1)\n  results[i] = mean(x)\n}\n\n\n# STEP 3: COMPUTE SD OF RESULTS\nsd(results)\n\n[1] 0.1807304\n\n\n\n\n\n# STEP 2: PLOT RESULTS\n\nhist(results, breaks=50) \n\n\n\n\n\n\n\n\n\n\n→ Enjoy it! This is a proper estimation of the Standard Error of the Mean via Monte Carlo simulation! 😊"
   },
   {
     "objectID": "Slides/3.Programming.html#for-loop-4",
@@ -1355,14 +1355,14 @@
     "href": "Slides/3.Programming.html#repeat-loop-self-study",
     "title": "Basics of Programming:  if…else, iterations, custom functions",
     "section": "repeat loop (self-study)",
-    "text": "repeat loop (self-study)\nThe repeat loop has a logic similar to the while loop but 1) it always runs at least one iteration, 2) it explicitly emphasizes repetition until a condition (not necessarily a target) is met, using a break statement to terminate\n\n\n\nrepeat{\n  roll_die = sample(1:6, 1)\n  print(roll_die)\n  if(roll_die == 6) break\n}\n\n[1] 2\n[1] 3\n[1] 1\n[1] 3\n[1] 1\n[1] 1\n[1] 5\n[1] 6\n\n\n\n\n\nattemptedExper = 0\n\nrepeat{\n  attemptedExper = attemptedExper + 1\n  tt = t.test(rnorm(10),rnorm(10))\n  if(tt$p.value &lt; 0.05) break\n}\n\n# number of experiments I attempted to... \n# get a false positive :-)\nattemptedExper\n\n[1] 12\n\nround( tt$p.value , 3 )\n\n[1] 0.041"
+    "text": "repeat loop (self-study)\nThe repeat loop has a logic similar to the while loop but 1) it certainly enters at least the first iteration, 2) it explicitly emphasizes repetition until a condition is met, using the “break” statement to terminate\n\n\n\nrepeat{\n  roll_die = sample(1:6, 1)\n  print(roll_die)\n  if(roll_die == 6) break\n}\n\n[1] 2\n[1] 3\n[1] 1\n[1] 3\n[1] 1\n[1] 1\n[1] 5\n[1] 6\n\n\n\n\n\nattempts = 0\nrepeat{\n  attempts = attempts + 1\n  tt = t.test(rnorm(10),rnorm(10))\n  if(tt$p.value &lt; 0.05) break\n}\n\n# number of experiments I attempted to... \n# get a false positive :-)\nattempts\n\n[1] 12\n\nround(tt$p.value, 3)\n\n[1] 0.041"
   },
   {
     "objectID": "Slides/3.Programming.html#apply-family",
     "href": "Slides/3.Programming.html#apply-family",
     "title": "Basics of Programming:  if…else, iterations, custom functions",
     "section": "apply family",
-    "text": "apply family\napply is a family of base functions that provide efficient tools for running iterations on structures like dataframes, vectors, matrices, lists\nThe apply family often expresses iterations more compactly. A preallocated for loop can be just as fast. Related tools (parallel::parLapply(), future.apply) allow parallel execution\nThe following is not a computationally heavy task — but for example, let’s say we want to compute the mean value per column in this dataframe:\n\n\n  BD SI DS PCn CD VC LN MR CO SS\n1 13 10  7  10 15  7 10 16  8 13\n2  7 11  6   8 13 10  9  5  9 14\n3 12  6  5   7  9  7  7  6  9  8\n4  8  7  9  11  1  5  7  6  8  4\n5 12 13  8  10 10 10  9 11 13 12\n6 13 17 13   7 10 19 13 10 15 13"
+    "text": "apply family\napply is a family of base functions that provide efficient tools for running iterations on data structures like dataframes, vectors, matrices, lists\nThe apply family can: 1) express some iterations more compactly; 2) compute faster (but a preallocated for loop can be just as fast); 3) facilitate parallel execution via related tools (parallel::parLapply(), future.apply)\nThe following is not a computationally heavy task — but let’s say we want to compute the mean value per column in this dataframe:\n\n\n  BD SI DS PCn CD VC LN MR CO SS\n1 13 10  7  10 15  7 10 16  8 13\n2  7 11  6   8 13 10  9  5  9 14\n3 12  6  5   7  9  7  7  6  9  8\n4  8  7  9  11  1  5  7  6  8  4\n5 12 13  8  10 10 10  9 11 13 12\n6 13 17 13   7 10 19 13 10 15 13"
   },
   {
     "objectID": "Slides/3.Programming.html#apply-family-1",
@@ -1397,21 +1397,21 @@
     "href": "Slides/3.Programming.html#apply-family-5",
     "title": "Basics of Programming:  if…else, iterations, custom functions",
     "section": "apply family",
-    "text": "apply family\nHere’s how apply family functions can be used to compactly compute the standard error of the mean via Monte Carlo simulation\n\n\nmyVectorsList = lapply(1:10000, function(i) rnorm(30))\n\nallMeans = sapply(myVectorsList, mean)\n\nsd(allMeans)\n\n[1] 0.1851159\n\n\n\n\n\nlapply is used to populate a long list of vectors each including 30 randomly generated numbers;\nsapply is then used to compute the mean of each vector in the list; \nstandard error of the mean is computed as the sd of the vector of the means\n\n\n\nNote: \"i\" represents the current element of 1:10000 over which lapply iterates. Even though it is practically useless here, because only random numbers are generated at each iteration, it must be included because lapply must pass an element as the argument to the function by default"
+    "text": "apply family\nHere’s how apply family functions can be used to compactly compute the standard error of the mean via Monte Carlo simulation\n\n\n# populate a long list of vectors \n# each including 30 randomly generated numbers\nallSamples = lapply(1:10000, function(i) rnorm(30))\n\n# compute the mean of each vector in the list\nallMeans = sapply(allSamples, mean)\n\n# compute the standard error across all means\nsd(allMeans)\n\n[1] 0.1851159\n\n\n\n\nNote: \"i\" represents the element across 1:10000 over which lapply iterates. Even though it is practically useless here, because only random numbers are generated at each iteration, it must be included because lapply must pass an element as the argument to the function by default"
   },
   {
     "objectID": "Slides/3.Programming.html#define-custom-functions-with-function",
     "href": "Slides/3.Programming.html#define-custom-functions-with-function",
     "title": "Basics of Programming:  if…else, iterations, custom functions",
     "section": "Define Custom Functions with function()",
-    "text": "Define Custom Functions with function()\nPreviously, we saw a few cases of custom functions, for example for counting NAs in vectors, or computing the mean of a randomly generated vector\nHere is the schema for defining custom functions with input (argument[s]), body, and output (return):\n\n\n# define new function with some argument(s) as input\nmyFunctName = function(arg1 = NA, arg2 = NA, arg3 = TRUE){ \n  \n  # body, series of operations\n    computes several operations \n    variously uses arg1, arg2, arg3 \n    res = ... get an object named \"res\" as final result \n \n  # gives an output\n  return(res)\n}"
+    "text": "Define Custom Functions with function()\nWith custom functions you can define a set of operations to reuse them here and there as needed, possibly varying some inputs and conditions.\nHere is the schema for defining a custom function with input/ARGUMENT(S), its BODY, and its OUTPUT (return):\n\n\n# define new function with some ARGUMENT(S) as input\nmyFunctName = function(arg1 = NA, arg2 = NA, arg3 = TRUE) { \n  \n   # BODY, series of operations\n     variously process input arg1, arg2, arg3   \n     computes several operations \n     res = ... can get an object \"res\" as final result \n \n   # gives an OUTPUT\n     return(res)\n}"
   },
   {
     "objectID": "Slides/3.Programming.html#define-custom-functions-with-function-1",
     "href": "Slides/3.Programming.html#define-custom-functions-with-function-1",
     "title": "Basics of Programming:  if…else, iterations, custom functions",
     "section": "Define Custom Functions with function()",
-    "text": "Define Custom Functions with function()\nHere’s a full example:\n\nz_score = function(vect = NA){\n  \n  vectM = mean(vect, na.rm=T)\n  vectSD = sd(vect, na.rm=T)\n  z = (vect - vectM) / vectSD\n  \n  return(z)\n}\n\nAfter creating it, a custom function can be used like any other function:\n\nx = c(101, 90, NA, NA, 114, 87, 106, 98, 93)\nz_score(x)\n\n[1]  0.27162785 -0.89033574          NA          NA  1.64485756 -1.20723491\n[7]  0.79979313 -0.04527131 -0.57343658"
+    "text": "Define Custom Functions with function()\nHere’s a full example to compute z-scores from a vector:\n\nz_score = function(vect = NA){\n  \n  mu = mean(vect, na.rm=T)\n  sigma = sd(vect, na.rm=T)\n  z = (vect - mu) / sigma\n  \n  return(z)\n}\n\nAfter creating it, a custom function can be used like any other function:\n\nx = c(101, 90, NA, NA, 114, 87, 106, 98, 93)\nz_score(x)\n\n[1]  0.27162785 -0.89033574          NA          NA  1.64485756 -1.20723491\n[7]  0.79979313 -0.04527131 -0.57343658"
   },
   {
     "objectID": "Slides/3.Programming.html#define-custom-functions-with-function-2",
@@ -1517,5 +1517,40 @@
     "title": "Intro to This Course; Getting Started with R",
     "section": "How popular is R?",
     "text": "How popular is R?\n\nTIOBE index of programming languages popularity: in November 2026 R ranks # 7 worldwide (2.27%), its highest position ever, after Python, C, Java, C++, C#, JavaScript (see R history)"
+  },
+  {
+    "objectID": "Slides/2.3.DataStruc-3.html#arrays",
+    "href": "Slides/2.3.DataStruc-3.html#arrays",
+    "title": "Data Structures: Factors, Lists, Matrices, Arrays",
+    "section": "Arrays",
+    "text": "Arrays\nArrays are multi-dimensional structures in R, generalizing vectors (1-dimensional) and matrices (2-dimensional) to the n-dimensional case\nIt’s easy to create an array using the array() function:\n\n\n\nmyArr = array(1:30, dim = c(3,5,2))\nmyArr\n\n, , 1\n\n     [,1] [,2] [,3] [,4] [,5]\n[1,]    1    4    7   10   13\n[2,]    2    5    8   11   14\n[3,]    3    6    9   12   15\n\n, , 2\n\n     [,1] [,2] [,3] [,4] [,5]\n[1,]   16   19   22   25   28\n[2,]   17   20   23   26   29\n[3,]   18   21   24   27   30\n\n\n\n\n\n→ this is a kind of “cubic structure” (3D structure): 3 rows, 5 columns, 2 slices\nIn a similar way, you could create hypercubes and so on (4D+)"
+  },
+  {
+    "objectID": "Slides/2.3.DataStruc-3.html#arrays-1",
+    "href": "Slides/2.3.DataStruc-3.html#arrays-1",
+    "title": "Data Structures: Factors, Lists, Matrices, Arrays",
+    "section": "Arrays",
+    "text": "Arrays\nindexing\nIndexing is exactly the same as with matrices but… with 3 (sets of) indices!\n\nmyArr[1, 4, 2] # extract a single element\n\n[1] 25\n\nmyArr[1:2 , 1:2 , ] # extract subsets of elements\n\n, , 1\n\n     [,1] [,2]\n[1,]    1    4\n[2,]    2    5\n\n, , 2\n\n     [,1] [,2]\n[1,]   16   19\n[2,]   17   20"
+  },
+  {
+    "objectID": "Slides/2.3.DataStruc-3.html#arrays-2",
+    "href": "Slides/2.3.DataStruc-3.html#arrays-2",
+    "title": "Data Structures: Factors, Lists, Matrices, Arrays",
+    "section": "Arrays",
+    "text": "Arrays\n\nWhy use (know) arrays?\n\nUseful for efficiently storing and manipulating multi-dimensional data\nGenerally used in advanced topics and machine learning, such as image/video processing and spatial data\nArrays in R are conceptually similar to tensors in Python (e.g., NumPy, TensorFlow), where they play a fundamental role in machine learning and deep learning, as they allow researchers to manage large amounts of data with complex structures"
+  },
+  {
+    "objectID": "Slides/3.Programming.html#while-loop",
+    "href": "Slides/3.Programming.html#while-loop",
+    "title": "Basics of Programming:  if…else, iterations, custom functions",
+    "section": "while loop",
+    "text": "while loop\nThe while loop is another type of iterative structure in R. It may be useful when the precise number of iterations is not predetermined, but depends on a target being reached\n\namount = 1000\nmonth = 0\ninterest_rate = 0.005 # 0.5% monthly interest rate\n\nwhile(amount &lt; 2000){\n  month = month + 1\n  amount = amount + amount * interest_rate\n}\n\nmonth\n\n[1] 139\n\n\n\nInterpretation: it takes 139 months to double the starting of \\(€1,000\\) with a \\(0.5\\)% monthly interest rate"
+  },
+  {
+    "objectID": "Slides/3.Programming.html#repeat-loop",
+    "href": "Slides/3.Programming.html#repeat-loop",
+    "title": "Basics of Programming:  if…else, iterations, custom functions",
+    "section": "repeat loop",
+    "text": "repeat loop\nThe repeat loop has a logic similar to the while loop but 1) it certainly enters at least the first iteration, 2) it explicitly emphasizes repetition until a condition is met, using the “break” statement to terminate\n\n\n\nrepeat{\n  roll_die = sample(1:6, 1)\n  print(roll_die)\n  if(roll_die == 6) break\n}\n\n[1] 2\n[1] 3\n[1] 1\n[1] 3\n[1] 1\n[1] 1\n[1] 5\n[1] 6\n\n\n\n\n\nattempts = 0\nrepeat{\n  attempts = attempts + 1\n  tt = t.test(rnorm(10),rnorm(10))\n  if(tt$p.value &lt; 0.05) break\n}\n\n# number of experiments I attempted to... \n# get a false positive :-)\nattempts\n\n[1] 12\n\nround(tt$p.value, 3)\n\n[1] 0.041"
   }
 ]

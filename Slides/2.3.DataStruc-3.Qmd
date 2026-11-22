@@ -264,7 +264,7 @@ myMat^2 # element-wise squaring of all values
 
 <!-- --------------------------------------------------------------------- -->
 
-## Arrays (self-study)
+## Arrays
 
 **Arrays** are multi-dimensional structures in R, generalizing *vectors (1-dimensional)* and *matrices (2-dimensional)* to the <em>**n-dimensional**</em> case
 
@@ -281,7 +281,7 @@ myArr
 In a similar way, you could create hypercubes and so on (4D+)
 </div></div>
 
-## Arrays (self-study)
+## Arrays
 ### indexing
 
 **Indexing** is exactly the same as with matrices but... with 3 (sets of) indices! 
@@ -292,14 +292,14 @@ myArr[1, 4, 2] # extract a single element
 myArr[1:2 , 1:2 , ] # extract subsets of elements
 ```
 
-## Arrays (self-study)
+## Arrays
 
 <div style="font-size:38px;">
 **Why use (know) arrays?**
 
 - Useful for efficiently storing and manipulating **multi-dimensional data**
 
-- Generally used in advanced topics and *machine learning*, such as **image/video processing** and **spatial data**
+- Generally used in advanced topics including **image/video processing**, **spatial data processing**, or *machine learning*
 
 - Arrays in R are conceptually similar to **tensors** in Python (e.g., `NumPy`, `TensorFlow`), where they play a fundamental role in <em>**machine learning**</em> and <em>**deep learning**</em>, as they allow researchers to manage large amounts of data with complex structures
 </div>
