@@ -35,7 +35,7 @@ pval = 0.02
 ```
 ```{r}
 if(pval < 0.05){
-  print("Significant")
+  print("Significant!")
 }
 ```
 </div>

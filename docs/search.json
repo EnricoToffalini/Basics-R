@@ -1236,7 +1236,7 @@
     "href": "Slides/3.Programming.html#conditional-programming",
     "title": "Basics of Programming:  if…else, iterations, custom functions",
     "section": "Conditional Programming",
-    "text": "Conditional Programming\nConditional statements like if, if...else, and ifelse in R are essential tools for automating tasks and assisting decision-making in data science. What follows are a few simple “toy examples”, but focus on the underlying logic. This will be very useful in more advanced applications\n\nif statement\nThe if statement performs an action only if a condition is met\n\n\npval = 0.02\n\n\nif(pval &lt; 0.05){\n  print(\"Significant\")\n}\n\n[1] \"Significant\""
+    "text": "Conditional Programming\nConditional statements like if, if...else, and ifelse in R are essential tools for automating tasks and assisting decision-making in data science. What follows are a few simple “toy examples”, but focus on the underlying logic. This will be very useful in more advanced applications\n\nif statement\nThe if statement performs an action only if a condition is met\n\n\npval = 0.02\n\n\nif(pval &lt; 0.05){\n  print(\"Significant!\")\n}\n\n[1] \"Significant!\""
   },
   {
     "objectID": "Slides/3.Programming.html#if-statement-1",
